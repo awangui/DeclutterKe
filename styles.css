@@ -73,9 +73,9 @@ h5 {
 nav {
     overflow: hidden;
     display: flex;
-    border-bottom: solid 0.1px #f1f1f15f;
     padding-bottom: 20px;
-    position: -webkit-sticky;
+    /* position: fixed;
+    z-index: 1; */
 }
 .logo{
     margin-right: auto;
