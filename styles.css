@@ -63,6 +63,7 @@ h5 {
     font-size: 1.1rem;
     padding: 10px;
 }
+
 /*navbar*/
 .navbar {
     /* background-color: #39846a; */
@@ -77,37 +78,45 @@ nav {
     /* position: fixed;
     z-index: 1; */
 }
-.logo{
+
+.logo {
     margin-right: auto;
 }
-nav span{
-color: #6ef374;
+
+nav span {
+    color: #6ef374;
 }
+
 nav a {
     color: #fff;
     text-align: center;
     padding: 12px 5px;
-    margin-top:15px; 
+    margin-top: 15px;
     margin-left: 15px;
-    margin-right: 15px;  
+    margin-right: 15px;
     text-decoration: none;
     transition: 0.3s all;
     justify-content: center;
 }
 
 nav a:hover {
-    border-bottom:solid 2px #6ef374;
+    border-bottom: solid 2px #6ef374;
 }
-.icon{
+
+.icon {
     font-size: 14px;
 }
-.credentials{
+
+.credentials {
     margin-left: auto;
 }
-.cta{
+
+.cta {
     background-color: #4caf50;
-    border-radius: 40px;
+    border-radius: 10px;
+    height:20px;
 }
+
 .search-container {
     display: flex;
     justify-content: center;
@@ -119,6 +128,7 @@ nav a:hover {
     margin: 0;
     border: none;
 }
+
 .menu {
     display: none;
     background-color: #4caf50;
@@ -128,7 +138,7 @@ nav a:hover {
     padding: 10px;
     cursor: pointer;
     position: absolute;
-    
+
 }
 
 input[type=text] {
@@ -614,4 +624,3 @@ input[type=submit] {
     }
 
 }
-

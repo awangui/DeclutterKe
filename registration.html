@@ -8,24 +8,17 @@
     <title>Decluttering Ke</title>
 </head>
 
-<body>
-    
+<body>    
     <form action="registration.php" method="post">
-        <h2 class="title">Sign up</h2>
-
-        <label for="fname">First Name:</label>
-        <input type="text" id="fname" name="fname" required>
-
-        <label for="sname">Surname:</label>
-        <input type="text" id="sname" name="sname" required>
-
-        <label for="email">Email address:</label>
-        <input type="text" id="email" name="email" required>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-
+        <!-- <img src="images/undraw_Authentication_re_svpt (2).png" class="illustration"> -->
+        <h2 class="title">Sign Up</h2>
+        <p>Create an account</p>
+        <input type="text" id="fname" name="fname" placeholder="First Name" required>
+        <input type="text" id="sname" name="sname"placeholder="Surname" required>
+        <input type="text" id="email" name="email" placeholder="Email address" required>
+        <input type="password" id="password" name="password" placeholder="password" required>
         <button type="submit">Sign Up</button>
+        <p>Already have an account?<span><a href="login.html">Login</a></span></p>
     </form>
 </body>
 

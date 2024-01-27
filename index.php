@@ -8,7 +8,6 @@
     <script src="script.js"></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image" href="/images/reading-book.png">
-    <script src="https://use.fontawesome.com/9d7bb590aa.js"></script>
     <script src="https://kit.fontawesome.com/661ba5765b.js" crossorigin="anonymous"></script>
     <title>Decluttering Ke</title>
 </head>
