@@ -43,14 +43,17 @@
             </div>
         </div>
     </section>
+
     <section id="browse">
         <h2>Popular Categories</h2>
+        <p>Most viewed items</p>
         <ul class="items">
             <li class="item"><a href="#">
-                    Fridges
+                    Tables
                 </a>
             </li>
-            <li class="item"><a href="#">
+            <li class="item">
+            <a href="#">
                     TVs</a>
             </li>
             <li class="item"><a href="#">
@@ -60,9 +63,10 @@
                     Beds</a>
             </li>
             <li class="item"><a href="#">
-                    Tables
+                    Fridges
                 </a>
             </li>
+            
         </ul>
 
     </section>
