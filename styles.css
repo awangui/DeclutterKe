@@ -114,7 +114,7 @@ nav a:hover {
 .cta {
     background-color: #4caf50;
     border-radius: 10px;
-    height:20px;
+    height: 20px;
 }
 
 .search-container {
@@ -149,15 +149,35 @@ input[type=text] {
 
 
 @media screen and (max-width: 600px) {
+    nav span {
+        color: #fff;
+    }
+
     nav {
         display: none;
         max-height: 0;
         transition: max-height 5s ease-out;
-        position: relative;
+        position: absolute;
+        background-color: #39846a;
+        width: 100%;
+    }
+
+    nav a {
+        border-radius: 4px;
+    }
+
+    .cta {
+        height: max-content;
+        background-color: #39846a;
+    }
+
+    nav a:hover, .active {
+        background-color: #4caf50;
+        color: #fff;
     }
 
     nav.show {
-        max-height: 400px;
+        max-height: 500px;
     }
 
     nav a,
@@ -182,6 +202,7 @@ input[type=text] {
 
     .menu {
         display: block;
+        position: relative;
     }
 }
 
@@ -201,6 +222,7 @@ input[type=text] {
     margin: 0 auto;
     width: 85%;
     text-align: center;
+    line-height: 1.5;
 }
 
 .desc h1 {
@@ -280,14 +302,24 @@ input[type=text] {
         padding-bottom: 5%;
     }
 } */
-#browse{
+#browse {
+    margin: 5% auto;
+    padding-bottom: 5%;
+}
+
+#browse p {
+    text-align: center;
+    font-family: "Homemade Apple", cursive;
+    margin-bottom: 5%;
+    color: #4caf4f;
+}
+
+#browse button {
+    text-align: center;
+    background-color: #4caf4f;
     margin: 5% auto;
 }
-#browse p{
-    text-align: center;
-    font-family:cursive;
-    margin-bottom: 5%;
-}
+
 .items {
     display: grid;
     /* grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); */
@@ -302,7 +334,7 @@ input[type=text] {
 }
 
 .item {
-    height:250px;
+    height: 250px;
     /* Adjust the height as needed */
     background-size: cover;
     background-position: center;
@@ -310,12 +342,13 @@ input[type=text] {
     display: flex;
     text-align: center;
     justify-content: center;
-    align-items:last baseline;
+    align-items: last baseline;
     border-radius: 16px;
     border: #00000000 solid 1px;
     /* filter: brightness(90%); */
 }
-.item a{
+
+.item a {
     color: #fff;
     padding: 10px;
     font-size: 25px;
@@ -328,9 +361,11 @@ input[type=text] {
 .item:nth-child(1) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('images/table.jfif');
 }
+
 .item:nth-child(2) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('images/tv.jfif');
 }
+
 .item:nth-child(3) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('images/sofa.jfif');
 }
@@ -338,8 +373,9 @@ input[type=text] {
 .item:nth-child(4) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('images/bed.jpeg');
 }
+
 .item:nth-child(5) {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),url('./images/download.jfif');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('./images/download.jfif');
 }
 
 @media screen and (max-width: 600px) {
@@ -351,6 +387,19 @@ input[type=text] {
         height: 140px;
 
     }
+
+    #best-sellers {
+        display: block;
+    }
+}
+
+#best-sellers {
+    margin: 5% auto;
+    width: 90%;
+}
+
+.description {
+    line-height: 2;
 }
 
 /*Most Popular*/

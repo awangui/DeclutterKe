@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Marck+Script&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image" href="/images/reading-book.png">
     <script src="https://kit.fontawesome.com/661ba5765b.js" crossorigin="anonymous"></script>
@@ -16,11 +19,10 @@
     <section id="header">
         <section id="navigation">
             <div class="navbar">
-                <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
-
+            <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
                 <nav>
                     <a href="index.php" class="logo"><b><span>Declutter</span> Ke</b></a>
-                    <a href="#home">Home</a>
+                    <a href="#home" class="active">Home</a>
                     <a href="#categories">Categories</a>
                     <a href="#about">About</a>
                     <a href="#contact">Contact</a>
@@ -33,12 +35,11 @@
         </section>
         <div class="desc">
             <h1>Your Resale Haven</h1>
-            <p>We help your pre loved items find a new home!</p>
+            <p>Helping your pre loved items find a new home</p>
             <div class="search-container">
-                <form action="/search" class="search">
-                    <input type="text" placeholder="What are you looking for?" name="search">
-                    <input type="text" placeholder="All Categories" name="search">
-                    <button type="button" class="searchbtn" onclick="searchFunction()">Search</button>
+                <input type="text" placeholder="What are you looking for?" id="productName" name="search" onkeyup="search()">
+                <input type="text" placeholder="All Categories" name="search">
+                <button type="button" class="searchbtn" onclick="searchFunction()">Search</button>
                 </form>
             </div>
         </div>
@@ -53,7 +54,7 @@
                 </a>
             </li>
             <li class="item">
-            <a href="#">
+                <a href="#">
                     TVs</a>
             </li>
             <li class="item"><a href="#">
@@ -66,9 +67,9 @@
                     Fridges
                 </a>
             </li>
-            
-        </ul>
 
+        </ul>
+<button class="btn">View all categories</button>
     </section>
     <section id="best-sellers">
         <div class="details">
@@ -84,11 +85,10 @@
     <section id="most-popular">
         <h2>Most Popular</h2>
         <div class="row">
-            <div class="card">
+            <div class="card" id="productCard">
                 <div class="card-content">
                     <div class="image_content">
                         <img src="images/download.jfif">
-
                     </div>
                     <div class="text_content">
                         <div class="item-details">
@@ -96,10 +96,9 @@
                             <p class="color">Silver</p>
                             <p class="condition">Fairly Used</p>
                         </div>
-                        <h5 class="item-title">Refrigrator</h5>
+                        <h5 class="item-title">Refrigerator</h5>
                         <button class="btn btn-secondary">View Item</button>
                     </div>
-
                 </div>
             </div>
             <div class="card">
