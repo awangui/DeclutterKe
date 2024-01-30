@@ -7,6 +7,22 @@
     <title>Add Listing</title>
 </head>
 <body>
+    <section id="navigation">
+        <div class="navbar">
+        <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
+            <nav>
+                <a href="index.php" class="logo"><b><span>Declutter</span> Ke</b></a>
+                <a href="#home" class="active">Home</a>
+                <a href="#categories">Categories</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+                <a href="listing.html" class="cta"><i class=" icon fa fa-plus"></i> Add a Listing</a>
+                <a href="login.html" class="credentials"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
+                <a href="registration.html"><i class="icon fa-regular fa-user"></i> Sign Up</a>
+
+            </nav>
+        </div>
+    </section>
 
     <form id="listingForm" action="listing.php" method="post" enctype="multipart/form-data">
         <h1>Add a listing</h1>
@@ -94,7 +110,7 @@
         <br>     
         </div>
         </div>
-        <button type="submit">Submit</button>
+        <button class="btn" type="submit">Submit</button>
     </form>
 
     <script>
