@@ -106,6 +106,10 @@ nav a:hover {
 .icon {
     font-size: 14px;
 }
+.active {
+    border-bottom: solid 2px #fff;
+    color: #fff;
+}
 
 .credentials {
     margin-left: auto;
@@ -141,7 +145,7 @@ nav a:hover {
 
 }
 
-input[type=text] {
+.text {
     padding: 10px;
     border: none;
     font-size: 17px;
@@ -171,7 +175,12 @@ input[type=text] {
         background-color: #39846a;
     }
 
-    nav a:hover, .active {
+    nav a:hover {
+        background-color: #4caf50;
+        color: #fff;
+    }
+
+    .active {
         background-color: #4caf50;
         color: #fff;
     }
@@ -476,16 +485,9 @@ input[type=text] {
     justify-content: center;
 }
 
-form {
-    text-align: center;
-    background-repeat: no-repeat;
-    background-color: white;
-    border: 3px solid #f1f1f1;
-    margin-bottom: 50px;
-    border-style: ridge;
-}
 
-label {
+
+.sign label {
     font-size: 1.5rem;
     font-weight: 400;
     text-align: center;
@@ -496,10 +498,16 @@ label {
     border: 3px solid #f1f1f1;
     width: 500px;
     margin-bottom: 50px;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-color: white;
+    border: 3px solid #f1f1f1;
+    margin-bottom: 50px;
+    border-style: ridge;
 }
 
 .email input[type=text],
-textarea,
+.textarea,
 input[type=email],
 input[type=password] {
     width: 80%;

@@ -19,7 +19,7 @@
     <section id="header">
         <section id="navigation">
             <div class="navbar">
-            <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
+                <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
                 <nav>
                     <a href="index.php" class="logo"><b><span>Declutter</span> Ke</b></a>
                     <a href="#home" class="active">Home</a>
@@ -37,8 +37,8 @@
             <h1>Your Resale Haven</h1>
             <p>Helping your pre loved items find a new home</p>
             <div class="search-container">
-                <input type="text" placeholder="What are you looking for?" id="productName" name="search" onkeyup="search()">
-                <input type="text" placeholder="All Categories" name="search">
+                <input type="text" placeholder="What are you looking for?" id="productName" name="search" onkeyup="search()" class="text">
+                <input type="text" placeholder="All Categories" name="search" class="text">
                 <button type="button" class="searchbtn" onclick="searchFunction()">Search</button>
                 </form>
             </div>
@@ -69,7 +69,7 @@
             </li>
 
         </ul>
-<button class="btn">View all categories</button>
+        <button class="btn">View all categories</button>
     </section>
     <section id="best-sellers">
         <div class="details">
@@ -212,10 +212,10 @@
                 </div>
                 <div class="email">
                     <label for="mail"><b>Email address:</b></label>
-                    <input type="email" name="mail" placeholder="e.g johndoe@gmail.com" required><br>
+                    <input type="email" name="mail" placeholder="e.g johndoe@gmail.com" required class="text"><br>
                     <div class="email">
                         <label for="message"><b>Message:</b></label> <br>
-                        <textarea name="message" placeholder="Leave a message..."></textarea>
+                        <textarea name="message" placeholder="Leave a message..." class="textarea" required></textarea>
 
                         <button type="submit" class="submit btn">Send</button>
             </form>
