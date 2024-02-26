@@ -1,27 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="./styles.css">
-    <link rel="stylesheet" href="./admin.css">
-    <link rel="icon" type="image" href="/images/reading-book.png">
-    <script src="https://use.fontawesome.com/9d7bb590aa.js"></script>
-    <title>Decluttering Ke</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+<link rel="stylesheet" href="admin.css">
 </head>
 <body>
-
-    <!-- left navbar -->
-    <section id="left-nav">
-        <a href="index.php" class="logo nav-item"><b>Decluttering Ke</b></a>    
-        <a class="nav-item">Dashboard</a>
-        <a class="nav-item">Stats</a>
-        <a class="nav-item">Listings</a>
-        <a class="nav-item">Users</a>
-        <a class="nav-item">Logout</a>
-    </section>
-
+  <div class="container">
+    <nav class="sidebar">
+      <a href="index.php" class="logo nav-item"><b>Decluttering Ke</b></a> 
+      <!-- Left Sidebar Content Goes Here -->
+      <ul>
+        <li><a class="nav-item active" >Dashboard</a>
+          <li><a class="nav-item">Users</a>
+        <li><a class="nav-item">Listings</a>
+          <li><a class="nav-item">Stats</a>
+        <li><a class="nav-item">Logout</a>
+        <!-- Add more links as needed -->
+      </ul>
+    </nav>
+    <div class="main-content">
+      <!-- Main Content Goes Here -->
+      <div class="widget">
+        <h2>Total Listings</h2>
+        <p>500</p>
+      </div>
+      <!-- Widget 2: Active Users -->
+      <div class="widget">
+        <h2>Active Users</h2>
+        <p>1000</p>
+      </div>
+      <!-- Widget 3: Reported Items -->
+      <div class="widget">
+        <h2>Reported Items</h2>
+        <p>20</p>
+      </div>
+      <!-- Widget 4: Pending Approvals -->
+      <div class="widget">
+        <h2>Pending Approvals</h2>
+        <p>5</p>
+      </div>
+      <!-- Widget 5: User Feedback -->
+      <div class="widget">
+        <h2>User Feedback</h2>
+        <p>4.2/5</p>
+      </div>
+      <!-- Widget 6: Messages -->
+      <div class="widget">
+        <h2>Messages</h2>
+        <p>10 unread</p>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

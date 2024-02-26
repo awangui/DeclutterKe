@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+
+
+  main {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    margin: 0 5%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  #product-details {
+    max-width: 600px; /* Adjust as needed */
+    margin-right: 20px; /* Add space between image and description */
+  }
+
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .card-img-top {
+    width: 100%;
+    max-height: 250px; /* Set a maximum height to prevent stretching */
+    object-fit: cover; /* Preserve aspect ratio */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+
+  .card-body {
+    padding: 20px;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .card-text {
+    color: #555;
+    margin-bottom: 20px;
+  }
+
+  .list-group-item {
+    border: none;
+    padding: 5px 0;
+  }
+
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  #product-images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  #product-images img {
+    width: 30%; /* Adjust image width as needed */
+    max-height: 200px; /* Set a maximum height to prevent stretching */
+    object-fit: cover; /* Preserve aspect ratio */
+    border-radius: 8px;
+  }
+
+  #product-description {
+    max-width: 400px; /* Adjust as needed */
+  }
+
+  footer {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+  }

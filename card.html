@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Page</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="card.css">
+</head>
+<body>
+    <section id="navigation">
+        <div class="navbar">
+        <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
+            <nav>
+                <a href="index.php" class="logo"><b><span>Declutter</span> Ke</b></a>
+                <a href="#home">Home</a>
+                <a href="#categories">Categories</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+                <a href="listing.html"><i class=" icon fa fa-plus"></i> Add a Listing</a>
+                <a href="login.html" class="credentials"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
+                <a href="registration.html"><i class="icon fa-regular fa-user"></i> Sign Up</a>
+
+            </nav>
+        </div>
+    </section>
+    <main>
+      <section id="product-images">
+        <!-- First image spans half the width -->
+        <img src="images/bed.jpeg" alt="Bed Image" class="card-img-top" style="width: 50%;">
+    
+        <!-- Three images displayed underneath -->
+        <div class="image-group">
+          <img src="images/bed.jpeg" alt="Bed Image">
+          <img src="images/sofa.jfif" alt="Sofa Image">
+          <img src="images/table.jfif" alt="Table Image">
+        </div>
+      </section>
+    
+      <section id="product-details">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title">Samsung 25 cu. ft. French Door Refrigerator</h2>
+            <p class="card-text">Keep your food fresh and organized with this spacious and stylish Samsung refrigerator.</p>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Capacity: 25 cubic feet</li>
+              <li class="list-group-item">Style: French door</li>
+              <li class="list-group-item">Features: Ice maker, water dispenser, adjustable shelves</li>
+              <li class="list-group-item">Energy Efficiency: ENERGY STAR certified</li>
+              <li class="list-group-item">Color: Stainless steel</li>
+            </ul>
+            <a href="#" class="btn btn-primary">Add to Cart</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    
+    
+    <footer>
+      &copy; 2024 Your Company Name. All rights reserved.
+    </footer>
+</body>
+</html>

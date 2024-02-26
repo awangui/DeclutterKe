@@ -1,16 +1,18 @@
-body {
+/* body {
     font-family: Arial, sans-serif;
-}
+} */
 
-h1 {
+h2 {
     color: #45a049;
-    margin: 5% auto;
 }
 
 /* form {
     max-width: 400px;
     margin: auto;
 } */
+#listingForm {
+    font-family: Arial, sans-serif;
+}
 
 label {
     display: block;
@@ -47,16 +49,24 @@ button:hover {
     justify-content: center;
 }
 
+@media screen and (max-width: 425px) {
+    .listing-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10%;
+
+    }
+
+}
 .details {
     justify-content: center;
     padding: 20px;
     width: 100%;
 }
-
-h1 {
-    text-align: center;
+.btn-submit{
+    background-color: #45a049;
+    color:#fff;
 }
-
 nav {
     background-color: #45a049;
     margin-bottom: 40px;
