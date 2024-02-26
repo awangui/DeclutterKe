@@ -3,6 +3,7 @@
     list-style: none;
     margin: 0;
     padding: 0;
+
 }
 
 a {
@@ -36,15 +37,16 @@ h2 {
     height: 40px;
     border-radius: 4px;
     min-width: 100px;
+    margin: auto;
 }
 
 .btn:hover {
     background-color: #4caf50;
 }
 
-body {
+/* body {
     font-size: 1.2rem;
-}
+} */
 
 @media screen and (max-width:945px) {
     h2 {
@@ -74,13 +76,15 @@ h5 {
 nav {
     overflow: hidden;
     display: flex;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
+    background-color: #39846a;
     /* position: fixed;
     z-index: 1; */
 }
 
 .logo {
     margin-right: auto;
+    font-size: 1.4rem;
 }
 
 nav span {
@@ -97,6 +101,7 @@ nav a {
     text-decoration: none;
     transition: 0.3s all;
     justify-content: center;
+    font-size: 1.2rem;
 }
 
 nav a:hover {
@@ -106,6 +111,7 @@ nav a:hover {
 .icon {
     font-size: 14px;
 }
+
 .active {
     border-bottom: solid 2px #fff;
     color: #fff;
@@ -168,6 +174,7 @@ nav a:hover {
 
     nav a {
         border-radius: 4px;
+
     }
 
     .cta {
@@ -213,11 +220,16 @@ nav a:hover {
         display: block;
         position: relative;
     }
+
+    .logo {
+        margin-right: auto;
+        font-size: 1.4rem;
+    }
 }
 
 /*header*/
 #header {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6)), url(./images/pexels-terry-magallanes-2988860.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url(./images/pexels-terry-magallanes-2988860.jpg);
     height: 100vh;
     background-position: center;
     background-repeat: no-repeat;
@@ -314,6 +326,7 @@ nav a:hover {
 #browse {
     margin: 5% auto;
     padding-bottom: 5%;
+    text-align: center; /* Center align content */
 }
 
 #browse p {
@@ -326,13 +339,15 @@ nav a:hover {
 #browse button {
     text-align: center;
     background-color: #4caf4f;
-    margin: 5% auto;
+    align-items: center;
+    align-content: center;
+    margin-top: 20px;
 }
 
 .items {
     display: grid;
     /* grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); */
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 1.5rem;
     justify-content: center;
     list-style: none;
@@ -343,7 +358,7 @@ nav a:hover {
 }
 
 .item {
-    height: 250px;
+    height: 200px;
     /* Adjust the height as needed */
     background-size: cover;
     background-position: center;
@@ -352,20 +367,29 @@ nav a:hover {
     text-align: center;
     justify-content: center;
     align-items: last baseline;
-    border-radius: 16px;
+    border-radius: 50%;
     border: #00000000 solid 1px;
+    position: relative;
     /* filter: brightness(90%); */
 }
 
 .item a {
     color: #fff;
     padding: 10px;
-    font-size: 25px;
-    background-color: #00000025;
-    width: 100%;
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
+    font-size: 20px; /* Adjust font size as needed */
+    background-color: rgba(0, 0, 0, 0.5); /* Use rgba for transparency */
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-decoration: none;
+    border-bottom-left-radius: 8px; /* Ensure border radius matches item */
+    border-bottom-right-radius: 8px; /* Ensure border radius matches item */
+    transition: background-color 0.3s ease;
+    overflow: hidden; /* Ensure text stays within container */
 }
+
 
 .item:nth-child(1) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('images/table.jfif');
@@ -436,7 +460,7 @@ nav a:hover {
 }
 
 .image_content {
-    height: 10rem;
+    height: 12rem;
     width: 100%;
 
 }
@@ -449,7 +473,7 @@ nav a:hover {
 }
 
 .card-content .btn {
-    margin-bottom: 5%;
+    margin: 5% auto;
 }
 
 .card:hover {
@@ -469,8 +493,25 @@ nav a:hover {
     margin: 15px 15% 0;
     gap: 10px;
     flex-wrap: wrap;
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: rgb(94, 93, 93);
+}
+
+.item-description {
+    overflow: hidden;
+    font-size: 1rem;
+    margin: 15px 15% 0;
+}
+
+.item-details p {
+    background-color: rgb(225, 222, 222);
+    border-radius: 4px;
+    padding: 2px;
+}
+
+.item-title {
+    margin-top: 10px;
+    padding: 10px;
 }
 
 @media screen and (max-width: 600px) {
