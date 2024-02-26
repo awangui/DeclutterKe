@@ -14,19 +14,24 @@ if (isset($_POST['submit'])) {
     $price = floatval($_POST['price']); 
     $description = htmlspecialchars($_POST['description']);
     //file upload
-    $file_name = $_FILES['image']['name'];
-    $tempname = $_FILES['image']['tmp_name'];
-    $folder = 'uploads/' . $file_name;
-    if (move_uploaded_file($tempname, $folder)) {
-        $query = "INSERT INTO listings (name, category, sub_category, brand, color, years_used, `condition`, price, description, photos) 
-                  VALUES ('$name', '$category', '$sub_category', '$brand', '$color', $years_used, '$condition', $price, '$description', '$file_name')";
-        if (mysqli_query($con, $query)) {
-            echo "<h2>Listing uploaded successfully</h2>";
-        } else {
-            echo "<h2>Listing failed to upload</h2>";
+    $file_names = array();
+    $file_count = count($_FILES['images']['name']);
+    for ($i = 0; $i < $file_count; $i++) {
+        $file_name = $_FILES['images']['name'][$i];
+        $temp_name = $_FILES['images']['tmp_name'][$i];
+        $folder = 'uploads/' . $file_name;
+        if (move_uploaded_file($temp_name, $folder)) {
+            $file_names[] = $file_name;
         }
+    }
+    // Insert listing with all photos
+    $photos = implode(',', $file_names); // Convert array of file names to a comma-separated string
+    $query = "INSERT INTO listings (name, category, sub_category, brand, color, years_used, `condition`, price, description, photos) 
+              VALUES ('$name', '$category', '$sub_category', '$brand', '$color', $years_used, '$condition', $price, '$description', '$photos')";
+    if (mysqli_query($con, $query)) {
+        echo "<h2>Listing uploaded successfully</h2>";
     } else {
-        echo "<h2>Failed to move uploaded file</h2>";
+        echo "<h2>Listing failed to upload</h2>";
     }
 }
 ?>
@@ -70,7 +75,7 @@ if (isset($_POST['submit'])) {
                 <label for="name">Product Name:</label>
                 <input type="text" id="name" name="name" required>
                 <label for="photos">Photos:</label>
-                <input type="file" id="photos" name="image" accept="image/*" multiple required>
+                <input type="file" id="photos" name="images[]"  multiple accept="image/*"  required>
 
 
                 <label for="category">Category:</label>
@@ -152,14 +157,7 @@ if (isset($_POST['submit'])) {
         </div>
 
     </form>
-    <div>
-        <?php
-        $res = mysqli_query($con, "select * from listings");
-        while ($row = mysqli_fetch_assoc($res)) {
-        ?>
-            <img src="uploads/<?php echo $row['photos'] ?>" />
-        <?php } ?>
-    </div>
+   
 
 </body>
 

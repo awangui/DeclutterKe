@@ -85,119 +85,40 @@
     <section id="most-popular">
         <h2>Most Popular</h2>
         <div class="row">
-            <div class="card" id="productCard">
-                <div class="card-content">
-                    <div class="image_content">
-                        <img src="images/download.jfif">
-                    </div>
-                    <div class="text_content">
-                        <div class="item-details">
-                            <p class="brand">LG</p>
-                            <p class="color">Silver</p>
-                            <p class="condition">Fairly Used</p>
+
+            <?php
+            include 'connection.php';
+            $res = mysqli_query($con, "SELECT * FROM listings");
+            while ($row = mysqli_fetch_assoc($res)) {
+                // Get the first image filename
+                $photosArray = explode(',', $row['photos']); // Split photos field by comma
+                $first_image = reset($photosArray); // Get the first item in the exploded array
+
+            ?>
+
+                <div class="card" id="productCard">
+                    <div class="card-content">
+                        <div class="image_content">
+                            <img src="uploads/<?php echo $first_image; ?>" />
                         </div>
-                        <h5 class="item-title">Refrigerator</h5>
-                        <button class="btn btn-secondary">View Item</button>
+                        <div class="text_content">
+                            <h3 class="item-title"><?php echo $row['name']; ?></h3>
+                            <div class="item-details">
+                                <p class="brand"><?php echo $row['brand']; ?></p>
+                                <p class="color"><?php echo $row['color']; ?></p>
+                                <p class="condition"><?php echo $row['condition']; ?></p>
+                                <p class="price"><?php echo 'ksh ' . $row['price']; ?></p>
+                                <br>
+                            </div>
+                            <p class="item-description"><?php echo $row['description']; ?></p>
+
+                            <button class="btn btn-secondary"><a href="card.php?listing_id=<?php echo $row['listing_id']; ?>">View Item</a></button>
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-content">
-                    <div class="image_content">
-                        <img src="images/download.jfif">
 
-                    </div>
-                    <div class="text_content">
-                        <h5>LG Fridge</h5>
-                        <button class="btn btn-secondary">View Item</button>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-content">
-                    <div class="image_content">
-                        <img src="images/download.jfif">
-
-                    </div>
-                    <div class="text_content">
-                        <h5>LG Fridge</h5>
-                        <button class="btn btn-secondary">View Item</button>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-content">
-                    <div class="image_content">
-                        <img src="images/download.jfif">
-
-                    </div>
-                    <div class="text_content">
-                        <h5>LG Fridge</h5>
-                        <button class="btn btn-secondary">View Item</button>
-                    </div>
-
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-content">
-                    <div class="image_content">
-                        <img src="images/download.jfif">
-
-                    </div>
-                    <div class="text_content">
-                        <h5>LG Fridge</h5>
-                        <button class="btn btn-secondary">View Item</button>
-                    </div>
-
-                </div>
-            </div>
-
-
-            <div class="card">
-                <div class="card-content">
-                    <div class="image_content">
-                        <img src="images/download.jfif">
-
-                    </div>
-                    <div class="text_content">
-                        <h5>LG Fridge</h5>
-                        <button class="btn btn-secondary">View Item</button>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-content">
-                    <div class="image_content">
-                        <img src="images/download.jfif">
-
-                    </div>
-                    <div class="text_content">
-                        <h5>LG Fridge</h5>
-                        <button class="btn btn-secondary">View Item</button>
-                    </div>
-
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-content">
-                    <div class="image_content">
-                        <img src="images/download.jfif">
-
-                    </div>
-                    <div class="text_content">
-                        <h5>LG Fridge</h5>
-                        <button class="btn btn-secondary">View Item</button>
-                    </div>
-
-                </div>
-            </div>
-
+            <?php } ?>
         </div>
 
     </section>
@@ -220,7 +141,6 @@
                         <button type="submit" class="submit btn">Send</button>
             </form>
         </div>
-    </section>
     </section>
     <section id="footer">
         <div class="footer-main">
