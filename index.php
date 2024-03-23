@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Marck+Script&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image" href="/images/reading-book.png">
+
     <script src="https://kit.fontawesome.com/661ba5765b.js" crossorigin="anonymous"></script>
     <title>Decluttering Ke</title>
 </head>
@@ -18,33 +18,41 @@
 <body>
     <section id="header">
         <section id="navigation">
-            <div class="navbar">
-                <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
-                <nav>
-                    <a href="index.php" class="logo"><b><span>Declutter</span> Ke</b></a>
-                    <a href="#home" class="active">Home</a>
-                    <a href="#categories">Categories</a>
-                    <a href="#about">About</a>
-                    <a href="#contact">Contact</a>
-                    <a href="listing.html" class="cta"><i class=" icon fa fa-plus"></i> Add a Listing</a>
-                    <a href="login.html" class="credentials"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
-                    <a href="registration.html"><i class="icon fa-regular fa-user"></i> Sign Up</a>
 
-                </nav>
-            </div>
+            <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
+            <nav>
+                <a href="index.php" class="logo"><b><span>Declutter</span> Ke</b></a>
+                <a href="#home" class="active">Home</a>
+                <a href="categories.php">Categories</a>
+                <a href="about.php">About</a>
+                <a href="#contact">Contact</a>
+                <a href="listing.html" class="cta"><i class=" icon fa fa-plus"></i> Add a Listing</a>
+                <a href="login.html" class="credentials"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
+                <a href="registration.html"><i class="icon fa-regular fa-user"></i> Sign Up</a>
+
+            </nav>
         </section>
-        <div class="desc">
+        <div class="desc" id="index">
             <h1>Your Resale Haven</h1>
             <p>Helping your pre loved items find a new home</p>
             <div class="search-container">
                 <input type="text" placeholder="What are you looking for?" id="productName" name="search" onkeyup="search()" class="text">
-                <input type="text" placeholder="All Categories" name="search" class="text">
+                <!-- <input type="text" placeholder="All Categories" name="search" class="text"> -->
                 <button type="button" class="searchbtn" onclick="searchFunction()">Search</button>
                 </form>
             </div>
         </div>
     </section>
-
+    <section id="best-sellers">
+        <div class="details">
+            <img src="./images/pexels-curtis-adams-6510974.jpg">
+        </div>
+        <div class="description">
+            <h3>Discover Treasures in Every Corner</h3>
+            <p>Explore a world of pre-loved wonders, where each item has a story to tell. Shop from our curated collection of household treasures and give them a new place to call home.</p>
+            <button class="btn">Shop Now</button>
+        </div>
+    </section>
     <section id="browse">
         <h2>Popular Categories</h2>
         <p>Most viewed items</p>
@@ -71,16 +79,7 @@
         </ul>
         <button class="btn">View all categories</button>
     </section>
-    <section id="best-sellers">
-        <div class="details">
-            <img src="./images/pexels-curtis-adams-6510974.jpg">
-        </div>
-        <div class="description">
-            <h3>Discover Treasures in Every Corner</h3>
-            <p>Explore a world of pre-loved wonders, where each item has a story to tell. Shop from our curated collection of household treasures and give them a new place to call home.</p>
-            <button class="btn">Shop Now</button>
-        </div>
-    </section>
+
 
     <section id="most-popular">
         <h2>Most Popular</h2>
@@ -122,45 +121,56 @@
         </div>
 
     </section>
-
-
-    <section class="newsletter">
-        <div class="form">
-            <form class="sign" action="crisp.php" method="post" style="margin-top: 70px;">
-                <div class="title">
-                    <h4><b>Have a Query?</b></h4><br>
-                    Do you want to enquire more about us and our services? Send us a message below and we will be in touch.
+    <section id="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="accordion">
+            <div class="accordion-item">
+                <h3 class="accordion-title">How do I list an item for sale?<i class="fa-solid fa-angle-down"></i></h3>
+                <div class="accordion-content">
+                    <p>Make sure you are logged into your account.Click on add listing and fill in the necessary details then click on submit.</p>
                 </div>
-                <div class="email">
-                    <label for="mail"><b>Email address:</b></label>
-                    <input type="email" name="mail" placeholder="e.g johndoe@gmail.com" required class="text"><br>
-                    <div class="email">
-                        <label for="message"><b>Message:</b></label> <br>
-                        <textarea name="message" placeholder="Leave a message..." class="textarea" required></textarea>
-
-                        <button type="submit" class="submit btn">Send</button>
-            </form>
-        </div>
+            </div>
+            <div class="accordion-item">
+                <h3 class="accordion-title"> How do you facilitate communication between buyers and sellers?<i class="fa-solid fa-angle-down"></i></h3>
+                <div class="accordion-content">
+                    <p>We offer communication between parties through WhatsApp but we aim to implement an inbuilt chat feature soon. Which will facilitate communication between involvied parties directly on the web app.</p>
+                </div>
+                <div class="accordion-item">
+                    <h3 class="accordion-title"> Do you offer shipping?<i class="fa-solid fa-angle-down"></i></h3>
+                    <div class="accordion-content">
+                        <p>No, at the moment we currently do not offer any shipping.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h3 class="accordion-title">What payment methods do you accept?<i class="fa-solid fa-angle-down"></i></h3>
+                    <div class="accordion-content">
+                        <p>We currently only accept payments via Mpesa.</p>
+                    </div>
+                </div>
+            </div>
     </section>
+
     <section id="footer">
         <div class="footer-main">
             <div class="contain">
                 <div class="contained">
                     <ul>
                         <h4><span>About Us</span></h4>
-                        <li><a href="about.html">Who we are</a></li>
-                        <li><a href="#">Stories and News</a></li>
-                        <li><a href="#">Customer Testimonials</a></li>
+                        <li><a href="about.html">Mission Statement</a></li>
+                        <li><a href="#">Benefits of reselling</a></li>
+                        <li><a href="about.html">Our purpose</a></li>
+                        <li><a href="#">Our buying process</a></li>
                     </ul>
                 </div>
                 <div class="contained">
-                    <ul>
-                        <h4><span>Get in touch</span></h4>
-                        <li><a href="#" class="fa fa-instagram"> Instagram</a></li>
-                        <li><a href="#" class="fa fa-phone"> +254 000 000 000</a></li>
-                        <li><a href="#" class="fa fa-email">declutterKe@gmail.com</a></li>
-                    </ul>
 
+                    <h4><span>Get in touch</span></h4>
+                    <ul>
+                        <li><a href="#"><i class="fa fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fa fa-phone"> </i> +254 000 000 000</i></a></li>
+                        <li><a href="#"><i class="fa-regular fa-envelope"></i></i> declutterke@gmail.com</a></li>
+
+                    </ul>
                 </div>
             </div>
         </div>

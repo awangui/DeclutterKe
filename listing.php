@@ -1,7 +1,12 @@
 <?php
 // Include the connection.php file
 include 'connection.php';
-
+//check if user is logged in
+// if(!isset($_SESSION['userId'])){
+//     //redirect to login page
+//     header("Location: login.html");
+//     exit();
+// }
 // Check if the form is submitted
 if (isset($_POST['submit'])) {
     $name = htmlspecialchars($_POST['name']);
@@ -9,10 +14,11 @@ if (isset($_POST['submit'])) {
     $sub_category = htmlspecialchars($_POST['sub-category']);
     $brand = htmlspecialchars($_POST['brand']);
     $color = htmlspecialchars($_POST['color']);
-    $years_used = intval($_POST['yearsUsed']); 
+    $years_used = intval($_POST['yearsUsed']);
     $condition = htmlspecialchars($_POST['condition']);
-    $price = floatval($_POST['price']); 
+    $price = floatval($_POST['price']);
     $description = htmlspecialchars($_POST['description']);
+    $phone = floatval($_POST['phone']);
     //file upload
     $file_names = array();
     $file_count = count($_FILES['images']['name']);
@@ -26,8 +32,8 @@ if (isset($_POST['submit'])) {
     }
     // Insert listing with all photos
     $photos = implode(',', $file_names); // Convert array of file names to a comma-separated string
-    $query = "INSERT INTO listings (name, category, sub_category, brand, color, years_used, `condition`, price, description, photos) 
-              VALUES ('$name', '$category', '$sub_category', '$brand', '$color', $years_used, '$condition', $price, '$description', '$photos')";
+    $query = "INSERT INTO listings (name, category, sub_category, brand, color, years_used, `condition`, price, description, photos, phone_number) 
+              VALUES ('$name', '$category', '$sub_category', '$brand', '$color', $years_used, '$condition', $price, '$description', '$photos', '$phone')";
     if (mysqli_query($con, $query)) {
         echo "<h2>Listing uploaded successfully</h2>";
     } else {
@@ -75,7 +81,7 @@ if (isset($_POST['submit'])) {
                 <label for="name">Product Name:</label>
                 <input type="text" id="name" name="name" required>
                 <label for="photos">Photos:</label>
-                <input type="file" id="photos" name="images[]"  multiple accept="image/*"  required>
+                <input type="file" id="photos" name="images[]" multiple accept="image/*" required>
 
 
                 <label for="category">Category:</label>
@@ -151,13 +157,15 @@ if (isset($_POST['submit'])) {
 
                 <label for="description">Description:</label>
                 <textarea id="description" name="description" rows="4" style="width: 100%;" placeholder="provide any more details necessary"></textarea>
+                <label for="number">Phone number:</label>
+                <input type="number" id="phone" name="phone" required placeholder="provide the phone number you want to be contacted with">
                 <button class="btn btn-submit" name="submit" type="submit">Submit</button>
                 <br>
             </div>
         </div>
 
     </form>
-   
+
 
 </body>
 
