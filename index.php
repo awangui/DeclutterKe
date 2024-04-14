@@ -8,7 +8,7 @@
     <script src="script.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Marck+Script&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 
     <script src="https://kit.fontawesome.com/661ba5765b.js" crossorigin="anonymous"></script>
@@ -21,20 +21,25 @@
 
             <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
             <nav>
-                <a href="index.php" class="logo"><b><span>Declutter</span> Ke</b></a>
+                <a href="index.php" class="logo">
+                    <img src="./images/Logo maker project (1).png" class="icon">
+                    <b><span>Declutter</span> Ke</b>
+                </a>
                 <a href="#home" class="active">Home</a>
-                <a href="categories.php">Categories</a>
+                <a href="store.php">Store</a>
                 <a href="about.php">About</a>
                 <a href="#contact">Contact</a>
-                <a href="listing.html" class="cta"><i class=" icon fa fa-plus"></i> Add a Listing</a>
-                <a href="login.html" class="credentials"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
+                <a href="listing.html" class="cta">Add a Listing</a>
+                <div class="credentials">
+                <a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
                 <a href="registration.html"><i class="icon fa-regular fa-user"></i> Sign Up</a>
+                </div>
 
             </nav>
         </section>
         <div class="desc" id="index">
             <h1>Your Resale Haven</h1>
-            <p>Helping your pre loved items find a new home</p>
+            <p>Helping your pre-loved items find a new home</p>
             <div class="search-container">
                 <input type="text" placeholder="What are you looking for?" id="productName" name="search" onkeyup="search()" class="text">
                 <!-- <input type="text" placeholder="All Categories" name="search" class="text"> -->
@@ -55,7 +60,6 @@
     </section>
     <section id="browse">
         <h2>Popular Categories</h2>
-        <p>Most viewed items</p>
         <ul class="items">
             <li class="item"><a href="#">
                     Tables
@@ -84,8 +88,7 @@
     <section id="most-popular">
         <h2>Most Popular</h2>
         <div class="row">
-
-            <?php
+        <?php
             include 'connection.php';
             $res = mysqli_query($con, "SELECT * FROM listings");
             while ($row = mysqli_fetch_assoc($res)) {
@@ -94,30 +97,29 @@
                 $first_image = reset($photosArray); // Get the first item in the exploded array
 
             ?>
-
-                <div class="card" id="productCard">
-                    <div class="card-content">
-                        <div class="image_content">
-                            <img src="uploads/<?php echo $first_image; ?>" />
-                        </div>
-                        <div class="text_content">
-                            <h3 class="item-title"><?php echo $row['name']; ?></h3>
-                            <div class="item-details">
-                                <p class="brand"><?php echo $row['brand']; ?></p>
-                                <p class="color"><?php echo $row['color']; ?></p>
-                                <p class="condition"><?php echo $row['condition']; ?></p>
-                                <p class="price"><?php echo 'ksh ' . $row['price']; ?></p>
-                                <br>
-                            </div>
-                            <p class="item-description"><?php echo $row['description']; ?></p>
-
-                            <button class="btn btn-secondary"><a href="card.php?listing_id=<?php echo $row['listing_id']; ?>">View Item</a></button>
-
-                        </div>
-                    </div>
+    <div class="card" id="productCard">
+        <div class="card-content">
+            <div class="image_content">
+                <img src="uploads/<?php echo $photosArray[0]; ?>" />
+            </div>
+            <div class="text_content">
+                <h3 class="item-title"><?php echo $row['name']; ?></h3>
+                <div class="item-details">
+                    <p class="brand"><?php echo $row['brand']; ?></p>
+                    <p class="color"><?php echo $row['color']; ?></p>
+                    <p class="condition"><?php echo $row['condition']; ?></p>
+                    <p class="price"><?php echo 'ksh ' . $row['price']; ?></p>
+                    <br>
                 </div>
+                <p class="item-description"><?php echo $row['description']; ?></p>
 
-            <?php } ?>
+                <button class="btn btn-secondary"><a href="card.php?listing_id=<?php echo $row['listing_id']; ?>">View Item</a></button>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+?>
         </div>
 
     </section>
@@ -172,6 +174,13 @@
 
                     </ul>
                 </div>
+                <div class="subscribe-content">
+        <p>Join our mailing list</p>
+        <form class="subscribe-form" action="#">
+            <input type="email" name="email" placeholder="Your E-mail">
+            <button type="submit">Subscribe</button>
+        </form>
+    </div>
             </div>
         </div>
     </section>
