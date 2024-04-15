@@ -8,13 +8,14 @@ main {
   display: flex;
   justify-content: center;
   padding: 20px;
-  margin: 0 5%;
+  margin: 3% 5%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding-top: 100px;
 }
 
 #product-details {
-  width: 50%; /* Adjust as needed */
-  margin-right: 20px; 
+  width: 50%;
+  margin-right: 20px;
 }
 
 .card {
@@ -25,8 +26,8 @@ main {
 
 .card-img-top {
   width: 100%;
-  max-height: 250px; 
-  object-fit: cover; /* Preserve aspect ratio */
+  max-height: 250px;
+  object-fit: cover;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 }
@@ -45,14 +46,23 @@ main {
   margin-bottom: 20px;
 }
 
+.list-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .list-group-item {
   border: none;
   padding: 5px 0;
 }
 
+.list-group-item span {
+  color: #ffca3a;
+}
+
 .btn {
-  display: block;
-  width: 100%;
+  display: inline-block;
+  width: calc(50% - 5px); /* Adjust the width as needed */
   padding: 10px 0;
   background-color: #000;
   color: #fff;
@@ -61,6 +71,13 @@ main {
   text-decoration: none;
   text-align: center;
   cursor: pointer;
+  margin-right: 5px; /* Adjust the margin between the buttons */
+}
+
+.actions {
+  display: flex;
+  margin-top: 20px;
+  justify-content: space-around;
 }
 
 #product-images {
@@ -71,18 +88,18 @@ main {
 }
 
 #product-images img {
-  width: 30%; /* Adjust image width as needed */
-  max-height: 200px; /* Set a maximum height to prevent stretching */
-  object-fit: cover; /* Preserve aspect ratio */
+  width: 30%;
+  max-height: 200px;
+  object-fit: cover;
   border-radius: 8px;
 }
 
 #product-description {
-  max-width: 400px; /* Adjust as needed */
+  max-width: 400px;
 }
 
 footer {
-  background-color: #4caf50;
+  background-color: #ffca3a;
   color: #fff;
   padding: 20px;
   text-align: center;
@@ -93,20 +110,77 @@ footer {
   cursor: pointer;
 }
 
-/* Responsive Layout */
+/* Heart icon */
+.wishlist:hover {
+  color: red;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  position: absolute;
+  background-color: #4caf4fe6;
+  color: #000;
+  text-align: center;
+  padding: 5px;
+  border-radius: 4px;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  font-size: 0.7rem;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.actions:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.actions {
+  position: relative;
+  display: inline-block;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 10px 15px; /* Adjust the padding here */
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+#related-products {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.related-products-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Adjust the number of columns as needed */
+  gap: 20px; /* Adjust the gap between products */
+  margin-top: 20px;
+}
+
+.related-product {
+  width: 100%; /* Each product takes the full width of its column */
+}
+
 @media (max-width: 768px) {
-  main {
-    flex-direction: column;
-    align-items: center;
+  .related-products-container {
+    grid-template-columns: repeat(2, 1fr); /* Display two columns on smaller screens */
   }
+}
 
-  #product-details {
-    width: 100%;
-    margin-top: 20px;
-  }
-
-  #product-images img {
-    width: 100%;
-    margin-bottom: 20px;
+@media (max-width: 576px) {
+  .related-products-container {
+    grid-template-columns: repeat(1, 1fr); /* Display one column on extra small screens */
   }
 }

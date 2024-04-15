@@ -604,7 +604,6 @@ nav a:hover {
     font-size: 1.5rem;
     font-weight: 400;
     text-align: center;
-    color: #f5c24a;
 }
 
 .sign {
@@ -694,7 +693,7 @@ input[type=submit] {
 /*FAQ*/
 #faq{
     background-color: #f7f7f7;
-    margin-top:  15%;
+    margin-top:  10%;
     padding-bottom:5%;
 }
 #faq h2 {
@@ -887,3 +886,4 @@ input[type=submit] {
 .subscribe-form button:hover {
     background-color: #ffca3a;
 }
+

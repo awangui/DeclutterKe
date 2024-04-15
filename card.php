@@ -20,18 +20,23 @@
 
 <body>
         <section class="sticky-nav">
-            <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
-            <nav>
-                <a href="index.php" class="logo"><b><span>Declutter</span> Ke</b></a>
-                <a href="#home" class="active">Home</a>
-                <a href="categories.php">Categories</a>
-                <a href="about.php">About</a>
-                <a href="#contact">Contact</a>
-                <a href="listing.html" class="cta"><i class=" icon fa fa-plus"></i> Add a Listing</a>
-                <a href="login.html" class="credentials"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
-                <a href="registration.html"><i class="icon fa-regular fa-user"></i> Sign Up</a>
+        <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
+<nav>
+    <a href="index.php" class="logo">
+        <img src="./images/Logo maker project (1).png" class="icon">
+        <b><span>Declutter</span> Ke</b>
+    </a>
+    <a href="#home">Home</a>
+    <a href="store.php" class="active">Store</a>
+    <a href="about.html">About</a>
+    <a href="#contact">Contact</a>
+    <a href="listing.php" class="cta">Add a Listing</a>
+    <div class="credentials">
+    <a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
+    <a href="registration.html"><i class="icon fa-regular fa-user"></i> Sign Up</a>
+    </div>
 
-            </nav>
+</nav>
         </section>
   <main>
     <section id="product-images">
@@ -214,9 +219,45 @@ favorite
   ?>
 </section>
 
-  <footer>
-    &copy; 2024 Your Company Name. All rights reserved.
-  </footer>
+ 
+    <section id="footer">
+        <div class="footer-main">
+            <div class="contain">
+                <div class="contained">
+                    <ul>
+                        <h4><span>About Us</span></h4>
+                        <li><a href="about.html">Mission Statement</a></li>
+                        <li><a href="#">Benefits of reselling</a></li>
+                        <li><a href="about.html">Our purpose</a></li>
+                        <li><a href="#">Our buying process</a></li>
+                        
+                    </ul>
+                </div>
+                <div class="contained">
+
+                    <h4><span>Get in touch</span></h4>
+                    <ul>
+                        <li><a href="#"><i class="fa fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fa fa-phone"> </i> +254 000 000 000</i></a></li>
+                        <li><a href="#"><i class="fa-regular fa-envelope"></i></i> declutterke@gmail.com</a></li>
+                        <li></li>
+
+                    </ul>
+                </div>
+                <div class="subscribe-content">
+        <p>Join our mailing list</p>
+        <form class="subscribe-form" action="#">
+            <input type="email" name="email" placeholder="Your E-mail">
+            <button type="submit">Subscribe</button>
+        </form>
+        <!-- <span> &copy; Declutter Ke. All rights reserved.</span> -->
+        
+    </div>
+            </div>
+           
+        </div>
+        
+    </section>
 
   <script>
     function swapImage(thumbnail) {

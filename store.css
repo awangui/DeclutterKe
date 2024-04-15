@@ -4,13 +4,6 @@ body {
     margin: 0;
     padding: 0;
 }
-
-.listings {
-    background-color: #29802c;
-    display: flex;
-    /* margin-left: 20%; */
-}
-
 .side-nav {
     width: 20%;
     background-color: #fff;
@@ -22,54 +15,48 @@ body {
     z-index: 1000;
     overflow-y: auto;
     top: 15%;
+    background-color: #fbb610;
+    border-radius: 14px;
     left: 2%;
 }
 
 .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
     margin-left: 22%;
     margin-top: 40px;
+    padding-bottom: 120px; 
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
 }
 
 @media screen and (max-width: 768px) {
     .container {
         margin-left: 0;
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+@media screen and (max-width: 450px) {
+    .container {
+        margin-left: 0;
+        grid-template-columns: 1fr;
     }
 }
 
-.listing-card {
-    width: 100%;
-    border: 1px solid #ccc;
-}
 
-.text-container {
-    padding: 10px;
-}
 
-.listing-card img {
-    width: 100%;
-    margin: 0;
-    padding: 0;
+#footer{
+    margin-left: 22%;
 }
 
 .image-container {
-    width: 100%;
-
     max-width: 100%;
     height: 12rem;
-    margin: 0;
-    padding: 0;
-
 }
 
 .image-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    margin: 0;
-    padding: 0;
 }
 
 .filters {
@@ -80,4 +67,11 @@ body {
 .filters select {
     width: 100%;
     margin-bottom: 10px;
+}
+
+#footer {
+    clear: both;
+    position: relative; /* Change to relative positioning */
+    width: 100%; /* Make the footer span the entire width */
+    margin-top: 20px; /* Add margin to separate it from the listing cards */
 }
