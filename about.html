@@ -19,17 +19,22 @@
         <!-- <section id="navigation"class="navbar"> -->
             <section id="header">
                 <section id="navigation">
-        
+
                     <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
                     <nav>
-                        <a href="index.php" class="logo"><b><span>Declutter</span> Ke</b></a>
-                        <a href="#home" >Home</a>
-                        <a href="#categories">Categories</a>
-                        <a href="about.php" class="active">About</a>
+                        <a href="index.php" class="logo">
+                            <img src="./images/Logo maker project (1).png" class="icon">
+                            <b><span>Declutter</span> Ke</b>
+                        </a>
+                        <a href="index.php">Home</a>
+                        <a href="store.php">Store</a>
+                        <a href="about.html" class="active">About</a>
                         <a href="#contact">Contact</a>
-                        <a href="listing.html" class="cta"><i class=" icon fa fa-plus"></i> Add a Listing</a>
-                        <a href="login.html" class="credentials"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
+                        <a href="listing.php" class="cta">Add a Listing</a>
+                        <div class="credentials">
+                        <a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
                         <a href="registration.html"><i class="icon fa-regular fa-user"></i> Sign Up</a>
+                        </div>
         
                     </nav>
                 </section>
@@ -43,7 +48,7 @@
                     <div class="information">
                     <h2>Exceptional Value, Unbeatable Quality</h2>
                         <p>Discover top-notch quality products at prices that won't break the bank. Experience the perfect blend of affordability and excellence with our curated selection.</p>
-                        <button class="btn">Discover More</button>
+                        <a href="store.php"><button class="btn">Discover More</button></a>
                 </div>
                 </div>
             </section>
@@ -65,7 +70,7 @@
     <li>
     <i class="fa-solid fa-leaf"></i><br>
         <h4 class="benefit-title">Promoting Sustainability</h4>
-        <p>Extends the lifecycle of items, reducing the need for new production.Promoting a sustainable way of living.</p>
+        <p>Extends the lifecycle of items, reducing the need for new production.</p>
     </li>
     <li>
     <i class="fa-solid fa-broom"></i><br>
@@ -93,23 +98,14 @@
         <div class="description">
             <h3>Empowering Savings, Enriching Sustainability</h3>
             <p>Our platform is dedicated to fostering a dual impact by enabling savvy savings while championing environmental responsibility. Explore a world where every purchase contributes to both your financial well-being and the health of our planet</p>
-            <button class="btn">Shop Now</button>
+            <a href="store.php"><button class="btn">Shop Now</button></a>
         </div>
         <div class="details">
-            <img src="/images/pexels-alina-vilchenko-1173651.jpg" >
+            <img src="./images/pexels-alina-vilchenko-1173651.jpg" >
         </div>
     </section>
     <h2>Our buying process</h2>
-    <div class="random clearfix">
-    <div class="timeline-section">
-        <div class="section-content">
-            <h2>Our Process</h2>
-            <p>Discover how our platform works</p>
-            <button class="btn">Learn More</button>
-            <button class="btn">Get Started</button>
-        </div>
-    </div>
-    
+    <div class="random clearfix">    
     <div class="timeline">
         
   <div class="container right">
@@ -167,29 +163,37 @@
         </form>
     </div>
 </section>
-    <section id="footer">
-        <div class="footer-main">
-            <div class="contain">
-                <div class="contained">
-                    <ul>
-                        <h4><span>About Us</span></h4>
-                        <li><a href="about.html">Who we are</a></li>
-                        <li><a href="#">Stories and News</a></li>
-                        <li><a href="#">Customer Testimonials</a></li>
-                    </ul>
-                </div>
-                <div class="contained">
-
-                    <h4><span>Get in touch</span></h4>
-                    <ul>
-                        <li><a href="#"><i class="fa fa-instagram"></i> Instagram</a></li>
-                        <li><a href="#"><i class="fa fa-phone"> </i> +254 000 000 000</i></a></li>
-                        <li><a href="#"><i class="fa-regular fa-envelope"></i></i> declutterke@gmail.com</a></li>
-
-                    </ul>
-                </div>
+<section id="footer">
+    <div class="footer-main">
+        <div class="contain">
+            <div class="contained">
+                <ul>
+                    <h4><span>About Us</span></h4>
+                    <li><a href="about.html">Mission Statement</a></li>
+                    <li><a href="#">Benefits of reselling</a></li>
+                    <li><a href="about.html">Our purpose</a></li>
+                    <li><a href="#">Our buying process</a></li>
+                </ul>
             </div>
+            <div class="contained">
+
+                <h4><span>Get in touch</span></h4>
+                <ul>
+                    <li><a href="#"><i class="fa fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fa fa-phone"> </i> +254 000 000 000</i></a></li>
+                    <li><a href="#"><i class="fa-regular fa-envelope"></i></i> declutterke@gmail.com</a></li>
+
+                </ul>
+            </div>
+            <div class="subscribe-content">
+    <p>Join our mailing list</p>
+    <form class="subscribe-form" action="#">
+        <input type="email" name="email" placeholder="Your E-mail">
+        <button type="submit">Subscribe</button>
+    </form>
+</div>
         </div>
-    </section>
+    </div>
+</section>
 </body>
 </html>

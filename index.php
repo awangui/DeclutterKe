@@ -27,9 +27,9 @@
                 </a>
                 <a href="#home" class="active">Home</a>
                 <a href="store.php">Store</a>
-                <a href="about.php">About</a>
+                <a href="about.html">About</a>
                 <a href="#contact">Contact</a>
-                <a href="listing.html" class="cta">Add a Listing</a>
+                <a href="listing.php" class="cta">Add a Listing</a>
                 <div class="credentials">
                 <a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
                 <a href="registration.html"><i class="icon fa-regular fa-user"></i> Sign Up</a>
@@ -55,7 +55,7 @@
         <div class="description">
             <h3>Discover Treasures in Every Corner</h3>
             <p>Explore a world of pre-loved wonders, where each item has a story to tell. Shop from our curated collection of household treasures and give them a new place to call home.</p>
-            <button class="btn">Shop Now</button>
+            <a href="store.php"><button class="btn">Shop Now</button></a>
         </div>
     </section>
     <section id="browse">

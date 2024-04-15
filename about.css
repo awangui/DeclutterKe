@@ -18,14 +18,7 @@ h2 {
     margin-bottom: 40px;
 }
 
-.desc {
-    padding-top: 150px;
-    color: #ffffff;
-    margin: 0 auto;
-    width: 85%;
-    text-align: center;
-    line-height: 1.5;
-}
+
 
 .information {
     color: #fff;
@@ -40,12 +33,12 @@ h2 {
 }
 
 .breadcrumbs a {
-    color: #3B9A3E;
+    color: #fbb610;
     text-decoration: none;
 }
 
 .breadcrumbs i {
-    color: #3B9A3E;
+    color: #fbb610;
     font-size: 12px;
 }
 
@@ -54,7 +47,7 @@ h2 {
 }
 
 .btn {
-    background-color: #3B9A3E;
+    background-color: #fbb610;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -64,7 +57,7 @@ h2 {
 }
 
 .btn:hover {
-    background-color: #29802c;
+    background-color: #f5c24a;
 }
 
 /* Media Query for smaller screens */
@@ -73,7 +66,12 @@ h2 {
         width: 100%;
         /* Adjusted width for smaller screens */
     }
-
+    .desc h2{
+        font-size: 22px;
+    }
+    .desc p{
+        font-size: 14px;
+    }
     .information {
         width: 100%;
         /* Adjusted width for smaller screens */
@@ -92,7 +90,7 @@ h2 {
 }
 
 .desc h1 {
-    color: #68e76c;
+    color: #f5c24a;
 }
 
 .desc h2 {
@@ -107,12 +105,12 @@ h2 {
 }
 
 .breadcrumbs a {
-    color: #6ef375d7;
+    color: #f5c24a;
     text-decoration: none;
 }
 
 .breadcrumbs i {
-    color: #3B9A3E;
+    color: #f5c24a;
     font-size: 12px;
 }
 
@@ -121,7 +119,7 @@ h2 {
 }
 
 .btn {
-    background-color: #3B9A3E;
+    background-color: #fbb610;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -131,59 +129,12 @@ h2 {
 }
 
 .btn:hover {
-    background-color: #29802c;
-}
-
-.info-card {
-    display: flex;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 20px;
-}
-
-.info-card .card-image {
-    width: 200px;
-    /* Adjust as needed */
-    height: auto;
-    flex-shrink: 0;
-    /* Prevent image from shrinking */
-}
-
-.info-card .card-content {
-    padding: 20px;
-}
-
-.info-card .card-title {
-    margin-top: 0;
-}
-
-.info-card .card-text {
-    margin-bottom: 10px;
-}
-
-.info-card .card-link {
-    text-decoration: none;
-    color: #007bff;
-    font-weight: bold;
-}
-
-/* Responsive Styling */
-@media (max-width: 768px) {
-    .info-card {
-        flex-direction: column;
-    }
-
-    .info-card .card-image {
-        width: 100%;
-        /* Take full width */
-    }
+    background-color: #f5c24a;
 }
 
 
 .benefits {
     background-color: #f9f9f9;
-    /* background-color: #4caf50; */
     color: #010400;
     margin: 20px 0;
     padding: 40px 10%;
@@ -193,6 +144,7 @@ h2 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     text-align: center;
+    gap:5px;
     justify-content: center;
 }
 
@@ -213,8 +165,7 @@ h2 {
 
 .benefit i {
     font-size: 4rem;
-
-    color: #4caf50;
+    color: #fbb610;
 }
 
 .benefit p {
@@ -233,7 +184,7 @@ h2 {
 
     .benefit i {
         font-size: 3rem;
-        color: #4caf50;
+        color: #fbb610;
     }
 
 
@@ -253,8 +204,8 @@ h2 {
 .timeline {
     position: relative;
     max-width: 50%;
-    /* margin: 0 auto; */
-    float: right;
+    margin: 0 auto;
+
 }
 
 /* The actual timeline (the vertical ruler) */
@@ -294,7 +245,7 @@ h2 {
     height: 25px;
     right: -17px;
     background-color: white;
-    border: 4px solid #3B9A3E;
+    border: 4px solid #fbb610;
     top: 15px;
     border-radius: 50%;
     z-index: 1;
@@ -422,7 +373,7 @@ h2 {
     display: block;
     width: 100%;
     padding: 10px 0;
-    background-color: #3B9A3E;
+    background-color: #fbb610;
     color: white;
     border: none;
     border-radius: 5px;
@@ -432,7 +383,7 @@ h2 {
 }
 
 .section-content .btn:hover {
-    background-color: #2F6B2E;
+    background-color: #fbb610;
 }
 
 .clearfix::after {

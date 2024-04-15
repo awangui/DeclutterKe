@@ -44,7 +44,7 @@
  }
 
  button {
-     background-color: #4caf50;
+     background-color: #f5ac04;
      color: #fff;
      padding: 10px 15px;
      border: none;
@@ -58,7 +58,7 @@
  }
 
  button:hover {
-     background-color: #45a049;
+     background-color: #f5c24a;
  }
  .other{
     background-color: #f1f1f1;
@@ -67,7 +67,7 @@
     margin-bottom: 20px;
  }
  .other:hover{
-    background-color: #45a049;
+    background-color: #f5c24a;
     color: #fff;
  }
  .glogo{
