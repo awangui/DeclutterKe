@@ -14,18 +14,15 @@
         <img src="./images/Logo maker project (1).png" class="icon" >
         <b>Declutter<span>Ke</span></b>
     </a>
-        <h2 class="title">Login</h2>      
-
-        <!-- Hidden input field to pass listing_id if provided -->
-        <input type="hidden" name="listing_id" value="<?php echo isset($_GET['listing_id']) ? $_GET['listing_id'] : ''; ?>">
-
+        <h2 class="title">Login</h2>
         <!-- Email input with associated label -->
         <label for="email">Email address:</label>
         <input type="text" id="email" name="email" placeholder="Email address" required>
 
-        <!-- Password input with associated label -->
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Password" required>
+<input type="password" id="password" name="password" placeholder="Password" required>
+<spa type="button" id="togglePassword">Show</spa>
+
 
         <!-- Sign In button -->
         <button type="submit" class="cta">SIGN IN</button>
@@ -42,6 +39,20 @@
         <!-- Link to registration page -->
         <p>Don't have an account? <span><a href="registration.html">Sign Up</a></span></p>
     </form>
-
+    <script>
+        const passwordInput = document.getElementById('password');
+        const toggleButton = document.getElementById('togglePassword');
+    
+        toggleButton.addEventListener('click', function() {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleButton.textContent = 'Hide';
+            } else {
+                passwordInput.type = 'password';
+                toggleButton.textContent = 'Show';
+            }
+        });
+    </script>
+    
 </body>
 </html>

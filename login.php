@@ -1,16 +1,14 @@
 <?php
-
 session_start();
-
 include "connection.php";
 
 if (isset($_POST['email']) && isset($_POST['password'])) {
 
     function validate($data)
     {
-        $data = trim($data); // Removes any leading or trailing whitespace from the input data.
-        $data = stripslashes($data); // Removes backslashes from the input data
-        $data = htmlspecialchars($data); // Converts special characters to their corresponding HTML entities helps in preventing cross site scripting
+        $data = trim($data); 
+        $data = stripslashes($data); 
+        $data = htmlspecialchars($data); 
         return $data;
     }
 
@@ -29,23 +27,23 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         mysqli_stmt_bind_param($stmt, "s", $email);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
-        mysqli_stmt_close($stmt);
-
+        
         if ($result && $row = mysqli_fetch_assoc($result)) {
             if (password_verify($pass, $row['password'])) {
-                $_SESSION['id'] = $row['id'];
+                $_SESSION['user_id'] = $row['UserId'];
                 header("Location: home.php");
                 exit();
             } else {
-                echo "Invalid password";
+                header("Location: index.php?error=Invalid password");
                 exit();
             }
         } else {
-            echo "Invalid email address";
+            header("Location: index.php?error=Invalid email address");
             exit();
         }
     }
 } else {
-    echo "Invalid details";
+    header("Location: index.php");
     exit();
 }
+?>
