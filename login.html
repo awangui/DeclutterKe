@@ -10,20 +10,38 @@
 <body>
     
     <form action="login.php" method="post">
-        <h2 class="title">Login</h2>       
-        <p>Welcome Back</p>
-        <input type="text" id="email" name="email" placeholder="Email address"  required>
+        <a href="index.php" >
+        <img src="./images/Logo maker project (1).png" class="icon" >
+        <b>Declutter<span>Ke</span></b>
+    </a>
+        <h2 class="title">Login</h2>      
 
+        <!-- Hidden input field to pass listing_id if provided -->
+        <input type="hidden" name="listing_id" value="<?php echo isset($_GET['listing_id']) ? $_GET['listing_id'] : ''; ?>">
+
+        <!-- Email input with associated label -->
+        <label for="email">Email address:</label>
+        <input type="text" id="email" name="email" placeholder="Email address" required>
+
+        <!-- Password input with associated label -->
+        <label for="password">Password:</label>
         <input type="password" id="password" name="password" placeholder="Password" required>
 
-        <button type="submit" class=".cta">SIGN IN</button>
-        <p><i class="fa-solid fa-minus"></i> Or <i class="fa-solid fa-minus"></i></p>
-        <button type="submit" class=".cta other"> <img src="images/google-symbol.png" class="glogo"><span>Login in with Google</span></button>
-        <p>Don't have an account?<span><a href="registration.html">Sign Up</a></span></p>
+        <!-- Sign In button -->
+        <button type="submit" class="cta">SIGN IN</button>
 
+        <!-- Or separator -->
+        <p><i class="fa-solid fa-minus"></i> Or <i class="fa-solid fa-minus"></i></p>
+
+        <!-- Button for Google login -->
+        <button type="submit" class="cta other">
+            <img src="images/google-symbol.png" class="glogo">
+            <span>Login in with Google</span>
+        </button>
+
+        <!-- Link to registration page -->
+        <p>Don't have an account? <span><a href="registration.html">Sign Up</a></span></p>
     </form>
 
-
-     </form>
-    </body>
-    </html>
+</body>
+</html>

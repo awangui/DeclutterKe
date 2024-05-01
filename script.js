@@ -24,48 +24,51 @@ function menuToggle() {
     }
     nav.classList.toggle('show');
 }
+// Get the card section
+const cardSection = document.getElementById('most-popular');
 
+// Function to scroll to the card section
+let debounceTimer;
 
-// function search() {
-//     // Declare variables
-//     var input, filter, card, title, txtValue;
-//     input = document.getElementById('productName');
-//     filter = input.value.toUpperCase();
-//     card = document.getElementById("productCard");
-  
-//     // Get the title element within the card
-//     title = card.querySelector('.item-title');
-  
-//     // Get the text content of the title
-//     txtValue = title.textContent || title.innerText;
-  
-//     // Check if the search query is found in the product name
-//     if (txtValue.toUpperCase().indexOf(filter) > -1) {
-//       card.style.display = "";
-//     } else {
-//       card.style.display = "none";
-//     }
-//   }
-  function search() {
-    var input, filter, listings, card, title, i, txtValue;
-    input = document.getElementById('productName');
-    filter = input.value.toUpperCase();
-    listings = document.getElementsByClassName('card'); // Assuming each listing has the class 'card'
-
-    // Loop through all listings, and hide those that don't match the search input
-    for (i = 0; i < listings.length; i++) {
-        card = listings[i];
-        title = card.querySelector('.item-title');
-        if (title) {
-            txtValue = title.textContent || title.innerText;
+function search() {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(function() {
+        var input, filter, cards, cardContainer, h3, i, txtValue;
+        input = document.getElementById("productName");
+        filter = input.value.toUpperCase();
+        cardContainer = document.getElementById("most-popular");
+        cards = cardContainer.getElementsByClassName("card");
+        for (i = 0; i < cards.length; i++) {
+            h3 = cards[i].querySelector(".item-title");
+            txtValue = h3.textContent || h3.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                card.style.display = ''; // Show the listing
+                cards[i].style.display = "";
             } else {
-                card.style.display = 'none'; // Hide the listing
+                cards[i].style.display = "none";
             }
         }
-    }
+
+        // Hide the best-sellers and browse sections
+        document.getElementById("best-sellers").style.display = "none";
+        document.getElementById("browse").style.display = "none";
+
+        // Scroll to the card section with a slight delay
+        scrollToCardSection();
+    }, 400); // Adjust the debounce delay as needed (e.g., 300 milliseconds)
 }
+
+function searchFunction() {
+    search();
+}
+function scrollToCardSection() {
+    var cardSection = document.getElementById("most-popular");
+    cardSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+
+
+
+
   //accordion faq
   document.addEventListener("DOMContentLoaded", function() {
     var accordionTitles = document.querySelectorAll(".accordion-title");
