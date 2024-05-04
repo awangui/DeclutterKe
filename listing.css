@@ -1,15 +1,4 @@
-/* body {
-    font-family: Arial, sans-serif;
-} */
 
-h2 {
-    color: #45a049;
-}
-
-/* form {
-    max-width: 400px;
-    margin: auto;
-} */
 #listingForm {
     font-family: Arial, sans-serif;
 }
@@ -19,7 +8,16 @@ label {
     margin-bottom: 8px;
     font-weight: 600;
 }
-
+.active{
+    border-radius: 0;
+}
+.cta:hover{
+background-color: #fff;
+color: #000
+}
+.active:hover{
+    border-color: #000;
+}
 select,
 input {
     width: 100%;
@@ -28,9 +26,8 @@ input {
     display: inline-block;
     box-sizing: border-box;
 }
-
 button {
-    background-color: #4CAF50;
+    background-color: #fbb610;
     color: white;
     padding: 15px;
     border: none;
@@ -39,14 +36,21 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #fbb610;
 }
-
-.listing-container {
+ 
+.details-container{
     display: grid;
-    grid-template-columns: 35% 35%;
-    gap: 10%;
+    grid-template-columns: 45% 45%;
+    gap: 5%;
     justify-content: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width:80%;
+    margin:0 auto;
+    padding: 40px;
+}
+.listing-container{
+    margin-top: 50px;
 }
 
 @media screen and (max-width: 425px) {
@@ -63,11 +67,41 @@ button:hover {
     padding: 20px;
     width: 100%;
 }
-.btn-submit{
-    background-color: #45a049;
-    color:#fff;
+
+.btn-submit {
+    background-color: #fbb610;
+    color: #fff;
 }
-nav {
-    background-color: #45a049;
-    margin-bottom: 40px;
+.page-dots {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 5px;
+}
+.active-dot {
+    background-color: #fbb610;
+}
+.cta{
+    background-color: #fff;
+} 
+#nextButtonContainer{
+    display: flex;
+    justify-content: flex-end; /* Aligns children (the button) to the end (right) */
+    margin-top: 20px;
+}
+#nextButtonContainer button{
+    width: 28%;
+    /* Removed justify-content: flex-end; from here */
+}
+#submitButtonContainer{
+    display: flex;
+    justify-content: flex-end; /* Aligns children (the button) to the end (right) */
+    margin-top: 20px;
 }

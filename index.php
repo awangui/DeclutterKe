@@ -86,7 +86,7 @@
 
 
     <section id="most-popular">
-        <h2>Most Popular</h2>
+        <h2>Newly Added</h2>
         <div class="row">
         <?php
             include 'connection.php';

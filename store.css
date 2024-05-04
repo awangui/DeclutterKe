@@ -26,7 +26,7 @@ body {
     padding-bottom: 120px; 
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    gap: 20px;
+    gap: 30px;
 }
 
 @media screen and (max-width: 768px) {
@@ -74,4 +74,36 @@ body {
     position: relative; /* Change to relative positioning */
     width: 100%; /* Make the footer span the entire width */
     margin-top: 20px; /* Add margin to separate it from the listing cards */
+}
+/*no listing found card*/
+#message-card{
+    margin-left: 30%;
+    padding-bottom: 120px; 
+    display: grid;
+    width: 50%;
+    gap: 20px;
+    text-align: center;
+    font-size: 20px;
+    color: #3E3D3C;
+}
+#message-card button{    
+    background-color:#3E3D3C ;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    width: 50%;
+    margin: 10px auto;
+}
+#message-card button:hover{
+    background-color: #fbb610;
+    color: white;
+}
+#message-card img{
+    width: 30%;
+    height: auto;
+    object-fit: cover;
+    margin: 0 auto;
 }

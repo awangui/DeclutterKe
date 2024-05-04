@@ -66,9 +66,6 @@ function scrollToCardSection() {
 }
 
 
-
-
-
   //accordion faq
   document.addEventListener("DOMContentLoaded", function() {
     var accordionTitles = document.querySelectorAll(".accordion-title");

@@ -95,3 +95,12 @@ b span{
 width:20%;
 height: auto;
  }
+#password{
+    position: relative;
+}
+span#togglePassword{
+    position: absolute;
+    right: 40%;
+    transform: translateY(-47px);
+    cursor: pointer;
+}

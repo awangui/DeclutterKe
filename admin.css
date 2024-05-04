@@ -1,46 +1,317 @@
+/* Reset CSS */
+* {
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+}
+a {
+    color:#000;
+    text-decoration: none;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+ font-family:  "Assistant", sans-serif;;
+ background-color: #f4f6f9;
+ display: flex;
+ flex-direction: column;
+ min-height: 100vh; /* Ensure content stretches to fill height */
 }
 
+header {
+ padding: 10px;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ position: fixed;
+ width: 100%;
+ top:0;
+ z-index: 1000; /* Ensure the header stays above other content */
+}
+
+.logo {
+ font-size: 24px;
+}
+b {
+    font-size: 1.4rem;
+    display: block;
+ text-align:  center;
+    font-size: 16px;
+    color: #000;
+}
+b span{
+    color: #f5ac04;
+}
+
+.icon{
+    width: 40px;
+    border-radius: 50%;   
+    }
+.profile {
+ display: flex;
+ align-items: center;
+}
+
+.notification {
+ background-color: #f44336;
+ color: #fff;
+ border-radius: 50%;
+ padding: 6px;
+ margin-right: 10px;
+}
+
+.avatar {
+ background-color: #fff;
+ color: #252a41;
+ border-radius: 50%;
+ padding: 10px;
+}
+
+/* Main content styles */
 .container {
-    display: flex;
+ display: flex;
+ flex: 1; /* Allow main content to grow */
+ padding-top: 70px; /* Add padding to the top to accommodate the fixed header */
 }
 
-.sidebar {
-    width: 250px;
-    background-color: #39846a;
-    padding: 20px;
+
+.side-bar {
+ background-color: #fbb610;
+ width: 250px;
+ position: fixed;
+ top:58px;
+ bottom: 0;
+ overflow-y: auto;
+}
+.menu-toggle {
+ display: none;
+}
+nav {
+ background-color: #fbb610;
+ color: #fff;
+ padding: 20px;
+ width: 100%;
 }
 
-.sidebar ul {
-    list-style-type: none;
-    padding: 0;
+nav ul {
+ list-style-type: none;
+ padding: 0;
+ margin: 0;
 }
 
-.sidebar ul li {
-    margin-bottom: 10px;
-    justify-content: center;
-    padding: 20px;
-    color: white;
-    margin-left: 20px;
+nav ul li {
+ margin-bottom: 15px;
 }
 
+nav ul li a {
+ color: #fff;
+ text-decoration: none;
+}
+
+nav .tools {
+ margin-top: 30px;
+}
+
+nav .tools h4 {
+ font-size: 14px;
+ margin-bottom: 10px;
+}
+
+nav .tools ul li {
+ margin-bottom: 10px;
+}
+
+
+/* Main content styles */
 .main-content {
-    display: flex;
-    flex-grow: 1;
-    padding: 20px;
-    flex-wrap: wrap;
-    justify-content: space-around;
+ padding: 20px;
+ display: flex;
+ flex-wrap: wrap;
+ gap: 20px;
+ flex: 1; /* Allow content to grow */
+ overflow-y: auto; /* Allow vertical scrolling */
+ margin-left: 250px; /* Adjust margin to match sidebar width */
 }
 
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+ .bar {
+ width: 25px;
+ height: 3px;
+ background-color: #fff;
+ margin: 5px 0;
+}
+ .main-content {
+     margin-left: 0; /* Reset margin for smaller screens */
+ }
+ .menu-toggle {
+     display: block;
+     cursor: pointer;
+ }
+
+ .side-bar {
+ background-color: #fbb610;
+ width: 250px;
+ position: fixed;
+ top:58px;
+ bottom: 0;
+ overflow-y: auto;
+ transform: translateX(-100%);
+ transition:transform 0.3s ease-in-out; 
+ }
+.side-bar.active {
+ transform: translateX(0);
+}
+ .main-content {
+     margin-left: 0;
+ }
+}
+section {
+ background-color: #fff;
+ border-radius: 8px;
+ padding: 20px;
+ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+ flex: 1 1 300px;
+}
+.widget-container {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ width: 50%;
+ margin-top: 20px;
+}
 .widget {
-    background-color: #f4f4f4;
+ background-color: #f4f4f4;
+ border-radius: 5px;
+ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+ margin-bottom: 20px;
+ padding: 20px;
+ height: max-content;
+}
+
+/* Chart container styles */
+/* Chart container styles */
+.chart-container {
+ width: 400px; /* Adjust width as needed */
+ height: 300px; /* Adjust height as needed */
+ margin-bottom: 20px;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+ .chart-container {
+     width: 100%; /* Make charts full width on smaller screens */
+     height: 300px; /* Keep height fixed */
+ }
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+ header {
+     flex-direction: column; /* Stack items vertically */
+     align-items: flex-start; /* Align items to the start */
+ }
+
+ .profile {
+     margin-top: 10px; /* Add some space between elements */
+ }
+
+ .container {
+     flex-direction: column; /* Stack sidebar and main content vertically */
+     padding-top: 50px; /* Adjust padding for smaller screens */
+ }
+
+ .side-bar {
+     min-width: 0; /* Allow sidebar to shrink to content */
+ }
+
+ nav {
+     width: 100%; /* Full width navigation on smaller screens */
+ }
+
+ .widget {
+     width: calc(50% - 20px); /* Adjust widget width for smaller screens */
+ }
+ .calendar,
+ .listing-log {
+     width: 100%; /* Adjust width to fit smaller screens */
+     overflow-x: auto; /* Add horizontal scroll if necessary */
+ }
+}
+#miniCalendar {
+    width: 100%; /* Adjust the width to fit the container */
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    font-family: Arial, sans-serif;
+}
+
+.day {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    margin: 2px;
+    cursor: pointer;
+}
+
+.currentDay {
+    background-color: #fbb610;
+    color: #fff;
+    border-radius: 50%;
+}
+
+.inactive {
+    color: #ccc;
+}
+
+.week-row {
+    margin-bottom: 5px;
+}
+
+     table {
+         width: 100%;
+         border-collapse: collapse;
+     }
+
+     th,
+     td {
+         padding: 12px 15px;
+         text-align: left;
+         border-bottom: 1px solid #ddd;
+     }
+
+     th {
+         background-color: #f4f4f4;
+     }
+
+     /* Status colors */
+     .on-sale {
+         color: #fbb610;
+     }
+
+     .in-progress {
+         color: #ffa500;
+     }
+
+     .sold {
+         color: #f44336;
+     }
+/*users page styling */
+.user-analytics{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:20px;
+}
+.user-count{
+    font-size: 24px;
+    color: #007bff;
     margin-bottom: 20px;
-    padding: 20px;
-    width: calc(33.33% - 40px);
-    height: max-content;
+    text-align: center;
+    border-radius: solid 1px #000;
+    background-color: #fbb610; /* For browsers that do not support gradients */
+  background-image: linear-gradient(90deg, #fbb610, yellow);
+}
+.user-count p{
+    text-align: center;
 }

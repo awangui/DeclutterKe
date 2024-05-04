@@ -22,8 +22,7 @@
             <a href="#contact">Contact</a>
             <a href="listing.php" class="cta">Add a Listing</a>
             <div class="credentials">
-                <a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
-                <a href="registration.html"><i class="icon fa-regular fa-user"></i> Sign Up</a>
+    <a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
             </div>
         </nav>
     </section>
@@ -110,8 +109,7 @@
             <div class="seller">
                 <h2>Seller details</h2>
                 <div class="seller-info">
-                    <p class="seller-name">Joseph Maina</p>
-                    <p class="seller-status">Posted by Ad ID: 1234</p>
+                    <p class="seller-name"> <?php echo $row['seller_name']; ?></p>
                     <p class="date-joined">Member since: 2021</p>
                 </div>
                 <!-- Add contact options as needed -->
