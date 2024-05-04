@@ -20,7 +20,7 @@ function applyFilters() {
     var categoryValue = categoryInput.value;
     var yearsValue = yearsInput.value;
     var subCategoryValue = subCategoryInput.value.toUpperCase();
-    var priceValue = priceInput.value;
+    var priceValue = parseFloat(priceInput.value); // Convert price value to float
     var sortByValue = sortByInput.value;
     var conditions = [];
     conditionInputs.forEach(function(input) {
@@ -58,7 +58,8 @@ function applyFilters() {
         var category = card.querySelector('.category').textContent;
         var years = card.querySelector('.years').textContent;
         var subCategory = card.querySelector('.sub-category').textContent.toUpperCase();
-        var price = card.querySelector('.price').textContent;
+        var priceText = card.querySelector('.price').textContent;
+        var price = parseFloat(priceText.substring(4)); // Extract and convert price to float
         var condition = card.querySelector('.condition').textContent.toUpperCase();
 
         // Check if any filter input has a value
@@ -73,7 +74,7 @@ function applyFilters() {
             var categoryMatch = categoryValue === "any" || category === categoryValue || categoryValue === 'all';
             var yearsMatch = !yearsValue || years.includes(yearsValue);
             var subCategoryMatch = !subCategoryValue || subCategory.includes(subCategoryValue);
-            var priceMatch = !priceValue || parseFloat(price.substring(4)) <= parseFloat(priceValue);
+            var priceMatch = !priceValue || price <= priceValue; // Compare price with filter value
             var conditionMatch = conditions.length === 0 || conditions.includes(condition);
 
             // Log matches
@@ -109,7 +110,6 @@ function applyFilters() {
         messageCard.style.display = "";
     }
 }
-
 function resetFilters() {
     document.getElementById('name').value = "";
     document.getElementById('brand').value = "";
@@ -131,7 +131,4 @@ function resetFilters() {
         var card = listings[i];
         card.style.display = ""; // Show the listing
     }
-
-    // Hide the message card
-    document.getElementById('message-card').style.display = "none";
 }
