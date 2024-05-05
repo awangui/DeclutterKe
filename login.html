@@ -11,10 +11,11 @@
     
     <form action="login.php" method="post">
         <a href="index.php" >
-        <img src="./images/Logo maker project (1).png" class="icon" >
+        <img src="./images/declutterLogo.png" class="icon" >
         <b>Declutter<span>Ke</span></b>
     </a>
         <h2 class="title">Login</h2>
+        <div class="login-error">Invalid credentials</div>
         <!-- Email input with associated label -->
         <label for="email">Email address:</label>
         <input type="text" id="email" name="email" placeholder="Email address" required>
@@ -52,6 +53,17 @@
                 toggleButton.textContent = 'Show';
             }
         });
+
+
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const myParam = urlParams.get('error');
+        if(typeof(myParam) !== 'undefined'){
+            document.querySelector('.login-error').style.display = 'block';
+            document.querySelector('.login-error').textContent = myParam;
+        }
+    </script>
+
     </script>
     
 </body>

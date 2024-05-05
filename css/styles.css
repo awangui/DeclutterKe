@@ -1,22 +1,24 @@
-
 @font-face {
     font-family: 'Lato';
     src: url('./font/Lato-Black.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
+
 @font-face {
     font-family: 'Lato';
     src: url('./font/Lato-Thin.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
+
 @font-face {
     font-family: 'Lato';
     src: url('./font/Lato-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
+
 * {
     text-decoration: none;
     list-style: none;
@@ -26,7 +28,7 @@
 }
 
 body {
-    font-family:"Lato", sans-serif;
+    font-family: "Lato", sans-serif;
     letter-spacing: 1.2px;
     line-height: 1.6;
 }
@@ -39,6 +41,15 @@ a {
 img {
     width: 100%;
     height: auto;
+}
+.related-product{
+    height: 300px;
+}
+.related-product img {
+    height: 300px;
+    width:100%;
+    object-fit: cover;
+
 }
 
 h1 {
@@ -92,15 +103,15 @@ h5 {
     z-index: 1000;
 }
 
-.icon{
-width: 40px;
-border-radius: 50%;
+.icon {
+    width: 40px;
+    border-radius: 50%;
 }
 
 .logo {
     font-size: 1.4rem;
     margin-right: auto;
-    display: flex; 
+    display: flex;
     align-items: center;
 }
 
@@ -136,10 +147,12 @@ nav a:hover {
     border-bottom: solid 2px #fbb610;
     transition: all 0.3s ease-in-out;
 }
-.active:hover{
+
+.active:hover {
     border-bottom: solid 2px #000;
     color: #fbb610;
 }
+
 .sticky-nav {
     position: fixed;
     top: 0;
@@ -149,18 +162,22 @@ nav a:hover {
     color: #000;
     transition: all 0.3s ease-in-out;
 }
-.sticky-nav nav a{
+
+.sticky-nav nav a {
     color: #000;
 }
+
 .credentials {
     margin-left: auto;
 }
-.sticky-nav .credentials i{
+
+.sticky-nav .credentials i {
     color: #f5c24a;
 }
+
 .cta {
     background-color: #fbb610;
-    color:#fff;
+    color: #fff;
     border-radius: 10px;
     padding: 8px 15px;
     margin-left: 15px;
@@ -285,13 +302,16 @@ nav a:hover {
         background-color: #f5c24a;
         color: #fff;
     }
-.logo{
-    display: block;
-    text-align: center;
-}
-.logo b{
-    display: block;
-}
+
+    .logo {
+        display: block;
+        text-align: center;
+    }
+
+    .logo b {
+        display: block;
+    }
+
     nav a,
     .search-container {
         float: none;
@@ -400,12 +420,13 @@ nav a:hover {
 
 #browse {
     margin: 5% auto;
-    padding-bottom:5%;
+    padding-bottom: 5%;
     text-align: center;
     background-color: #f1f1f1;
     /* Center align content */
 }
-#browse h2{
+
+#browse h2 {
     padding: 3% 0;
 }
 
@@ -439,7 +460,7 @@ nav a:hover {
     text-align: center;
     justify-content: center;
     align-items: last baseline;
-    border-radius:4px;
+    border-radius: 4px;
     border: #00000000 solid 1px;
     position: relative;
 
@@ -450,7 +471,7 @@ nav a:hover {
     padding: 10px;
     font-size: 20px;
     background-color: rgba(0, 0, 0, 0.5);
-    border-radius:4px;
+    border-radius: 4px;
     display: block;
     position: absolute;
     bottom: 10;
@@ -486,9 +507,11 @@ nav a:hover {
     .desc {
         padding-top: 70px;
     }
-    .desc h1{
+
+    .desc h1 {
         font-size: 2.5rem;
     }
+
     .items {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -516,9 +539,11 @@ nav a:hover {
 #most-popular {
     padding: 0 5%;
 }
+
 #most-popular h2 {
     color: #3E3D3C;
 }
+
 .row {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -596,12 +621,15 @@ nav a:hover {
     .row {
         grid-template-columns: repeat(2, 1fr);
     }
+
     .item-title {
         font-size: 12px;
     }
+
     .item-details p {
         font-size: 10px;
     }
+
     .item-description {
         overflow: hidden;
         font-size: 0.75rem;
@@ -706,11 +734,12 @@ input[type=submit] {
 }
 
 /*FAQ*/
-#faq{
+#faq {
     background-color: #f7f7f7;
-    margin-top:  10%;
-    padding-bottom:5%;
+    margin-top: 10%;
+    padding-bottom: 5%;
 }
+
 #faq h2 {
     color: #fbb610;
 }
@@ -727,7 +756,7 @@ input[type=submit] {
     margin: 0;
     background-color: #f7f7f7;
     border-top: 1px solid #ccc;
-    display: flex; 
+    display: flex;
     align-items: center;
 }
 
@@ -760,13 +789,16 @@ input[type=submit] {
     padding: 1% 8%;
     background-color: #3E3D3C;
 }
-#footer a{
+
+#footer a {
     color: #fff;
     padding: 10px 0;
 }
-#footer a:hover{
+
+#footer a:hover {
     border-bottom: 1.5px solid #fbb610;
 }
+
 .footer-main {
     /* background-color: #f2f2f2; */
     border-bottom: solid 3px white;
@@ -859,6 +891,7 @@ input[type=submit] {
     }
 
 }
+
 #subscribe-section {
     background-color: #3E3D3C;
     color: #fff;
@@ -901,4 +934,3 @@ input[type=submit] {
 .subscribe-form button:hover {
     background-color: #ffca3a;
 }
-

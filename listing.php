@@ -64,8 +64,8 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="listing.js"></script>
-    <link rel="stylesheet" href="styles.css">
+    <script src="./js/listing.js"></script>
+    <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="listing.css">
     <script src="https://kit.fontawesome.com/661ba5765b.js" crossorigin="anonymous"></script>
     <title>Add Listing</title>
@@ -77,7 +77,7 @@ if (isset($_POST['submit'])) {
         <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
         <nav>
             <a href="index.php" class="logo">
-                <img src="./images/Logo maker project (1).png" class="icon">
+                <img src="./images/declutterLogo.png" class="icon">
                 <b><span>Declutter</span> Ke</b>
             </a>
             <a href="#home">Home</a>

@@ -9,11 +9,11 @@ require_once 'connection.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="script.js"></script>
+    <script src="./js/script.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Marck+Script&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="about.css">
     <script src="https://kit.fontawesome.com/661ba5765b.js" crossorigin="anonymous"></script>
     <title>Decluttering Ke</title>
@@ -27,7 +27,7 @@ require_once 'connection.php';
             <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
             <nav>
                 <a href="index.php" class="logo">
-                    <img src="./images/Logo maker project (1).png" class="icon">
+                    <img src="./images/declutterLogo.png" class="icon">
                     <b><span>Declutter</span> Ke</b>
                 </a>
                 <a href="index.php">Home</a>

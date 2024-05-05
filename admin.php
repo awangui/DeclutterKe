@@ -7,19 +7,20 @@
     <title>Admin Page</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="admin.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/admin.css">
 
 </head>
+
 <body>
     <header>
         <a href="index.php" class="logo">
-            <img src="./images/Logo maker project (1).png" class="icon">
+            <img src="./images/declutterLogo.png" class="icon">
         </a>
         <b><span>Declutter</span> Ke</b>
-        <div class="profile">        
-                  
+        <div class="profile">
+
             <span class="notification">4</span>
             <div class="avatar">Charles Hall</div>
             <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
@@ -34,22 +35,27 @@
         <div class="side-bar">
             <nav>
                 <ul>
-                    <li><a class="nav-item active" >Dashboard</a>
-                        <li><a class="nav-item" href="users.php">Users</a>
-                      <li><a class="nav-item">Listings</a>
-                        <li><a class="nav-item">Stats</a>
-                      <li><a class="nav-item">Logout</a>
+                    <li><a class="nav-item active">Dashboard</a>
+                    <li><a class="nav-item" href="users.php">Users</a>
+                    <li><a class="nav-item">Listings</a>
+                    <li><a class="nav-item">Stats</a>
+                    <li><a class="nav-item">Logout</a>
                 </ul>
+                <?php if (isset($_SESSION['user_id'])) { ?>
+                    <div class="credentials">
+                        <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
+                    </div>
+                <?php }  ?>
                 <div class="tools">
                     <h4>Tools & Components</h4>
                     <ul>
                         <li><a href="#">Settings</a></li>
-                        
+
                     </ul>
                 </div>
             </nav>
         </div>
-     <div class="main-content">
+        <div class="main-content">
             <section class="analytics">
                 <h2>Analytics Dashboard</h2>
                 <p>Sales: 2,382 (-3.65% Since last week)</p>
@@ -64,39 +70,39 @@
             </section>
             <div class="widget-container">
                 <div class="widget-row">
-            <div class="widget">
-                <h2>Total Listings</h2>
-                <p>500</p>
+                    <div class="widget">
+                        <h2>Total Listings</h2>
+                        <p>500</p>
+                    </div>
+                    <!-- Widget 2: Active Users -->
+                    <div class="widget">
+                        <h2>Active Users</h2>
+                        <p>1000</p>
+                    </div>
+                    <!-- Widget 3: Reported Items -->
+                    <div class="widget">
+                        <h2>Reported Items</h2>
+                        <p>20</p>
+                    </div>
+                </div>
+                <div class="widget-row">
+                    <!-- Widget 4: Pending Approvals -->
+                    <div class="widget">
+                        <h2>Pending Approvals</h2>
+                        <p>5</p>
+                    </div>
+                    <!-- Widget 5: User Feedback -->
+                    <div class="widget">
+                        <h2>User Feedback</h2>
+                        <p>4.2/5</p>
+                    </div>
+                    <!-- Widget 6: Messages -->
+                    <div class="widget">
+                        <h2>Messages</h2>
+                        <p>10 unread</p>
+                    </div>
+                </div>
             </div>
-            <!-- Widget 2: Active Users -->
-            <div class="widget">
-                <h2>Active Users</h2>
-                <p>1000</p>
-            </div>
-            <!-- Widget 3: Reported Items -->
-            <div class="widget">
-                <h2>Reported Items</h2>
-                <p>20</p>
-            </div>
-            </div>
-            <div class="widget-row">
-            <!-- Widget 4: Pending Approvals -->
-            <div class="widget">
-                <h2>Pending Approvals</h2>
-                <p>5</p>
-            </div>
-            <!-- Widget 5: User Feedback -->
-            <div class="widget">
-                <h2>User Feedback</h2>
-                <p>4.2/5</p>
-            </div>
-            <!-- Widget 6: Messages -->
-            <div class="widget">
-                <h2>Messages</h2>
-                <p>10 unread</p>
-            </div>
-        </div>
-        </div>
             <div class="widget chart-container">
                 <canvas id="monthlySalesChart"></canvas>
             </div>
@@ -106,7 +112,7 @@
             <div class="widget chart-container">
                 <canvas id="browserUsageChart"></canvas>
             </div>
-            
+
             <section class="browser-usage">
                 <table>
                     <thead>
@@ -148,64 +154,6 @@
     </div>
     <script src="admin.js"></script>
     <script>
-        
-            // Get the container for the mini calendar
-            const miniCalendarContainer = document.getElementById('miniCalendar');
-
-// Get the current date
-const currentDate = new Date();
-
-// Get the current month and year
-const currentMonth = currentDate.getMonth();
-const currentYear = currentDate.getFullYear();
-
-// Get the number of days in the current month
-const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-
-// Create a table for the calendar
-const calendarTable = document.createElement('table');
-
-// Create a table row for the days of the week (headers)
-const headerRow = document.createElement('tr');
-const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-daysOfWeek.forEach(day => {
-    const th = document.createElement('th');
-    th.textContent = day;
-    headerRow.appendChild(th);
-});
-calendarTable.appendChild(headerRow);
-
-// Calculate the day of the week for the first day of the month
-const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
-
-// Create the calendar
-let dayCounter = 1;
-for (let i = 0; i < 6; i++) { // Assuming a maximum of 6 rows
-    const row = document.createElement('tr');
-    for (let j = 0; j < 7; j++) {
-        const cell = document.createElement('td');
-        if (i === 0 && j < firstDayOfMonth) {
-            // Empty cells before the first day of the month
-            cell.textContent = '';
-        } else if (dayCounter > daysInMonth) {
-            // Empty cells after the last day of the month
-            cell.textContent = '';
-        } else {
-            // Add the day to the cell
-            cell.textContent = dayCounter;
-            if (dayCounter === currentDate.getDate()) {
-                // Highlight the current day
-                cell.classList.add('currentDay');
-            }
-            dayCounter++;
-        }
-        row.appendChild(cell);
-    }
-    calendarTable.appendChild(row);
-}
-
-// Append the calendar table to the container
-miniCalendarContainer.appendChild(calendarTable);
         // Data for the monthly sales chart
         const monthlySalesData = {
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -316,8 +264,6 @@ miniCalendarContainer.appendChild(calendarTable);
             data: browserUsageData,
             options: browserUsageChartOptions
         });
-        // Get the menu toggle button
-
     </script>
 
 </body>

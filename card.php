@@ -15,8 +15,8 @@ if (!isset($_SESSION['user_id'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Property Details</title>
   <script src="https://kit.fontawesome.com/661ba5765b.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="draft.css">
+  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="./css/card.css">
 </head>
 
 <body>
@@ -24,7 +24,7 @@ if (!isset($_SESSION['user_id'])) {
     <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
     <nav>
       <a href="index.php" class="logo">
-        <img src="./images/Logo maker project (1).png" class="icon">
+        <img src="./images/declutterLogo.png" class="icon">
         <b><span>Declutter</span> Ke</b>
       </a>
       <a href="index.php">Home</a>
@@ -131,17 +131,49 @@ if (!isset($_SESSION['user_id'])) {
             </a>
 
             <a href="store.php" class="contact"><button class="btn"><i class="fa-solid fa-phone"></i>Show Contact</button></a>
-            <i class="fa-regular fa-heart"></i>
+
+            <a class="fa-regular fa-heart"></a>
+
+
+            <!-- Button to open the modal -->
+            <div id="myModal" class="modal">
+
+              <!-- Modal content -->
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="modal-body">
+                  <h2>Payment</h2>
+                  <form action="safaricom/stk_initiate.php" method="POST">
+                    <div class="form-group">
+                      <label for="amount">Amount</label>
+                      <input type="text" class="form-control" id="amount" name="amount" placeholder="Enter Amount">
+                    </div>
+                    <div class="form-group">
+                      <label for="phone">Phone Number</label>
+                      <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter Phone Number">
+                    </div>
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-success" name="submit" value="submit">Pay</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <button id="myBtn" class="btn buy-now-btn">Buy Now</button>
+
           </div>
-      <?php
+
+
+    </div>
+<?php
         } else {
           echo "Product not found.";
         }
       } else {
         echo "Listing ID not provided.";
       }
-      ?>
-    </div>
+?>
+  </div>
   </div>
 
   <section id="related-products">
@@ -175,7 +207,7 @@ if (!isset($_SESSION['user_id'])) {
         $sub_category = $row['sub_category'];
 
         // Fetch related products with similar category or subcategory, limited to 3
-        $related_query = "SELECT * FROM listings WHERE (category = '$category' OR sub_category = '$sub_category') AND listing_id != $listing_id ";
+        $related_query = "SELECT * FROM listings WHERE (category = '$category' OR sub_category = '$sub_category') AND listing_id != $listing_id  LIMIT 4";
         $related_result = mysqli_query($con, $related_query);
 
         // Check if there are related products
@@ -188,7 +220,7 @@ if (!isset($_SESSION['user_id'])) {
             echo '<a href="card.php?listing_id=' . $related_row['listing_id'] . '">';
             echo '<div class="card">';
             // Fix image source path here
-            echo '<img src="uploads/' . $related_row['photos'] . '" alt="Product Image" class="card-img-top">';
+            echo '<img src="uploads/' . explode(',', $related_row['photos'])[0] . '" alt="Product Image" class="card-img-top">';
             echo '<div class="card-body">';
             echo '<h3>' . $related_row['name'] . '</h3>'; // Display product name
             // Display other product details here
@@ -277,18 +309,11 @@ if (!isset($_SESSION['user_id'])) {
       </div>
     </div>
   </section>
-  <script>
-    function swapImage(thumbnail) {
-      var mainImage = document.getElementById('mainImage');
-      mainImage.style.opacity = 0; // Fade out main image
-      setTimeout(function() {
-        var tempSrc = mainImage.src;
-        mainImage.src = thumbnail.src;
-        thumbnail.src = tempSrc;
-        mainImage.style.opacity = 1; // Fade in main image
-      }, 300); // Wait for fade out transition to complete (300ms)
-    }
-  </script>
+  <script src="card.js"></script>
+
+  <!-- The Modal -->
+
+
 </body>
 
 </html>

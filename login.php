@@ -31,14 +31,22 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         if ($result && $row = mysqli_fetch_assoc($result)) {
             if (password_verify($pass, $row['password'])) {
                 $_SESSION['user_id'] = $row['UserId'];
+                $_SESSION['user_role']= $row['role'];
+                if($row['role'] == 1){
+                    header("Location: admin.php");
+                    exit();
+                }
+                else{
                 header("Location: index.php");
                 exit();
+                }
             } else {
-                header("Location: index.php?error=Invalid password");
+                header("Location: login.html?error=Invalid details");
+        
                 exit();
             }
         } else {
-            header("Location: index.php?error=Invalid email address");
+            header("Location: login.html?error=Invalid details");
             exit();
         }
     }

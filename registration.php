@@ -14,11 +14,11 @@ if (!empty($fname) && !empty($sname) && !empty($mail) && !empty($hash_pass)) {
     $stmt = mysqli_prepare($con, $sql);
     mysqli_stmt_bind_param($stmt, "ssss", $fname, $sname, $mail, $hash_pass);
     $rs = mysqli_stmt_execute($stmt);
-    
+
     if ($rs) {
         $_SESSION['id'] = mysqli_insert_id($con); // Get the ID of the inserted user
         $_SESSION['email'] = $mail; // Store additional user information in session if needed
-        header("Location: home.php");
+        header("Location: index.php");
         exit();
     } else {
         header("Location: registration.php?error=Failed to register");
@@ -28,4 +28,3 @@ if (!empty($fname) && !empty($sname) && !empty($mail) && !empty($hash_pass)) {
     header("Location: registration.php?error=All fields are required.");
     exit();
 }
-?>

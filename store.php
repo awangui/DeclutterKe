@@ -3,8 +3,8 @@ session_start();
 require_once 'connection.php';
 // Check if the user is not logged in, redirect to the login page
 if (!isset($_SESSION['user_id'])) {
-  header("Location: login.html");
-  exit();
+    header("Location: login.html");
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -17,8 +17,8 @@ if (!isset($_SESSION['user_id'])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Marck+Script&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="store.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/store.css">
     <script src="https://kit.fontawesome.com/661ba5765b.js" crossorigin="anonymous"></script>
     <title>Decluttering Ke</title>
 </head>
@@ -28,10 +28,10 @@ if (!isset($_SESSION['user_id'])) {
         <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
         <nav>
             <a href="index.php" class="logo">
-                <img src="./images/Logo maker project (1).png" class="icon">
+                <img src="./images/declutterLogo.png" class="icon">
                 <b><span>Declutter</span> Ke</b>
             </a>
-            <a href="home.php">Home</a>
+            <a href="index.php">Home</a>
             <a href="store.php" class="active">Store</a>
             <a href="about.php">About</a>
             <a href="#contact">Contact</a>
