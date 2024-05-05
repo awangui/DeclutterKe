@@ -1,3 +1,22 @@
+
+@font-face {
+    font-family: 'Lato';
+    src: url('./font/Lato-Black.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Lato';
+    src: url('./font/Lato-Thin.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Lato';
+    src: url('./font/Lato-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 * {
     text-decoration: none;
     list-style: none;
@@ -7,8 +26,7 @@
 }
 
 body {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-weight: 400;
+    font-family:"Lato", sans-serif;
     letter-spacing: 1.2px;
     line-height: 1.6;
 }
@@ -27,7 +45,6 @@ h1 {
     font-size: 3.5rem;
     text-align: center;
     padding: 20px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
     font-weight: 500;
 }
 
@@ -35,7 +52,6 @@ h2 {
     text-align: center;
     font-size: 2.2rem;
     padding: 2%;
-    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .btn {

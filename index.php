@@ -1,6 +1,9 @@
+<?php
+session_start();
+require_once 'connection.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 
-    <script src="https://kit.fontawesome.com/661ba5765b.js" crossorigin="anonymous"></script>
+    <script src="../js/font-awesome.js" crossorigin="anonymous"></script>
     <title>Decluttering Ke</title>
 </head>
 
@@ -27,14 +30,20 @@
                 </a>
                 <a href="#home" class="active">Home</a>
                 <a href="store.php">Store</a>
-                <a href="about.html">About</a>
+                <a href="about.php">About</a>
                 <a href="#contact">Contact</a>
                 <a href="listing.php" class="cta">Add a Listing</a>
-                <div class="credentials">
-                <a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
-                <a href="registration.html"><i class="icon fa-regular fa-user"></i> Sign Up</a>
-                </div>
-
+                <?php if (isset($_SESSION['user_id'])) { ?>
+                    <div class="credentials">
+                        <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
+                    </div>
+                <?php } else {
+                ?>
+                    <div class="credentials">
+                        <a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
+                        <a href="registration.html"><i class="icon fa-regular fa-user"></i> Sign Up</a>
+                    </div>
+                <?php } ?>
             </nav>
         </section>
         <div class="desc" id="index">
@@ -66,11 +75,11 @@
                 </a>
             </li>
             <li class="item">
-                <a href="#">
-                    TVs</a>
+                <a href="store.php?cat=electronics">
+                    Electronics</a>
             </li>
-            <li class="item"><a href="#">
-                    Sofas</a>
+            <li class="item"><a href="store.php?cat=furniture">
+                    Furniture</a>
             </li>
             <li class="item"><a href="#">
                     Beds</a>
@@ -85,10 +94,12 @@
     </section>
 
 
+
+
     <section id="most-popular">
         <h2>Newly Added</h2>
         <div class="row">
-        <?php
+            <?php
             include 'connection.php';
             $res = mysqli_query($con, "SELECT * FROM listings");
             while ($row = mysqli_fetch_assoc($res)) {
@@ -97,29 +108,29 @@
                 $first_image = reset($photosArray); // Get the first item in the exploded array
 
             ?>
-    <div class="card" id="productCard">
-        <div class="card-content">
-            <div class="image_content">
-                <img src="uploads/<?php echo $photosArray[0]; ?>" />
-            </div>
-            <div class="text_content">
-                <h3 class="item-title"><?php echo $row['name']; ?></h3>
-                <div class="item-details">
-                    <p class="brand"><?php echo $row['brand']; ?></p>
-                    <p class="color"><?php echo $row['color']; ?></p>
-                    <p class="condition"><?php echo $row['condition']; ?></p>
-                    <p class="price"><?php echo 'ksh ' . $row['price']; ?></p>
-                    <br>
-                </div>
-                <p class="item-description"><?php echo $row['description']; ?></p>
+                <div class="card" id="productCard">
+                    <div class="card-content">
+                        <div class="image_content">
+                            <img src="uploads/<?php echo $photosArray[0]; ?>" />
+                        </div>
+                        <div class="text_content">
+                            <h3 class="item-title"><?php echo $row['name']; ?></h3>
+                            <div class="item-details">
+                                <p class="brand"><?php echo $row['brand']; ?></p>
+                                <p class="color"><?php echo $row['color']; ?></p>
+                                <p class="condition"><?php echo $row['condition']; ?></p>
+                                <p class="price"><?php echo 'ksh ' . $row['price']; ?></p>
+                                <br>
+                            </div>
+                            <p class="item-description"><?php echo $row['description']; ?></p>
 
-                <button class="btn btn-secondary"><a href="card.php?listing_id=<?php echo $row['listing_id']; ?>">View Item</a></button>
-            </div>
-        </div>
-    </div>
-    <?php
-}
-?>
+                            <button class="btn btn-secondary"><a href="card.php?listing_id=<?php echo $row['listing_id']; ?>">View Item</a></button>
+                        </div>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
         </div>
 
     </section>
@@ -158,9 +169,9 @@
                 <div class="contained">
                     <ul>
                         <h4><span>About Us</span></h4>
-                        <li><a href="about.html">Mission Statement</a></li>
+                        <li><a href="about.php">Mission Statement</a></li>
                         <li><a href="#">Benefits of reselling</a></li>
-                        <li><a href="about.html">Our purpose</a></li>
+                        <li><a href="about.php">Our purpose</a></li>
                         <li><a href="#">Our buying process</a></li>
                     </ul>
                 </div>
@@ -175,12 +186,12 @@
                     </ul>
                 </div>
                 <div class="subscribe-content">
-        <p>Join our mailing list</p>
-        <form class="subscribe-form" action="#">
-            <input type="email" name="email" placeholder="Your E-mail">
-            <button type="submit">Subscribe</button>
-        </form>
-    </div>
+                    <p>Join our mailing list</p>
+                    <form class="subscribe-form" action="#">
+                        <input type="email" name="email" placeholder="Your E-mail">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>

@@ -1,3 +1,12 @@
+<?php
+session_start();
+require_once 'connection.php';
+// Check if the user is not logged in, redirect to the login page
+if (!isset($_SESSION['user_id'])) {
+  header("Location: login.html");
+  exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +33,7 @@
             </a>
             <a href="home.php">Home</a>
             <a href="store.php" class="active">Store</a>
-            <a href="about.html">About</a>
+            <a href="about.php">About</a>
             <a href="#contact">Contact</a>
             <a href="listing.php" class="cta">Add a Listing</a>
             <div class="credentials">
@@ -34,67 +43,136 @@
     </section>
 
     <div class="side-nav">
-    <div class="filters">
-        <h2>Filters</h2>
-        <label for="name">Name:</label>
-        <input type="text" id="name" placeholder="Enter item name">
+        <div class="filters">
+            <h2>Filters</h2>
+            <form action="store.php" method="GET">
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" placeholder="Enter item name" value="<?php echo isset($_GET['name']) ? $_GET['name'] : ''; ?>" />
 
-        <label for="brand">Brand:</label>
-        <input type="text" id="brand" placeholder="Enter brand">
+                <label for="brand">Brand:</label>
+                <input type="text" id="brand" name="brand" placeholder="Enter brand" value="<?php echo isset($_GET['brand']) ? $_GET['brand']  : ''; ?>" />
 
-        <label for="color">Color:</label>
-        <input type="text" id="color" placeholder="Enter color">
+                <label for="color">Color:</label>
+                <input type="text" id="color" name="color" value="<?php echo isset($_GET['color']) ? $_GET['color'] : ''; ?>" placeholder="Enter color">
 
-        <label for="location">Location:</label>
-        <input type="text" id="location" placeholder="Enter location">
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" placeholder="Enter location" value="<?php echo isset($_GET['location']) ? $_GET['location'] : ''; ?>" />
 
-        <label for="category">Category:</label>
-        <select id="category">
-        <option value="any">Any</option>
-            <option value="electronics">Electronics</option>
-            <option value="clothing">Clothing</option>
-            <option value="furniture">Furniture</option>
-            <!-- Add more categories as needed -->
-        </select>
+                <label for="category">Category:</label>
+                <select id="category" name="cat">
+                    <option value="any">Any</option>
+                    <?php
+                    $res = mysqli_query($con, "SELECT DISTINCT LOWER(category) AS category FROM `listings` ORDER BY category;");
+                    while ($row = mysqli_fetch_assoc($res)) {
+                        echo "<option " . ($_GET['cat'] == $row['category'] ? 'selected' : '') . " value='" . $row['category'] . "'>" . $row['category'] . "</option> \n";
+                    }
 
-        <div class="filter-condition">
-            <label>Condition:</label>
-            <input type="checkbox" id="new">
-            <label for="new">New</label>
-            <input type="checkbox" id="fairly">
-            <label for="fairly">Fairly used</label>
-            <input type="checkbox" id="used">
-            <label for="used">Used</label>
-            <!-- Add more condition options as needed -->
+                    ?>
+
+                </select>
+
+                <div class="filter-condition">
+                    <table>
+                        <tr>
+                            <td><label>Condition:</label></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" id="new" name="new"></td>
+                            <td><label for="new">New</label></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" id="fairly" name="fairly"></td>
+                            <td><label for="fairly">Fairly used</label></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" id="used" name="used"></td>
+                            <td><label for="used">Used</label></td>
+                        </tr>
+                    </table>
+
+                    <!-- Add more condition options as needed -->
+                </div>
+
+                <label for="years">Years Used:</label>
+                <input type="number" id="years" name="years" placeholder="Enter years used" value="<?php echo isset($_GET['years']) ? $_GET['years'] : ''; ?>">
+
+                <label for="sub-category">Sub-Category:</label>
+                <input type="text" id="sub-category" name="sub-category" placeholder="Enter sub-category" value="<?php echo isset($_GET['sub-category']) ? $_GET['sub-category'] : ''; ?>">
+                <label for="min-price">Min Price:</label>
+                <input type="number" id="min-price" name="min-price" placeholder="Enter price" value="<?php echo isset($_GET['min-price']) ? $_GET['min-price'] : ''; ?>">
+                <label for="max-price"> Max Price:</label>
+                <input type="number" id="max-price" name="max-price" placeholder="Enter price" value="<?php echo isset($_GET['max-price']) ? $_GET['max-price'] : '' ?>">
+
+                <label for="sort-by">Sort By:</label>
+                <select id="sort-by" value="sort-by" name="sort-by">
+                    <?php
+                    echo "<option " . ($_GET['sort-by'] == 'newest' ? 'selected' : '') . " value='newest'>Newest</option> \n";
+                    echo "<option " . ($_GET['sort-by'] == 'price-low-high' ? 'selected' : '') . " value='price-low-high'>Price: Low to High</option> \n";
+                    echo "<option " . ($_GET['sort-by'] == 'price-high-low' ? 'selected' : '') . " value='price-high-low'>Price: High to Low</option> \n";
+                    ?>
+                </select>
+
+                <button id="filter-btn" type="submit">Apply Filters</button>
+                <button id="reset-btn" onclick="resetFilters()">Reset Filters</button>
+            </form>
         </div>
 
-        <label for="years">Years Used:</label>
-        <input type="number" id="years" placeholder="Enter years used">
-
-        <label for="sub-category">Sub-Category:</label>
-        <input type="text" id="sub-category" placeholder="Enter sub-category">
-
-        <label for="price">Price:</label>
-        <input type="number" id="price" placeholder="Enter price">
-
-        <label for="sort-by">Sort By:</label>
-        <select id="sort-by">
-            <option value="newest">Newest</option>
-            <option value="price-low-high">Price: Low to High</option>
-            <option value="price-high-low">Price: High to Low</option>
-            <!-- Add more sorting options as needed -->
-        </select>
-
-        <button id="filter-btn" onclick="applyFilters()">Apply Filters</button>
-        <button id="reset-btn" onclick="resetFilters()">Reset Filters</button>
     </div>
-</div>
 
     <!-- Listings Showcase -->
     <div class="container" id="listings-container">
         <?php
-        include 'connection.php';
-        $res = mysqli_query($con, "SELECT * FROM listings");
+        $category =  isset($_GET['cat']) ? $_GET['cat'] : "1";
+        $queryFilter = "";
+        if (isset($_GET['name']) && $_GET['name'] != "") {
+            $queryFilter .= " AND name LIKE '%" . $_GET['name'] . "%'";
+        }
+        if (isset($_GET['brand']) && $_GET['brand'] != "") {
+            $queryFilter .= " AND brand LIKE '%" . $_GET['brand'] . "%'";
+        }
+        if (isset($_GET['color']) && $_GET['color'] != "") {
+            $queryFilter .= " AND color LIKE '%" . $_GET['color'] . "%'";
+        }
+        if (isset($_GET['location']) && $_GET['location'] != "") {
+            $queryFilter .= " AND city LIKE '%" . $_GET['location'] . "%'";
+        }
+        if (isset($_GET['cat']) && $_GET['cat'] != "any") {
+            $queryFilter .= " AND category = '" . $_GET['cat'] . "'";
+        }
+        if (isset($_GET['new'])) {
+            $queryFilter .= " AND `condition` = 'New'";
+        }
+        if (isset($_GET['fairly'])) {
+            $queryFilter .= " AND `condition` = 'Fairly Used'";
+        }
+        if (isset($_GET['used'])) {
+            $queryFilter .= " AND `condition` = 'Used'";
+        }
+        if (isset($_GET['years']) && $_GET['years'] != "") {
+            $queryFilter .= " AND years_used = " . $_GET['years'];
+        }
+        if (isset($_GET['sub-category']) && $_GET['sub-category'] != "") {
+            $queryFilter .= " AND sub_category LIKE '%" . $_GET['sub-category'] . "%'";
+        }
+        if (isset($_GET['min-price']) && $_GET['min-price'] != "") {
+            $queryFilter .= " AND price >= " . $_GET['min-price'];
+        }
+        if (isset($_GET['max-price']) && $_GET['max-price'] != "") {
+            $queryFilter .= " AND price <= " . $_GET['max-price'];
+        }
+        if (isset($_GET['sort-by']) && $_GET['sort-by'] != "") {
+            if ($_GET['sort-by'] == 'price-low-high') {
+                $queryFilter .= " ORDER BY price ASC";
+            } else if ($_GET['sort-by'] == 'price-high-low') {
+                $queryFilter .= " ORDER BY price DESC";
+            } else if ($_GET['sort-by'] == 'newest') {
+                $queryFilter .= " ORDER BY listing_id DESC";
+            }
+        }
+        $queryFilter = " WHERE 1 " . $queryFilter;
+
+        $res = mysqli_query($con, "SELECT * FROM listings " . $queryFilter);
+        $rows = mysqli_num_rows($res);
         while ($row = mysqli_fetch_assoc($res)) {
             // Get the first image filename
             $photosArray = explode(',', $row['photos']); // Split photos field by comma
@@ -114,7 +192,7 @@
                             <p class="location" id="location_<?php echo $row['listing_id']; ?>"><?php echo $row['city']; ?></p>
                             <p class="category" id="category_<?php echo $row['listing_id']; ?>"><?php echo $row['category']; ?></p>
                             <p class="years" id="years_<?php echo $row['listing_id']; ?>">Used for <?php echo $row['years_used']; ?> yr(s)</p>
-                            <p class="sub-category" id="sub_category_<?php echo $row['listing_id']; ?>"><?php echo $row['sub_category'];?></p>
+                            <p class="sub-category" id="sub_category_<?php echo $row['listing_id']; ?>"><?php echo $row['sub_category']; ?></p>
                             <p class="condition" id="condition_<?php echo $row['listing_id']; ?>"><?php echo $row['condition']; ?></p>
                             <p class="price" id="price_<?php echo $row['listing_id']; ?>">Ksh <?php echo $row['price']; ?></p>
                             <br>
@@ -126,21 +204,21 @@
             </div>
         <?php } ?>
 
-       
+
 
     </div>
-    <div id="message-card" style="display: none;">
-    <img src="./images/error.svg" alt="No listing found error image">
-    <p>No listings found. Please adjust your filters.</p>
-    <button onclick="resetFilters()">Reset Filters</button>
-</div>
+    <div id="message-card" style="<?php echo $rows == 0 ? '' : "display: none;" ?>">
+        <img src="./images/error.svg" alt="No listing found error image">
+        <p>No listings found. Please adjust your filters.</p>
+        <button onclick="resetFilters()">Reset Filters</button>
+    </div>
     <section id="footer">
         <div class="footer-main">
             <div class="contain">
                 <div class="contained">
                     <ul>
                         <h4><span>About Us</span></h4>
-                        <li><a href="about.html">Who we are</a></li>
+                        <li><a href="about.php">Who we are</a></li>
                         <li><a href="#">Stories and News</a></li>
                         <li><a href="#">Customer Testimonials</a></li>
                     </ul>
@@ -160,4 +238,5 @@
     <script src="store.js"></script>
 
 </body>
+
 </html>

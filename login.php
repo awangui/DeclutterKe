@@ -31,7 +31,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         if ($result && $row = mysqli_fetch_assoc($result)) {
             if (password_verify($pass, $row['password'])) {
                 $_SESSION['user_id'] = $row['UserId'];
-                header("Location: home.php");
+                header("Location: index.php");
                 exit();
             } else {
                 header("Location: index.php?error=Invalid password");

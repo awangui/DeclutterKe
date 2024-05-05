@@ -1,35 +1,46 @@
+<?php
+session_start();
+require_once 'connection.php';
+// Check if the user is not logged in, redirect to the login page
+if (!isset($_SESSION['user_id'])) {
+  header("Location: login.html");
+  exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Details</title>
-    <script src="https://kit.fontawesome.com/661ba5765b.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="draft.css">
-</head>
-<body>
-    <section class="sticky-nav">
-        <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
-        <nav>
-            <a href="index.php" class="logo">
-                <img src="./images/Logo maker project (1).png" class="icon">
-                <b><span>Declutter</span> Ke</b>
-            </a>
-            <a href="index.php">Home</a>
-            <a href="store.php" class="active">Store</a>
-            <a href="about.html">About</a>
-            <a href="#contact">Contact</a>
-            <a href="listing.php" class="cta">Add a Listing</a>
-            <div class="credentials">
-    <a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
-            </div>
-        </nav>
-    </section>
 
-    <div class="container">
-        <div class="property-images">
-        <?php
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Property Details</title>
+  <script src="https://kit.fontawesome.com/661ba5765b.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="draft.css">
+</head>
+
+<body>
+  <section class="sticky-nav">
+    <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
+    <nav>
+      <a href="index.php" class="logo">
+        <img src="./images/Logo maker project (1).png" class="icon">
+        <b><span>Declutter</span> Ke</b>
+      </a>
+      <a href="index.php">Home</a>
+      <a href="store.php" class="active">Store</a>
+      <a href="about.php">About</a>
+      <a href="#contact">Contact</a>
+      <a href="listing.php" class="cta">Add a Listing</a>
+      <div class="credentials">
+        <a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
+      </div>
+    </nav>
+  </section>
+
+  <div class="container">
+    <div class="property-images">
+      <?php
       include 'connection.php';
       // Check if the listing_id is provided in the URL
       if (isset($_GET['listing_id'])) {
@@ -45,33 +56,32 @@
           $photosArray = explode(',', $row['photos']); // Split photos field by comma
           echo '<div class="image-gallery">';
           echo '<img src="uploads/' . $photosArray[0] . '" alt="Product Image" id="mainImage">';
-          
+
           echo '<div class="gallery-row">';
           for ($i = 1; $i < count($photosArray); $i++) {
             echo ' <img src="uploads/' . $photosArray[$i] . '" alt="Product Image" onclick="swapImage(this)">';
           }
           echo '</div>';
           echo '</div>';
-         
         } else {
           echo "Product not found.";
         }
       } else {
         echo "Listing ID not provided.";
       }
-      ?>            <div class="safety-tips">
-      <h2>Safety tips</h2>
-      <ul>
+      ?> <div class="safety-tips">
+        <h2>Safety tips</h2>
+        <ul>
           <li><b>1.Bring a Friend:</b> It's always a good idea to bring a friend or family member along when viewing a listing.</li>
           <li><b>2.Inspect Items Thoroughly:</b> Before finalizing a purchase, inspect the item thoroughly for any damages or discrepancies. Ask for additional photos or information if needed.</li>
           <li><b>3.Do not pay before viewing: </b> inspect the item in person before making any payments to ensure it matches its description and meets your expectations.</li>
           <a href="listing.php" class="contact"><button class="post-like">Post Ad Like This</button></a>
-      </ul>
-    
-  </div>
-        </div>
-        <div class="property-details">
-        <?php
+        </ul>
+
+      </div>
+    </div>
+    <div class="property-details">
+      <?php
       // Check if the listing_id is provided in the URL
       if (isset($_GET['listing_id'])) {
         // Fetch product details based on the listing_id
@@ -81,48 +91,49 @@
         if ($row) {
           // Retrieve phone number from the database
           $phone_number = $row['phone_number'];
-   ?>
-          
-            <h1 class="product-title"><?php echo $row['name'];  ?></h1>
-            <div class="listing-details">
-                <p class="posted-info">Posted:<span><?php echo $row['date_posted']; ?></span></li></p>
-                <p class="location">Town:<span><?php echo $row['city']; ?></p>
-                
-                <!-- Additional property details -->
-                <div class="property-info">
-                <li class="list-group-item">Category: <span> <?php echo $row['category']; ?></span></li>
-                <li class="list-group-item">Sub Category: <span> <?php echo $row['sub_category']; ?></span></li>
-                <li class="list-group-item">Brand: <span> <?php echo $row['brand']; ?></span></li>
-                <li class="list-group-item">Color: <span> <?php echo $row['color']; ?></span></li>
-                <li class="list-group-item">Years Used: <span> <?php echo $row['years_used']; ?></span></li>
-                <li class="list-group-item">Condition: <span> <?php echo $row['condition']; ?></span></li>
-            <p class="card-text"><?php echo $row['description']; ?></p>
-                </div>
+      ?>
 
-                <!-- Price and contact information -->
-                <div class="price-contact">
-                <li class="list-group-item">Price: <span><?php echo 'ksh ' . $row['price']; ?></span></li>
-                    <!-- Add contact options as needed -->
-                </div>
-            </div>
-            <!-- Seller information -->
-            <div class="seller">
-                <h2>Seller details</h2>
-                <div class="seller-info">
-                    <p class="seller-name"> <?php echo $row['seller_name']; ?></p>
-                    <p class="date-joined">Member since: 2021</p>
-                </div>
-                <!-- Add contact options as needed -->
-                <a href="https://wa.me/<?php echo $phone_number; ?>"  class="whatsapp">
-    <button class="btn">
-        <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
-    </button>
-</a>
+          <h1 class="product-title"><?php echo $row['name'];  ?></h1>
+          <div class="listing-details">
+            <p class="posted-info">Posted:<span><?php echo $row['date_posted']; ?></span></li>
+            </p>
+            <p class="location">Town:<span><?php echo $row['city']; ?></p>
 
-                <a href="store.php" class="contact"><button class="btn"><i class="fa-solid fa-phone"></i>Show Contact</button></a>
-                <i class="fa-regular fa-heart"></i>
+            <!-- Additional property details -->
+            <div class="property-info">
+              <li class="list-group-item">Category: <span> <?php echo $row['category']; ?></span></li>
+              <li class="list-group-item">Sub Category: <span> <?php echo $row['sub_category']; ?></span></li>
+              <li class="list-group-item">Brand: <span> <?php echo $row['brand']; ?></span></li>
+              <li class="list-group-item">Color: <span> <?php echo $row['color']; ?></span></li>
+              <li class="list-group-item">Years Used: <span> <?php echo $row['years_used']; ?></span></li>
+              <li class="list-group-item">Condition: <span> <?php echo $row['condition']; ?></span></li>
+              <p class="card-text"><?php echo $row['description']; ?></p>
             </div>
-            <?php
+
+            <!-- Price and contact information -->
+            <div class="price-contact">
+              <li class="list-group-item">Price: <span><?php echo 'ksh ' . $row['price']; ?></span></li>
+              <!-- Add contact options as needed -->
+            </div>
+          </div>
+          <!-- Seller information -->
+          <div class="seller">
+            <h2>Seller details</h2>
+            <div class="seller-info">
+              <p class="seller-name"> <?php echo $row['seller_name']; ?></p>
+              <p class="date-joined">Member since: 2021</p>
+            </div>
+            <!-- Add contact options as needed -->
+            <a href="https://wa.me/<?php echo $phone_number; ?>" class="whatsapp">
+              <button class="btn">
+                <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+              </button>
+            </a>
+
+            <a href="store.php" class="contact"><button class="btn"><i class="fa-solid fa-phone"></i>Show Contact</button></a>
+            <i class="fa-regular fa-heart"></i>
+          </div>
+      <?php
         } else {
           echo "Product not found.";
         }
@@ -130,143 +141,143 @@
         echo "Listing ID not provided.";
       }
       ?>
-        </div>
-        </div>
- 
-    <section id="related-products">
-  <h2>
-    <?php
-    if (isset($row) && $row) {
-      echo 'Related Products';
-    } else {
-      echo 'Other Products';
-    }
-    ?>
-  </h2>
+    </div>
+  </div>
 
-  <!-- PHP code to fetch related products from the database -->
-  <?php
-  include 'connection.php'; // Include your database connection file
-
-  // Check if the listing_id is provided in the URL
-  if (isset($_GET['listing_id'])) {
-    $listing_id = $_GET['listing_id'];
-
-    // Fetch product details based on the listing_id
-    $query = "SELECT * FROM listings WHERE listing_id = $listing_id";
-    $result = mysqli_query($con, $query);
-    $row = mysqli_fetch_assoc($result);
-
-    // Check if the product details are fetched successfully
-    if ($row) {
-      // Extract category and subcategory of the current product
-      $category = $row['category'];
-      $sub_category = $row['sub_category'];
-
-      // Fetch related products with similar category or subcategory, limited to 3
-      $related_query = "SELECT * FROM listings WHERE (category = '$category' OR sub_category = '$sub_category') AND listing_id != $listing_id ";
-      $related_result = mysqli_query($con, $related_query);
-
-      // Check if there are related products
-      if (mysqli_num_rows($related_result) > 0) {
-        echo '<div class="related-products-container">';
-        // Loop through each related product and display it
-        while ($related_row = mysqli_fetch_assoc($related_result)) {
-          // Output HTML for each related product
-          echo '<div class="related-product">';
-          echo '<a href="card.php?listing_id=' . $related_row['listing_id'] . '">';
-          echo '<div class="card">';
-          // Fix image source path here
-          echo '<img src="uploads/' . $related_row['photos'] . '" alt="Product Image" class="card-img-top">';
-          echo '<div class="card-body">';
-          echo '<h3>' . $related_row['name'] . '</h3>'; // Display product name
-          // Display other product details here
-          echo '</div>';
-          echo '</div>';
-          echo '</a>';
-          echo '</div>';
-        }
-        echo '</div>'; // Close related-products-container
+  <section id="related-products">
+    <h2>
+      <?php
+      if (isset($row) && $row) {
+        echo 'Related Products';
       } else {
-        // If no related products found, fetch random products
-        $random_query = "SELECT * FROM listings WHERE listing_id != $listing_id ORDER BY RAND() LIMIT 4"; // Exclude the current product
-        $random_result = mysqli_query($con, $random_query);
+        echo 'Other Products';
+      }
+      ?>
+    </h2>
 
-        if (mysqli_num_rows($random_result) > 0) {
+    <!-- PHP code to fetch related products from the database -->
+    <?php
+    include 'connection.php'; // Include your database connection file
+
+    // Check if the listing_id is provided in the URL
+    if (isset($_GET['listing_id'])) {
+      $listing_id = $_GET['listing_id'];
+
+      // Fetch product details based on the listing_id
+      $query = "SELECT * FROM listings WHERE listing_id = $listing_id";
+      $result = mysqli_query($con, $query);
+      $row = mysqli_fetch_assoc($result);
+
+      // Check if the product details are fetched successfully
+      if ($row) {
+        // Extract category and subcategory of the current product
+        $category = $row['category'];
+        $sub_category = $row['sub_category'];
+
+        // Fetch related products with similar category or subcategory, limited to 3
+        $related_query = "SELECT * FROM listings WHERE (category = '$category' OR sub_category = '$sub_category') AND listing_id != $listing_id ";
+        $related_result = mysqli_query($con, $related_query);
+
+        // Check if there are related products
+        if (mysqli_num_rows($related_result) > 0) {
           echo '<div class="related-products-container">';
-          while ($random_row = mysqli_fetch_assoc($random_result)) {
+          // Loop through each related product and display it
+          while ($related_row = mysqli_fetch_assoc($related_result)) {
+            // Output HTML for each related product
             echo '<div class="related-product">';
-            echo '<a href="card.php?listing_id=' . $random_row['listing_id'] . '">';
+            echo '<a href="card.php?listing_id=' . $related_row['listing_id'] . '">';
             echo '<div class="card">';
             // Fix image source path here
-            echo '<img src="uploads/' . $random_row['photos'] . '" alt="Product Image" class="card-img-top">';
+            echo '<img src="uploads/' . $related_row['photos'] . '" alt="Product Image" class="card-img-top">';
             echo '<div class="card-body">';
-            echo '<h3>' . $random_row['name'] . '</h3>';
+            echo '<h3>' . $related_row['name'] . '</h3>'; // Display product name
             // Display other product details here
             echo '</div>';
             echo '</div>';
             echo '</a>';
             echo '</div>';
           }
-          echo '</div>';
+          echo '</div>'; // Close related-products-container
         } else {
-          echo '<p>No products found.</p>';
+          // If no related products found, fetch random products
+          $random_query = "SELECT * FROM listings WHERE listing_id != $listing_id ORDER BY RAND() LIMIT 4"; // Exclude the current product
+          $random_result = mysqli_query($con, $random_query);
+
+          if (mysqli_num_rows($random_result) > 0) {
+            echo '<div class="related-products-container">';
+            while ($random_row = mysqli_fetch_assoc($random_result)) {
+              echo '<div class="related-product">';
+              echo '<a href="card.php?listing_id=' . $random_row['listing_id'] . '">';
+              echo '<div class="card">';
+              // Fix image source path here
+              echo '<img src="uploads/' . $random_row['photos'] . '" alt="Product Image" class="card-img-top">';
+              echo '<div class="card-body">';
+              echo '<h3>' . $random_row['name'] . '</h3>';
+              // Display other product details here
+              echo '</div>';
+              echo '</div>';
+              echo '</a>';
+              echo '</div>';
+            }
+            echo '</div>';
+          } else {
+            echo '<p>No products found.</p>';
+          }
         }
+      } else {
+        echo "Product not found.";
       }
     } else {
-      echo "Product not found.";
+      echo "Listing ID not provided.";
     }
-  } else {
-    echo "Listing ID not provided.";
-  }
-  ?>
-</section>
-        <!-- Safety tips -->
-        <div class="caution">
-       
-                <div class="disclaimer">
-          <h3>Disclaimer</h3>
+    ?>
+  </section>
+  <!-- Safety tips -->
+  <div class="caution">
+
+    <div class="disclaimer">
+      <h3>Disclaimer</h3>
+      <ul>
+        <li>The platform serves as a marketplace for sellers to list their items, and while we strive to ensure the accuracy of the listings, we cannot guarantee the quality, safety, or legality of the items listed.</li>
+        <li> Buyers are advised to exercise caution, conduct thorough inspections, and verify the authenticity of items before making any purchases.</li>
+        <li> Additionally, transactions conducted through this platform are solely between the buyer and the seller, and we are not responsible for any disputes or issues that may arise.</li>
+      </ul>
+    </div>
+  </div>
+
+  <section id="footer">
+    <div class="footer-main">
+      <div class="contain">
+        <div class="contained">
           <ul>
-<li>The platform serves as a marketplace for sellers to list their items, and while we strive to ensure the accuracy of the listings, we cannot guarantee the quality, safety, or legality of the items listed.</li>
-  <li> Buyers are advised to exercise caution, conduct thorough inspections, and verify the authenticity of items before making any purchases.</li>
-<li> Additionally, transactions conducted through this platform are solely between the buyer and the seller, and we are not responsible for any disputes or issues that may arise.</li>
-</ul>
+            <h4><span>About Us</span></h4>
+            <li><a href="about.php">Mission Statement</a></li>
+            <li><a href="#">Benefits of reselling</a></li>
+            <li><a href="about.php">Our purpose</a></li>
+            <li><a href="#">Our buying process</a></li>
+          </ul>
         </div>
-</div>
+        <div class="contained">
 
-    <section id="footer">
-        <div class="footer-main">
-            <div class="contain">
-                <div class="contained">
-                    <ul>
-                        <h4><span>About Us</span></h4>
-                        <li><a href="about.html">Mission Statement</a></li>
-                        <li><a href="#">Benefits of reselling</a></li>
-                        <li><a href="about.html">Our purpose</a></li>
-                        <li><a href="#">Our buying process</a></li>
-                    </ul>
-                </div>
-                <div class="contained">
+          <h4><span>Get in touch</span></h4>
+          <ul>
+            <li><a href="#"><i class="fa fa-instagram"></i> Instagram</a></li>
+            <li><a href="#"><i class="fa fa-phone"> </i> +254 000 000 000</i></a></li>
+            <li><a href="#"><i class="fa-regular fa-envelope"></i></i> declutterke@gmail.com</a></li>
 
-                    <h4><span>Get in touch</span></h4>
-                    <ul>
-                        <li><a href="#"><i class="fa fa-instagram"></i> Instagram</a></li>
-                        <li><a href="#"><i class="fa fa-phone"> </i> +254 000 000 000</i></a></li>
-                        <li><a href="#"><i class="fa-regular fa-envelope"></i></i> declutterke@gmail.com</a></li>
-
-                    </ul>
-                </div>
-                <div class="subscribe-content">
-        <p>Join our mailing list</p>
-        <form class="subscribe-form" action="#">
+          </ul>
+        </div>
+        <div class="subscribe-content">
+          <p>Join our mailing list</p>
+          <form class="subscribe-form" action="#">
             <input type="email" name="email" placeholder="Your E-mail">
             <button type="submit">Subscribe</button>
-        </form>
-    </div>
-            </div>
+          </form>
         </div>
-    </section>
-    <script>
+      </div>
+    </div>
+  </section>
+  <script>
     function swapImage(thumbnail) {
       var mainImage = document.getElementById('mainImage');
       mainImage.style.opacity = 0; // Fade out main image
@@ -279,4 +290,5 @@
     }
   </script>
 </body>
+
 </html>
