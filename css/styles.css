@@ -1,20 +1,20 @@
 @font-face {
     font-family: 'Lato';
-    src: url('./font/Lato-Black.ttf') format('truetype');
+    src: url('../font/Lato-Black.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Lato';
-    src: url('./font/Lato-Thin.ttf') format('truetype');
+    src: url('../font/Lato-Thin.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Lato';
-    src: url('./font/Lato-Regular.ttf') format('truetype');
+    src: url('../font/Lato-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -352,7 +352,7 @@ nav a:hover {
 
 /*header*/
 #header {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url(./images/pexels-terry-magallanes-2988860.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url(../images/pexels-terry-magallanes-2988860.jpg);
     height: 100vh;
     background-position: center;
     background-repeat: no-repeat;
@@ -484,23 +484,23 @@ nav a:hover {
 
 
 .item:nth-child(1) {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('images/table.jfif');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('../images/table.jfif');
 }
 
 .item:nth-child(2) {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('images/tv.jfif');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('../images/tv.jfif');
 }
 
 .item:nth-child(3) {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('images/sofa.jfif');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('../images/sofa.jfif');
 }
 
 .item:nth-child(4) {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('images/bed.jpeg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('../images/bed.jpeg');
 }
 
 .item:nth-child(5) {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('./images/download.jfif');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('../images/download.jfif');
 }
 
 @media screen and (max-width: 600px) {
