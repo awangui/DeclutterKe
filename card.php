@@ -85,7 +85,11 @@ if (!isset($_SESSION['user_id'])) {
       // Check if the listing_id is provided in the URL
       if (isset($_GET['listing_id'])) {
         // Fetch product details based on the listing_id
-        $query = "SELECT * FROM listings WHERE listing_id = $listing_id";
+        $query = "SELECT listings.*, users.firstName, users.surname
+        FROM listings 
+        INNER JOIN users ON listings.seller_id = users.userId 
+        WHERE listings.listing_id = $listing_id";
+
         $result = mysqli_query($con, $query);
         $row = mysqli_fetch_assoc($result);
         if ($row) {
@@ -120,7 +124,7 @@ if (!isset($_SESSION['user_id'])) {
           <div class="seller">
             <h2>Seller details</h2>
             <div class="seller-info">
-              <p class="seller-name"> <?php echo $row['seller_name']; ?></p>
+              <p class="seller-name"> <?php echo $row['firstName' ],  $row['surname']; ?></p>
               <p class="date-joined">Member since: 2021</p>
             </div>
             <!-- Add contact options as needed -->

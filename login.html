@@ -15,7 +15,7 @@
         <b>Declutter<span>Ke</span></b>
     </a>
         <h2 class="title">Login</h2>
-        <div class="login-error">Invalid credentials</div>
+        <div class="login-error"></div>
         <!-- Email input with associated label -->
         <label for="email">Email address:</label>
         <input type="text" id="email" name="email" placeholder="Email address" required>
@@ -58,9 +58,11 @@
 
         const urlParams = new URLSearchParams(window.location.search);
         const myParam = urlParams.get('error');
-        if(typeof(myParam) !== 'undefined'){
+        if(typeof(myParam) !== 'undefined' && myParam !== null){
             document.querySelector('.login-error').style.display = 'block';
             document.querySelector('.login-error').textContent = myParam;
+        } else {
+            document.querySelector('.login-error').style.display = 'none';
         }
     </script>
 

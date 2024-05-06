@@ -104,15 +104,97 @@ if (isset($_POST['submit'])) {
     <form id="listingForm" method="post" enctype="multipart/form-data">
 
         <div class="listing-container">
+            <div class="listing-container">
             <h2>Add a listing</h2>
             <div class="details-container">
                 <div class="details" id="productDetails">
-                    <!-- Your form fields -->
+                    <label for="name">Product Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="photos">Photos:</label>
+                    <input type="file" id="photos" name="images[]" multiple accept="image/*" required>
+                    <label for="category">Category:</label>
+                    <select id="category" name="category" required>
+                        <option value="furniture">Furniture</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="Appliances">Appliances</option>
+                        <option value="Kitchenware">Kitchenware</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                    <label for="sub-category">Sub-Category:</label>
+                    <select id="sub-category" name="sub-category" required>
+                        <option value="fridges">Fridges</option>
+                        <option value="phones">Phones</option>
+                        <option value="tables">Tables</option>
+                        <option value="phones">Phones</option>
+                        <option value="Speakers">Speakers</option>
+                        <option value="TVs">TVs</option>
+                        <option value="Microwaves">Microwaves</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                    <label for="brand">Brand:</label>
+                    <select id="brand" name="brand" required>
+                        <option value="">Select a brand</option>
+                        <option value="Samsung">Samsung</option>
+                        <option value="LG">LG</option>
+                        <option value="Mika">Mika</option>
+                        <option value="Hisense">Hisense</option>
+                        <option value="Ramtons">Ramtons</option>
+                        <option value="Hotpoint">Hotpoint</option>
+                        <option value="otherbrand">Other</option>
+                    </select>
                 </div>
-                <!-- Rest of your form -->
+                <div id="rightDetails">
+                    <label for="color">Color:</label>
+                    <select id="color" name="color" required>
+                        <option value="Black">Black</option>
+                        <option value="Silver">Silver</option>
+                        <option value="Bronze">Bronze</option>
+                        <option value="Brown">Brown</option>
+                        <option value="White">White</option>
+                        <option value="Red">Red</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                    <label for="yearsUsed">Number of Years Used:</label>
+                    <input type="number" id="yearsUsed" name="yearsUsed" required>
+
+
+                    <label for="condition">Condition:</label>
+                    <select id="condition" name="condition" required>
+                        <option value="">Select the condition</option>
+                        <option value="new">Barely Used i.e almost new</option>
+                        <option value="fairly used">Fairly used</option>
+                        <option value="used">Used</option>
+                    </select>
+
+                    <label for="price">Price:</label>
+                    <input type="number" id="price" name="price" required>
+
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" rows="4" style="width: 100%;" placeholder="provide any more details necessary"></textarea>
+                    <div id="nextButtonContainer">
+                        <button id="nextButton" type="button">Next</button>
+                    </div>
+                </div>
+                <div class="details" id="contactDetails" style="display: none;">
+                    <label for="city">Pickup City:</label>
+                    <input type="text" id="city" name="city" required placeholder="e.g Nairobi">
+                    <label for="town">Location:</label>
+                    <input type="text" id="town" name="town" required placeholder="e.g Ruiru">
+                    <label for="phone">Phone number:</label>
+                    <input type="number" id="phone" name="phone" required placeholder="provide the phone number you want to be contacted with">
+                </div>
+                <div class="details" id="submitButtonContainer" style="display: none;">
+                    <button id="backButton" type="button" style="display: none;">Back</button><br>
+                    <button class="btn btn-submit" name="submit" type="submit">Submit</button>
+                </div>
+            </div>
             </div>
         </div>
     </form>
+
 
     <!-- Page dots -->
     <div class="page-dots">

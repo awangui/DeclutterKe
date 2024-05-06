@@ -13,6 +13,7 @@ include "connection.php";
 //     exit();
 // }
 
+// Fetch all distinct categories
 // Query to count the total number of users
 $sqlCountUsers = "SELECT COUNT(DISTINCT UserId) AS totalUsers FROM users";
 $resultCountUsers = mysqli_query($con, $sqlCountUsers);
@@ -28,14 +29,9 @@ if ($resultCountUsers) {
     $totalUsers = "Unknown";
 }
 
-// Query to fetch all users
-$sqlFetchUsers = "SELECT * FROM users";
-$resultFetchUsers = mysqli_query($con, $sqlFetchUsers);
-
-//count of users who have posted listings
+// Query to count the total number of sellers (users with listings)
 $sqlCountUsersWithListings = "SELECT COUNT(DISTINCT l.seller_id) AS totalUsersWithListings 
-                              FROM listings l 
-                              JOIN users u ON l.seller_id = u.UserId";
+                              FROM listings l ";
 $resultCountUsersWithListings = mysqli_query($con, $sqlCountUsersWithListings);
 
 if ($resultCountUsersWithListings) {
@@ -45,21 +41,37 @@ if ($resultCountUsersWithListings) {
     // Handle error if the query fails
 }
 
-// Calculate the percentage of sellers
-$sellersPercentage = ($totalUsersWithListings / $totalUsers) * 100;
+$sqlFetchCategories = "SELECT DISTINCT category FROM users";
+$resultFetchCategories = mysqli_query($con, $sqlFetchCategories);
 
-// Query to fetch all sellers
-$sqlFetchSellers = "SELECT u.*, l.seller_name
-FROM users u
-JOIN listings l ON u.UserId = l.seller_id
-GROUP BY u.UserId";
-$resultFetchSellers = mysqli_query($con, $sqlFetchSellers);
-
-if (!$resultFetchSellers) {
+if (!$resultFetchCategories) {
     // Handle the case where the query failed
-    die("Error fetching sellers: " . mysqli_error($con));
+    die("Error fetching categories: " . mysqli_error($con));
+}
+
+// Define the selected category (default to all categories)
+$selectedCategory = isset($_GET['category']) ? $_GET['category'] : 'All';
+
+// Query to fetch users based on the selected category
+$sqlFetchUsers = "SELECT u.*, IFNULL(COUNT(l.listing_id), 0) AS totalListings 
+                FROM users u 
+                LEFT JOIN listings l ON u.UserId = l.seller_id ";
+
+// If a category is selected, add a condition to filter users by category
+if ($selectedCategory !== 'All') {
+    $sqlFetchUsers .= "WHERE u.category = '$selectedCategory' ";
+}
+
+$sqlFetchUsers .= "GROUP BY u.UserId";
+
+$resultFetchUsers = mysqli_query($con, $sqlFetchUsers);
+
+if (!$resultFetchUsers) {
+    // Handle the case where the query failed
+    die("Error fetching users: " . mysqli_error($con));
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -91,6 +103,7 @@ if (!$resultFetchSellers) {
             <div class="bar"></div>
         </div>
     </header>
+    
     <div class="container">
         <div class="side-bar">
             <nav>
@@ -110,39 +123,53 @@ if (!$resultFetchSellers) {
             </nav>
         </div>
         <div class="main-content">
+        <div class="row">
+                    <div class="col">
+                        <div class="widget">
+                            <h3>Total Users</h3>
+                            <p><?php echo $totalUsers; ?></p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="widget">
+                            <h3>Total Sellers</h3>
+                            <p><?php echo $totalUsersWithListings; ?></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget">
+                    <div class="chart-container">
+                        <canvas id="sellersChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-content">
             <div class="container">
+                
                 <div class="row">
                     <div class="col">
                         <div class="card">
                             <div class="card-header">
                                 <h2 class="display">Users</h2>
                             </div>
-                            <div class="user-analytics">
-                                <div class="user-count">
-                                    <h3>Total Users</h3>
-                                    <p><?php
-                                        // Display the total number of users
-                                        echo $totalUsers;
+                            <div class="card-body">
+                                <form method="GET">
+                                    <label for="category">Filter by Category:</label>
+                                    <select name="category" id="category">
+                                        <option value="All" <?php if ($selectedCategory === 'All') echo 'selected'; ?>>All</option>
+                                        <?php
+                                        // Display category options
+                                        while ($row = mysqli_fetch_assoc($resultFetchCategories)) {
+                                            $category = $row['category'];
+                                            echo "<option value='$category'";
+                                            if ($selectedCategory === $category) echo 'selected';
+                                            echo ">$category</option>";
+                                        }
                                         ?>
-                                    </p>
-                                </div>
-                                <div class="user-count">
-                                    <h3>Total Sellers</h3>
-                                    <p><?php
-                                        // Display the total number of users
-                                        echo $totalUsersWithListings;
-                                        ?>
-                                    </p>
-                                </div>
-                                <div class="set-size charts-container">
-                                    <div class="pie-wrapper progress-<?php echo $sellersPercentage; ?>">
-                                        <span class="label"><?php echo $sellersPercentage; ?><span class="smaller">%</span></span>
-                                        <div class="pie">
-                                            <div class="left-side half-circle"></div>
-                                            <div class="right-side half-circle"></div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    </select>
+                                    <button type="submit">Filter</button>
+                                </form>
                             </div>
                             <div class="card-body">
                                 <h3>All users</h3>
@@ -152,6 +179,8 @@ if (!$resultFetchSellers) {
                                         <th>First Name</th>
                                         <th>Email</th>
                                         <th>Date Joined</th>
+                                        <th>Category</th>
+                                        <th>Total Listings</th>
                                         <th>Operations</th>
                                     </tr>
                                     <?php
@@ -161,36 +190,10 @@ if (!$resultFetchSellers) {
                                         <tr>
                                             <td><?= $id ?></td>
                                             <td><?php echo $row['firstName']; ?></td>
-                                            <td><?php echo $row['surname']; ?></td>
                                             <td><?php echo $row['email']; ?></td>
                                             <td><?php echo $row['date']; ?></td>
-                                            <td><a href="update.php?editId=<?= $id ?>" class="btn btn-primary">Edit</a><a href="delete.php?deleteid=<?= $id ?>" class="btn btn-danger">Delete</a></td>
-                                        </tr>
-                                    <?php
-                                    }
-                                    ?>
-                                </table>
-                            </div>
-
-                            <div class="card-body">
-                                <h3>All sellers</h3>
-                                <table>
-                                    <tr class="table-header">
-                                        <th>User ID</th>
-                                        <th>Seller Name</th>
-                                        <th>Email</th>
-                                        <th>Date Joined</th>
-                                        <th>Operations</th>
-                                    </tr>
-                                    <?php
-                                    while ($row = mysqli_fetch_assoc($resultFetchSellers)) {
-                                        $id = $row['UserId'];
-                                    ?>
-                                        <tr>
-                                            <td><?= $id ?></td>
-                                            <td><?php echo $row['seller_name']; ?></td>
-                                            <td><?php echo $row['email']; ?></td>
-                                            <td><?php echo $row['date']; ?></td>
+                                            <td><?php echo $row['category']; ?></td>
+                                            <td><?php echo $row['totalListings']; ?></td>
                                             <td><a href="update.php?editId=<?= $id ?>" class="btn btn-primary">Edit</a><a href="delete.php?deleteid=<?= $id ?>" class="btn btn-danger">Delete</a></td>
                                         </tr>
                                     <?php
@@ -200,18 +203,51 @@ if (!$resultFetchSellers) {
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
     <script>
-        // Example usage
-        const totalUsers = <?php echo $totalUsers; ?>;
+ // Chart.js configuration
+ const totalUsers = <?php echo $totalUsers; ?>;
         const totalSellers = <?php echo $totalUsersWithListings; ?>;
         const sellersPercentage = (totalSellers / totalUsers) * 100;
 
-        updateProgress(sellersPercentage, '.progress-sellers');
+        const ctx = document.getElementById('sellersChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Users', 'Sellers'],
+                datasets: [{
+                    label: 'Users vs Sellers',
+                    data: [totalUsers - totalSellers, totalSellers],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 99, 132, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 99, 132, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Users vs Sellers'
+                },
+                animation: {
+                    animateScale: true,
+                    animateRotate: true
+                }
+            }
+        });
     </script>
 </body>
 

@@ -1,3 +1,13 @@
+<?php
+session_start();
+require_once 'connection.php';
+if (!isset($_SESSION['user_id']) || (isset($_SESSION['user_role']) && $_SESSION['user_role'] != 1)){
+    header("Location: login.html");
+    exit();
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +32,9 @@
         <div class="profile">
 
             <span class="notification">4</span>
-            <div class="avatar">Charles Hall</div>
+            <div class="user">
+                <p><?php echo $_SESSION['name']; ?></p>
+                <img src="./images/user.png" class="user-icon">
             <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
         </div>
         <div class="menu-toggle">
@@ -39,13 +51,9 @@
                     <li><a class="nav-item" href="users.php">Users</a>
                     <li><a class="nav-item">Listings</a>
                     <li><a class="nav-item">Stats</a>
-                    <li><a class="nav-item">Logout</a>
+                    <li><a class="nav-item" href="logout.php">Logout</a>
                 </ul>
-                <?php if (isset($_SESSION['user_id'])) { ?>
-                    <div class="credentials">
-                        <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
-                    </div>
-                <?php }  ?>
+               
                 <div class="tools">
                     <h4>Tools & Components</h4>
                     <ul>

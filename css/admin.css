@@ -59,12 +59,7 @@ b span{
  margin-right: 10px;
 }
 
-.avatar {
- background-color: #fff;
- color: #252a41;
- border-radius: 50%;
- padding: 10px;
-}
+
 
 /* Main content styles */
 .container {
@@ -85,40 +80,7 @@ b span{
 .menu-toggle {
  display: none;
 }
-nav {
- background-color: #fbb610;
- color: #fff;
- padding: 20px;
- width: 100%;
-}
 
-nav ul {
- list-style-type: none;
- padding: 0;
- margin: 0;
-}
-
-nav ul li {
- margin-bottom: 15px;
-}
-
-nav ul li a {
- color: #fff;
- text-decoration: none;
-}
-
-nav .tools {
- margin-top: 30px;
-}
-
-nav .tools h4 {
- font-size: 14px;
- margin-bottom: 10px;
-}
-
-nav .tools ul li {
- margin-bottom: 10px;
-}
 
 
 /* Main content styles */
