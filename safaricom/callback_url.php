@@ -12,22 +12,16 @@ $errorResponse = '{
   }';
 
 // DATA
-
 $mpesaResponse = file_get_contents('php://input');
 
 $json = json_decode($mpesaResponse);
+
 $mid = $json->Body->stkCallback->MerchantRequestID;
 $cid = $json->Body->stkCallback->CheckoutRequestID;
-$pn = $json->Body->stkCallback->ResultCode;
-$rn = $json->Body->stkCallback->ResultDesc;
-
-
-// $mid = $json->Body->stkCallback->MerchantRequestID;
-// $cid = $json->Body->stkCallback->CheckoutRequestID;
-// $amount = $json->Body->stkCallback->CallbackMetadata->Item[0]->Value;
-// $rn = $json->Body->stkCallback->CallbackMetadata->Item[1]->Value;
-// $td = $json->Body->stkCallback->CallbackMetadata->Item[2]->Value;
-// $pn = $json->Body->stkCallback->CallbackMetadata->Item[3]->Value;
+$amount = $json->Body->stkCallback->CallbackMetadata->Item[0]->Value;
+$rn = $json->Body->stkCallback->CallbackMetadata->Item[1]->Value;
+$td = $json->Body->stkCallback->CallbackMetadata->Item[2]->Value;
+$pn = $json->Body->stkCallback->CallbackMetadata->Item[3]->Value;
 
 
 

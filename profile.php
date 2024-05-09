@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="profile.css">
 
-    <script src="https://kit.fontawesome.com/661ba5765b.js" crossorigin="anonymous"></script>
+    <script src="./js/font-awesome.js" crossorigin="anonymous"></script>
 
 </head>
 
