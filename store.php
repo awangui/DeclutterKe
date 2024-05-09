@@ -2,10 +2,10 @@
 session_start();
 require_once 'connection.php';
 // Check if the user is not logged in, redirect to the login page
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.html");
-    exit();
-}
+// if (!isset($_SESSION['user_id'])) {
+//     header("Location: login.html");
+//     exit();
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,12 +14,9 @@ if (!isset($_SESSION['user_id'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Marck+Script&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/store.css">
-    <script src="https://kit.fontawesome.com/661ba5765b.js" crossorigin="anonymous"></script>
+    <script src="./js/font-awesome.js" crossorigin="anonymous"></script>
     <title>Decluttering Ke</title>
 </head>
 
@@ -36,9 +33,17 @@ if (!isset($_SESSION['user_id'])) {
             <a href="about.php">About</a>
             <a href="#contact">Contact</a>
             <a href="listing.php" class="cta">Add a Listing</a>
-            <div class="credentials">
-                <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
-            </div>
+            <?php if (isset($_SESSION['user_id'])) { ?>
+                    <div class="credentials">
+                        <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
+                    </div>
+                <?php } else {
+                ?>
+                    <div class="credentials">
+                        <a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
+                        <a href="registration.html"><i class="icon fa-regular fa-user"></i> Sign Up</a>
+                    </div>
+                <?php } ?>
         </nav>
     </section>
 
@@ -50,7 +55,18 @@ if (!isset($_SESSION['user_id'])) {
                 <input type="text" name="name" id="name" placeholder="Enter item name" value="<?php echo isset($_GET['name']) ? $_GET['name'] : ''; ?>" />
 
                 <label for="brand">Brand:</label>
-                <input type="text" id="brand" name="brand" placeholder="Enter brand" value="<?php echo isset($_GET['brand']) ? $_GET['brand']  : ''; ?>" />
+<select id="brand" name="brand">
+<option value="any">Any</option>
+    <?php
+    // Fetch the list of brands from the database
+    $num = mysqli_query($con, "SELECT DISTINCT LOWER(brand_name) AS brand FROM brands ORDER BY brand_name;");
+    while ($row = mysqli_fetch_assoc($num)) {
+        echo "<option " . ($_GET['brand'] == $row['brand'] ? 'selected' : '') . " value='" . $row['brand'] . "'>" . $row['brand'] . "</option> \n";
+    }
+    var_dump($_POST);
+    ?>
+</select>
+
 
                 <label for="color">Color:</label>
                 <input type="text" id="color" name="color" value="<?php echo isset($_GET['color']) ? $_GET['color'] : ''; ?>" placeholder="Enter color">
@@ -62,7 +78,7 @@ if (!isset($_SESSION['user_id'])) {
                 <select id="category" name="cat">
                     <option value="any">Any</option>
                     <?php
-                    $res = mysqli_query($con, "SELECT DISTINCT LOWER(category) AS category FROM `listings` ORDER BY category;");
+                    $res = mysqli_query($con, "SELECT DISTINCT LOWER(category_name) AS category FROM categories ORDER BY category_name;");
                     while ($row = mysqli_fetch_assoc($res)) {
                         echo "<option " . ($_GET['cat'] == $row['category'] ? 'selected' : '') . " value='" . $row['category'] . "'>" . $row['category'] . "</option> \n";
                     }
@@ -127,8 +143,8 @@ if (!isset($_SESSION['user_id'])) {
         if (isset($_GET['name']) && $_GET['name'] != "") {
             $queryFilter .= " AND name LIKE '%" . $_GET['name'] . "%'";
         }
-        if (isset($_GET['brand']) && $_GET['brand'] != "") {
-            $queryFilter .= " AND brand LIKE '%" . $_GET['brand'] . "%'";
+        if (isset($_GET['brand']) && $_GET['brand'] != "any") {
+            $queryFilter .= " AND b.brand_name = '" . $_GET['brand'] . "'";
         }
         if (isset($_GET['color']) && $_GET['color'] != "") {
             $queryFilter .= " AND color LIKE '%" . $_GET['color'] . "%'";
@@ -137,7 +153,7 @@ if (!isset($_SESSION['user_id'])) {
             $queryFilter .= " AND city LIKE '%" . $_GET['location'] . "%'";
         }
         if (isset($_GET['cat']) && $_GET['cat'] != "any") {
-            $queryFilter .= " AND category = '" . $_GET['cat'] . "'";
+            $queryFilter .= " AND c.category_name = '" . $_GET['cat'] . "'";
         }
         if (isset($_GET['new'])) {
             $queryFilter .= " AND `condition` = 'New'";
@@ -170,8 +186,13 @@ if (!isset($_SESSION['user_id'])) {
             }
         }
         $queryFilter = " WHERE 1 " . $queryFilter;
+        $query = "SELECT listings.*, b.brand_name, c.category_name 
+          FROM listings 
+          INNER JOIN brands b ON listings.brand_id = b.brand_id 
+          INNER JOIN categories c ON listings.category_id = c.category_id ";
 
-        $res = mysqli_query($con, "SELECT * FROM listings " . $queryFilter);
+          $query .= $queryFilter;
+        $res = mysqli_query($con, $query);
         $rows = mysqli_num_rows($res);
         while ($row = mysqli_fetch_assoc($res)) {
             // Get the first image filename
@@ -187,17 +208,22 @@ if (!isset($_SESSION['user_id'])) {
                         <h3 class="item-title"><?php echo $row['name']; ?></h3>
                         <div class="item-details">
                             <!-- Update these elements with IDs -->
-                            <p class="brand" id="brand_<?php echo $row['listing_id']; ?>"><?php echo $row['brand']; ?></p>
-                            <p class="color" id="color_<?php echo $row['listing_id']; ?>"><?php echo $row['color']; ?></p>
                             <p class="location" id="location_<?php echo $row['listing_id']; ?>"><?php echo $row['city']; ?></p>
-                            <p class="category" id="category_<?php echo $row['listing_id']; ?>"><?php echo $row['category']; ?></p>
-                            <p class="years" id="years_<?php echo $row['listing_id']; ?>">Used for <?php echo $row['years_used']; ?> yr(s)</p>
+                        
+                                    <?php if ($row['brand_name'] !== 'Other') { ?>
+                                        <p class="brand"><?php echo $row['brand_name']; ?></p>
+                                    <?php } ?>
+
+                            <p class="category" id="category_<?php echo $row['listing_id']; ?>"><?php echo $row['category_name']; ?></p>
+<!-- 
+                            <p class="years" id="years_<?php echo $row['listing_id']; ?>">Used for <?php echo $row['years_used']; ?> yr(s)</p> -->
                             <p class="sub-category" id="sub_category_<?php echo $row['listing_id']; ?>"><?php echo $row['sub_category']; ?></p>
                             <p class="condition" id="condition_<?php echo $row['listing_id']; ?>"><?php echo $row['condition']; ?></p>
                             <p class="price" id="price_<?php echo $row['listing_id']; ?>">Ksh <?php echo $row['price']; ?></p>
                             <br>
+                            <span class="item-description"><?php echo $row['description']; ?></span>
                         </div>
-                        <p class="item-description"><?php echo $row['description']; ?></p>
+                      
                         <button class="btn btn-secondary"><a href="card.php?listing_id=<?php echo $row['listing_id']; ?>">View Item</a></button>
                     </div>
                 </div>

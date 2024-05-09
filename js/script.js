@@ -85,3 +85,11 @@ function scrollToCardSection() {
     });
 });
 
+const urlParams = new URLSearchParams(window.location.search);
+const myParam = urlParams.get('error');
+if(typeof(myParam) !== 'undefined' && myParam !== null){
+    document.querySelector('.login-error').style.display = 'block';
+    document.querySelector('.login-error').textContent = myParam;
+} else {
+    document.querySelector('.login-error').style.display = 'none';
+}

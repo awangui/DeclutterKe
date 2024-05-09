@@ -14,8 +14,8 @@ require_once 'connection.php';
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Marck+Script&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="about.css">
-    <script src="https://kit.fontawesome.com/661ba5765b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/about.css">
+    <script src="./js/font-awesome.js" crossorigin="anonymous"></script>
     <title>Decluttering Ke</title>
 </head>
 

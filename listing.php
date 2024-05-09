@@ -1,6 +1,27 @@
 <?php
 session_start();
 require_once 'connection.php';
+// Function to fetch categories from the database
+function getCategories($con) {
+    $categories = array();
+    $query = "SELECT * FROM categories";
+    $result = mysqli_query($con, $query);
+    while ($row = mysqli_fetch_assoc($result)) {
+        $categories[] = $row;
+    }
+    return $categories;
+}
+
+// Function to fetch brands from the database
+function getBrands($con) {
+    $brands = array();
+    $query = "SELECT * FROM brands";
+    $result = mysqli_query($con, $query);
+    while ($row = mysqli_fetch_assoc($result)) {
+        $brands[] = $row;
+    }
+    return $brands;
+}
 
 // Check if the user is not logged in, redirect to the login page
 if (!isset($_SESSION['user_id'])) {
@@ -23,6 +44,12 @@ if (isset($_POST['submit'])) {
     $phone = floatval($_POST['phone']);
     $city = htmlspecialchars($_POST['city']); // New field
     $town = htmlspecialchars($_POST['town']); // New field
+
+        // Insert category if it doesn't exist and get its ID
+        $categoryId = $_POST['category'];
+
+        // Insert brand if it doesn't exist and get its ID
+        $brandId = $_POST['brand'];
 
     // File upload
     $file_names = array();
@@ -48,14 +75,14 @@ if (isset($_POST['submit'])) {
         $stmt = mysqli_prepare($con, $update_query);
         mysqli_stmt_bind_param($stmt, "i", $userId);
         mysqli_stmt_execute($stmt);
-        
+
 
         // Insert the listing into the database, including the user's ID as the seller_id
-        $insert_query = "INSERT INTO listings (name, category, sub_category, brand, color, years_used, `condition`, price, description, photos, phone_number, city, town, seller_id) 
+        $insert_query = "INSERT INTO listings (name, category_id, sub_category, brand_id, color, years_used, `condition`, price, description, photos, phone_number, city, town, seller_id) 
                          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($con, $insert_query);
-        mysqli_stmt_bind_param($stmt, "sssssssdsssssi", $name, $category, $sub_category, $brand, $color, $years_used, $condition, $price, $description, $photos, $phone, $city, $town, $userId);
-        
+        mysqli_stmt_bind_param($stmt, "sssssssdsssssi", $name, $categoryId, $sub_category, $brandId, $color, $years_used, $condition, $price, $description, $photos, $phone, $city, $town, $userId);
+
         if (mysqli_stmt_execute($stmt)) {
             echo "<h2>Listing uploaded successfully</h2>";
         } else {
@@ -76,7 +103,7 @@ if (isset($_POST['submit'])) {
     <script src="./js/listing.js"></script>
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/listing.css">
-    <script src="https://kit.fontawesome.com/661ba5765b.js" crossorigin="anonymous"></script>
+    <script src="./js/font-awesome.js" crossorigin="anonymous"></script>
     <title>Add Listing</title>
 </head>
 
@@ -89,7 +116,7 @@ if (isset($_POST['submit'])) {
                 <img src="./images/declutterLogo.png" class="icon">
                 <b><span>Declutter</span> Ke</b>
             </a>
-            <a href="#home">Home</a>
+            <a href="index.php">Home</a>
             <a href="store.php">Store</a>
             <a href="about.php">About</a>
             <a href="#contact">Contact</a>
@@ -105,92 +132,87 @@ if (isset($_POST['submit'])) {
 
         <div class="listing-container">
             <div class="listing-container">
-            <h2>Add a listing</h2>
-            <div class="details-container">
-                <div class="details" id="productDetails">
-                    <label for="name">Product Name:</label>
-                    <input type="text" id="name" name="name" required>
-                    <label for="photos">Photos:</label>
-                    <input type="file" id="photos" name="images[]" multiple accept="image/*" required>
-                    <label for="category">Category:</label>
-                    <select id="category" name="category" required>
-                        <option value="furniture">Furniture</option>
-                        <option value="electronics">Electronics</option>
-                        <option value="Appliances">Appliances</option>
-                        <option value="Kitchenware">Kitchenware</option>
-                        <option value="other">Other</option>
-                    </select>
+                <h2>Add a listing</h2>
+                <div class="details-container">
+                    <div class="details" id="productDetails">
+                        <label for="name">Product Name:</label>
+                        <input type="text" id="name" name="name" required>
+                        <label for="photos">Photos:</label>
+                        <input type="file" id="photos" name="images[]" multiple accept="image/*" required>
+                        <label for="category">Category:</label>
+                        <select id="category" name="category" required>
+                        <?php
+                            // Fetch categories from the database and populate the dropdown
+                            $categories = getCategories($con);
+                            foreach ($categories as $category) {
+                                echo "<option value=\"" . $category['category_id'] . "\">" . $category['category_name'] . "</option>";
+                            }
+                            ?>
+                        </select>
 
-                    <label for="sub-category">Sub-Category:</label>
-                    <select id="sub-category" name="sub-category" required>
-                        <option value="fridges">Fridges</option>
-                        <option value="phones">Phones</option>
-                        <option value="tables">Tables</option>
-                        <option value="phones">Phones</option>
-                        <option value="Speakers">Speakers</option>
-                        <option value="TVs">TVs</option>
-                        <option value="Microwaves">Microwaves</option>
-                        <option value="other">Other</option>
-                    </select>
+                        <label for="sub-category">Sub-Category:</label>
+                        <select id="sub-category" name="sub-category" required>
+                            <option value="fridges">Fridges</option>
+                            <option value="phones">Phones</option>
+                            <option value="tables">Tables</option>
+                            <option value="phones">Phones</option>
+                            <option value="Speakers">Speakers</option>
+                            <option value="beds">Beds</option>
+                            <option value="TVs">TVs</option>
+                            <option value="sofas">sofas</option>
+                            <option value="Microwaves">Microwaves</option>
+                            <option value="other">Other</option>
+                        </select>
 
-                    <label for="brand">Brand:</label>
-                    <select id="brand" name="brand" required>
-                        <option value="">Select a brand</option>
-                        <option value="Samsung">Samsung</option>
-                        <option value="LG">LG</option>
-                        <option value="Mika">Mika</option>
-                        <option value="Hisense">Hisense</option>
-                        <option value="Ramtons">Ramtons</option>
-                        <option value="Hotpoint">Hotpoint</option>
-                        <option value="otherbrand">Other</option>
-                    </select>
-                </div>
-                <div id="rightDetails">
+                        <label for="brand">Brand:</label>
+                        <select id="brand" name="brand" required>
+                        <?php
+                            // Fetch brands from the database and populate the dropdown
+                            $brands = getBrands($con);
+                            foreach ($brands as $brand) {
+                                echo "<option value=\"" . $brand['brand_id'] . "\">" . $brand['brand_name'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div id="rightDetails">
                     <label for="color">Color:</label>
-                    <select id="color" name="color" required>
-                        <option value="Black">Black</option>
-                        <option value="Silver">Silver</option>
-                        <option value="Bronze">Bronze</option>
-                        <option value="Brown">Brown</option>
-                        <option value="White">White</option>
-                        <option value="Red">Red</option>
-                        <option value="other">Other</option>
-                    </select>
+                        <input type="text" id="color" name="color" required>
 
-                    <label for="yearsUsed">Number of Years Used:</label>
-                    <input type="number" id="yearsUsed" name="yearsUsed" required>
+                        <label for="yearsUsed">Number of Years Used:</label>
+                        <input type="number" id="yearsUsed" name="yearsUsed" required>
 
 
-                    <label for="condition">Condition:</label>
-                    <select id="condition" name="condition" required>
-                        <option value="">Select the condition</option>
-                        <option value="new">Barely Used i.e almost new</option>
-                        <option value="fairly used">Fairly used</option>
-                        <option value="used">Used</option>
-                    </select>
+                        <label for="condition">Condition:</label>
+                        <select id="condition" name="condition" required>
+                            <option value="">Select the condition</option>
+                            <option value="new">Barely Used i.e almost new</option>
+                            <option value="fairly used">Fairly used</option>
+                            <option value="used">Used</option>
+                        </select>
 
-                    <label for="price">Price:</label>
-                    <input type="number" id="price" name="price" required>
+                        <label for="price">Price:</label>
+                        <input type="number" id="price" name="price" required>
 
-                    <label for="description">Description:</label>
-                    <textarea id="description" name="description" rows="4" style="width: 100%;" placeholder="provide any more details necessary"></textarea>
-                    <div id="nextButtonContainer">
-                        <button id="nextButton" type="button">Next</button>
+                        <label for="description">Description:</label>
+                        <textarea id="description" name="description" rows="4" style="width: 100%;" placeholder="provide any more details necessary"></textarea>
+                        <div id="nextButtonContainer">
+                            <button id="nextButton" type="button">Next</button>
+                        </div>
+                    </div>
+                    <div class="details" id="contactDetails" style="display: none;">
+                        <label for="city">Pickup City:</label>
+                        <input type="text" id="city" name="city" required placeholder="e.g Nairobi">
+                        <label for="town">Location:</label>
+                        <input type="text" id="town" name="town" required placeholder="e.g Ruiru">
+                        <label for="phone">Phone number:</label>
+                        <input type="number" id="phone" name="phone" required placeholder="provide the phone number you want to be contacted with">
+                    </div>
+                    <div class="details" id="submitButtonContainer" style="display: none;">
+                        <button id="backButton" type="button" style="display: none;">Back</button><br>
+                        <button class="btn btn-submit" name="submit" type="submit">Submit</button>
                     </div>
                 </div>
-                <div class="details" id="contactDetails" style="display: none;">
-                    <label for="city">Pickup City:</label>
-                    <input type="text" id="city" name="city" required placeholder="e.g Nairobi">
-                    <label for="town">Location:</label>
-                    <input type="text" id="town" name="town" required placeholder="e.g Ruiru">
-                    <label for="phone">Phone number:</label>
-                    <input type="number" id="phone" name="phone" required placeholder="provide the phone number you want to be contacted with">
-                </div>
-                <div class="details" id="submitButtonContainer" style="display: none;">
-                    <button id="backButton" type="button" style="display: none;">Back</button><br>
-                    <button class="btn btn-submit" name="submit" type="submit">Submit</button>
-                </div>
-            </div>
             </div>
         </div>
     </form>

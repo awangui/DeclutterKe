@@ -14,7 +14,7 @@ if (!isset($_SESSION['user_id'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Property Details</title>
-  <script src="https://kit.fontawesome.com/661ba5765b.js" crossorigin="anonymous"></script>
+  <script src="./js/font-awesome.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./css/styles.css">
   <link rel="stylesheet" href="./css/card.css">
 </head>
@@ -48,6 +48,7 @@ if (!isset($_SESSION['user_id'])) {
 
         // Fetch product details based on the listing_id
         $query = "SELECT * FROM listings WHERE listing_id = $listing_id";
+       
         $result = mysqli_query($con, $query);
         $row = mysqli_fetch_assoc($result);
 
@@ -85,9 +86,11 @@ if (!isset($_SESSION['user_id'])) {
       // Check if the listing_id is provided in the URL
       if (isset($_GET['listing_id'])) {
         // Fetch product details based on the listing_id
-        $query = "SELECT listings.*, users.firstName, users.surname
+        $query = "SELECT listings.*, users.firstName, users.surname, b.brand_name, c.category_name 
         FROM listings 
         INNER JOIN users ON listings.seller_id = users.userId 
+        INNER JOIN brands b ON listings.brand_id = b.brand_id 
+        INNER JOIN categories c ON listings.category_id = c.category_id 
         WHERE listings.listing_id = $listing_id";
 
         $result = mysqli_query($con, $query);
@@ -105,9 +108,9 @@ if (!isset($_SESSION['user_id'])) {
 
             <!-- Additional property details -->
             <div class="property-info">
-              <li class="list-group-item">Category: <span> <?php echo $row['category']; ?></span></li>
+              <li class="list-group-item">Category: <span> <?php echo $row['category_name']; ?></span></li>
               <li class="list-group-item">Sub Category: <span> <?php echo $row['sub_category']; ?></span></li>
-              <li class="list-group-item">Brand: <span> <?php echo $row['brand']; ?></span></li>
+              <li class="list-group-item">Brand: <span> <?php echo $row['brand_name']; ?></span></li>
               <li class="list-group-item">Color: <span> <?php echo $row['color']; ?></span></li>
               <li class="list-group-item">Years Used: <span> <?php echo $row['years_used']; ?></span></li>
               <li class="list-group-item">Condition: <span> <?php echo $row['condition']; ?></span></li>
@@ -124,7 +127,7 @@ if (!isset($_SESSION['user_id'])) {
           <div class="seller">
             <h2>Seller details</h2>
             <div class="seller-info">
-              <p class="seller-name"> <?php echo $row['firstName' ],  $row['surname']; ?></p>
+              <p class="seller-name"> <?php echo $row['firstName'].' '.  $row['surname']; ?></p>
               <p class="date-joined">Member since: 2021</p>
             </div>
             <!-- Add contact options as needed -->
@@ -200,18 +203,21 @@ if (!isset($_SESSION['user_id'])) {
       $listing_id = $_GET['listing_id'];
 
       // Fetch product details based on the listing_id
-      $query = "SELECT * FROM listings WHERE listing_id = $listing_id";
+      $query = "SELECT listings.*, categories.category_name 
+      FROM listings 
+      INNER JOIN categories ON listings.category_id = categories.category_id 
+      WHERE listings.listing_id = $listing_id";
       $result = mysqli_query($con, $query);
       $row = mysqli_fetch_assoc($result);
 
       // Check if the product details are fetched successfully
       if ($row) {
         // Extract category and subcategory of the current product
-        $category = $row['category'];
+        $category = $row['category_name'];
         $sub_category = $row['sub_category'];
-
-        // Fetch related products with similar category or subcategory, limited to 3
-        $related_query = "SELECT * FROM listings WHERE (category = '$category' OR sub_category = '$sub_category') AND listing_id != $listing_id  LIMIT 4";
+              // Fetch related products with similar category or subcategory, limited to 3
+$related_query = "SELECT * FROM listings WHERE listing_id != $listing_id AND category_id = " . $row['category_id'] . " LIMIT 3";      
+$related_result = mysqli_query($con, $related_query);
         $related_result = mysqli_query($con, $related_query);
 
         // Check if there are related products
@@ -236,7 +242,10 @@ if (!isset($_SESSION['user_id'])) {
           echo '</div>'; // Close related-products-container
         } else {
           // If no related products found, fetch random products
-          $random_query = "SELECT * FROM listings WHERE listing_id != $listing_id ORDER BY RAND() LIMIT 4"; // Exclude the current product
+          $random_query = "SELECT * FROM listings WHERE listing_id != $listing_id ORDER BY RAND() LIMIT 4"; 
+          
+          
+          // Exclude the current product
           $random_result = mysqli_query($con, $random_query);
 
           if (mysqli_num_rows($random_result) > 0) {
@@ -314,10 +323,6 @@ if (!isset($_SESSION['user_id'])) {
     </div>
   </section>
   <script src="card.js"></script>
-
-  <!-- The Modal -->
-
-
 </body>
 
 </html>

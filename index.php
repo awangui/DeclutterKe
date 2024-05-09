@@ -16,7 +16,7 @@ require_once 'connection.php';
     <link rel="manifest" href="./site.webmanifest">
     <link rel="stylesheet" href="./css/styles.css">
 
-    <script src="../js/font-awesome.js" crossorigin="anonymous"></script>
+    <script src="./js/font-awesome.js" crossorigin="anonymous"></script>
     <title>Decluttering Ke</title>
 </head>
 
@@ -52,10 +52,12 @@ require_once 'connection.php';
             <h1>Your Resale Haven</h1>
             <p>Helping your pre-loved items find a new home</p>
             <div class="search-container">
-                <input type="text" placeholder="What are you looking for?" id="productName" name="search" onkeyup="search()" class="text">
-                <!-- <input type="text" placeholder="All Categories" name="search" class="text"> -->
-                <button type="button" class="searchbtn" onclick="searchFunction()">Search</button>
-                </form>
+                <form id="searchForm" action="store.php" method="get">
+    <input type="text" name="name" class="text" id="searchInput" placeholder="What are you looking for?">
+    <button type="submit" class="searchbtn">Search</button>
+</form>
+
+
             </div>
         </div>
     </section>
@@ -76,7 +78,7 @@ require_once 'connection.php';
         <section id="browse">
             <h2>Popular Categories</h2>
             <ul class="items">
-                <li class="item"><a href="#">
+                <li class="item"> <a href="store.php?sub-category=tables">
                         Tables
                     </a>
                 </li>
@@ -87,16 +89,16 @@ require_once 'connection.php';
                 <li class="item"><a href="store.php?cat=furniture">
                         Furniture</a>
                 </li>
-                <li class="item"><a href="#">
-                        Beds</a>
+                <li class="item"> <a href="store.php?name=bed">
+                Beds</a>
                 </li>
-                <li class="item"><a href="#">
-                        Fridges
+                <li class="item"> <a href="store.php?cat=appliances">
+                Appliances
                     </a>
                 </li>
 
             </ul>
-            <button class="btn">View all categories</button>
+            <button class="btn" ><a href="store.php?cat=any">View all categories</a></button>
         </section>
 
 
@@ -107,7 +109,11 @@ require_once 'connection.php';
             <div class="row">
                 <?php
                 include 'connection.php';
-                $res = mysqli_query($con, "SELECT * FROM listings");
+                $query = "SELECT l.*, b.brand_name, c.category_name 
+              FROM listings l 
+              JOIN brands b ON l.brand_id = b.brand_id 
+              JOIN categories c ON l.category_id = c.category_id";
+                $res = mysqli_query($con, $query);
                 while ($row = mysqli_fetch_assoc($res)) {
                     // Get the first image filename
                     $photosArray = explode(',', $row['photos']); // Split photos field by comma
@@ -122,14 +128,20 @@ require_once 'connection.php';
                             <div class="text_content">
                                 <h3 class="item-title"><?php echo $row['name']; ?></h3>
                                 <div class="item-details">
-                                    <p class="brand"><?php echo $row['brand']; ?></p>
+                                <p class="location" id="location_<?php echo $row['listing_id']; ?>"><?php echo $row['city']; ?></p>
+                                    <?php if ($row['brand_name'] !== 'Other') { ?>
+                                        <p class="brand"><?php echo $row['brand_name']; ?></p>
+                                    <?php } ?>
                                     <p class="color"><?php echo $row['color']; ?></p>
                                     <p class="condition"><?php echo $row['condition']; ?></p>
                                     <p class="price"><?php echo 'ksh ' . $row['price']; ?></p>
-                                    <br>
-                                </div>
-                                <p class="item-description"><?php echo $row['description']; ?></p>
 
+                                    <br>
+                                    <span class="item-description"><?php echo $row['description']; ?></span>
+
+
+                                </div>
+                                
                                 <button class="btn btn-secondary"><a href="card.php?listing_id=<?php echo $row['listing_id']; ?>">View Item</a></button>
                             </div>
                         </div>
@@ -193,14 +205,58 @@ require_once 'connection.php';
                     </div>
                     <div class="subscribe-content">
                         <p>Join our mailing list</p>
+                        <div class="subscription"></div>
                         <form class="subscribe-form" action="subscribe.php" method="POST">
                             <input type="email" name="email" placeholder="Your E-mail">
                             <button type="submit">Subscribe</button>
+                            
                         </form>
                     </div>
                 </div>
             </div>
         </section>
 </body>
+<script>
+    function searchFunction() {
+        var search = document.getElementById('productName').value;
+        window.location.href = 'store.php?search=' + search;
+        
+    }
+    function search() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('productName');
+        filter = input.value.toUpperCase();
+        ul = document.getElementsByClassName('items')[0];
+        li = ul.getElementsByClassName('item');
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+    function menuToggle() {
+        var nav = document.getElementsByTagName('nav')[0];
+        nav.classList.toggle('active');
+    }
+    var acc = document.getElementsByClassName("accordion-title");
+    var i;
 
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+        };
+    
+ 
+</script>
 </html>

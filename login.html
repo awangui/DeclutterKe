@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="login.css">    
-    <script src="https://kit.fontawesome.com/661ba5765b.js" crossorigin="anonymous"></script>
+    <script src="./js/font-awesome.js" crossorigin="anonymous"></script>
     <title>Decluttering Ke</title>
 </head>
 <body>
-    
+
+    <div id="logo">           
+                <a href="index.php" class="logo">
+                    <img src="./images/declutterLogo.png" class="icon">
+                    <b><span>Declutter</span> Ke</b>
+                </a>
+  </div>
+
+        
     <form action="login.php" method="post">
-        <a href="index.php" >
-        <img src="./images/declutterLogo.png" class="icon" >
-        <b>Declutter<span>Ke</span></b>
-    </a>
         <h2 class="title">Login</h2>
         <div class="login-error"></div>
         <!-- Email input with associated label -->
@@ -22,21 +26,10 @@
 
         <label for="password">Password:</label>
 <input type="password" id="password" name="password" placeholder="Password" required>
-<spa type="button" id="togglePassword">Show</spa>
-
+<span type="button" id="togglePassword">Show</span>
 
         <!-- Sign In button -->
         <button type="submit" class="cta">SIGN IN</button>
-
-        <!-- Or separator -->
-        <p><i class="fa-solid fa-minus"></i> Or <i class="fa-solid fa-minus"></i></p>
-
-        <!-- Button for Google login -->
-        <button type="submit" class="cta other">
-            <img src="images/google-symbol.png" class="glogo">
-            <span>Login in with Google</span>
-        </button>
-
         <!-- Link to registration page -->
         <p>Don't have an account? <span><a href="registration.html">Sign Up</a></span></p>
     </form>

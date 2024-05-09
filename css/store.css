@@ -4,6 +4,17 @@ body {
     margin: 0;
     padding: 0;
 }
+
+.container {
+    margin-left: 22%;
+    margin-top: 40px;
+    padding-bottom: 120px; 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 250px));
+    gap: 30px;
+}
+
+/* Styling for the side navigation */
 .side-nav {
     width: 20%;
     background-color: #fff;
@@ -17,16 +28,27 @@ body {
     top: 15%;
     background-color: #fbb610;
     border-radius: 14px;
+    margin-right: 20px;
     left: 2%;
 }
 
-.container {
-    margin-left: 22%;
-    margin-top: 40px;
-    padding-bottom: 120px; 
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 30px;
+@media screen and (max-width: 768px) {
+    .side-nav {
+        display: none;
+    }
+}
+
+.filters button{
+    background-color:#3E3D3C ;
+    color: white;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px auto;
+}
+#reset-btn{
+   margin-left: 30px;
 }
 
 @media screen and (max-width: 768px) {
@@ -42,40 +64,24 @@ body {
     }
 }
 
-
-
+/* footer styling */
 #footer{
     margin-left: 22%;
 }
 
-.image-container {
-    max-width: 100%;
-    height: 12rem;
-}
-
-.image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.filters {
-    padding: 10px;
-}
-
-.filters input,
-.filters select {
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 6px;
-}
-
 #footer {
     clear: both;
-    position: relative; /* Change to relative positioning */
-    width: 100%; /* Make the footer span the entire width */
-    margin-top: 20px; /* Add margin to separate it from the listing cards */
+    position: relative; 
+    width: 100%; 
+    margin-top: 20px;
 }
+
+@media screen and (max-width: 768px) {
+    #footer {
+        margin-left: 0;
+    }
+}
+
 /*no listing found card*/
 #message-card{
     margin-left: 30%;
@@ -108,15 +114,14 @@ body {
     object-fit: cover;
     margin: 0 auto;
 }
-.filters button{
-    background-color:#3E3D3C ;
-    color: white;
-    border: none;
-    padding: 8px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 10px auto;
+
+.filters {
+    padding: 10px;
 }
-#reset-btn{
-   margin-left: 30px;
+
+.filters input,
+.filters select {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 6px;
 }
