@@ -34,7 +34,8 @@ require_once 'connection.php';
             <a href="#contact">Contact</a>
             <a href="listing.php" class="cta">Add a Listing</a>
             <?php if (isset($_SESSION['user_id'])) { ?>
-                    <div class="credentials">
+                <div class="credentials">
+                        <a href="profile.php"><i class="icon fa-regular fa-user"></i> Profile</a>
                         <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
                     </div>
                 <?php } else {

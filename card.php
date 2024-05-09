@@ -33,6 +33,7 @@ if (!isset($_SESSION['user_id'])) {
       <a href="#contact">Contact</a>
       <a href="listing.php" class="cta">Add a Listing</a>
       <div class="credentials">
+                        <a href="profile.php"><i class="icon fa-regular fa-user"></i> Profile</a>
         <a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
       </div>
     </nav>

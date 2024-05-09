@@ -122,6 +122,7 @@ if (isset($_POST['submit'])) {
             <a href="#contact">Contact</a>
             <a href="listing.php" class="cta active">Add a Listing</a>
             <div class="credentials">
+                        <a href="profile.php"><i class="icon fa-regular fa-user"></i> Profile</a>
                 <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
             </div>
 
