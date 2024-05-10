@@ -152,7 +152,7 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="close">&times;</span>
                 <div class="modal-body">
                   <h2>Payment</h2>
-                  <form action="./safaricom/stk_initiate.php" method="POST">
+                  <form action="/safaricom/stk_initiate.php" method="POST">
                     <div class="form-group">
                       <label for="amount">Amount</label>
                       <input type="text" class="form-control" id="amount" name="amount" placeholder="Enter Amount">
