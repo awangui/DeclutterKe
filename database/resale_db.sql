@@ -84,9 +84,9 @@ CREATE TABLE `listings` (
   `description` text NOT NULL,
   `photos` text NOT NULL,
   `phone_number` varchar(15) DEFAULT NOT NULL,
- `city` varchar(100) NOT NULL,
-  `town` varchar(100) NOT NULL,
-  `date_posted` date NOT NULL DEFAULT current_timestamp(),
+ `city` varchar(100) DEFAULT '' NOT NULL,
+  `town` varchar(100) DEFAULT '' NOT NULL,
+  `date_posted` datetime NOT NULL DEFAULT current_timestamp(),
   `seller_id` int(11) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
   `brand_id` int(11) DEFAULT NULL
@@ -204,7 +204,7 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` int(11) NOT NULL DEFAULT 2,
-  `date` date NOT NULL DEFAULT current_timestamp(),
+  `date` datetime NOT NULL DEFAULT current_timestamp(),
   `category` enum('normal','seller','admin') NOT NULL DEFAULT 'normal'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
