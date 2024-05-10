@@ -72,7 +72,6 @@ INSERT INTO `categories` (`category_id`, `category_name`) VALUES
 --
 -- Table structure for table `listings`
 --
-
 CREATE TABLE `listings` (
   `listing_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -83,8 +82,9 @@ CREATE TABLE `listings` (
   `price` bigint(20) DEFAULT NULL,
   `description` text NOT NULL,
   `photos` text NOT NULL,
-  `phone_number` varchar(15)   `city` varchar(100) DEFAULT '' NOT NULL,
-  `town` varchar(100) DEFAULT '' NOT NULL,DEFAULT NULL,
+  `phone_number` varchar(15) NOT NULL,
+  `city` varchar(100) DEFAULT '' NOT NULL,
+  `town` varchar(100) DEFAULT '' NOT NULL,
   `date_posted` datetime NOT NULL DEFAULT current_timestamp(),
   `seller_id` int(11) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
