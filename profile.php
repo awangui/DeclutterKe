@@ -78,7 +78,7 @@ mysqli_close($con);
         <img src="./images/declutterLogo.png" class="icon">
         <b><span>Declutter</span> Ke</b>
     </a>
-    <a href="#home">Home</a>
+    <a href="index.php">Home</a>
     <a href="store.php">Store</a>
     <a href="about.php">About</a>
     <a href="#contact">Contact</a>
@@ -139,10 +139,11 @@ mysqli_close($con);
             <?php if ($listings && count($listings) > 0): ?>
             <table>
             <tr>
+                <th>#</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
-                <th>Actions</th>
+                <th>Action</th>
             </tr>
             
             <?php 
@@ -154,7 +155,7 @@ mysqli_close($con);
                 <td><?php echo $listing['name']; ?></td>
                 <td><?php echo $listing['description']; ?></td>
                 <td><?php echo $listing['price']; ?></td>
-                <td><a href="update.php?editId=<?= $id ?>" class="btn btn-primary">Edit</a><a href="delete.php?deleteid=<?= $id ?>" class="btn btn-danger">Delete</a></td>
+                <td><a href="update.php?editId=<?= $id ?>" class="btn btn-primary">Edit</a></td>
                 </tr>
             <?php endforeach; ?>
             </table>
@@ -168,6 +169,30 @@ mysqli_close($con);
                 </table>
         </div>
         </div>
+    </div>
+    <section id="footer">
+        <div class="footer-main">
+            <div class="contain">
+                <div class="contained">
+                    <ul>
+                        <h4><span>About Us</span></h4>
+                        <li><a href="about.php">Who we are</a></li>
+                        <li><a href="#">Stories and News</a></li>
+                        <li><a href="#">Customer Testimonials</a></li>
+                    </ul>
+                </div>
+                <div class="contained">
+                    <h4><span>Get in touch</span></h4>
+                    <ul>
+                        <li><a href="#"><i class="fa fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fa fa-phone"></i> +254 000 000 000</a></li>
+                        <li><a href="#"><i class="fa-regular fa-envelope"></i> declutterke@gmail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
 </body>
 

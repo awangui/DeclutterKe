@@ -125,3 +125,19 @@ body {
     margin-bottom: 10px;
     padding: 6px;
 }
+/* CSS for transitions */
+.sticky-nav {
+    transition: all 0.3s ease;
+}
+
+.side-nav {
+    transition: all 0.3s ease;
+}
+
+.container {
+    transition: all 0.3s ease;
+}
+
+.card {
+    transition: all 0.3s ease;
+}

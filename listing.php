@@ -71,7 +71,7 @@ if (isset($_POST['submit'])) {
         $userId = $_SESSION['user_id'];
 
         // Update the user's category to 'seller'
-        $update_query = "UPDATE users SET category = 'seller' WHERE UserId = ?";
+        $update_query = "UPDATE users SET `role` = '3' WHERE UserId = ?";
         $stmt = mysqli_prepare($con, $update_query);
         mysqli_stmt_bind_param($stmt, "i", $userId);
         mysqli_stmt_execute($stmt);

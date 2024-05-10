@@ -109,7 +109,7 @@ h5 {
 }
 
 .logo {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     margin-right: auto;
     display: flex;
     align-items: center;
@@ -720,7 +720,7 @@ input[type=text]:hover,
 input[type=password]:hover,
 input[type=email]:hover,
 textarea:hover {
-    background-color: rgb(182, 181, 181);
+    background-color: #f1f1f1;
     outline: none;
 }
 
@@ -768,7 +768,7 @@ input[type=submit] {
 }
 
 .active .accordion-content {
-    border-bottom: solid 2px #fbb610;
+    /* border-bottom: solid 2px #fbb610; */
     color: #000;
     border-bottom: none;
 }
@@ -784,6 +784,7 @@ input[type=submit] {
 
 .active .accordion-content {
     display: block;
+    padding-bottom: 50px;
 }
 
 /*footer*/

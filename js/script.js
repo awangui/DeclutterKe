@@ -66,8 +66,8 @@ function scrollToCardSection() {
 }
 
 
-  //accordion faq
-  document.addEventListener("DOMContentLoaded", function() {
+   //accordion faq
+   document.addEventListener("DOMContentLoaded", function() {
     var accordionTitles = document.querySelectorAll(".accordion-title");
     
     accordionTitles.forEach(function(title) {
@@ -84,7 +84,7 @@ function scrollToCardSection() {
         });
     });
 });
-
+// login and registration display error function
 const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get('error');
 if(typeof(myParam) !== 'undefined' && myParam !== null){
