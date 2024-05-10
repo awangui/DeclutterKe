@@ -44,7 +44,6 @@ if(isset($_POST['submit'])){
   # callback url
   $CallBackURL = 'http://164.92.94.13/safaricom/callback_url.php';  
 
-
   $curl = curl_init($access_token_url);
   curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
