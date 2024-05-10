@@ -132,9 +132,10 @@ if (!isset($_SESSION['user_id'])) {
               <p class="date-joined">Member since: 2021</p>
             </div>
             <!-- Add contact options as needed -->
-            <a href="https://wa.me/<?php echo $phone_number; ?>" class="whatsapp">
+           
               <button class="btn">
-                <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+                <i class="fa-brands fa-whatsapp"></i> 
+                <a href="https://wa.me/<?php echo $phone_number; ?>?text=Hello, I'm interested in your <?php echo $row['name']; ?> advertised on DeclutterKe" class="whatsapp">Chat on WhatsApp</a>
               </button>
             </a>
 

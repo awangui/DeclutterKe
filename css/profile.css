@@ -2,10 +2,11 @@
     max-width: 80%;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f5f5f5;
+    background-color: #fff;
     opacity: 0.9;
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin-bottom: 3%;
 }
 
 body {
@@ -22,7 +23,6 @@ body {
     align-items: center;
     padding: 20px;
     margin: 20px;
-    background-color: #f2f2f2;
     border-radius: 10px;
     border: solid 1px #3E3D3C;
 }
@@ -61,17 +61,10 @@ p {
     margin-bottom: 5px;
 }
 
-.listing {
-    margin-bottom: 20px;
+.listings{
+    margin-bottom: 20%;
     padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ccc;
     border-radius: 5px;
-}
-
-.listing h2 {
-    font-size: 20px;
-    margin-bottom: 5px;
 }
 
 .empty-listings {
@@ -84,4 +77,4 @@ height: 100vh;
 .empty-listings img{
     width: 30%;
     height: auto;
-    }
+}

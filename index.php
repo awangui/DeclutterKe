@@ -30,7 +30,7 @@ require_once 'connection.php';
                     <img src="./images/declutterLogo.png" class="icon">
                     <b><span>Declutter</span> Ke</b>
                 </a>
-                <a href="#home" class="active">Home</a>
+                <a href="index.php" class="active">Home</a>
                 <a href="store.php">Store</a>
                 <a href="about.php">About</a>
                 <a href="#contact">Contact</a>
@@ -154,33 +154,34 @@ require_once 'connection.php';
 
         </section>
         <section id="faq">
-            <h2>Frequently Asked Questions</h2>
-            <div class="accordion">
+        <h2>Frequently Asked Questions</h2>
+        <div class="accordion">
+            <div class="accordion-item">
+                <h3 class="accordion-title">How do I list an item for sale?<i class="fa-solid fa-angle-down"></i></h3>
+                <div class="accordion-content">
+                    <p>Make sure you are logged into your account.Click on add listing and fill in the necessary details then click on submit.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h3 class="accordion-title"> How do you facilitate communication between buyers and sellers?<i class="fa-solid fa-angle-down"></i></h3>
+                <div class="accordion-content">
+                    <p>We offer communication between parties through WhatsApp but we aim to implement an inbuilt chat feature soon. Which will facilitate communication between involvied parties directly on the web app.</p>
+                </div>
+            </div>
                 <div class="accordion-item">
-                    <h3 class="accordion-title">How do I list an item for sale?<i class="fa-solid fa-angle-down"></i></h3>
+                    <h3 class="accordion-title"> Do you offer shipping?<i class="fa-solid fa-angle-down"></i></h3>
                     <div class="accordion-content">
-                        <p>Make sure you are logged into your account.Click on add listing and fill in the necessary details then click on submit.</p>
+                        <p>No, at the moment we currently do not offer any shipping.</p>
                     </div>
                 </div>
                 <div class="accordion-item">
-                    <h3 class="accordion-title"> How do you facilitate communication between buyers and sellers?<i class="fa-solid fa-angle-down"></i></h3>
+                    <h3 class="accordion-title">What payment methods do you accept?<i class="fa-solid fa-angle-down"></i></h3>
                     <div class="accordion-content">
-                        <p>We offer communication between parties through WhatsApp but we aim to implement an inbuilt chat feature soon. Which will facilitate communication between involvied parties directly on the web app.</p>
-                    </div>
-                    <div class="accordion-item">
-                        <h3 class="accordion-title"> Do you offer shipping?<i class="fa-solid fa-angle-down"></i></h3>
-                        <div class="accordion-content">
-                            <p>No, at the moment we currently do not offer any shipping.</p>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h3 class="accordion-title">What payment methods do you accept?<i class="fa-solid fa-angle-down"></i></h3>
-                        <div class="accordion-content">
-                            <p>We currently only accept payments via Mpesa.</p>
-                        </div>
+                        <p>We currently only accept payments via Mpesa.</p>
                     </div>
                 </div>
-        </section>
+            </div>
+    </section>
 
         <section id="footer">
             <div class="footer-main">
