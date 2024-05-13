@@ -35,16 +35,16 @@ require_once 'connection.php';
             <a href="listing.php" class="cta">Add a Listing</a>
             <?php if (isset($_SESSION['user_id'])) { ?>
                 <div class="credentials">
-                        <a href="profile.php"><i class="icon fa-regular fa-user"></i> Profile</a>
-                        <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
-                    </div>
-                <?php } else {
-                ?>
-                    <div class="credentials">
-                        <a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
-                        <a href="registration.html"><i class="icon fa-regular fa-user"></i> Sign Up</a>
-                    </div>
-                <?php } ?>
+                    <a href="profile.php"><i class="icon fa-regular fa-user"></i> Profile</a>
+                    <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
+                </div>
+            <?php } else {
+            ?>
+                <div class="credentials">
+                    <a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
+                    <a href="registration.php"><i class="icon fa-regular fa-user"></i> Sign Up</a>
+                </div>
+            <?php } ?>
         </nav>
     </section>
 
@@ -56,17 +56,17 @@ require_once 'connection.php';
                 <input type="text" name="name" id="name" placeholder="Enter item name" value="<?php echo isset($_GET['name']) ? $_GET['name'] : ''; ?>" />
 
                 <label for="brand">Brand:</label>
-<select id="brand" name="brand">
-<option value="any">Any</option>
-    <?php
-    // Fetch the list of brands from the database
-    $num = mysqli_query($con, "SELECT DISTINCT LOWER(brand_name) AS brand FROM brands ORDER BY brand_name;");
-    while ($row = mysqli_fetch_assoc($num)) {
-        echo "<option " . ($_GET['brand'] == $row['brand'] ? 'selected' : '') . " value='" . $row['brand'] . "'>" . $row['brand'] . "</option> \n";
-    }
-    var_dump($_POST);
-    ?>
-</select>
+                <select id="brand" name="brand">
+                    <option value="any">Any</option>
+                    <?php
+                    // Fetch the list of brands from the database
+                    $num = mysqli_query($con, "SELECT DISTINCT LOWER(brand_name) AS brand FROM brands ORDER BY brand_name;");
+                    while ($row = mysqli_fetch_assoc($num)) {
+                        echo "<option " . ($_GET['brand'] == $row['brand'] ? 'selected' : '') . " value='" . $row['brand'] . "'>" . $row['brand'] . "</option> \n";
+                    }
+                    var_dump($_POST);
+                    ?>
+                </select>
 
 
                 <label for="color">Color:</label>
@@ -192,7 +192,7 @@ require_once 'connection.php';
           INNER JOIN brands b ON listings.brand_id = b.brand_id 
           INNER JOIN categories c ON listings.category_id = c.category_id ";
 
-          $query .= $queryFilter;
+        $query .= $queryFilter;
         $res = mysqli_query($con, $query);
         $rows = mysqli_num_rows($res);
         while ($row = mysqli_fetch_assoc($res)) {
@@ -210,13 +210,13 @@ require_once 'connection.php';
                         <div class="item-details">
                             <!-- Update these elements with IDs -->
                             <p class="location" id="location_<?php echo $row['listing_id']; ?>"><?php echo $row['city']; ?></p>
-                        
-                                    <?php if ($row['brand_name'] !== 'Other') { ?>
-                                        <p class="brand"><?php echo $row['brand_name']; ?></p>
-                                    <?php } ?>
+
+                            <?php if ($row['brand_name'] !== 'Other') { ?>
+                                <p class="brand"><?php echo $row['brand_name']; ?></p>
+                            <?php } ?>
 
                             <p class="category" id="category_<?php echo $row['listing_id']; ?>"><?php echo $row['category_name']; ?></p>
-<!-- 
+                            <!-- 
                             <p class="years" id="years_<?php echo $row['listing_id']; ?>">Used for <?php echo $row['years_used']; ?> yr(s)</p> -->
                             <p class="sub-category" id="sub_category_<?php echo $row['listing_id']; ?>"><?php echo $row['sub_category']; ?></p>
                             <p class="condition" id="condition_<?php echo $row['listing_id']; ?>"><?php echo $row['condition']; ?></p>
@@ -224,7 +224,7 @@ require_once 'connection.php';
                             <br>
                             <span class="item-description"><?php echo $row['description']; ?></span>
                         </div>
-                      
+
                         <button class="btn btn-secondary"><a href="card.php?listing_id=<?php echo $row['listing_id']; ?>">View Item</a></button>
                     </div>
                 </div>

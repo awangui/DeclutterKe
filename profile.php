@@ -7,10 +7,10 @@ require_once 'connection.php';
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.html");
     exit();
-  }
+}
 
 // Check if the user is logged in
-if(isset($_SESSION['user_id'])) {
+if (isset($_SESSION['user_id'])) {
     $id = $_SESSION['user_id'];
 
     // Get user details from the database
@@ -25,10 +25,10 @@ if(isset($_SESSION['user_id'])) {
         $user = mysqli_fetch_assoc($result);
 
         // Extract user details
-        $name = $user['firstName'].' '.$user['surname'];
+        $name = $user['firstName'] . ' ' . $user['surname'];
         $email = $user['email'];
-        $phone = $user['phone']??'Add phone number';
-        $city = $user['city']??'Provide your city';
+        $phone = $user['phone'] ?? 'Add phone number';
+        $city = $user['city'] ?? 'Provide your city';
     } else {
         // Handle the error if the query fails
         echo "Error: " . mysqli_error($con);
@@ -70,104 +70,104 @@ mysqli_close($con);
 </head>
 
 <body>
-<section id="navigation">
+    <section id="navigation">
 
-<button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
-<nav>
-    <a href="index.php" class="logo">
-        <img src="./images/declutterLogo.png" class="icon">
-        <b><span>Declutter</span> Ke</b>
-    </a>
-    <a href="index.php">Home</a>
-    <a href="store.php">Store</a>
-    <a href="about.php">About</a>
-    <a href="#contact">Contact</a>
-    <a href="listing.php" class="cta">Add a Listing</a>
-    <?php if (isset($_SESSION['user_id'])) { ?>
-        <div class="credentials">
-            <a href="profile.php"  class="active"><i class="icon fa-regular fa-user"></i> Profile</a>
-            <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
-        </div>
-    <?php } else {
-    ?>
-        <div class="credentials">
-            <a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
-            <a href="registration.html"><i class="icon fa-regular fa-user"></i> Sign Up</a>
-        </div>
-    <?php } ?>
-</nav>
-</section>
+        <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
+        <nav>
+            <a href="index.php" class="logo">
+                <img src="./images/declutterLogo.png" class="icon">
+                <b><span>Declutter</span> Ke</b>
+            </a>
+            <a href="index.php">Home</a>
+            <a href="store.php">Store</a>
+            <a href="about.php">About</a>
+            <a href="#contact">Contact</a>
+            <a href="listing.php" class="cta">Add a Listing</a>
+            <?php if (isset($_SESSION['user_id'])) { ?>
+                <div class="credentials">
+                    <a href="profile.php" class="active"><i class="icon fa-regular fa-user"></i> Profile</a>
+                    <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
+                </div>
+            <?php } else {
+            ?>
+                <div class="credentials">
+                    <a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
+                    <a href="registration.php"><i class="icon fa-regular fa-user"></i> Sign Up</a>
+                </div>
+            <?php } ?>
+        </nav>
+    </section>
     <div class="container">
         <div class="header">
             <h1>Welcome, <?php echo $name; ?></h1>
-        <h2>Personal Details</h2>
-        <div class="profile">
-            <div class="profile-image">
-                <img src="./images/undraw_up_to_date_re_nqid.svg" class="hero">
+            <h2>Personal Details</h2>
+            <div class="profile">
+                <div class="profile-image">
+                    <img src="./images/undraw_up_to_date_re_nqid.svg" class="hero">
+                </div>
+                <div class="profile-details">
+                    <form action="update_profile.php" method="POST">
+                        <p>
+                            <label for="avatar">Avatar:</label>
+                            <input type="file" id="avatar" name="avatar">
+                        </p>
+                        <p>
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" value="<?php echo $name; ?>">
+                        </p>
+                        <p>
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" value="<?php echo $email; ?>">
+                        </p>
+                        <p>
+                            <label for="phone">Phone:</label>
+                            <input type="tel" id="phone" name="phone" value="<?php echo $phone; ?>">
+                        </p>
+                        <p>
+                            <label for="city">City:</label>
+                            <input type="text" id="city" name="city" value="<?php echo $city; ?>">
+                        </p>
+                        <p>
+                            <input type="submit" value="Update">
+                        </p>
+                    </form>
+                </div>
             </div>
-            <div class="profile-details">
-                <form action="update_profile.php" method="POST">
-                    <p>
-                        <label for="avatar">Avatar:</label>
-                        <input type="file" id="avatar" name="avatar">
-                    </p>
-                    <p>
-                        <label for="name">Name:</label>
-                        <input type="text" id="name" name="name" value="<?php echo $name; ?>">
-                    </p>
-                    <p>
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" value="<?php echo $email; ?>">
-                    </p>
-                    <p>
-                        <label for="phone">Phone:</label>
-                        <input type="tel" id="phone" name="phone" value="<?php echo $phone; ?>">
-                    </p>
-                    <p>
-                        <label for="city">City:</label>
-                        <input type="text" id="city" name="city" value="<?php echo $city; ?>">
-                    </p>
-                    <p>
-                        <input type="submit" value="Update">
-                    </p>
-                </form>
-            </div>
-        </div>
 
-        <h2>Listings Posted</h2>
-        <div class="listings">
-            <?php if ($listings && count($listings) > 0): ?>
-            <table>
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Action</th>
-            </tr>
-            
-            <?php 
-            $count=0;
-            foreach ($listings as $listing): 
-            $count+=1?>
-                <tr>
-                    <td><?php echo $count ?></td>
-                <td><?php echo $listing['name']; ?></td>
-                <td><?php echo $listing['description']; ?></td>
-                <td><?php echo $listing['price']; ?></td>
-                <td><a href="update.php?editId=<?= $id ?>" class="btn btn-primary">Edit</a></td>
-                </tr>
-            <?php endforeach; ?>
-            </table>
-        <?php else: ?>
-            <div class="empty-listings">
-            <img src="./images/error.svg" alt="No listings found" class="empty">
-            <p>No listings found.</p>
-     <a href="listing.php"><button>Post an ad today</button></a>
-            </div>
-        <?php endif; ?>
+            <h2>Listings Posted</h2>
+            <div class="listings">
+                <?php if ($listings && count($listings) > 0) : ?>
+                    <table>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+
+                        <?php
+                        $count = 0;
+                        foreach ($listings as $listing) :
+                            $count += 1 ?>
+                            <tr>
+                                <td><?php echo $count ?></td>
+                                <td><?php echo $listing['name']; ?></td>
+                                <td><?php echo $listing['description']; ?></td>
+                                <td><?php echo $listing['price']; ?></td>
+                                <td><a href="update.php?editId=<?= $id ?>" class="btn btn-primary">Edit</a></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </table>
+                <?php else : ?>
+                    <div class="empty-listings">
+                        <img src="./images/error.svg" alt="No listings found" class="empty">
+                        <p>No listings found.</p>
+                        <a href="listing.php"><button>Post an ad today</button></a>
+                    </div>
+                <?php endif; ?>
                 </table>
-        </div>
+            </div>
         </div>
     </div>
     <section id="footer">

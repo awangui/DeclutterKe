@@ -44,7 +44,7 @@ require_once 'connection.php';
                 ?>
                     <div class="credentials">
                         <a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
-                        <a href="registration.html"><i class="icon fa-regular fa-user"></i> Sign Up</a>
+                        <a href="registration.php"><i class="icon fa-regular fa-user"></i> Sign Up</a>
                     </div>
                 <?php } ?>
 

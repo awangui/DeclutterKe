@@ -123,3 +123,12 @@ span#togglePassword {
         background-size: cover;
     }
 }
+#password, #confirm_password{
+    position: relative;
+}
+#toggle-password, #toggle-confirm_password{
+    position: absolute;
+    right: 40%;
+    transform: translateY(-47px);
+    cursor: pointer;
+}

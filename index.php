@@ -44,7 +44,7 @@ require_once 'connection.php';
                 ?>
                     <div class="credentials">
                         <a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
-                        <a href="registration.html"><i class="icon fa-regular fa-user"></i> Sign Up</a>
+                        <a href="registration.php"><i class="icon fa-regular fa-user"></i> Sign Up</a>
                     </div>
                 <?php } ?>
             </nav>
@@ -54,9 +54,9 @@ require_once 'connection.php';
             <p>Helping your pre-loved items find a new home</p>
             <div class="search-container">
                 <form id="searchForm" action="store.php" method="get">
-    <input type="text" name="name" class="text" id="searchInput" placeholder="What are you looking for?">
-    <button type="submit" class="searchbtn">Search</button>
-</form>
+                    <input type="text" name="name" class="text" id="searchInput" placeholder="What are you looking for?">
+                    <button type="submit" class="searchbtn">Search</button>
+                </form>
 
 
             </div>
@@ -91,15 +91,15 @@ require_once 'connection.php';
                         Furniture</a>
                 </li>
                 <li class="item"> <a href="store.php?name=bed">
-                Beds</a>
+                        Beds</a>
                 </li>
                 <li class="item"> <a href="store.php?cat=appliances">
-                Appliances
+                        Appliances
                     </a>
                 </li>
 
             </ul>
-            <button class="btn" ><a href="store.php?cat=any">View all categories</a></button>
+            <button class="btn"><a href="store.php?cat=any">View all categories</a></button>
         </section>
 
 
@@ -129,7 +129,7 @@ require_once 'connection.php';
                             <div class="text_content">
                                 <h3 class="item-title"><?php echo $row['name']; ?></h3>
                                 <div class="item-details">
-                                <p class="location" id="location_<?php echo $row['listing_id']; ?>"><?php echo $row['city']; ?></p>
+                                    <p class="location" id="location_<?php echo $row['listing_id']; ?>"><?php echo $row['city']; ?></p>
                                     <?php if ($row['brand_name'] !== 'Other') { ?>
                                         <p class="brand"><?php echo $row['brand_name']; ?></p>
                                     <?php } ?>
@@ -142,7 +142,7 @@ require_once 'connection.php';
 
 
                                 </div>
-                                
+
                                 <button class="btn btn-secondary"><a href="card.php?listing_id=<?php echo $row['listing_id']; ?>">View Item</a></button>
                             </div>
                         </div>
@@ -154,20 +154,20 @@ require_once 'connection.php';
 
         </section>
         <section id="faq">
-        <h2>Frequently Asked Questions</h2>
-        <div class="accordion">
-            <div class="accordion-item">
-                <h3 class="accordion-title">How do I list an item for sale?<i class="fa-solid fa-angle-down"></i></h3>
-                <div class="accordion-content">
-                    <p>Make sure you are logged into your account.Click on add listing and fill in the necessary details then click on submit.</p>
+            <h2>Frequently Asked Questions</h2>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <h3 class="accordion-title">How do I list an item for sale?<i class="fa-solid fa-angle-down"></i></h3>
+                    <div class="accordion-content">
+                        <p>Make sure you are logged into your account.Click on add listing and fill in the necessary details then click on submit.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="accordion-item">
-                <h3 class="accordion-title"> How do you facilitate communication between buyers and sellers?<i class="fa-solid fa-angle-down"></i></h3>
-                <div class="accordion-content">
-                    <p>We offer communication between parties through WhatsApp but we aim to implement an inbuilt chat feature soon. Which will facilitate communication between involvied parties directly on the web app.</p>
+                <div class="accordion-item">
+                    <h3 class="accordion-title"> How do you facilitate communication between buyers and sellers?<i class="fa-solid fa-angle-down"></i></h3>
+                    <div class="accordion-content">
+                        <p>We offer communication between parties through WhatsApp but we aim to implement an inbuilt chat feature soon. Which will facilitate communication between involvied parties directly on the web app.</p>
+                    </div>
                 </div>
-            </div>
                 <div class="accordion-item">
                     <h3 class="accordion-title"> Do you offer shipping?<i class="fa-solid fa-angle-down"></i></h3>
                     <div class="accordion-content">
@@ -181,7 +181,7 @@ require_once 'connection.php';
                     </div>
                 </div>
             </div>
-    </section>
+        </section>
 
         <section id="footer">
             <div class="footer-main">
@@ -211,7 +211,7 @@ require_once 'connection.php';
                         <form class="subscribe-form" action="subscribe.php" method="POST">
                             <input type="email" name="email" placeholder="Your E-mail">
                             <button type="submit">Subscribe</button>
-                            
+
                         </form>
                     </div>
                 </div>
@@ -222,8 +222,9 @@ require_once 'connection.php';
     function searchFunction() {
         var search = document.getElementById('productName').value;
         window.location.href = 'store.php?search=' + search;
-        
+
     }
+
     function search() {
         var input, filter, ul, li, a, i, txtValue;
         input = document.getElementById('productName');
@@ -240,6 +241,7 @@ require_once 'connection.php';
             }
         }
     }
+
     function menuToggle() {
         var nav = document.getElementsByTagName('nav')[0];
         nav.classList.toggle('active');
@@ -257,8 +259,7 @@ require_once 'connection.php';
                 content.style.maxHeight = content.scrollHeight + "px";
             }
         });
-        };
-    
- 
+    };
 </script>
+
 </html>
