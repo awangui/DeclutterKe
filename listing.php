@@ -2,7 +2,8 @@
 session_start();
 require_once 'connection.php';
 // Function to fetch categories from the database
-function getCategories($con) {
+function getCategories($con)
+{
     $categories = array();
     $query = "SELECT * FROM categories";
     $result = mysqli_query($con, $query);
@@ -13,7 +14,8 @@ function getCategories($con) {
 }
 
 // Function to fetch brands from the database
-function getBrands($con) {
+function getBrands($con)
+{
     $brands = array();
     $query = "SELECT * FROM brands";
     $result = mysqli_query($con, $query);
@@ -42,14 +44,14 @@ if (isset($_POST['submit'])) {
     $price = floatval($_POST['price']);
     $description = htmlspecialchars($_POST['description']);
     $phone = floatval($_POST['phone']);
-    $city = htmlspecialchars($_POST['city']); // New field
-    $town = htmlspecialchars($_POST['town']); // New field
+    $city = htmlspecialchars($_POST['city']); 
+    $town = htmlspecialchars($_POST['town']); 
 
-        // Insert category if it doesn't exist and get its ID
-        $categoryId = $_POST['category'];
+    // Insert category if it doesn't exist and get its ID
+    $categoryId = $_POST['category'];
 
-        // Insert brand if it doesn't exist and get its ID
-        $brandId = $_POST['brand'];
+    // Insert brand if it doesn't exist and get its ID
+    $brandId = $_POST['brand'];
 
     // File upload
     $file_names = array();
@@ -71,7 +73,7 @@ if (isset($_POST['submit'])) {
         $userId = $_SESSION['user_id'];
 
         // Update the user's category to 'seller'
-        $update_query = "UPDATE users SET `role` = '3' WHERE UserId = ?";
+        $update_query = "UPDATE users SET `role` = '2' WHERE UserId = ?";
         $stmt = mysqli_prepare($con, $update_query);
         mysqli_stmt_bind_param($stmt, "i", $userId);
         mysqli_stmt_execute($stmt);
@@ -122,7 +124,7 @@ if (isset($_POST['submit'])) {
             <a href="#contact">Contact</a>
             <a href="listing.php" class="cta active">Add a Listing</a>
             <div class="credentials">
-                        <a href="profile.php"><i class="icon fa-regular fa-user"></i> Profile</a>
+                <a href="profile.php"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>
                 <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
             </div>
 
@@ -142,7 +144,7 @@ if (isset($_POST['submit'])) {
                         <input type="file" id="photos" name="images[]" multiple accept="image/*" required>
                         <label for="category">Category:</label>
                         <select id="category" name="category" required>
-                        <?php
+                            <?php
                             // Fetch categories from the database and populate the dropdown
                             $categories = getCategories($con);
                             foreach ($categories as $category) {
@@ -167,7 +169,7 @@ if (isset($_POST['submit'])) {
 
                         <label for="brand">Brand:</label>
                         <select id="brand" name="brand" required>
-                        <?php
+                            <?php
                             // Fetch brands from the database and populate the dropdown
                             $brands = getBrands($con);
                             foreach ($brands as $brand) {
@@ -177,7 +179,7 @@ if (isset($_POST['submit'])) {
                         </select>
                     </div>
                     <div id="rightDetails">
-                    <label for="color">Color:</label>
+                        <label for="color">Color:</label>
                         <input type="text" id="color" name="color" required>
 
                         <label for="yearsUsed">Number of Years Used:</label>

@@ -36,7 +36,9 @@ body {
 .profile-details {
     width: 100%;
 }
-
+.profile-details .detail-title{
+    color:#ffb610;
+}
 table {
     width: 100%;
     border-collapse: collapse;

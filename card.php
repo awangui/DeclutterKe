@@ -33,7 +33,7 @@ if (!isset($_SESSION['user_id'])) {
       <a href="#contact">Contact</a>
       <a href="listing.php" class="cta">Add a Listing</a>
       <div class="credentials">
-                        <a href="profile.php"><i class="icon fa-regular fa-user"></i> Profile</a>
+        <a href="profile.php"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>
         <a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
       </div>
     </nav>
@@ -49,7 +49,7 @@ if (!isset($_SESSION['user_id'])) {
 
         // Fetch product details based on the listing_id
         $query = "SELECT * FROM listings WHERE listing_id = $listing_id";
-       
+
         $result = mysqli_query($con, $query);
         $row = mysqli_fetch_assoc($result);
 
@@ -128,15 +128,15 @@ if (!isset($_SESSION['user_id'])) {
           <div class="seller">
             <h2>Seller details</h2>
             <div class="seller-info">
-              <p class="seller-name"> <?php echo $row['firstName'].' '.  $row['surname']; ?></p>
+              <p class="seller-name"> <?php echo $row['firstName'] . ' ' .  $row['surname']; ?></p>
               <p class="date-joined">Member since: 2021</p>
             </div>
             <!-- Add contact options as needed -->
-           
-              <button class="btn">
-                <i class="fa-brands fa-whatsapp"></i> 
-                <a href="https://wa.me/<?php echo $phone_number; ?>?text=Hello, I'm interested in your <?php echo $row['name']; ?> advertised on DeclutterKe" class="whatsapp">Chat on WhatsApp</a>
-              </button>
+
+            <button class="btn">
+              <i class="fa-brands fa-whatsapp"></i>
+              <a href="https://wa.me/<?php echo $phone_number; ?>?text=Hello, I'm interested in your <?php echo $row['name']; ?> advertised on DeclutterKe" class="whatsapp">Chat on WhatsApp</a>
+            </button>
             </a>
 
             <a href="store.php" class="contact"><button class="btn"><i class="fa-solid fa-phone"></i>Show Contact</button></a>
@@ -217,9 +217,9 @@ if (!isset($_SESSION['user_id'])) {
         // Extract category and subcategory of the current product
         $category = $row['category_name'];
         $sub_category = $row['sub_category'];
-              // Fetch related products with similar category or subcategory, limited to 3
-$related_query = "SELECT * FROM listings WHERE listing_id != $listing_id AND category_id = " . $row['category_id'] . " LIMIT 3";      
-$related_result = mysqli_query($con, $related_query);
+        // Fetch related products with similar category or subcategory, limited to 3
+        $related_query = "SELECT * FROM listings WHERE listing_id != $listing_id AND category_id = " . $row['category_id'] . " LIMIT 3";
+        $related_result = mysqli_query($con, $related_query);
         $related_result = mysqli_query($con, $related_query);
 
         // Check if there are related products
@@ -244,9 +244,9 @@ $related_result = mysqli_query($con, $related_query);
           echo '</div>'; // Close related-products-container
         } else {
           // If no related products found, fetch random products
-          $random_query = "SELECT * FROM listings WHERE listing_id != $listing_id ORDER BY RAND() LIMIT 4"; 
-          
-          
+          $random_query = "SELECT * FROM listings WHERE listing_id != $listing_id ORDER BY RAND() LIMIT 4";
+
+
           // Exclude the current product
           $random_result = mysqli_query($con, $random_query);
 

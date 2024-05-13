@@ -70,7 +70,8 @@ mysqli_close($con);
 </head>
 
 <body>
-    <section id="navigation">
+    
+    <section class="navigation" id="navigation">
 
         <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
         <nav>
@@ -83,55 +84,64 @@ mysqli_close($con);
             <a href="about.php">About</a>
             <a href="#contact">Contact</a>
             <a href="listing.php" class="cta">Add a Listing</a>
-            <?php if (isset($_SESSION['user_id'])) { ?>
-                <div class="credentials">
-                    <a href="profile.php" class="active"><i class="icon fa-regular fa-user"></i> Profile</a>
-                    <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
-                </div>
-            <?php } else {
-            ?>
-                <div class="credentials">
-                    <a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
-                    <a href="registration.php"><i class="icon fa-regular fa-user"></i> Sign Up</a>
-                </div>
-            <?php } ?>
+            <?php
+// Check if the user is logged in
+if (isset($_SESSION['user_id'])) {
+    // Check if the user role is set to 3 which refers to sellers
+    if ($_SESSION['user_role'] == 3) {
+        // Display the "Manage Listings" link
+        echo '<div class="credentials">';
+        echo '<a href="profile.php" class="active"><i class="icon fa-regular fa-user"></i>' . $_SESSION['name'] . '</a>';
+        echo '<a href="manage_listings.php"><i class="fa-solid fa-pen-to-square"></i> Manage Listings</a>';
+        echo '<a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i></a>';
+    } else {
+        // Display the profile link
+        echo '<div class="credentials">';
+        echo '<a href="profile.php" class="active"><i class="icon fa-regular fa-user"></i>' . $_SESSION['name'] . '</a>';
+        echo '<a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>';
+    }
+    echo '</div>';
+} else {
+    // Display the login and signup links for users who are not logged in
+    echo '<div class="credentials">';
+    echo '<a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>';
+    echo '<a href="registration.php"><i class="icon fa-regular fa-user"></i> Sign Up</a>';
+    echo '</div>';
+}
+?>
         </nav>
     </section>
     <div class="container">
         <div class="header">
             <h1>Welcome, <?php echo $name; ?></h1>
+   
             <h2>Personal Details</h2>
             <div class="profile">
                 <div class="profile-image">
                     <img src="./images/undraw_up_to_date_re_nqid.svg" class="hero">
                 </div>
                 <div class="profile-details">
-                    <form action="update_profile.php" method="POST">
-                        <p>
-                            <label for="avatar">Avatar:</label>
-                            <input type="file" id="avatar" name="avatar">
-                        </p>
-                        <p>
-                            <label for="name">Name:</label>
-                            <input type="text" id="name" name="name" value="<?php echo $name; ?>">
-                        </p>
-                        <p>
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" value="<?php echo $email; ?>">
-                        </p>
-                        <p>
-                            <label for="phone">Phone:</label>
-                            <input type="tel" id="phone" name="phone" value="<?php echo $phone; ?>">
-                        </p>
-                        <p>
-                            <label for="city">City:</label>
-                            <input type="text" id="city" name="city" value="<?php echo $city; ?>">
-                        </p>
-                        <p>
-                            <input type="submit" value="Update">
-                        </p>
-                    </form>
-                </div>
+
+    <div class="name">
+        <span class="detail-title">Name:</span>
+        <span><?php echo $name; ?></span>
+    </div>
+    <div class="email">
+        <span class="detail-title">Email:</span>
+        <span><?php echo $email; ?></span>
+    </div>
+    <div class="phone">
+        <span class="detail-title">Phone:</span><?php echo $phone; ?>
+    </div>
+    <div class="city">
+        <span class="detail-title">City:</span>
+        <span><?php echo $city; ?></span>
+    </div>
+    <div class="update">
+    <a href="update_profile.php?editId=<?= $id ?>" class="btn btn-primary">Edit</a>
+    </div>
+</div>
+
             </div>
 
             <h2>Listings Posted</h2>
@@ -155,7 +165,7 @@ mysqli_close($con);
                                 <td><?php echo $listing['name']; ?></td>
                                 <td><?php echo $listing['description']; ?></td>
                                 <td><?php echo $listing['price']; ?></td>
-                                <td><a href="update.php?editId=<?= $id ?>" class="btn btn-primary">Edit</a></td>
+                                <td><a href="update_listing.php?editId=<?php echo $listing['listing_id']; ?>" class="cta">Edit Listing</a></td>
                             </tr>
                         <?php endforeach; ?>
                     </table>

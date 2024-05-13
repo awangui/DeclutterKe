@@ -32,7 +32,8 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
             if (password_verify($pass, $row['password'])) {
                 $_SESSION['user_id'] = $row['UserId'];
                 $_SESSION['user_role']= $row['role'];
-                $_SESSION['name'] = $row['firstName'] ." ". $row['surname'];
+                $_SESSION['name'] = $row['firstName'];
+                // $_SESSION['name'] = $row['firstName'] ." ". $row['surname'];
                 if($row['role'] == 1){
                     header("Location: admin.php");
                     exit();
