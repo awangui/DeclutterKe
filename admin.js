@@ -55,3 +55,5 @@ menuToggle.addEventListener('click', function() {
     // Toggle the 'active' class on the side bar
     sideBar.classList.toggle('active');
 });
+
+

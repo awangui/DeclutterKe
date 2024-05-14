@@ -1,68 +1,7 @@
 <?php
-session_start();
-require_once 'connection.php';
-if (!isset($_SESSION['user_id']) || (isset($_SESSION['user_role']) && $_SESSION['user_role'] != 1)){
-    header("Location: login.html");
-    exit();
-}
 
-
+require_once 'navbar.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Page</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/admin.css">
-
-</head>
-
-<body>
-    <header>
-        <a href="index.php" class="logo">
-            <img src="./images/declutterLogo.png" class="icon">
-        </a>
-        <b><span>Declutter</span> Ke</b>
-        <div class="profile">
-
-            <span class="notification">4</span>
-            <div class="user">
-                <p><?php echo $_SESSION['name']; ?></p>
-                <img src="./images/user.png" class="user-icon">
-            <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
-        </div>
-        <div class="menu-toggle">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-    </header>
-    <div class="container">
-        <div class="side-bar">
-            <nav>
-                <ul>
-                    <li><a class="nav-item active">Dashboard</a>
-                    <li><a class="nav-item" href="users.php">Users</a>
-                    <li><a class="nav-item">Listings</a>
-                    <li><a class="nav-item">Stats</a>
-                    <li><a class="nav-item" href="logout.php">Logout</a>
-                </ul>
-               
-                <div class="tools">
-                    <h4>Tools & Components</h4>
-                    <ul>
-                        <li><a href="#">Settings</a></li>
-
-                    </ul>
-                </div>
-            </nav>
-        </div>
         <div class="main-content">
             <section class="analytics">
                 <h2>Analytics Dashboard</h2>

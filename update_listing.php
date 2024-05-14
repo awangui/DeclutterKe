@@ -46,7 +46,7 @@ function getCategories($con)
 function getBrands($con)
 {
     $brands = array();
-    $query = "SELECT * FROM brands" ;
+    $query = "SELECT * FROM brands";
     $result = mysqli_query($con, $query);
     while ($row = mysqli_fetch_assoc($result)) {
         $brands[] = $row;
@@ -79,7 +79,7 @@ function getBrands($con)
             <a href="index.php">Home</a>
             <a href="store.php">Store</a>
             <a href="about.php">About</a>
-            <a href="#contact">Contact</a>
+            <a href="contact.php">Contact</a>
             <a href="listing.php" class="cta active">Add a Listing</a>
             <div class="credentials">
                 <a href="profile.php"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>
@@ -173,49 +173,49 @@ function getBrands($con)
                 </div>
             </div>
         </div>
-<?php
-if (isset($_POST['submit'])) {
-    // Retrieve form data
-    $name = htmlspecialchars($_POST['name']);
-    $category = htmlspecialchars($_POST['category']);
-    $sub_category = htmlspecialchars($_POST['sub-category']);
-    $brand = htmlspecialchars($_POST['brand']);
-    $color = htmlspecialchars($_POST['color']);
-    $years_used = floatval($_POST['yearsUsed']);
-    $condition = htmlspecialchars($_POST['condition']);
-    $price = floatval($_POST['price']);
-    $description = htmlspecialchars($_POST['description']);
-    $phone = floatval($_POST['phone']);
-    $city = htmlspecialchars($_POST['city']); 
-    $town = htmlspecialchars($_POST['town']); 
+        <?php
+        if (isset($_POST['submit'])) {
+            // Retrieve form data
+            $name = htmlspecialchars($_POST['name']);
+            $category = htmlspecialchars($_POST['category']);
+            $sub_category = htmlspecialchars($_POST['sub-category']);
+            $brand = htmlspecialchars($_POST['brand']);
+            $color = htmlspecialchars($_POST['color']);
+            $years_used = floatval($_POST['yearsUsed']);
+            $condition = htmlspecialchars($_POST['condition']);
+            $price = floatval($_POST['price']);
+            $description = htmlspecialchars($_POST['description']);
+            $phone = floatval($_POST['phone']);
+            $city = htmlspecialchars($_POST['city']);
+            $town = htmlspecialchars($_POST['town']);
 
-    // Insert category if it doesn't exist and get its ID
-    $categoryId = $_POST['category'];
+            // Insert category if it doesn't exist and get its ID
+            $categoryId = $_POST['category'];
 
-    // Insert brand if it doesn't exist and get its ID
-    $brandId = $_POST['brand'];
+            // Insert brand if it doesn't exist and get its ID
+            $brandId = $_POST['brand'];
 
-    // File upload
-    $file_names = array();
-    $file_count = count($_FILES['images']['name']);
-    for ($i = 0; $i < $file_count; $i++) {
-        $file_name = $_FILES['images']['name'][$i];
-        $temp_name = $_FILES['images']['tmp_name'][$i];
-        $folder = 'uploads/' . $file_name;
-        if (move_uploaded_file($temp_name, $folder)) {
-            $file_names[] = $file_name;
+            // File upload
+            $file_names = array();
+            $file_count = count($_FILES['images']['name']);
+            for ($i = 0; $i < $file_count; $i++) {
+                $file_name = $_FILES['images']['name'][$i];
+                $temp_name = $_FILES['images']['tmp_name'][$i];
+                $folder = 'uploads/' . $file_name;
+                if (move_uploaded_file($temp_name, $folder)) {
+                    $file_names[] = $file_name;
+                }
+            }
+
+            // Insert listing with all photos
+            $photos = implode(',', $file_names);
+            $updateQuery = "UPDATE listings SET name=?, sub_category=?, brand_id=?, color=?, years_used=?, `condition`=?, price=?, description=?, city=?, town=?, phone_number=?, photos=? WHERE listing_id=?";
+            $updateStmt = mysqli_prepare($con, $updateQuery);
+            mysqli_stmt_bind_param($updateStmt, "ssssisdssssi", $name, $sub_category, $brand, $color, $years_used, $condition, $price, $description, $city, $town, $phone, $photos, $id);
+            $result = mysqli_stmt_execute($updateStmt);
+            mysqli_stmt_close($updateStmt);
         }
-    }
-
-    // Insert listing with all photos
-    $photos = implode(',', $file_names);
-    $updateQuery = "UPDATE listings SET name=?, sub_category=?, brand_id=?, color=?, years_used=?, `condition`=?, price=?, description=?, city=?, town=?, phone_number=?, photos=? WHERE listing_id=?";
-    $updateStmt = mysqli_prepare($con, $updateQuery);
-    mysqli_stmt_bind_param($updateStmt, "ssssisdssssi", $name, $sub_category, $brand, $color, $years_used, $condition, $price, $description, $city, $town, $phone, $photos, $id);
-    $result = mysqli_stmt_execute($updateStmt);
-    mysqli_stmt_close($updateStmt);
-}
-?>
+        ?>
     </form>
     <!-- Page dots -->
     <div class="page-dots">

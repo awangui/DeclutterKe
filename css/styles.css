@@ -25,10 +25,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Lato", sans-serif;
 }
 
 body {
-    font-family: "Lato", sans-serif;
     letter-spacing: 1.2px;
     line-height: 1.6;
 }
@@ -95,8 +95,7 @@ h5 {
     font-size: 1.1rem;
     padding: 10px;
 }
-
-
+/* navigation */
 #navigation {
     top: 0;
     width: 100%;
@@ -643,6 +642,7 @@ nav a:hover {
 .form {
     display: flex;
     justify-content: center;
+    margin-bottom: 50px;
 }
 
 .sign label {
@@ -657,8 +657,8 @@ nav a:hover {
     margin-bottom: 50px;
     text-align: center;
     background-repeat: no-repeat;
-    background-color: white;
-    border: 3px solid #f1f1f1;
+    background-color: #fff;
+    border: 3px solid #f2f2f2;
     margin-bottom: 50px;
     border-style: ridge;
     margin: 20px;

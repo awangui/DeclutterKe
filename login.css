@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Lato", sans-serif;
     background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url(./images/pexels-terry-magallanes-2988860.jpg);
     margin: 0;
     padding: 0;
@@ -88,7 +88,7 @@ button {
 }
 
 button:hover {
-    background-color: #f5c24a;
+    background-color: #f7bc33;
 }
 
 #password {
@@ -107,6 +107,14 @@ span#togglePassword {
     background: #FFB6C1;
     border: 1px solid rgb(173, 3, 3);
     color: rgb(173, 3, 3);
+    margin-bottom: 15px;
+    display: none;
+}
+.login-success {
+    padding: 5px;
+    background: #90EE90;
+    border: 1px solid green;
+    color: green;
     margin-bottom: 15px;
     display: none;
 }

@@ -14,7 +14,6 @@
   flex: 1;
 }
 .product-title{
-  color: #fbb610;
   font-size: large;
   font-weight: 600;
 }
@@ -46,8 +45,8 @@
   transform: translateX(-50%);
 }
 
-.contact button, .whatsapp button{
-  background-color: #fbb610;
+.contact button, .whatsapp {
+  background-color: #45a049;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -55,9 +54,8 @@
   cursor: pointer;
   margin: 0 5px;
 }
-
-.whatsapp button{
-  background-color: #45a049;
+.contact button{
+  background-color: #3E3D3C;
 }
 .gallery-navigation button i {
   margin-right: 5px;
@@ -107,12 +105,17 @@
 
 .safety-tips h2, .seller h2 {
   font-size: 18px;
-  margin-bottom: 10px;
   text-align: center;
 }
-
+.list-group-item{
+  font-size: 18px;
+  color: #45a049;
+}
+.list-group-item span{
+  color: #3E3D3C;
+}
 .seller-info {
-  padding: 20px;
+  padding: 0 20px 20px 20px;
 }
 
 .seller {
@@ -237,7 +240,7 @@
   z-index:100 ;
 }
 .buy-now-btn{
-  background-color: #3E3D3C;
+  background-color: #ffb610;
   color: #fff;
   border: none;
   padding: 10px 20px;

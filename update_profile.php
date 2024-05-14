@@ -68,33 +68,12 @@ if (isset($_GET['editId'])) {
 </head>
 
 <body>
-    <section id="navigation">
-
-        <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
-        <nav>
+    
             <a href="index.php" class="logo">
                 <img src="./images/declutterLogo.png" class="icon">
                 <b><span>Declutter</span> Ke</b>
             </a>
-            <a href="index.php" class="active">Home</a>
-            <a href="store.php">Store</a>
-            <a href="about.php">About</a>
-            <a href="#contact">Contact</a>
-            <a href="listing.php" class="cta">Add a Listing</a>
-            <?php if (isset($_SESSION['user_id'])) { ?>
-                <div class="credentials">
-                    <a href="profile.php"><i class="icon fa-regular fa-user"></i><?php echo $name; ?></a>
-                    <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
-                </div>
-            <?php } else {
-            ?>
-                <div class="credentials">
-                    <a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
-                    <a href="registration.php"><i class="icon fa-regular fa-user"></i> Sign Up</a>
-                </div>
-            <?php } ?>
-        </nav>
-    </section>
+
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>?editId=<?php echo $id; ?>" method="post">
         <h2 class="title">Update Profile</h2>
 

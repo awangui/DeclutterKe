@@ -33,7 +33,7 @@ require_once 'connection.php';
                 <a href="index.php">Home</a>
                 <a href="store.php">Store</a>
                 <a href="about.php" class="active">About</a>
-                <a href="#contact">Contact</a>
+                <a href="contact.php">Contact</a>
                 <a href="listing.php" class="cta">Add a Listing</a>
                 <?php if (isset($_SESSION['user_id'])) { ?>
                     <div class="credentials">

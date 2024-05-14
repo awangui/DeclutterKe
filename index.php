@@ -33,11 +33,11 @@ require_once 'connection.php';
                 <a href="index.php" class="active">Home</a>
                 <a href="store.php">Store</a>
                 <a href="about.php">About</a>
-                <a href="#contact">Contact</a>
+                <a href="contact.php">Contact</a>
                 <a href="listing.php" class="cta">Add a Listing</a>
                 <?php if (isset($_SESSION['user_id'])) { ?>
                     <div class="credentials">
-                    <a href="profile.php"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>
+                        <a href="profile.php"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>
 
                         <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
                     </div>

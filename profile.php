@@ -70,7 +70,7 @@ mysqli_close($con);
 </head>
 
 <body>
-    
+
     <section class="navigation" id="navigation">
 
         <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
@@ -82,39 +82,39 @@ mysqli_close($con);
             <a href="index.php">Home</a>
             <a href="store.php">Store</a>
             <a href="about.php">About</a>
-            <a href="#contact">Contact</a>
+            <a href="contact.php">Contact</a>
             <a href="listing.php" class="cta">Add a Listing</a>
             <?php
-// Check if the user is logged in
-if (isset($_SESSION['user_id'])) {
-    // Check if the user role is set to 3 which refers to sellers
-    if ($_SESSION['user_role'] == 3) {
-        // Display the "Manage Listings" link
-        echo '<div class="credentials">';
-        echo '<a href="profile.php" class="active"><i class="icon fa-regular fa-user"></i>' . $_SESSION['name'] . '</a>';
-        echo '<a href="manage_listings.php"><i class="fa-solid fa-pen-to-square"></i> Manage Listings</a>';
-        echo '<a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i></a>';
-    } else {
-        // Display the profile link
-        echo '<div class="credentials">';
-        echo '<a href="profile.php" class="active"><i class="icon fa-regular fa-user"></i>' . $_SESSION['name'] . '</a>';
-        echo '<a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>';
-    }
-    echo '</div>';
-} else {
-    // Display the login and signup links for users who are not logged in
-    echo '<div class="credentials">';
-    echo '<a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>';
-    echo '<a href="registration.php"><i class="icon fa-regular fa-user"></i> Sign Up</a>';
-    echo '</div>';
-}
-?>
+            // Check if the user is logged in
+            if (isset($_SESSION['user_id'])) {
+                // Check if the user role is set to 2 which refers to sellers
+                if ($_SESSION['user_role'] == 2) {
+                    // Display the "Manage Listings" link
+                    echo '<div class="credentials">';
+                    echo '<a href="profile.php" class="active"><i class="icon fa-regular fa-user"></i>' . $_SESSION['name'] . '</a>';
+                    echo '<a href="manage_listings.php"><i class="fa-solid fa-pen-to-square"></i> Manage Listings</a>';
+                    echo '<a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i></a>';
+                } else {
+                    // Display the profile link
+                    echo '<div class="credentials">';
+                    echo '<a href="profile.php" class="active"><i class="icon fa-regular fa-user"></i>' . $_SESSION['name'] . '</a>';
+                    echo '<a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>';
+                }
+                echo '</div>';
+            } else {
+                // Display the login and signup links for users who are not logged in
+                echo '<div class="credentials">';
+                echo '<a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>';
+                echo '<a href="registration.php"><i class="icon fa-regular fa-user"></i> Sign Up</a>';
+                echo '</div>';
+            }
+            ?>
         </nav>
     </section>
     <div class="container">
         <div class="header">
             <h1>Welcome, <?php echo $name; ?></h1>
-   
+
             <h2>Personal Details</h2>
             <div class="profile">
                 <div class="profile-image">
@@ -122,25 +122,25 @@ if (isset($_SESSION['user_id'])) {
                 </div>
                 <div class="profile-details">
 
-    <div class="name">
-        <span class="detail-title">Name:</span>
-        <span><?php echo $name; ?></span>
-    </div>
-    <div class="email">
-        <span class="detail-title">Email:</span>
-        <span><?php echo $email; ?></span>
-    </div>
-    <div class="phone">
-        <span class="detail-title">Phone:</span><?php echo $phone; ?>
-    </div>
-    <div class="city">
-        <span class="detail-title">City:</span>
-        <span><?php echo $city; ?></span>
-    </div>
-    <div class="update">
-    <a href="update_profile.php?editId=<?= $id ?>" class="btn btn-primary">Edit</a>
-    </div>
-</div>
+                    <div class="name">
+                        <span class="detail-title">Name:</span>
+                        <span><?php echo $name; ?></span>
+                    </div>
+                    <div class="email">
+                        <span class="detail-title">Email:</span>
+                        <span><?php echo $email; ?></span>
+                    </div>
+                    <div class="phone">
+                        <span class="detail-title">Phone:</span><?php echo $phone; ?>
+                    </div>
+                    <div class="city">
+                        <span class="detail-title">City:</span>
+                        <span><?php echo $city; ?></span>
+                    </div>
+                    <div class="update">
+                        <a href="update_profile.php?editId=<?= $id ?>" class="btn btn-primary">Edit</a>
+                    </div>
+                </div>
 
             </div>
 
@@ -153,7 +153,7 @@ if (isset($_SESSION['user_id'])) {
                             <th>Name</th>
                             <th>Description</th>
                             <th>Price</th>
-                            <th>Action</th>
+                            <th>Actions</th>
                         </tr>
 
                         <?php
@@ -165,7 +165,9 @@ if (isset($_SESSION['user_id'])) {
                                 <td><?php echo $listing['name']; ?></td>
                                 <td><?php echo $listing['description']; ?></td>
                                 <td><?php echo $listing['price']; ?></td>
-                                <td><a href="update_listing.php?editId=<?php echo $listing['listing_id']; ?>" class="cta">Edit Listing</a></td>
+                                <td><a href="update_listing.php?editId=<?php echo $listing['listing_id']; ?>" class="cta">Edit Listing</a>
+                                    <a href="#" class="cta delete">Delete Listing</a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </table>
@@ -173,7 +175,7 @@ if (isset($_SESSION['user_id'])) {
                     <div class="empty-listings">
                         <img src="./images/error.svg" alt="No listings found" class="empty">
                         <p>No listings found.</p>
-                        <a href="listing.php"><button>Post an ad today</button></a>
+                        <a href="listing.php"><button class="cta">Post an ad today</button></a>
                     </div>
                 <?php endif; ?>
                 </table>

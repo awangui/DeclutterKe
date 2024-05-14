@@ -44,8 +44,8 @@ if (isset($_POST['submit'])) {
     $price = floatval($_POST['price']);
     $description = htmlspecialchars($_POST['description']);
     $phone = floatval($_POST['phone']);
-    $city = htmlspecialchars($_POST['city']); 
-    $town = htmlspecialchars($_POST['town']); 
+    $city = htmlspecialchars($_POST['city']);
+    $town = htmlspecialchars($_POST['town']);
 
     // Insert category if it doesn't exist and get its ID
     $categoryId = $_POST['category'];
@@ -121,7 +121,7 @@ if (isset($_POST['submit'])) {
             <a href="index.php">Home</a>
             <a href="store.php">Store</a>
             <a href="about.php">About</a>
-            <a href="#contact">Contact</a>
+            <a href="contact.php">Contact</a>
             <a href="listing.php" class="cta active">Add a Listing</a>
             <div class="credentials">
                 <a href="profile.php"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>

@@ -26,9 +26,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $rs = mysqli_stmt_execute($stmt);
 
             if ($rs) {
-                $_SESSION['user_id'] = mysqli_insert_id($con); // Get the ID of the inserted user
-                $_SESSION['email'] = $mail; // Store additional user information in session if needed
-                header("Location: index.php");
+                $success_message = "Successfully registered! Please login.";
+                header("Location: login.html?message=" . urlencode($success_message));
+
                 exit();
             } else {
                 $error_message = "Failed to register";

@@ -30,7 +30,7 @@ if (!isset($_SESSION['user_id'])) {
       <a href="index.php">Home</a>
       <a href="store.php" class="active">Store</a>
       <a href="about.php">About</a>
-      <a href="#contact">Contact</a>
+      <a href="contact.php">Contact</a>
       <a href="listing.php" class="cta">Add a Listing</a>
       <div class="credentials">
         <a href="profile.php"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>
@@ -87,7 +87,7 @@ if (!isset($_SESSION['user_id'])) {
       // Check if the listing_id is provided in the URL
       if (isset($_GET['listing_id'])) {
         // Fetch product details based on the listing_id
-        $query = "SELECT listings.*, users.firstName, users.surname, b.brand_name, c.category_name 
+        $query = "SELECT listings.*, users.firstName, users.surname, users.date, b.brand_name, c.category_name 
         FROM listings 
         INNER JOIN users ON listings.seller_id = users.userId 
         INNER JOIN brands b ON listings.brand_id = b.brand_id 
@@ -99,49 +99,45 @@ if (!isset($_SESSION['user_id'])) {
         if ($row) {
           // Retrieve phone number from the database
           $phone_number = $row['phone_number'];
-      ?>
 
+      ?>
           <h1 class="product-title"><?php echo $row['name'];  ?></h1>
           <div class="listing-details">
-            <p class="posted-info">Posted:<span><?php echo $row['date_posted']; ?></span></li>
-            </p>
-            <p class="location">Town:<span><?php echo $row['city']; ?></p>
-
-            <!-- Additional property details -->
-            <div class="property-info">
-              <li class="list-group-item">Category: <span> <?php echo $row['category_name']; ?></span></li>
-              <li class="list-group-item">Sub Category: <span> <?php echo $row['sub_category']; ?></span></li>
-              <li class="list-group-item">Brand: <span> <?php echo $row['brand_name']; ?></span></li>
-              <li class="list-group-item">Color: <span> <?php echo $row['color']; ?></span></li>
-              <li class="list-group-item">Years Used: <span> <?php echo $row['years_used']; ?></span></li>
-              <li class="list-group-item">Condition: <span> <?php echo $row['condition']; ?></span></li>
-              <p class="card-text"><?php echo $row['description']; ?></p>
-            </div>
-
-            <!-- Price and contact information -->
-            <div class="price-contact">
-              <li class="list-group-item">Price: <span><?php echo 'ksh ' . $row['price']; ?></span></li>
-              <!-- Add contact options as needed -->
-            </div>
+            <li class="list-group-item">Posted:<span><?php echo $row['date_posted']; ?></span></li>
+            <li class="list-group-item">Town:<span><?php echo $row['city']; ?></span></li>
+            <li class="list-group-item">Category: <span> <?php echo $row['category_name']; ?></span></li>
+            <li class="list-group-item">Sub Category: <span> <?php echo $row['sub_category']; ?></span></li>
+            <li class="list-group-item">Brand: <span> <?php echo $row['brand_name']; ?></span></li>
+            <li class="list-group-item">Color: <span> <?php echo $row['color']; ?></span></li>
+            <li class="list-group-item">Years Used: <span> <?php echo $row['years_used']; ?></span></li>
+            <li class="list-group-item">Condition: <span> <?php echo $row['condition']; ?></span></li>
+            <li class="list-group-item">Description:<span><?php echo $row['description']; ?></span></li>
           </div>
+
+          <!-- Price and contact information -->
+          <div class="price-contact">
+            <li class="list-group-item">Price: <span><?php echo 'ksh ' . $row['price']; ?></span></li>
+            <!-- Add contact options as needed -->
+          </div>
+
           <!-- Seller information -->
           <div class="seller">
             <h2>Seller details</h2>
             <div class="seller-info">
               <p class="seller-name"> <?php echo $row['firstName'] . ' ' .  $row['surname']; ?></p>
-              <p class="date-joined">Member since: 2021</p>
+              <p class="date-joined">Member since: <?php echo date('Y', strtotime($row['date'])); ?></p>
             </div>
             <!-- Add contact options as needed -->
 
-            <button class="btn">
+            <button class="whatsapp">
               <i class="fa-brands fa-whatsapp"></i>
               <a href="https://wa.me/<?php echo $phone_number; ?>?text=Hello, I'm interested in your <?php echo $row['name']; ?> advertised on DeclutterKe" class="whatsapp">Chat on WhatsApp</a>
             </button>
             </a>
 
-            <a href="store.php" class="contact"><button class="btn"><i class="fa-solid fa-phone"></i>Show Contact</button></a>
+            <a href="store.php" class="contact"><button class="btn"><i class="fa-solid fa-phone"></i> Show Contact</button></a>
 
-            <a class="fa-regular fa-heart"></a>
+            <!-- <a class="fa-regular fa-heart"></a> -->
 
 
             <!-- Button to open the modal -->
@@ -168,7 +164,7 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
               </div>
             </div>
-            <button id="myBtn" class="btn buy-now-btn">Buy Now</button>
+            <button id="myBtn" class="btn buy-now-btn"><i class="fa-solid fa-basket-shopping"></i> Buy Now</button>
 
           </div>
 

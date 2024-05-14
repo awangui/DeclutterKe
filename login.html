@@ -20,6 +20,7 @@
     <form action="login.php" method="post">
         <h2 class="title">Login</h2>
         <div class="login-error"></div>
+        <div class="login-success"></div>
         <!-- Email input with associated label -->
         <label for="email">Email address:</label>
         <input type="text" id="email" name="email" placeholder="Email address" required>
@@ -57,9 +58,14 @@
         } else {
             document.querySelector('.login-error').style.display = 'none';
         }
+        const success = urlParams.get('message');
+        if(typeof(success) !== 'undefined' && success !== null){
+            document.querySelector('.login-success').style.display = 'block';
+            document.querySelector('.login-success').textContent = success;
+        } else {
+            document.querySelector('.login-success').style.display = 'none';
+        }
     </script>
 
-    </script>
-    
 </body>
 </html>
