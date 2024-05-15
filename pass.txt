@@ -1,0 +1,5 @@
+villageB0wl
+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
+amap1Ano
+d3clutt3r
+{ "MerchantRequestID":"53e3-4aa8-9fe0-8fb5e4092cdd2281474", "CheckoutRequestID":"ws_CO_07052024122735052711936444", "ResponseCode": "0", "ResponseDescription":"Success. Request accepted for processing", "CustomerMessage":"Success. Request accepted for processing" } { "MerchantRequestID":"53e3-4aa8-9fe0-8fb5e4092cdd2281474", "CheckoutRequestID":"ws_CO_07052024122735052711936444", "ResponseCode": "0", "ResponseDescription":"Success. Request accepted for processing", "CustomerMessage":"Success. Request accepted for processing" }
