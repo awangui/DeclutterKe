@@ -16,7 +16,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Page</title>
+    <title>Admin Pages</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
@@ -31,7 +31,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <section class="sticky-nav">
         <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
         <nav>
-            <a href="index.php" class="logo">
+            <a href="admin.php" class="logo">
                 <img src="./images/declutterLogo.png" class="icon">
                 <b><span>Declutter</span> Ke</b>
             </a>
@@ -41,7 +41,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <a href="listings.php" class="nav-link" data-page="listings.php">Listings</a>
             <a href="brands.php" class="nav-link" data-page="brands.php">Brands</a>
                 <div class="credentials">
-                    <a href="profile.php"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>
+                    <a href="admin.php"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>
                     <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
                 </div>
         </nav>

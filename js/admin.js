@@ -56,4 +56,24 @@ menuToggle.addEventListener('click', function() {
     sideBar.classList.toggle('active');
 });
 
+            // JavaScript to handle modal close buttons
+            document.querySelectorAll('.close').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    document.getElementById('userModal').style.display = "none";
+                    document.getElementById('deleteModal').style.display = "none";
+                });
+            });
+
+            // Close the modal if the user clicks outside of it
+            window.addEventListener('click', function(event) {
+                var userModal = document.getElementById('userModal');
+                var deleteModal = document.getElementById('deleteModal');
+                if (event.target == userModal) {
+                    userModal.style.display = "none";
+                }
+                if (event.target == deleteModal) {
+                    deleteModal.style.display = "none";
+                }
+            });
+
 

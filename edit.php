@@ -1,18 +1,6 @@
 <?php
 require_once 'navbar.php';
 
-$message = '';
-$messageClass = '';
-
-// Check for success or error messages in the URL query parameters
-if (isset($_GET['success'])) {
-    $message = htmlspecialchars($_GET['success']);
-    $messageClass = 'success';
-} elseif (isset($_GET['error'])) {
-    $message = htmlspecialchars($_GET['error']);
-    $messageClass = 'error';
-}
-
 // Function to get role label based on role number
 function getRoleLabel($role)
 {
@@ -26,6 +14,9 @@ function getRoleLabel($role)
         return "Unknown";
     }
 }
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 // Fetch all distinct roles
 $sqlFetchRoles = "SELECT DISTINCT role FROM users";
@@ -48,6 +39,7 @@ $sqlFetchUsers = "SELECT u.*, IFNULL(listings.totalListings, 0) AS totalListings
                       GROUP BY seller_id
                   ) AS listings ON u.UserId = listings.seller_id";
 
+
 // If a role is selected, add a condition to filter users by role
 if ($selectedRole !== 'All') {
     $sqlFetchUsers .= " WHERE role = '$selectedRole'";
@@ -58,7 +50,6 @@ if (!$resultFetchUsers) {
     // Handle the case where the query failed
     die("Error fetching users: " . mysqli_error($con));
 }
-
 // Fetch data for bar chart
 $sqlFetchUsersByMonth = "SELECT MONTH(date) AS month, YEAR(date) AS year, COUNT(*) AS totalUsers
                          FROM users
@@ -96,23 +87,72 @@ mysqli_close($con);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Management</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="./css/admin.css">
+    <style>
+        /* Modal styles */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0, 0, 0); 
+            background-color: rgba(0, 0, 0, 0.4); 
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; 
+            max-width: 500px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn-confirm, .btn-cancel {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-confirm {
+            background-color: #d9534f;
+            color: white;
+        }
+
+        .btn-cancel {
+            background-color: #5bc0de;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="main-content" >
+    <div class="main-content" style="display: block;">
         <div class="row">
             <div class="col">
-                <h2>Number of users joined each month</h2>
                 <div class="widget">
                     <canvas id="usersByMonthChart"></canvas>
                 </div>
             </div>
         </div>
-
-        <?php if ($message): ?>
-            <div class="alert <?= $messageClass ?>"><?= $message ?></div>
-        <?php endif; ?>
 
         <div class="row">
             <div class="col">
@@ -152,8 +192,7 @@ mysqli_close($con);
                             ?>
                         </h2>
                         <button id="downloadCSVButton"> <i class="fa-solid fa-download"></i> Download</button>
-                        <section class='table-display'>
-                        <table>
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th>User ID</th>
@@ -198,13 +237,12 @@ mysqli_close($con);
                                 
                             </tbody>
                         </table>
-                                </div>
                     </div>
                 </div>
             </div>
         </div>
 
-           <!-- User Modal -->
+        <!-- User Modal -->
         <div id="userModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
@@ -233,10 +271,10 @@ mysqli_close($con);
             // CSV download functionality
             document.getElementById('downloadCSVButton').addEventListener('click', function() {
                 var csvContent = "";
-                var headers = document.querySelectorAll(".table-display th:not(:last-child)");
+                var headers = document.querySelectorAll(".table-display table th:not(:last-child)");
                 var headerRow = Array.from(headers).map(header => header.textContent.trim());
                 csvContent += headerRow.join(",") + "\n";
-                var rows = document.querySelectorAll(".table-display tbody tr");
+                var rows = document.querySelectorAll(".table-display table tbody tr");
                 rows.forEach(function(row) {
                     var rowData = Array.from(row.querySelectorAll("td:not(:last-child)")).map(cell => cell.textContent.trim());
                     csvContent += rowData.join(",") + "\n";
@@ -341,3 +379,5 @@ mysqli_close($con);
 </body>
 
 </html>
+
+

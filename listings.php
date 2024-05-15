@@ -6,81 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listings Management</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0, 0, 0);
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .btn-confirm,
-        .btn-cancel {
-            margin: 10px;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-confirm {
-            background-color: #d9534f;
-            color: white;
-        }
-
-        .btn-cancel {
-            background-color: #5bc0de;
-            color: white;
-        }
-
-        .alert {
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid transparent;
-            border-radius: 4px;
-        }
-
-        .alert-success {
-            color: #3c763d;
-            background-color: #dff0d8;
-            border-color: #d6e9c6;
-        }
-
-        .alert-error {
-            color: #a94442;
-            background-color: #f2dede;
-            border-color: #ebccd1;
-        }
-    </style>
 </head>
 
 <body>
@@ -154,18 +79,7 @@
 
         </div>
 
-        <!-- Add Listing -->
-        <h2>Add Listing</h2>
-        <form method="POST" action="">
-            <input type="text" name="listing_name" placeholder="Listing Name" required>
-            <select name="category_id" required>
-                <option value="">Select Category</option>
-                <?php foreach ($categories as $category_id => $category_name) : ?>
-                    <option value="<?php echo $category_id; ?>"><?php echo $category_name; ?></option>
-                <?php endforeach; ?>
-            </select>
-            <button type="submit">Add</button>
-        </form>
+
 <!-- Add a button to trigger the download -->
 <button id="downloadCSVButton"> <i class="fa-solid fa-download"></i> Download</button>
 
@@ -199,6 +113,8 @@
             $result_listings = $con->query($sql_listings);
             if ($result_listings->num_rows > 0) {
                 while ($row = $result_listings->fetch_assoc()) {
+                    $id = $row['listing_id'];
+                    
                     echo "<tr>";
                     echo "<td>" . $row["listing_id"] . "</td><td>" . $row["name"] . "</td><td>" . $categories[$row["category_id"]]  . "</td>";
 
@@ -216,8 +132,8 @@
                     echo "<td>".$row["date_posted"]."</td>";
                     echo "<td>".$row["seller_id"]."</td>";
                     echo "<td>".$row["brand_id"]."</td>";
-                    echo "<td><a href='#' onclick='openEditModal(" . $row['listing_id'] . ", \"" . $row['name'] . "\", \"" . $row['category_id'] . "\")' class='btn' >Edit</a> ";
-                    echo " <a href='listings.php?id=" . $row['listing_id'] . "' onclick='return confirm(\"Are you sure you want to delete this listing?\")' class='btn delete btn-danger'>Delete</a></td>";
+                    // echo "<td><a href='#' onclick='openEditModal(" . $row['listing_id'] . ", \"" . $row['name'] . "\", \"" . $row['category_id'] . "\")' class='btn' >Edit</a> ";
+                    echo   " <td><a href='#' data-id='$id' class='btn deleteBtn btn-danger'>Delete</a></td>";
                     echo "</tr>";
                 }
             } else {
@@ -227,27 +143,15 @@
         </tbody>
     </table>
 </section>
-
-
-        <!-- Edit Listing Modal -->
-        <div id="editListingModal" class="modal" style="display: none;">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <h2>Edit Listing</h2>
-                <form id="editListingForm" method="POST" action="">
-                    <input type="hidden" id="listingId" name="listing_id">
-                    <input type="text" id="listingName" name="listing_name" placeholder="Listing Name">
-                    <select id="listingCategory" name="category_id" required>
-                        <option value="">Select Category</option>
-                        <?php foreach ($categories as $category_id => $category_name) : ?>
-                            <option value="<?php echo $category_id; ?>"><?php echo $category_name; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
-        </div>
-
+<!-- Delete Confirmation Modal -->
+<div id="deleteConfirmationModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('deleteConfirmationModal')">&times;</span>
+        <h2>Delete Listing</h2>
+        <p>Are you sure you want to delete this listing?</p>
+        <button id="confirmDeleteButton">Delete</button>
+    </div>
+</div>
         <script>
            // CSV download functionality
 document.getElementById('downloadCSVButton').addEventListener('click', function() {
@@ -318,6 +222,20 @@ document.getElementById('downloadCSVButton').addEventListener('click', function(
                 modal.style.display = "block";
             }
 
+                         // JavaScript to handle delete button clicks
+                         document.querySelectorAll('.deleteBtn').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var userId = this.getAttribute('data-id');
+                    document.getElementById('confirmDeleteButton').setAttribute('data-id', userId);
+                    document.getElementById('deleteModal').style.display = "block";
+                });
+            });
+
+            // JavaScript to handle confirm delete button click
+            document.getElementById('confirmDeleteButton').addEventListener('click', function() {
+                var listingId = this.getAttribute('data-id');
+                window.location.href = `delete.php?deleteid=${listingId}`;
+            });
             // Function to close the modal
             function closeModal() {
                 var modal = document.getElementById("editListingModal");
@@ -331,6 +249,7 @@ document.getElementById('downloadCSVButton').addEventListener('click', function(
                     modal.style.display = "none";
                 }
             };
+  
         </script>
 
         <!-- Listing Chart -->
