@@ -195,8 +195,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     foreach ($search_results as $row) {
                         echo "<tr>";
                         echo "<td>" . $row["category_id"] . "</td><td>" . $row["category_name"] . "</td>";
-                        echo "<td><a href='#' onclick='openEditModal(".$row['category_id'].", \"".$row['category_name']."\")'>Edit</a> ";
-                        echo " <a href='categories.php?id=".$row['category_id']."' onclick='return confirm(\"Are you sure you want to delete this category?\")'>Delete</a></td>";
+                        echo "<td><a href='#' onclick='openEditModal(".$row['category_id'].", \"".$row['category_name']."\")' class='btn' >Edit</a> ";
+                        echo " <a href='categories.php?id=".$row['category_id']."' onclick='return confirm(\"Are you sure you want to delete this category?\")class='btn delete btn-danger''>Delete</a></td>";
                         echo "</tr>";
                     }
                 } else {
@@ -211,8 +211,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         while($row = $result->fetch_assoc()) {
                             echo "<tr>";
                             echo "<td>" . $row["category_id"] . "</td><td>" . $row["category_name"] . "</td>";
-                            echo "<td><a href='#' onclick='openEditModal(".$row['category_id'].", \"".$row['category_name']."\")'>Edit</a> ";
-                            echo " <a href='categories.php?id=".$row['category_id']."' onclick='return confirm(\"Are you sure you want to delete this category?\")'>Delete</a></td>";
+                            echo "<td><a href='#' onclick='openEditModal(".$row['category_id'].", \"".$row['category_name']."\")' class='btn' >Edit</a> ";
+                            echo " <a href='categories.php?id=".$row['category_id']."' onclick='return confirm(\"Are you sure you want to delete this category?\")' class='btn delete btn-danger'>Delete</a></td>";
                             echo "</tr>";
                         }
                     } else {

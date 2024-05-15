@@ -371,7 +371,7 @@ input[type=text] {
 }
 
 button {
-    background-color: #ffb610;
+    background-color: #ffa500;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -715,3 +715,24 @@ background-color: #3E3D3C;
 color: #fff;
 width: fit-content;
   }
+  .btn {
+    background-color: rgb(90, 180, 90);
+    color:#fff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+}
+.delete{
+background-color: #f44336e6;
+
+}
+.delete:hover {
+    background-color: #f44336;
+}
+.btn:hover {
+    background-color: #ffa500;
+}

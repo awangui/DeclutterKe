@@ -32,52 +32,34 @@ if (!isset($_SESSION['user_id']) || (isset($_SESSION['user_role']) && $_SESSION[
                 <img src="./images/declutterLogo.png" class="icon">
                 <b><span>Declutter</span> Ke</b>
             </a>
-            <a href="users.php" class="active">Users</a>
-           <a href="categories.php">Categories</a>
-            <a href="listings.php">Listings</a>
-            <a href="brands.php">Brands</a>
-            <a href="listings.php" class="cta">Manage Listings</a>
+            <a href="admin.php" class="nav-link">Dashboard</a>
+            <a href="users.php" class="nav-link">Users</a>
+            <a href="categories.php" class="nav-link">Categories</a>
+            <a href="listings.php" class="nav-link">Listings</a>
+            <a href="brands.php" class="nav-link">Brands</a>
+            <a href="listings.php" class="cta nav-link">Manage Listings</a>
                 <div class="credentials">
                     <a href="profile.php"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>
                     <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
                 </div>
         </nav>
 </section>
-    <!-- <div id="navigation">
-        <a href="index.php" class="logo">
-            <img src="./images/declutterLogo.png" class="icon">
-        </a>
-        <nav>
-                <ul>
-                    <li class="nav-item"><i class="fa-regular fa-user"></i> <a href="users.php">Users</a></li>
-                    <li class="nav-item"><i class="fa-solid fa-list"></i> <a href="listings.php">Listings</a></li>
-                    <li class="nav-item active"><i class="fa-solid fa-bars-staggered"></i> <a href="categories.php">Categories</a></li>
-                    <li class="nav-item"><i class="fa-solid fa-ellipsis"></i> <a href="brands.php">Brands</a></li>
-                    <li class="nav-item"><i class="fa-solid fa-chart-simple"></i> <a href="#">Stats</a></li>
-                    <li class="nav-item"><i class="fa-solid fa-arrow-right-from-bracket"></i> <a href="logout.php">Logout</a></li>
-                </ul>
-            </nav>
-        <div class="profile">
-            <a href="profile.php"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name'];?></a>
-            <a href="logout.php"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
-        </div>
-        <div class="menu-toggle">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div> 
-    </div>
+<script>
+// Function to handle click event on navigation links and add active class
+function activeClass() {
+    var navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            console.log('Clicked:', this.textContent); // Log the clicked link text
+            navLinks.forEach(link => link.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+}
 
-     <div class="container">
-        <div class="side-bar">
-            <nav>
-                <ul>
-                    <li class="nav-item"><i class="fa-regular fa-user"></i> <a href="users.php">Users</a></li>
-                    <li class="nav-item"><i class="fa-solid fa-list"></i> <a href="listings.php">Listings</a></li>
-                    <li class="nav-item active"><i class="fa-solid fa-bars-staggered"></i> <a href="categories.php">Categories</a></li>
-                    <li class="nav-item"><i class="fa-solid fa-ellipsis"></i> <a href="brands.php">Brands</a></li>
-                    <li class="nav-item"><i class="fa-solid fa-chart-simple"></i> <a href="#">Stats</a></li>
-                    <li class="nav-item"><i class="fa-solid fa-arrow-right-from-bracket"></i> <a href="logout.php">Logout</a></li>
-                </ul>
-            </nav>
-        </div>    -->
+// Call the activeClass function when the DOM content is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Document loaded'); // Log when the document is loaded
+    activeClass();
+});
+</script>
