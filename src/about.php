@@ -9,13 +9,13 @@ require_once 'connection.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./js/script.js"></script>
+    <script src="../js/script.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Marck+Script&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="./css/about.css">
-    <script src="./js/font-awesome.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/about.css">
+    <script src="../js/font-awesome.js" crossorigin=" anonymous"></script>
     <title>Decluttering Ke</title>
 </head>
 
@@ -27,7 +27,7 @@ require_once 'connection.php';
             <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
             <nav>
                 <a href="index.php" class="logo">
-                    <img src="./images/declutterLogo.png" class="icon">
+                    <img src="../images/declutterLogo.png" class="icon">
                     <b><span>Declutter</span> Ke</b>
                 </a>
                 <a href="index.php">Home</a>
@@ -113,7 +113,7 @@ require_once 'connection.php';
             <a href="store.php"><button class="btn">Shop Now</button></a>
         </div>
         <div class="details">
-            <img src="./images/pexels-alina-vilchenko-1173651.jpg">
+            <img src="../images/pexels-alina-vilchenko-1173651.jpg">
         </div>
     </section>
     <h2>Our buying process</h2>

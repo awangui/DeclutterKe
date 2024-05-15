@@ -42,12 +42,14 @@ img {
     width: 100%;
     height: auto;
 }
-.related-product{
+
+.related-product {
     height: 300px;
 }
+
 .related-product img {
     height: 300px;
-    width:100%;
+    width: 100%;
     object-fit: cover;
 
 }
@@ -95,6 +97,7 @@ h5 {
     font-size: 1.1rem;
     padding: 10px;
 }
+
 /* navigation */
 #navigation {
     top: 0;
@@ -551,7 +554,7 @@ nav a:hover {
 }
 
 #productCard {
-    line-height:1.6;
+    line-height: 1.6;
     text-align: center;
     border-radius: 14px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
@@ -596,6 +599,7 @@ nav a:hover {
     flex-wrap: wrap;
     color: rgb(94, 93, 93);
 }
+
 .item-details p {
     background-color: rgb(225, 222, 222);
     border-radius: 4px;
@@ -894,6 +898,7 @@ input[type=submit] {
     }
 
 }
+
 /*subscription section*/
 #subscribe-section {
     background-color: #3E3D3C;
@@ -937,6 +942,7 @@ input[type=submit] {
 .subscribe-form button:hover {
     background-color: #ffca3a;
 }
-.subscription{
+
+.subscription {
     display: none;
 }

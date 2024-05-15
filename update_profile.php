@@ -62,17 +62,17 @@ if (isset($_GET['editId'])) {
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="../css/login.css">
     <link rel="stylesheet" href="/css/styles.css">
     <title>Update Profile</title>
 </head>
 
 <body>
-    
-            <a href="index.php" class="logo">
-                <img src="./images/declutterLogo.png" class="icon">
-                <b><span>Declutter</span> Ke</b>
-            </a>
+
+    <a href="index.php" class="logo">
+        <img src="../images/declutterLogo.png" class="icon">
+        <b><span>Declutter</span> Ke</b>
+    </a>
 
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>?editId=<?php echo $id; ?>" method="post">
         <h2 class="title">Update Profile</h2>

@@ -55,7 +55,7 @@ if (isset($_GET['editId'])) {
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="../css/login.css">
     <title>Update Profile</title>
 </head>
 

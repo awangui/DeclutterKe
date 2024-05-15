@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="../css/login.css">
     <title>Decluttering Ke</title>
     <style>
         .error-message {
@@ -56,10 +56,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </style>
 </head>
 
-<body>    
-    <div id="logo">           
+<body>
+    <div id="logo">
         <a href="index.php" class="logo">
-            <img src="./images/declutterLogo.png" class="icon">
+            <img src="../images/declutterLogo.png" class="icon">
             <b><span>Declutter</span> Ke</b>
         </a>
     </div>
@@ -68,10 +68,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h2 class="title">Sign Up</h2>
         <p>Create an account</p>
         <input type="text" id="fname" name="fname" placeholder="First Name" required>
-        <input type="text" id="sname" name="sname"placeholder="Surname" required>
+        <input type="text" id="sname" name="sname" placeholder="Surname" required>
         <input type="email" id="email" name="email" placeholder="Email address" required>
         <input type="password" id="password" name="password" placeholder="Password" required>
-            <span id="toggle-password">Show</span>
+        <span id="toggle-password">Show</span>
         <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
         <span id="toggle-confirm_password" onclick="togglePassword('confirm_password')">Show</span>
         <div id="error-message" class="error-message"><?php echo isset($error_message) ? $error_message : ''; ?></div>
@@ -81,16 +81,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script>
         // function to toggle password visibility
         function togglePassword(inputId) {
-    var passwordInput = document.getElementById(inputId);
-    var toggleButton = document.getElementById("toggle-" + inputId);
-    if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        toggleButton.textContent = "Hide";
-    } else {
-        passwordInput.type = "password";
-        toggleButton.textContent = "Show";
-    }
-}
+            var passwordInput = document.getElementById(inputId);
+            var toggleButton = document.getElementById("toggle-" + inputId);
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                toggleButton.textContent = "Hide";
+            } else {
+                passwordInput.type = "password";
+                toggleButton.textContent = "Show";
+            }
+        }
 
 
         // function to validate form

@@ -14,9 +14,9 @@ require_once 'connection.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="./css/store.css">
-    <script src="./js/font-awesome.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/store.css">
+    <script src="../js/font-awesome.js" crossorigin=" anonymous"></script>
     <title>Decluttering Ke</title>
 </head>
 
@@ -25,7 +25,7 @@ require_once 'connection.php';
         <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
         <nav>
             <a href="index.php" class="logo">
-                <img src="./images/declutterLogo.png" class="icon">
+                <img src="../images/declutterLogo.png" class="icon">
                 <b><span>Declutter</span> Ke</b>
             </a>
             <a href="index.php">Home</a>
@@ -203,7 +203,7 @@ require_once 'connection.php';
             <div class="card" id="productCard">
                 <div class="card-content">
                     <div class="image_content">
-                        <img src="uploads/<?php echo $photosArray[0]; ?>" />
+                        <img src="../uploads/<?php echo $photosArray[0]; ?>" />
                     </div>
                     <div class="text_content">
                         <h3 class="item-title"><?php echo $row['name']; ?></h3>
@@ -235,7 +235,7 @@ require_once 'connection.php';
 
     </div>
     <div id="message-card" style="<?php echo $rows == 0 ? '' : "display: none;" ?>">
-        <img src="./images/error.svg" alt="No listing found error image">
+        <img src="../images/error.svg" alt="No listing found error image">
         <p>No listings found. Please adjust your filters.</p>
         <button onclick="resetFilters()">Reset Filters</button>
     </div>
@@ -262,7 +262,7 @@ require_once 'connection.php';
         </div>
     </section>
 
-    <script src="store.js"></script>
+    <script src="../js/store.js"></script>
 
 </body>
 

@@ -83,13 +83,13 @@ if (!$resultFetchUsers) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/admin.css">
+    <link rel="stylesheet" href="../css/admin.css">
 </head>
 
 <body>
     <header>
         <a href="index.php" class="logo">
-            <img src="./images/declutterLogo.png" class="icon">
+            <img src="../images/declutterLogo.png" class="icon">
         </a>
         <b><span>Declutter</span> Ke</b>
         <div class="profile">
@@ -103,7 +103,7 @@ if (!$resultFetchUsers) {
             <div class="bar"></div>
         </div>
     </header>
-    
+
     <div class="container">
         <div class="side-bar">
             <nav>
@@ -123,95 +123,95 @@ if (!$resultFetchUsers) {
             </nav>
         </div>
         <div class="main-content">
-        <div class="row">
-                    <div class="col">
-                        <div class="widget">
-                            <h3>Total Users</h3>
-                            <p><?php echo $totalUsers; ?></p>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="widget">
-                            <h3>Total Sellers</h3>
-                            <p><?php echo $totalUsersWithListings; ?></p>
-                        </div>
+            <div class="row">
+                <div class="col">
+                    <div class="widget">
+                        <h3>Total Users</h3>
+                        <p><?php echo $totalUsers; ?></p>
                     </div>
                 </div>
-                <div class="widget">
-                    <div class="chart-container">
-                        <canvas id="sellersChart"></canvas>
+                <div class="col">
+                    <div class="widget">
+                        <h3>Total Sellers</h3>
+                        <p><?php echo $totalUsersWithListings; ?></p>
                     </div>
                 </div>
             </div>
+            <div class="widget">
+                <div class="chart-container">
+                    <canvas id="sellersChart"></canvas>
+                </div>
+            </div>
         </div>
-        <div class="main-content">
-            <div class="container">
-                
-                <div class="row">
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-header">
-                                <h2 class="display">Users</h2>
-                            </div>
-                            <div class="card-body">
-                                <form method="GET">
-                                    <label for="category">Filter by Category:</label>
-                                    <select name="category" id="category">
-                                        <option value="All" <?php if ($selectedCategory === 'All') echo 'selected'; ?>>All</option>
-                                        <?php
-                                        // Display category options
-                                        while ($row = mysqli_fetch_assoc($resultFetchCategories)) {
-                                            $category = $row['category'];
-                                            echo "<option value='$category'";
-                                            if ($selectedCategory === $category) echo 'selected';
-                                            echo ">$category</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                    <button type="submit">Filter</button>
-                                </form>
-                            </div>
-                            <div class="card-body">
-                                <h3>All users</h3>
-                                <table>
-                                    
-                                    </style>
-                                    <tr class="table-header">
-                                        <th>User ID</th>
-                                        <th>First Name</th>
-                                        <th>Email</th>
-                                        <th>Date Joined</th>
-                                        <th>Category</th>
-                                        <th>Total Listings</th>
-                                        <th>Operations</th>
-                                    </tr>
+    </div>
+    <div class="main-content">
+        <div class="container">
+
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="display">Users</h2>
+                        </div>
+                        <div class="card-body">
+                            <form method="GET">
+                                <label for="category">Filter by Category:</label>
+                                <select name="category" id="category">
+                                    <option value="All" <?php if ($selectedCategory === 'All') echo 'selected'; ?>>All</option>
                                     <?php
-                                    while ($row = mysqli_fetch_assoc($resultFetchUsers)) {
-                                        $id = $row['UserId'];
-                                    ?>
-                                        <tr>
-                                            <td><?= $id ?></td>
-                                            <td><?php echo $row['firstName']; ?></td>
-                                            <td><?php echo $row['email']; ?></td>
-                                            <td><?php echo $row['date']; ?></td>
-                                            <td><?php echo $row['category']; ?></td>
-                                            <td><?php echo $row['totalListings']; ?></td>
-                                            <td><a href="update.php?editId=<?= $id ?>" class="btn btn-primary">Edit</a><a href="delete.php?deleteid=<?= $id ?>" class="btn btn-danger">Delete</a></td>
-                                        </tr>
-                                    <?php
+                                    // Display category options
+                                    while ($row = mysqli_fetch_assoc($resultFetchCategories)) {
+                                        $category = $row['category'];
+                                        echo "<option value='$category'";
+                                        if ($selectedCategory === $category) echo 'selected';
+                                        echo ">$category</option>";
                                     }
                                     ?>
-                                </table>
-                            </div>
+                                </select>
+                                <button type="submit">Filter</button>
+                            </form>
+                        </div>
+                        <div class="card-body">
+                            <h3>All users</h3>
+                            <table>
+
+                                </style>
+                                <tr class="table-header">
+                                    <th>User ID</th>
+                                    <th>First Name</th>
+                                    <th>Email</th>
+                                    <th>Date Joined</th>
+                                    <th>Category</th>
+                                    <th>Total Listings</th>
+                                    <th>Operations</th>
+                                </tr>
+                                <?php
+                                while ($row = mysqli_fetch_assoc($resultFetchUsers)) {
+                                    $id = $row['UserId'];
+                                ?>
+                                    <tr>
+                                        <td><?= $id ?></td>
+                                        <td><?php echo $row['firstName']; ?></td>
+                                        <td><?php echo $row['email']; ?></td>
+                                        <td><?php echo $row['date']; ?></td>
+                                        <td><?php echo $row['category']; ?></td>
+                                        <td><?php echo $row['totalListings']; ?></td>
+                                        <td><a href="update.php?editId=<?= $id ?>" class="btn btn-primary">Edit</a><a href="delete.php?deleteid=<?= $id ?>" class="btn btn-danger">Delete</a></td>
+                                    </tr>
+                                <?php
+                                }
+                                ?>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
     <script>
- // Chart.js configuration
- const totalUsers = <?php echo $totalUsers; ?>;
+        // Chart.js configuration
+        const totalUsers = <?php echo $totalUsers; ?>;
         const totalSellers = <?php echo $totalUsersWithListings; ?>;
         const sellersPercentage = (totalSellers / totalUsers) * 100;
 

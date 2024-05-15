@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Management</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="./css/admin.css">
+    <link rel="stylesheet" href="../css/admin.css">
 </head>
 
 <body>
@@ -109,7 +109,7 @@
     <div class="main-content" style="display: block;">
         <h1>Categories</h1>
 
-        <?php if ($message): ?>
+        <?php if ($message) : ?>
             <div class="alert <?php echo $messageClass; ?>">
                 <?php echo $message; ?>
             </div>
@@ -145,7 +145,7 @@
         <button id="downloadCSVButton"> <i class="fa-solid fa-download"></i> Download</button>
 
         <script>
-            document.getElementById('downloadCSVButton').addEventListener('click', function () {
+            document.getElementById('downloadCSVButton').addEventListener('click', function() {
                 // Define the CSV content
                 var csvContent = "";
 
@@ -156,13 +156,15 @@
 
                 // Add table rows, excluding the last column
                 var rows = document.querySelectorAll(".table-display table tbody tr");
-                rows.forEach(function (row) {
+                rows.forEach(function(row) {
                     var rowData = Array.from(row.querySelectorAll("td:not(:last-child)")).map(cell => cell.textContent.trim());
                     csvContent += rowData.join(",") + "\n";
                 });
 
                 // Create a Blob containing the CSV data
-                var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                var blob = new Blob([csvContent], {
+                    type: 'text/csv;charset=utf-8;'
+                });
 
                 // Create a temporary URL for the Blob
                 var url = URL.createObjectURL(blob);
@@ -274,7 +276,7 @@
         }
 
         // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
+        window.onclick = function(event) {
             var modal = document.getElementById("editCategoryModal");
             if (event.target == modal) {
                 modal.style.display = "none";

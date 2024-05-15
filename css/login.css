@@ -1,6 +1,6 @@
 body {
     font-family: "Lato", sans-serif;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url(./images/pexels-terry-magallanes-2988860.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url(../images/pexels-terry-magallanes-2988860.jpg);
     margin: 0;
     padding: 0;
     display: flex;
@@ -110,6 +110,7 @@ span#togglePassword {
     margin-bottom: 15px;
     display: none;
 }
+
 .login-success {
     padding: 5px;
     background: #90EE90;
@@ -131,10 +132,14 @@ span#togglePassword {
         background-size: cover;
     }
 }
-#password, #confirm_password{
+
+#password,
+#confirm_password {
     position: relative;
 }
-#toggle-password, #toggle-confirm_password{
+
+#toggle-password,
+#toggle-confirm_password {
     position: absolute;
     right: 40%;
     transform: translateY(-47px);

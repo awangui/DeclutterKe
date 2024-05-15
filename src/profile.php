@@ -63,9 +63,9 @@ mysqli_close($con);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="./css/profile.css">
-    <script src="./js/font-awesome.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/profile.css">
+    <script src="../js/font-awesome.js" crossorigin=" anonymous"></script>
     <title>User Profile</title>
 </head>
 
@@ -76,7 +76,7 @@ mysqli_close($con);
         <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
         <nav>
             <a href="index.php" class="logo">
-                <img src="./images/declutterLogo.png" class="icon">
+                <img src="../images/declutterLogo.png" class="icon">
                 <b><span>Declutter</span> Ke</b>
             </a>
             <a href="index.php">Home</a>
@@ -118,7 +118,7 @@ mysqli_close($con);
             <h2>Personal Details</h2>
             <div class="profile">
                 <div class="profile-image">
-                    <img src="./images/undraw_up_to_date_re_nqid.svg" class="hero">
+                    <img src="../images/undraw_up_to_date_re_nqid.svg" class="hero">
                 </div>
                 <div class="profile-details">
 
@@ -165,7 +165,7 @@ mysqli_close($con);
                                 <td><?php echo $listing['name']; ?></td>
                                 <td><?php echo $listing['description']; ?></td>
                                 <td><?php echo $listing['price']; ?></td>
-                                <td><a href="update_listing.php?editId=<?php echo $listing['listing_id']; ?>" class="cta">Edit Listing</a>
+                                <td><a href="update_listing.php?editId=<?php echo $listing['listing_id']; ?>" class="cta">View/Edit</a>
                                     <a href="#" class="cta delete">Delete Listing</a>
                                 </td>
                             </tr>
@@ -173,7 +173,7 @@ mysqli_close($con);
                     </table>
                 <?php else : ?>
                     <div class="empty-listings">
-                        <img src="./images/error.svg" alt="No listings found" class="empty">
+                        <img src="../images/error.svg" alt="No listings found" class="empty">
                         <p>No listings found.</p>
                         <a href="listing.php"><button class="cta">Post an ad today</button></a>
                     </div>

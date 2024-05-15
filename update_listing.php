@@ -60,10 +60,10 @@ function getBrands($con)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./js/listing.js"></script>
-    <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="./css/listing.css">
-    <script src="./js/font-awesome.js" crossorigin="anonymous"></script>
+    <script src="../js/listing.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/listing.css">
+    <script src="../js/font-awesome.js" crossorigin=" anonymous"></script>
     <title>Update Listing</title>
 </head>
 
@@ -73,7 +73,7 @@ function getBrands($con)
         <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
         <nav>
             <a href="index.php" class="logo">
-                <img src="./images/declutterLogo.png" class="icon">
+                <img src="../images/declutterLogo.png" class="icon">
                 <b><span>Declutter</span> Ke</b>
             </a>
             <a href="index.php">Home</a>

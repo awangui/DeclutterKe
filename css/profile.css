@@ -10,7 +10,7 @@
 }
 
 body {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url(./images/pexels-terry-magallanes-2988860.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url(../images/pexels-terry-magallanes-2988860.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -36,15 +36,19 @@ body {
 .profile-details {
     width: 100%;
 }
-.profile-details .detail-title{
-    color:#ffb610;
+
+.profile-details .detail-title {
+    color: #ffb610;
 }
+
 table {
     width: 100%;
     border-collapse: collapse;
 }
 
-table, th, td {
+table,
+th,
+td {
     border: 1px solid black;
     padding: 10px;
     text-align: left;
@@ -63,23 +67,25 @@ p {
     margin-bottom: 5px;
 }
 
-.listings{
+.listings {
     margin-bottom: 20%;
     padding: 10px;
     border-radius: 5px;
 }
 
 .empty-listings {
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 
 }
-.empty-listings img{
+
+.empty-listings img {
     width: 30%;
     height: auto;
 }
-.delete{
+
+.delete {
     background-color: rgba(255, 0, 0, 0.676);
 }

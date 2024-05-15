@@ -9,14 +9,14 @@ require_once 'connection.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./js/script.js"></script>
+    <script src="../js/script.js"></script>
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
     <link rel="manifest" href="./site.webmanifest">
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
 
-    <script src="./js/font-awesome.js" crossorigin="anonymous"></script>
+    <script src="../js/font-awesome.js" crossorigin=" anonymous"></script>
     <title>Decluttering Ke</title>
 </head>
 
@@ -27,7 +27,7 @@ require_once 'connection.php';
             <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
             <nav>
                 <a href="index.php" class="logo">
-                    <img src="./images/declutterLogo.png" class="icon">
+                    <img src="../images/declutterLogo.png" class="icon">
                     <b><span>Declutter</span> Ke</b>
                 </a>
                 <a href="index.php" class="active">Home</a>
@@ -68,7 +68,7 @@ require_once 'connection.php';
     <?php if (!isset($_SESSION['user_id'])) { ?>
         <section id="best-sellers">
             <div class="details">
-                <img src="./images/pexels-curtis-adams-6510974.jpg">
+                <img src="../images/pexels-curtis-adams-6510974.jpg">
             </div>
             <div class="description">
                 <h3>Discover Treasures in Every Corner</h3>
@@ -80,7 +80,7 @@ require_once 'connection.php';
         <section id="browse">
             <h2>Popular Categories</h2>
             <ul class="items">
-                <li class="item"> <a href="store.php?sub-category=tables">
+                <li class="item"> <a href="store.php?sub-category=table">
                         Tables
                     </a>
                 </li>
@@ -125,7 +125,7 @@ require_once 'connection.php';
                     <div class="card" id="productCard">
                         <div class="card-content">
                             <div class="image_content">
-                                <img src="uploads/<?php echo $photosArray[0]; ?>" />
+                                <img src="../uploads/<?php echo $photosArray[0]; ?>" />
                             </div>
                             <div class="text_content">
                                 <h3 class="item-title"><?php echo $row['name']; ?></h3>
