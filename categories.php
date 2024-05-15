@@ -52,11 +52,24 @@ if(isset($_GET['category']) && !empty($_GET['category'])) {
 }
 
 // Process add/edit category form submission
+// Process add/edit category form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $category_name = $_POST['category_name'];
-    
-    if(empty($category_id)) {
+    if(isset($_POST['category_id']) && !empty($_POST['category_id'])) {
+        // Editing an existing category
+        $category_id = $_POST['category_id'];
+        $category_name = $_POST['category_name'];
+
+        // Update category in the database
+        $sql_update_category = "UPDATE categories SET category_name = '$category_name' WHERE category_id = '$category_id'";
+        if ($con->query($sql_update_category) === TRUE) {
+            echo "Category updated successfully.";
+        } else {
+            echo "Error updating category: " . $con->error;
+        }
+    } else {
         // Adding a new category
+        $category_name = $_POST['category_name'];
+        
         // Check if the category already exists
         $sql_check_duplicate = "SELECT * FROM categories WHERE category_name = '$category_name'";
         $result_check_duplicate = $con->query($sql_check_duplicate);
@@ -71,28 +84,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo "Error adding category: " . $con->error;
             }
         }
-    } else {
-        // Editing an existing category
-        // Check if the new category name already exists (excluding the current category)
-        $sql_check_duplicate = "SELECT * FROM categories WHERE category_name = '$category_name' AND category_id != '$category_id'";
-        $result_check_duplicate = $con->query($sql_check_duplicate);
-        if ($result_check_duplicate->num_rows > 0) {
-            echo "Category name already exists.";
-        } else {
-            // Update category name in the database
-            if(empty($category_name)) {
-                echo "Category name is required.";
-                exit();
-            }
-            $sql_update_category = "UPDATE categories SET category_name = '$category_name' WHERE category_id = '$category_id'";
-            if ($con->query($sql_update_category) === TRUE) {
-                echo "Category updated successfully.";
-            } else {
-                echo "Error updating category: " . $con->error;
-            }
-        }
     }
 }
+
 
 ?>
 
@@ -207,7 +201,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                 } else {
                     // Display all categories
-                    $sql = "SELECT * FROM categories";
+                    $sql = "SELECT c.category_id, c.category_name, COUNT(l.listing_id) as total_listings 
+                    FROM categories c 
+                    LEFT JOIN listings l ON c.category_id = l.category_id 
+                    GROUP BY c.category_id, c.category_name 
+                    ORDER BY total_listings DESC";
                     $result = $con->query($sql);
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
