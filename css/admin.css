@@ -116,7 +116,7 @@ b span {
 
 /* Main content styles */
 .main-content {
-    margin:0 250px;
+    margin:0 10%;
     margin-top: 10%;
     padding: 20px;
     display: flex;
@@ -676,3 +676,42 @@ nav a:hover {
         position: static;
     }
 }
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    z-index:100 ;
+  }
+  .buy-now-btn{
+    background-color: #ffb610;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 5px;
+  
+  }
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  #downloadCSVButton{
+background-color: #3E3D3C;
+color: #fff;
+width: fit-content;
+  }
