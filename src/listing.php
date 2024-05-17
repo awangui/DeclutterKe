@@ -155,6 +155,8 @@ if (isset($_POST['submit'])) {
                         <input type="text" id="name" name="name" required>
                         <label for="photos">Photos:</label>
                         <input type="file" id="photos" name="images[]" multiple accept="image/*" required>
+                    <!-- div to preview images -->
+                    <div id="imagePreview"></div>
                         <label for="category">Category:</label>
                         <select id="category" name="category" required>
                             <?php
@@ -239,6 +241,27 @@ if (isset($_POST['submit'])) {
         <span class="dot" id="dot1"></span>
         <span class="dot" id="dot2"></span>
     </div>
-</body>
 
+<script>
+    document.getElementById('photos').addEventListener('change', function(event) {
+        const imagePreview = document.getElementById('imagePreview');
+        imagePreview.innerHTML = ''; // Clear any existing previews
+        
+        Array.from(event.target.files).forEach(file => {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.alt = 'Image Preview';
+                img.style.maxWidth = '100px'; // Set the maximum width of the preview images
+                img.style.margin = '10px'; // Add some margin between images
+                imagePreview.appendChild(img);
+            };
+            
+            reader.readAsDataURL(file);
+        });
+    });
+</script>
+</body>
 </html>
