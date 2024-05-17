@@ -14,6 +14,10 @@ if (!isset($_SESSION['user_id'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Property Details</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="./site.webmanifest">
   <script src="../js/font-awesome.js" crossorigin=" anonymous"></script>
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/card.css">
@@ -135,10 +139,19 @@ if (!isset($_SESSION['user_id'])) {
             </button>
             </a>
 
-            <a href="store.php" class="contact"><button class="btn"><i class="fa-solid fa-phone"></i> Show Contact</button></a>
+            <a class="contact">
+    <button id="contactButton" class="btn" onclick="showPhoneNumber('<?php echo $phone_number; ?>')">
+        <i class="fa-solid fa-phone"></i> Show Contact
+    </button>
+    <script>
+    function showPhoneNumber(phoneNumber) {
 
-            <!-- <a class="fa-regular fa-heart"></a> -->
-
+        // Change the text of the button
+        var contactButton = document.getElementById('contactButton');
+        contactButton.innerHTML = '<?php echo $phone_number; ?>';
+    }
+</script>
+</a>
 
             <!-- Button to open the modal -->
             <div id="myModal" class="modal">
