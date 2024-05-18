@@ -82,63 +82,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <button type="submit">Sign Up</button>
         <p>Already have an account?<span><a href="login.html">Login</a></span></p>
     </form>
-    <script>
-        // function to toggle password visibility
-        function togglePassword(inputId) {
-            var passwordInput = document.getElementById(inputId);
-            var toggleButton = document.getElementById("toggle-" + inputId);
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-                toggleButton.textContent = "Hide";
-            } else {
-                passwordInput.type = "password";
-                toggleButton.textContent = "Show";
-            }
-        }
-
-
-        // function to validate form
-        function validateForm() {
-            var password = document.getElementById("password").value;
-            var confirm_password = document.getElementById("confirm_password").value;
-            var errorMessage = document.getElementById("error-message");
-
-            // Password length check
-            if (password.length < 8) {
-                errorMessage.innerText = "Password must be at least 8 characters long.";
-                errorMessage.style.display = "block";
-                return false;
-            }
-
-            // Uppercase letter check
-            if (!/[A-Z]/.test(password)) {
-                errorMessage.innerText = "Password must contain at least one uppercase letter.";
-                errorMessage.style.display = "block";
-                return false;
-            }
-
-            // Special character check
-            if (!/[^a-zA-Z0-9]/.test(password)) {
-                errorMessage.innerText = "Password must contain at least one special character.";
-                errorMessage.style.display = "block";
-                return false;
-            }
-
-            // Password match check
-            if (password !== confirm_password) {
-                errorMessage.innerText = "Passwords do not match.";
-                errorMessage.style.display = "block";
-                return false;
-            }
-
-            return true;
-        }
-
-        // event listener to toggle password button
-        document.getElementById("toggle-password").addEventListener("click", function() {
-            togglePassword('password');
-        });
-    </script>
 </body>
-
+<script src="../js/script.js"></script>
 </html>

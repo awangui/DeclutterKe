@@ -93,3 +93,82 @@ if(typeof(myParam) !== 'undefined' && myParam !== null){
 } else {
     document.querySelector('.login-error').style.display = 'none';
 }
+     // function to toggle password visibility
+     function togglePassword(inputId) {
+        var passwordInput = document.getElementById(inputId);
+        var toggleButton = document.getElementById("toggle-" + inputId);
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleButton.textContent = "Hide";
+        } else {
+            passwordInput.type = "password";
+            toggleButton.textContent = "Show";
+        }
+    }
+ // function to validate form
+ function validateForm() {
+    var password = document.getElementById("password").value;
+    var confirm_password = document.getElementById("confirm_password").value;
+    var errorMessage = document.getElementById("error-message");
+    
+    var fname = document.getElementById("fname").value;
+    var sname = document.getElementById("sname").value;
+    //check if the name contains numbers
+    if (fname.match(/\d+/g) || sname.match(/\d+/g)) {
+        errorMessage.innerText = "Name should not contain numbers";
+        errorMessage.style.display = "block";
+        return false;
+    }
+    //name length check
+    if (fname.length < 3 || sname.length < 3) {
+        errorMessage.innerText = "Name should be at least 3 characters long";
+        errorMessage.style.display = "block";
+        return false;
+    }
+    if (fname === "" || sname === "") {
+        errorMessage.innerText = "Name cannot be empty";
+        errorMessage.style.display = "block";
+        return false;
+    }
+    fname = fname.trim();
+    sname = sname.trim();
+    
+    // Password length check
+    if (password.length < 8) {
+        errorMessage.innerText = "Password must be at least 8 characters long.";
+        errorMessage.style.display = "block";
+        return false;
+    }
+
+    // Uppercase letter check
+    if (!/[A-Z]/.test(password)) {
+        errorMessage.innerText = "Password must contain at least one uppercase letter.";
+        errorMessage.style.display = "block";
+        return false;
+    }
+    if (phone.match(/\d+/g)) {
+        errorMessage.innerText = "Phone number should not contain letters";
+        errorMessage.style.display = "block";
+        return false;
+    }
+    // Special character check
+    if (!/[^a-zA-Z0-9]/.test(password)) {
+        errorMessage.innerText = "Password must contain at least one special character.";
+        errorMessage.style.display = "block";
+        return false;
+    }
+
+    // Password match check
+    if (password !== confirm_password) {
+        errorMessage.innerText = "Passwords do not match.";
+        errorMessage.style.display = "block";
+        return false;
+    }
+
+    return true;
+}
+
+// event listener to toggle password button
+document.getElementById("toggle-password").addEventListener("click", function() {
+    togglePassword('password');
+});
