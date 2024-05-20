@@ -17,25 +17,7 @@ if(isset($_GET['id'])) {
     }
 }
 
-// Get brand with the most listings
-$sql = "SELECT brand_name, COUNT(listing_id) as total_listings FROM brands JOIN listings ON brands.brand_id = listings.brand_id GROUP BY brand_name ORDER BY total_listings DESC LIMIT 1";
-$result = $con->query($sql);
-$most_listings = $result->fetch_assoc();
 
-// Get the top 3 brands with the most listings
-$sql = "SELECT brand_name, COUNT(listing_id) as total_listings FROM brands JOIN listings ON brands.brand_id = listings.brand_id GROUP BY brand_name ORDER BY total_listings DESC LIMIT 3";
-$result = $con->query($sql);
-$top_brands = $result->fetch_all(MYSQLI_ASSOC);
-
-// Get brand chart data
-$sql = "SELECT brand_name, COUNT(listing_id) as total_listings FROM brands JOIN listings ON brands.brand_id = listings.brand_id GROUP BY brand_name ORDER BY total_listings DESC";
-$result = $con->query($sql);
-$chart_labels = [];
-$chart_values = [];
-while ($row = $result->fetch_assoc()) {
-    $chart_labels[] = $row['brand_name'];
-    $chart_values[] = $row['total_listings'];
-}
 
 // Process search query
 $search_results = [];
@@ -89,26 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div class="main-content" style="display: block;">
     <h1>Brands</h1>
-    <div class="header">
-        <div class="widget">
-            <!-- most popular brand -->
-            <h2>Most popular Brand</h2>
-            <p><?php echo $most_listings['brand_name']; ?></p>
-        </div>
-        <!-- top 3 brands -->
-        <div class="widget">
-            <h2>Top 3 Brands</h2>
-            <ul>
-                <?php foreach ($top_brands as $brand) { ?>
-                    <li><?php echo $brand['brand_name']; ?> - <?php echo $brand['total_listings']; ?> listings</li>
-                <?php } ?>
-            </ul>  
-        </div>
-        <div class="widget">
-            <h3>Number of listings per brand</h3>
-            <canvas id="brandChart"></canvas>
-        </div>
-    </div>
+
     <!-- Add Brand -->
     <h2>Add Brand</h2>
     <form method="POST" action="">
@@ -253,26 +216,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    var ctx = document.getElementById('brandChart').getContext('2d');
-    var brandChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: <?php echo json_encode($chart_labels); ?>,
-            datasets: [{
-                label: 'Number of Listings',
-                data: <?php echo json_encode($chart_values); ?>,
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    precision: 0
-                }
-            }
-        }
-    });
+    
 </script>

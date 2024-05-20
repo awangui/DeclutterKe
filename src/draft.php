@@ -36,12 +36,12 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Check if the listing ID is provided
-if (!isset($_GET['editId'])) {
+if (!isset($_GET['listing_id'])) {
     header("Location: manage_listings.php");
     exit();
 }
 
-$listing_id = $_GET['editId'];
+$listing_id = $_GET['listing_id'];
 
 // Fetch existing listing data
 $query = "SELECT * FROM listings WHERE listing_id = ?";
@@ -99,22 +99,10 @@ if (isset($_POST['submit'])) {
     if (isset($_SESSION['user_id'])) {
         $userId = $_SESSION['user_id'];
 
-        // Debugging statements to check variable values
-        echo "Debugging: categoryId = $categoryId, brandId = $brandId, listing_id = $listing_id<br>";
-
-        // Prepare and bind SQL statement
+        // Update the listing in the database
         $update_query = "UPDATE listings SET name = ?, category_id = ?, sub_category = ?, brand_id = ?, color = ?, years_used = ?, `condition` = ?, price = ?, description = ?, photos = ?, phone_number = ?, city = ?, town = ? WHERE listing_id = ?";
         $stmt = mysqli_prepare($con, $update_query);
-
-        // Check if statement preparation was successful
-        if (!$stmt) {
-            die('mysqli_prepare() failed: ' . htmlspecialchars(mysqli_error($con)));
-        }
-
-        // Bind parameters to the prepared statement
-        mysqli_stmt_bind_param($stmt, "sisisisdsssssi", $name, $categoryId, $sub_category, $brandId, $color, $years_used, $condition, $price, $description, $photos, $phone, $city, $town, $listing_id);
-
-
+        mysqli_stmt_bind_param($stmt, "sssssssdsssssii", $name, $categoryId, $sub_category, $brandId, $color, $years_used, $condition, $price, $description, $photos, $phone, $city, $town, $listing_id);
 
         if (mysqli_stmt_execute($stmt)) {
             $message = "Listing updated successfully.";
@@ -278,7 +266,7 @@ if (isset($_POST['submit'])) {
         document.getElementById('photos').addEventListener('change', function(event) {
             const imagePreview = document.getElementById('imagePreview');
             imagePreview.innerHTML = ''; // Clear any existing previews
-
+            
             Array.from(event.target.files).forEach(file => {
                 const reader = new FileReader();
 
@@ -290,7 +278,7 @@ if (isset($_POST['submit'])) {
                     img.style.margin = '10px'; // Add some margin between images
                     imagePreview.appendChild(img);
                 };
-
+                
                 reader.readAsDataURL(file);
             });
         });

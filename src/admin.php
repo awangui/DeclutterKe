@@ -143,6 +143,25 @@ while ($row = $result->fetch_assoc()) {
     $chart_values[] = $row['total_listings'];
 }
 ?>
+<style>
+    .widget {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid #ffb610;
+        }
+        .widget h4, .widget h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .widget p {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+</style>
  <div class="main-content" style="display: block;">
  <h2>Dashboard</h2>
         <h1>Overview</h1>
@@ -353,12 +372,13 @@ var ctxx = document.getElementById('categoryChart').getContext('2d');
                     label: 'Users vs Sellers',
                     data: [totalUsers - totalSellers, totalSellers],
                     backgroundColor: [
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgb(245, 172, 4,0.2)'
+                        'rgb(245, 172, 4,0.2)',
+                        'rgba(54, 162, 235, 0.2)'
+                        
                     ],
                     borderColor: [
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(245, 172, 4, 1)'
+                        'rgba(245, 172, 4, 1)',
+                        'rgba(54, 162, 235, 1)'                        
                     ],
                     borderWidth: 1
                 }]

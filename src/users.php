@@ -59,32 +59,6 @@ if (!$resultFetchUsers) {
     die("Error fetching users: " . mysqli_error($con));
 }
 
-// Fetch data for bar chart
-$sqlFetchUsersByMonth = "SELECT MONTH(date) AS month, YEAR(date) AS year, COUNT(*) AS totalUsers
-                         FROM users
-                         GROUP BY YEAR(date), MONTH(date)
-                         ORDER BY year DESC, month DESC";
-$resultFetchUsersByMonth = mysqli_query($con, $sqlFetchUsersByMonth);
-
-// Check for query errors
-if (!$resultFetchUsersByMonth) {
-    // Handle error
-    die("Error fetching data: " . mysqli_error($con));
-}
-
-// Initialize arrays to store labels and data for chart
-$labels = [];
-$data = [];
-
-// Fetch data and populate arrays
-while ($row = mysqli_fetch_assoc($resultFetchUsersByMonth)) {
-    // Generate label in "Month Year" format
-    $label = date('M Y', mktime(0, 0, 0, $row['month'], 1, $row['year']));
-    $labels[] = $label;
-    // Store total users for the month
-    $data[] = $row['totalUsers'];
-}
-
 // Close connection
 mysqli_close($con);
 ?>
@@ -101,20 +75,14 @@ mysqli_close($con);
 
 <body>
     <div class="main-content">
-        <div class="row">
-            <div class="col">
-                <h2>Number of users joined each month</h2>
-                <div class="widget">
-                    <canvas id="usersByMonthChart"></canvas>
-                </div>
-            </div>
-        </div>
+     
 
         <?php if ($message) : ?>
             <div class="alert <?= $messageClass ?>"><?= $message ?></div>
         <?php endif; ?>
 
         <div class="row">
+        <h1>Users</h1>
             <div class="col">
                 <div class="card">
                     <div class="card-header"></div>

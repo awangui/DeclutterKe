@@ -50,15 +50,6 @@
         }
     }
 
-    // Get top 3 categories with the most listings
-    arsort($listings_count);
-    $top_categories = array_slice($listings_count, 0, 3, true);
-
-    // Get listing chart data
-    $chart_labels = array_values($categories);
-    $chart_values = array_map(function ($category_id) use ($listings_count) {
-        return isset($listings_count[$category_id]) ? $listings_count[$category_id] : 0;
-    }, array_keys($categories));
     ?>
 
     <div class="main-content" style="display: block;">
@@ -69,15 +60,6 @@
                 <?php echo $message; ?>
             </div>
         <?php endif; ?>
-
-        <div class="header">
-            <div class="widget">
-                <h3>Number of listings per category</h3>
-                <canvas id="listingChart"></canvas>
-            </div>
-
-
-        </div>
 
 
 <!-- Add a button to trigger the download -->
@@ -250,32 +232,6 @@ document.getElementById('downloadCSVButton').addEventListener('click', function(
                 }
             };
   
-        </script>
-
-        <!-- Listing Chart -->
-        <script>
-            var ctx = document.getElementById('listingChart').getContext('2d');
-            var listingChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: <?php echo json_encode(array_values($categories)); ?>,
-                    datasets: [{
-                        label: 'Number of Listings',
-                        data: <?php echo json_encode($chart_values); ?>,
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            precision: 0
-                        }
-                    }
-                }
-            });
         </script>
 
     </div>

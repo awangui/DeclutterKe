@@ -115,26 +115,6 @@
             </div>
         <?php endif; ?>
 
-        <div class="header">
-            <div class="widget">
-                <h3>Number of listings per category</h3>
-                <canvas id="categoryChart"></canvas>
-            </div>
-            <div class="widget">
-                <!-- most popular category -->
-                <h2>Most popular Category</h2>
-                <p><?php echo $most_listings['category_name']; ?></p>
-            </div>
-            <!-- top 3 categories -->
-            <div class="widget">
-                <h2>Top 3 Categories</h2>
-                <ul>
-                    <?php foreach ($top_categories as $category) { ?>
-                        <li><?php echo $category['category_name']; ?> - <?php echo $category['total_listings']; ?> listings</li>
-                    <?php } ?>
-                </ul>
-            </div>
-        </div>
         <!-- Add Category -->
         <h2>Add Category</h2>
         <form method="POST" action="">
@@ -283,32 +263,6 @@
             }
         };
     </script>
-
-    <script>
-        var ctx = document.getElementById('categoryChart').getContext('2d');
-        var categoryChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: <?php echo json_encode($chart_labels); ?>,
-                datasets: [{
-                    label: 'Number of Listings',
-                    data: <?php echo json_encode($chart_values); ?>,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        precision: 0
-                    }
-                }
-            }
-        });
-    </script>
-
 </body>
 
 </html>

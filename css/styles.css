@@ -976,6 +976,9 @@ width: fit-content;
 
 .delete, .deleteBtn{
 background-color: #f44336e6;
+border: none;
+padding: 8px 20px;
+font-size: 1.1rem;
 
 }
 .delete, .deleteBtn:hover {

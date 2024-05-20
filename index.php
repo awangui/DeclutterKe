@@ -209,6 +209,7 @@ require_once 'connection.php';
                             <li><a href="#"><i class="fa fa-instagram"></i> Instagram</a></li>
                             <li><a href="#"><i class="fa fa-phone"> </i> +254 000 000 000</i></a></li>
                             <li><a href="#"><i class="fa-regular fa-envelope"></i></i> declutterke@gmail.com</a></li>
+                            <li><a href="https://github.com/awangui">Made with 🤍 by Wangui</a></li>
 
                         </ul>
                     </div>
