@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     foreach ($search_results as $row) {
                         echo "<tr>";
                         echo "<td>" . $row["brand_id"] . "</td><td>" . $row["brand_name"] . "</td><td>" . $row["total_listings"] . "</td>";
-                        echo "<td><a onclick='openEditModal(".$row['brand_id'].", \"".$row['brand_name']."\")' class='btn'>Edit</a>  <a href='brands.php?id=".$row['brand_id']."' onclick='return confirm(\"Are you sure you want to delete this brand?\")'class='btn delete btn-danger'>Delete</a></td>";
+                        echo "<td><a onclick='openEditModal(".$row['brand_id'].", \"".$row['brand_name']."\")' class='btn'>Edit</a>  < <a href='#' data-id='".$row['brand_id']."' class='cta delete deleteBtn'>Delete</a></td>";
                         echo "</tr>";
                     }
                 } else {

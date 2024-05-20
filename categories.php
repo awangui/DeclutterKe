@@ -199,7 +199,7 @@
                             echo "<tr>";
                             echo "<td>" . $row["category_id"] . "</td><td>" . $row["category_name"] . "</td>";
                             echo "<td><a href='#' onclick='openEditModal(" . $row['category_id'] . ", \"" . $row['category_name'] . "\")' class='btn' >Edit</a> ";
-                            echo " <a href='categories.php?id=" . $row['category_id'] . "' onclick='return confirm(\"Are you sure you want to delete this category?\")' class='btn delete btn-danger'>Delete</a></td>";
+                            echo " <a data-id='".$row['category_id']."' class='cta delete deleteBtn'>Delete</a></td></td>";
                             echo "</tr>";
                         }
                     } else {
@@ -215,7 +215,7 @@
                                 echo "<tr>";
                                 echo "<td>" . $row["category_id"] . "</td><td>" . $row["category_name"] . "</td>";
                                 echo "<td><a href='#' onclick='openEditModal(" . $row['category_id'] . ", \"" . $row['category_name'] . "\")' class='btn' >Edit</a> ";
-                                echo " <a href='categories.php?id=" . $row['category_id'] . "' onclick='return confirm(\"Are you sure you want to delete this category?\")' class='btn delete btn-danger'>Delete</a></td>";
+                                echo " <a data-id='".$row['category_id']."' class='cta delete deleteBtn'>Delete</a></td>";
                                 echo "</tr>";
                             }
                         } else {
@@ -227,7 +227,15 @@
             </table>
         </section>
     </div>
-
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Confirm Deletion</h2>
+            <p>Are you sure you want to delete this Category?</p>
+            <button id="confirmDeleteButton" class="btn-confirm">Confirm</button>
+            <button class="btn-cancel close">Cancel</button>
+        </div>
+    </div>
     <script>
         // Function to reset the form fields
         function resetForm() {
@@ -262,6 +270,32 @@
                 modal.style.display = "none";
             }
         };
+        // JavaScript to handle delete button clicks
+document.querySelectorAll('.deleteBtn').forEach(function(button) {
+    button.addEventListener('click', function() {
+        var listing_id = this.getAttribute('data-id');
+        document.getElementById('confirmDeleteButton').setAttribute('data-id', listing_id);
+        document.getElementById('deleteModal').style.display = "block";
+    });
+});
+
+// JavaScript to handle confirm delete button click
+document.getElementById('confirmDeleteButton').addEventListener('click', function() {
+    var category_id = this.getAttribute('data-id');
+    window.location.href = `categories.php?id=${category_id}`;
+});
+//
+// Close the delete modal when the user clicks on the close button
+function closeModal() {
+    document.getElementById('deleteModal').style.display = "none";
+}
+document.querySelectorAll('.close').forEach(function(button) {
+    button.addEventListener('click', closeModal);
+});
+// JavaScript to handle close button click
+document.querySelector('.close').addEventListener('click', function() {
+    document.getElementById('deleteModal').style.display = "none";
+});
     </script>
 </body>
 
