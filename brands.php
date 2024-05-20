@@ -1,6 +1,7 @@
 <?php
 require_once 'navbar.php';
-
+$message = '';
+$messageClass = '';
 // Check if the 'id' parameter is set in the URL
 if(isset($_GET['id'])) {
     $brand_id = $_GET['id'];
@@ -12,8 +13,8 @@ if(isset($_GET['id'])) {
         header("Location: brands.php");
         exit();
     } else {
-        // Handle deletion error
-        echo "Error deleting brand: " . $con->error;
+        $message = "Error deleting brand: " . $con->error;
+        $messageClass = "alert-error";
     }
 }
 
@@ -42,9 +43,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Update brand in the database
         $sql_update_brand = "UPDATE brands SET brand_name = '$brand_name' WHERE brand_id = '$brand_id'";
         if ($con->query($sql_update_brand) === TRUE) {
-            echo "Brand updated successfully.";
+            $message = "Brand updated successfully.";
+            $messageClass = "alert-success";
         } else {
-            echo "Error updating brand: " . $con->error;
+            $message = "Error updating brand: " . $con->error;
+            $messageClass = "alert-error";
         }
     } else {
         // Adding a new brand
@@ -54,14 +57,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql_check_duplicate = "SELECT * FROM brands WHERE brand_name = '$brand_name'";
         $result_check_duplicate = $con->query($sql_check_duplicate);
         if ($result_check_duplicate->num_rows > 0) {
-            echo "Brand already exists.";
+            $message = "Brand already exists.";
+            $messageClass = "alert-error";
         } else {
             // Insert new brand into the database
             $sql_insert_brand = "INSERT INTO brands (brand_name) VALUES ('$brand_name')";
             if ($con->query($sql_insert_brand) === TRUE) {
-                echo "Brand added successfully.";
+                $message = "Brand added successfully.";
+                $messageClass = "alert-success";
             } else {
-                echo "Error adding brand: " . $con->error;
+                $message = "Error adding brand: " . $con->error;
+                $messageClass = "alert-error";
             }
         }
     }
@@ -70,8 +76,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <div class="main-content" style="display: block;">
+<?php if ($message) : ?>
+            <div class="alert <?php echo $messageClass; ?>">
+                <?php echo $message; ?>
+            </div>
+        <?php endif; ?>
     <h1>Brands</h1>
-
     <!-- Add Brand -->
     <h2>Add Brand</h2>
     <form method="POST" action="">
@@ -116,11 +126,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         while($row = $result->fetch_assoc()) {
                             echo "<tr>";
                             echo "<td>" . $row["brand_id"] . "</td><td>" . $row["brand_name"] . "</td><td>" . $row["total_listings"] . "</td>";
-                            echo "<td><a onclick='openEditModal(".$row['brand_id'].", \"".$row['brand_name']."\")' class='btn '>Edit</a>  <a href='brands.php?id=".$row['brand_id']."' onclick='return confirm(\"Are you sure you want to delete this brand?\")' class='btn delete btn-danger'>Delete</a></td>";
+                            echo "<td><a onclick='openEditModal(".$row['brand_id'].", \"".$row['brand_name']."\")' class='btn'>Edit</a>  <a href='#' data-id='".$row['brand_id']."' class='cta delete deleteBtn'>Delete</a></td>";
                             echo "</tr>";
+            
                         }
                     } else {
-                        echo "<tr><td colspan='4'>No brands found.</td></tr>";
+                        $message = "No brands found.";
+                        $messageClass = "alert-error";
                     }
                 }
                 ?>
@@ -132,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!-- Edit Brand Modal -->
 <div id="editBrandModal" class="modal" style="display: none;">
     <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
+        <span class="close">&times;</span>
         <h2>Edit Brand</h2>
         <form id="editBrandForm" method="POST" action="">
             <input type="hidden" id="brandId" name="brand_id">
@@ -141,7 +153,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     </div>
 </div>
-
+<div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Confirm Deletion</h2>
+            <p>Are you sure you want to delete this Brand?</p>
+            <button id="confirmDeleteButton" class="btn-confirm">Confirm</button>
+            <button class="btn-cancel close">Cancel</button>
+        </div>
+    </div>
 <script>
     // Function to reset the form fields
     function resetForm() {
@@ -211,10 +231,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Cleanup
         document.body.removeChild(a);
-    });
-</script>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    
+    });
+
+// JavaScript to handle delete button clicks
+document.querySelectorAll('.deleteBtn').forEach(function(button) {
+    button.addEventListener('click', function() {
+        var listing_id = this.getAttribute('data-id');
+        document.getElementById('confirmDeleteButton').setAttribute('data-id', listing_id);
+        document.getElementById('deleteModal').style.display = "block";
+    });
+});
+
+// JavaScript to handle confirm delete button click
+document.getElementById('confirmDeleteButton').addEventListener('click', function() {
+    var brand_id = this.getAttribute('data-id');
+    window.location.href = `brands.php?id=${brand_id}`;
+});
+//
+// Close the delete modal when the user clicks on the close button
+function closeModal() {
+    document.getElementById('deleteModal').style.display = "none";
+}
+document.querySelectorAll('.close').forEach(function(button) {
+    button.addEventListener('click', closeModal);
+});
+// JavaScript to handle close button click
+document.querySelector('.close').addEventListener('click', function() {
+    document.getElementById('deleteModal').style.display = "none";
+});
 </script>
