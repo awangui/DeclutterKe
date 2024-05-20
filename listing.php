@@ -61,7 +61,7 @@ if (isset($_POST['submit'])) {
     for ($i = 0; $i < $file_count; $i++) {
         $file_name = $_FILES['images']['name'][$i];
         $temp_name = $_FILES['images']['tmp_name'][$i];
-        $folder = '../uploads/' . $file_name;
+        $folder = './uploads/' . $file_name;
         if (move_uploaded_file($temp_name, $folder)) {
             $file_names[] = $file_name;
         }
@@ -85,8 +85,7 @@ if (isset($_POST['submit'])) {
         $insert_query = "INSERT INTO listings (name, category_id, sub_category, brand_id, color, years_used, `condition`, price, description, photos, phone_number, city, town, seller_id) 
                          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($con, $insert_query);
-        var_dump($stmt);
-        mysqli_stmt_bind_param($stmt, "sssssssdsssssii", $name, $categoryId, $sub_category, $brandId, $color, $years_used, $condition, $price, $description, $photos, $phone, $city, $town, $userId);
+        mysqli_stmt_bind_param($stmt, "sssssssdsssssi", $name, $categoryId, $sub_category, $brandId, $color, $years_used, $condition, $price, $description, $photos, $phone, $city, $town, $userId);
 
         if (mysqli_stmt_execute($stmt)) {
             $message = "Listing uploaded successfully.";
@@ -97,7 +96,7 @@ if (isset($_POST['submit'])) {
         }
     } else {
         $message = "You are not logged in" . $con->error;
-            $messageClass = "alert-error";
+        $messageClass = "alert-error";
     }
 }
 ?>
@@ -108,14 +107,14 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../js/listing.js"></script>
-    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-    <link rel="manifest" href="./site.webmanifest">
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/listing.css">
-    <script src="../js/font-awesome.js" crossorigin=" anonymous"></script>
+    <script src="./js/listing.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/listing.css">
+    <script src="./js/font-awesome.js" crossorigin=" anonymous"></script>
     <title>Add Listing</title>
 </head>
 
@@ -125,7 +124,7 @@ if (isset($_POST['submit'])) {
         <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
         <nav>
             <a href="index.php" class="logo">
-                <img src="../images/declutterLogo.png" class="icon">
+                <img src="./images/declutterLogo.png" class="icon">
                 <b><span>Declutter</span> Ke</b>
             </a>
             <a href="index.php">Home</a>
@@ -147,18 +146,18 @@ if (isset($_POST['submit'])) {
             <div class="listing-container">
                 <h2>Add a listing</h2>
                 <?php if ($message) : ?>
-            <div class="alert <?php echo $messageClass; ?>"  style="text-align:center">
-                <?php echo $message; ?>
-            </div>
-        <?php endif; ?>
+                    <div class="alert <?php echo $messageClass; ?>" style="text-align:center">
+                        <?php echo $message; ?>
+                    </div>
+                <?php endif; ?>
                 <div class="details-container">
                     <div class="details" id="productDetails">
                         <label for="name">Product Name:</label>
                         <input type="text" id="name" name="name" required>
                         <label for="photos">Photos:</label>
                         <input type="file" id="photos" name="images[]" multiple accept="image/*" required>
-                    <!-- div to preview images -->
-                    <div id="imagePreview"></div>
+                        <!-- div to preview images -->
+                        <div id="imagePreview"></div>
                         <label for="category">Category:</label>
                         <select id="category" name="category" required>
                             <?php
@@ -244,26 +243,27 @@ if (isset($_POST['submit'])) {
         <span class="dot" id="dot2"></span>
     </div>
 
-<script>
-    document.getElementById('photos').addEventListener('change', function(event) {
-        const imagePreview = document.getElementById('imagePreview');
-        imagePreview.innerHTML = ''; // Clear any existing previews
-        
-        Array.from(event.target.files).forEach(file => {
-            const reader = new FileReader();
+    <script>
+        document.getElementById('photos').addEventListener('change', function(event) {
+            const imagePreview = document.getElementById('imagePreview');
+            imagePreview.innerHTML = ''; // Clear any existing previews
 
-            reader.onload = function(e) {
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.alt = 'Image Preview';
-                img.style.maxWidth = '100px'; // Set the maximum width of the preview images
-                img.style.margin = '10px'; // Add some margin between images
-                imagePreview.appendChild(img);
-            };
-            
-            reader.readAsDataURL(file);
+            Array.from(event.target.files).forEach(file => {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = 'Image Preview';
+                    img.style.maxWidth = '100px'; // Set the maximum width of the preview images
+                    img.style.margin = '10px'; // Add some margin between images
+                    imagePreview.appendChild(img);
+                };
+
+                reader.readAsDataURL(file);
+            });
         });
-    });
-</script>
+    </script>
 </body>
+
 </html>

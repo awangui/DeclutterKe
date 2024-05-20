@@ -38,13 +38,13 @@ mysqli_close($con);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/profile.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-    <link rel="manifest" href="./site.webmanifest">
-    <script src="../js/font-awesome.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/profile.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <script src="./js/font-awesome.js" crossorigin="anonymous"></script>
     <title>User Profile</title>
 </head>
 
@@ -53,7 +53,7 @@ mysqli_close($con);
         <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
         <nav>
             <a href="index.php" class="logo">
-                <img src="../images/declutterLogo.png" class="icon">
+                <img src="./images/declutterLogo.png" class="icon">
                 <b><span>Declutter</span> Ke</b>
             </a>
             <a href="index.php">Home</a>
@@ -105,14 +105,14 @@ mysqli_close($con);
                             <td>
                                 <a href="card.php?listing_id=<?php echo $listing['listing_id']; ?>" class="cta view">View</a>
                                 <a href="update_listing.php?editId=<?php echo $listing['listing_id']; ?>" class="cta edit">Edit</a>
-                                <button  data-id='<?php echo $listing['listing_id']; ?>' class='cta delete deleteBtn'>Delete</button>
+                                <button data-id='<?php echo $listing['listing_id']; ?>' class='cta delete deleteBtn'>Delete</button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
             <?php else : ?>
                 <div class="empty-listings">
-                    <img src="../images/error.svg" alt="No listings found" class="empty">
+                    <img src="./images/error.svg" alt="No listings found" class="empty">
                     <p>No listings found.</p>
                     <a href="listing.php"><button class="cta">Post an ad today</button></a>
                 </div>
@@ -129,66 +129,65 @@ mysqli_close($con);
                     <p><strong>Category:</strong> <span id="listingCategory"></span></p>
                 </div>
             </div>
-        <div id="deleteModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Confirm Deletion</h2>
-                <p>Are you sure you want to delete this listing?</p>
-                <button id="confirmDeleteButton" class="btn-confirm">Confirm</button>
-                <button class="btn-cancel close">Cancel</button>
+            <div id="deleteModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Confirm Deletion</h2>
+                    <p>Are you sure you want to delete this listing?</p>
+                    <button id="confirmDeleteButton" class="btn-confirm">Confirm</button>
+                    <button class="btn-cancel close">Cancel</button>
+                </div>
             </div>
         </div>
-    </div>
-    <script>
-        document.querySelectorAll('.delete').forEach(function(button) {
-            button.addEventListener('click', function() {
-                var id = this.getAttribute('data-id');
-                document.getElementById('confirmDeleteButton').setAttribute('data-id', id);
-                document.getElementById('deleteModal').style.display = "block";
+        <script>
+            document.querySelectorAll('.delete').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var id = this.getAttribute('data-id');
+                    document.getElementById('confirmDeleteButton').setAttribute('data-id', id);
+                    document.getElementById('deleteModal').style.display = "block";
+                });
             });
-        });
 
-        // Close the delete modal when the user clicks on the close button
-        document.querySelector('.close').addEventListener('click', function() {
-            document.getElementById('deleteModal').style.display = "none";
-        });
+            // Close the delete modal when the user clicks on the close button
+            document.querySelector('.close').addEventListener('click', function() {
+                document.getElementById('deleteModal').style.display = "none";
+            });
 
-        // Close the delete modal when the user clicks outside of it
-        window.onclick = function(event) {
-            var modal = document.getElementById('deleteModal');
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        };
+            // Close the delete modal when the user clicks outside of it
+            window.onclick = function(event) {
+                var modal = document.getElementById('deleteModal');
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            };
 
-        // JavaScript to handle delete button clicks
-        document.querySelectorAll('.deleteBtn').forEach(function(button) {
-            button.addEventListener('click', function() {
+            // JavaScript to handle delete button clicks
+            document.querySelectorAll('.deleteBtn').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var listing_id = this.getAttribute('data-id');
+                    document.getElementById('confirmDeleteButton').setAttribute('data-id', listing_id);
+                    document.getElementById('deleteModal').style.display = "block";
+                });
+            });
+
+            // JavaScript to handle confirm delete button click
+            document.getElementById('confirmDeleteButton').addEventListener('click', function() {
                 var listing_id = this.getAttribute('data-id');
-                document.getElementById('confirmDeleteButton').setAttribute('data-id', listing_id);
-                document.getElementById('deleteModal').style.display = "block";
+                window.location.href = `delete_listing.php?deleteid=${listing_id}`;
             });
-        });
-
-        // JavaScript to handle confirm delete button click
-        document.getElementById('confirmDeleteButton').addEventListener('click', function() {
-            var listing_id = this.getAttribute('data-id');
-            window.location.href = `delete_listing.php?deleteid=${listing_id}`;
-        });
-        //
-        // Close the delete modal when the user clicks on the close button
-        function closeModal() {
-            document.getElementById('deleteModal').style.display = "none";
-        }
-        document.querySelectorAll('.close').forEach(function(button) {
-            button.addEventListener('click', closeModal);
-        });
-        // JavaScript to handle close button click
-        document.querySelector('.close').addEventListener('click', function() {
-            document.getElementById('deleteModal').style.display = "none";
-        });
-
-            </script>
+            //
+            // Close the delete modal when the user clicks on the close button
+            function closeModal() {
+                document.getElementById('deleteModal').style.display = "none";
+            }
+            document.querySelectorAll('.close').forEach(function(button) {
+                button.addEventListener('click', closeModal);
+            });
+            // JavaScript to handle close button click
+            document.querySelector('.close').addEventListener('click', function() {
+                document.getElementById('deleteModal').style.display = "none";
+            });
+        </script>
 </body>
 
 </html>

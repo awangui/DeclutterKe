@@ -10,14 +10,14 @@ require_once 'connection.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../js/script.js"></script>
-    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-    <link rel="manifest" href="./site.webmanifest">
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/about.css">
-    <script src="../js/font-awesome.js" crossorigin=" anonymous"></script>
+    <script src="./js/script.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/about.css">
+    <script src="./js/font-awesome.js" crossorigin=" anonymous"></script>
     <title>Decluttering Ke</title>
 </head>
 
@@ -26,37 +26,37 @@ require_once 'connection.php';
     <section id="header">
         <section id="navigation">
 
-        <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
+            <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
             <nav>
-            <a href="index.php" class="logo">
-                <img src="../images/declutterLogo.png" class="icon">
-                <b><span>Declutter</span> Ke</b>
-            </a>
-            <a href="index.php">Home</a>
-            <a href="store.php">Store</a>
-            <a href="about.php">About</a>
-            <a href="contact.php" class="active">Contact</a>
-            
-            <?php if (isset($_SESSION['user_id'])) { ?>
-                <?php if ($_SESSION['user_role'] == 2) { ?>
-                   
-                    <a href="listing.php">Add a Listing</a>
-                    <a href="manage_listings.php" class="cta">Manage Listings</a>
+                <a href="index.php" class="logo">
+                    <img src="./images/declutterLogo.png" class="icon">
+                    <b><span>Declutter</span> Ke</b>
+                </a>
+                <a href="index.php">Home</a>
+                <a href="store.php">Store</a>
+                <a href="about.php">About</a>
+                <a href="contact.php" class="active">Contact</a>
+
+                <?php if (isset($_SESSION['user_id'])) { ?>
+                    <?php if ($_SESSION['user_role'] == 2) { ?>
+
+                        <a href="listing.php">Add a Listing</a>
+                        <a href="manage_listings.php" class="cta">Manage Listings</a>
+                    <?php } else { ?>
+                        <a href="listing.php" class="cta">Add a Listing</a>
+                    <?php } ?>
+                    <div class="credentials">
+                        <a href="profile.php" id="myBtn"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>
+                        <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket"></i> Logout</a>
+                    </div>
                 <?php } else { ?>
                     <a href="listing.php" class="cta">Add a Listing</a>
+                    <div class="credentials">
+                        <a href="login.html"><i class="icon fa-solid fa-right-to-bracket"></i> Login</a>
+                        <a href="registration.php"><i class="icon fa-regular fa-user"></i> Sign Up</a>
+                    </div>
                 <?php } ?>
-                <div class="credentials">
-                    <a href="profile.php" id="myBtn"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>
-                    <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket"></i> Logout</a>
-                </div>
-            <?php } else { ?>
-                <a href="listing.php" class="cta">Add a Listing</a>
-                <div class="credentials">
-                    <a href="login.html"><i class="icon fa-solid fa-right-to-bracket"></i> Login</a>
-                    <a href="registration.php"><i class="icon fa-regular fa-user"></i> Sign Up</a>
-                </div>
-            <?php } ?>
-        </nav>
+            </nav>
         </section>
         <section class="newsletter">
             <div class="form">

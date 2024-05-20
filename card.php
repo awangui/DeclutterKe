@@ -14,49 +14,49 @@ if (!isset($_SESSION['user_id'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Property Details</title>
-  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-    <link rel="manifest" href="./site.webmanifest">
-  <script src="../js/font-awesome.js" crossorigin=" anonymous"></script>
-  <link rel="stylesheet" href="../css/styles.css">
-  <link rel="stylesheet" href="../css/card.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+  <script src="./js/font-awesome.js" crossorigin=" anonymous"></script>
+  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="./css/card.css">
 </head>
 
 <body>
   <section class="sticky-nav">
     <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
     <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
-            <nav>
-            <a href="index.php" class="logo">
-                <img src="../images/declutterLogo.png" class="icon">
-                <b><span>Declutter</span> Ke</b>
-            </a>
-            <a href="index.php" >Home</a>
-            <a href="store.php" class="active">Store</a>
-            <a href="about.php" >About</a>
-            <a href="contact.php">Contact</a>
-            
-            <?php if (isset($_SESSION['user_id'])) { ?>
-                <?php if ($_SESSION['user_role'] == 2) { ?>
-                   
-                    <a href="listing.php">Add a Listing</a>
-                    <a href="manage_listings.php" class="cta">Manage Listings</a>
-                <?php } else { ?>
-                    <a href="listing.php" class="cta">Add a Listing</a>
-                <?php } ?>
-                <div class="credentials">
-                    <a href="profile.php" id="myBtn"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>
-                    <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket"></i> Logout</a>
-                </div>
-            <?php } else { ?>
-                <a href="listing.php" class="cta">Add a Listing</a>
-                <div class="credentials">
-                    <a href="login.html"><i class="icon fa-solid fa-right-to-bracket"></i> Login</a>
-                    <a href="registration.php"><i class="icon fa-regular fa-user"></i> Sign Up</a>
-                </div>
-            <?php } ?>
-        </nav>
+    <nav>
+      <a href="index.php" class="logo">
+        <img src="./images/declutterLogo.png" class="icon">
+        <b><span>Declutter</span> Ke</b>
+      </a>
+      <a href="index.php">Home</a>
+      <a href="store.php" class="active">Store</a>
+      <a href="about.php">About</a>
+      <a href="contact.php">Contact</a>
+
+      <?php if (isset($_SESSION['user_id'])) { ?>
+        <?php if ($_SESSION['user_role'] == 2) { ?>
+
+          <a href="listing.php">Add a Listing</a>
+          <a href="manage_listings.php" class="cta">Manage Listings</a>
+        <?php } else { ?>
+          <a href="listing.php" class="cta">Add a Listing</a>
+        <?php } ?>
+        <div class="credentials">
+          <a href="profile.php" id="myBtn"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>
+          <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket"></i> Logout</a>
+        </div>
+      <?php } else { ?>
+        <a href="listing.php" class="cta">Add a Listing</a>
+        <div class="credentials">
+          <a href="login.html"><i class="icon fa-solid fa-right-to-bracket"></i> Login</a>
+          <a href="registration.php"><i class="icon fa-regular fa-user"></i> Sign Up</a>
+        </div>
+      <?php } ?>
+    </nav>
   </section>
 
   <div class="container">
@@ -77,11 +77,11 @@ if (!isset($_SESSION['user_id'])) {
         if ($row) {
           $photosArray = explode(',', $row['photos']); // Split photos field by comma
           echo '<div class="image-gallery">';
-          echo '<img src="../uploads/' . $photosArray[0] . '" alt="Product Image" id="mainImage">';
+          echo '<img src="./uploads/' . $photosArray[0] . '" alt="Product Image" id="mainImage">';
 
           echo '<div class="gallery-row">';
           for ($i = 1; $i < count($photosArray); $i++) {
-            echo ' <img src="../uploads/' . $photosArray[$i] . '" alt="Product Image" onclick="swapImage(this)">';
+            echo ' <img src="./uploads/' . $photosArray[$i] . '" alt="Product Image" onclick="swapImage(this)">';
           }
           echo '</div>';
           echo '</div>';
@@ -156,18 +156,18 @@ if (!isset($_SESSION['user_id'])) {
             </a>
 
             <a class="contact">
-    <button id="contactButton" class="btn" onclick="showPhoneNumber('<?php echo $phone_number; ?>')">
-        <i class="fa-solid fa-phone"></i> Show Contact
-    </button>
-    <script>
-    function showPhoneNumber(phoneNumber) {
+              <button id="contactButton" class="btn" onclick="showPhoneNumber('<?php echo $phone_number; ?>')">
+                <i class="fa-solid fa-phone"></i> Show Contact
+              </button>
+              <script>
+                function showPhoneNumber(phoneNumber) {
 
-        // Change the text of the button
-        var contactButton = document.getElementById('contactButton');
-        contactButton.innerHTML = '<?php echo $phone_number; ?>';
-    }
-</script>
-</a>
+                  // Change the text of the button
+                  var contactButton = document.getElementById('contactButton');
+                  contactButton.innerHTML = '<?php echo $phone_number; ?>';
+                }
+              </script>
+            </a>
 
             <!-- Button to open the modal -->
             <div id="myModal" class="modal">
@@ -177,7 +177,7 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="close">&times;</span>
                 <div class="modal-body">
                   <h2>Payment</h2>
-                  <form action="../safaricom/stk_initiate.php" method="POST">
+                  <form action="./safaricom/stk_initiate.php" method="POST">
                     <div class="form-group">
                       <label for="amount">Amount</label>
                       <input type="text" class="form-control" id="amount" name="amount" placeholder="Enter Amount">
@@ -257,7 +257,7 @@ if (!isset($_SESSION['user_id'])) {
             echo '<a href="card.php?listing_id=' . $related_row['listing_id'] . '">';
             echo '<div class="card">';
             // Fix image source path here
-            echo '<img src="../uploads/' . explode(',', $related_row['photos'])[0] . '" alt="Product Image" class="card-img-top">';
+            echo '<img src="./uploads/' . explode(',', $related_row['photos'])[0] . '" alt="Product Image" class="card-img-top">';
             echo '<div class="card-body">';
             echo '<h3>' . $related_row['name'] . '</h3>'; // Display product name
             // Display other product details here
@@ -282,7 +282,7 @@ if (!isset($_SESSION['user_id'])) {
               echo '<a href="card.php?listing_id=' . $random_row['listing_id'] . '">';
               echo '<div class="card">';
               // Fix image source path here
-              echo '<img src="../uploads/' . $random_row['photos'] . '" alt="Product Image" class="card-img-top">';
+              echo '<img src="./uploads/' . $random_row['photos'] . '" alt="Product Image" class="card-img-top">';
               echo '<div class="card-body">';
               echo '<h3>' . $random_row['name'] . '</h3>';
               // Display other product details here
@@ -349,7 +349,7 @@ if (!isset($_SESSION['user_id'])) {
       </div>
     </div>
   </section>
-  <script src="../js/card.js"></script>
+  <script src="./js/card.js"></script>
 </body>
 
 </html>

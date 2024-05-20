@@ -85,7 +85,7 @@ if (isset($_POST['submit'])) {
         for ($i = 0; $i < $file_count; $i++) {
             $file_name = $_FILES['images']['name'][$i];
             $temp_name = $_FILES['images']['tmp_name'][$i];
-            $folder = '../uploads/' . $file_name;
+            $folder = './uploads/' . $file_name;
             if (move_uploaded_file($temp_name, $folder)) {
                 $file_names[] = $file_name;
             }
@@ -136,14 +136,14 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../js/listing.js"></script>
-    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-    <link rel="manifest" href="./site.webmanifest">
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/listing.css">
-    <script src="../js/font-awesome.js" crossorigin="anonymous"></script>
+    <script src="./js/listing.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/listing.css">
+    <script src="./js/font-awesome.js" crossorigin="anonymous"></script>
     <title>Update Listing</title>
 </head>
 
@@ -153,7 +153,7 @@ if (isset($_POST['submit'])) {
         <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
         <nav>
             <a href="index.php" class="logo">
-                <img src="../images/declutterLogo.png" class="icon">
+                <img src="./images/declutterLogo.png" class="icon">
                 <b><span>Declutter</span> Ke</b>
             </a>
             <a href="index.php">Home</a>
@@ -188,7 +188,7 @@ if (isset($_POST['submit'])) {
                         <?php
                         $existing_photos = explode(',', $listing['photos']);
                         foreach ($existing_photos as $photo) {
-                            echo "<img src='../uploads/$photo' alt='Image Preview' style='max-width: 100px; margin: 10px;'>";
+                            echo "<img src='./uploads/$photo' alt='Image Preview' style='max-width: 100px; margin: 10px;'>";
                         }
                         ?>
                     </div>

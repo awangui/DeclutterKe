@@ -14,34 +14,34 @@ require_once 'connection.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/store.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-    <link rel="manifest" href="./site.webmanifest">
-    <script src="../js/font-awesome.js" crossorigin=" anonymous"></script>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/store.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <script src="./js/font-awesome.js" crossorigin=" anonymous"></script>
     <title>Decluttering Ke</title>
 </head>
 
 <body>
     <section class="sticky-nav">
-    <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
-            <nav>
+        <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
+        <nav>
             <a href="index.php" class="logo">
-                <img src="../images/declutterLogo.png" class="icon">
+                <img src="./images/declutterLogo.png" class="icon">
                 <b><span>Declutter</span> Ke</b>
             </a>
-            <a href="index.php" >Home</a>
+            <a href="index.php">Home</a>
             <a href="store.php" class="active">Store</a>
-            <a href="about.php" >About</a>
+            <a href="about.php">About</a>
             <a href="contact.php">Contact</a>
-            
+
             <?php if (isset($_SESSION['user_id'])) { ?>
                 <?php if ($_SESSION['user_role'] == 2) { ?>
-                   
+
                     <a href="listing.php" class="cta">Add a Listing</a>
-                    <a href="manage_listings.php" >Manage Listings</a>
+                    <a href="manage_listings.php">Manage Listings</a>
                 <?php } else { ?>
                     <a href="listing.php" class="cta">Add a Listing</a>
                 <?php } ?>
@@ -214,7 +214,7 @@ require_once 'connection.php';
             <div class="card" id="productCard">
                 <div class="card-content">
                     <div class="image_content">
-                        <img src="../uploads/<?php echo $photosArray[0]; ?>" />
+                        <img src="./uploads/<?php echo $photosArray[0]; ?>" />
                     </div>
                     <div class="text_content">
                         <h3 class="item-title"><?php echo $row['name']; ?></h3>
@@ -246,7 +246,7 @@ require_once 'connection.php';
 
     </div>
     <div id="message-card" style="<?php echo $rows == 0 ? '' : "display: none;" ?>">
-        <img src="../images/error.svg" alt="No listing found error image">
+        <img src="./images/error.svg" alt="No listing found error image">
         <p>No listings found. Please adjust your filters.</p>
         <button onclick="resetFilters()">Reset Filters</button>
     </div>
@@ -273,7 +273,7 @@ require_once 'connection.php';
         </div>
     </section>
 
-    <script src="../js/store.js"></script>
+    <script src="./js/store.js"></script>
 
 </body>
 

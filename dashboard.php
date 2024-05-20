@@ -80,13 +80,13 @@ if (!$resultFetchUsers) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Page</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="./css/admin.css">
 </head>
 
 <body>
     <header>
         <a href="index.php" class="logo">
-            <img src="../images/declutterLogo.png" class="icon">
+            <img src="./images/declutterLogo.png" class="icon">
         </a>
         <b><span>Declutter</span> Ke</b>
         <div class="profile">

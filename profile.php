@@ -69,14 +69,14 @@ mysqli_close($con);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/profile.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-    <link rel="manifest" href="./site.webmanifest">
-   
-    <script src="../js/font-awesome.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/profile.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+
+    <script src="./js/font-awesome.js" crossorigin="anonymous"></script>
     <title>User Profile</title>
     <style>
         .error-message {
@@ -90,20 +90,20 @@ mysqli_close($con);
 
     <section class="navigation" id="navigation">
 
-    <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
-            <nav>
+        <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
+        <nav>
             <a href="index.php" class="logo">
-                <img src="../images/declutterLogo.png" class="icon">
+                <img src="./images/declutterLogo.png" class="icon">
                 <b><span>Declutter</span> Ke</b>
             </a>
-            <a href="index.php" >Home</a>
+            <a href="index.php">Home</a>
             <a href="store.php">Store</a>
-            <a href="about.php" >About</a>
+            <a href="about.php">About</a>
             <a href="contact.php">Contact</a>
-            
+
             <?php if (isset($_SESSION['user_id'])) { ?>
                 <?php if ($_SESSION['user_role'] == 2) { ?>
-                   
+
                     <a href="listing.php">Add a Listing</a>
                     <a href="manage_listings.php" class="cta">Manage Listings</a>
                 <?php } else { ?>
@@ -127,10 +127,10 @@ mysqli_close($con);
             <h2>Personal Details</h2>
             <div class="profile">
                 <div class="profile-image">
-                    <img src="../images/undraw_up_to_date_re_nqid.svg" class="hero">
+                    <img src="./images/undraw_up_to_date_re_nqid.svg" class="hero">
                 </div>
                 <div class="profile-details">
-                <?php if ($message) : ?>
+                    <?php if ($message) : ?>
                         <div class="alert <?php echo $messageClass; ?>">
                             <?php echo $message; ?>
                         </div>
@@ -154,7 +154,7 @@ mysqli_close($con);
                     <div class="update">
                         <button id="editBtn" class="btn cta">Edit</button>
                     </div>
-                    
+
                 </div>
 
             </div>
@@ -191,7 +191,7 @@ mysqli_close($con);
             <form action="" method="POST" onsubmit="return validateForm()">
                 <div class="form-group">
                     <label for="fname">First Name:</label>
-                    <input type="text"id="fname" name="fname" value="<?php echo htmlspecialchars($fname); ?>" required>
+                    <input type="text" id="fname" name="fname" value="<?php echo htmlspecialchars($fname); ?>" required>
                 </div>
                 <div class="form-group">
                     <label for="sname">Surname:</label>
@@ -211,7 +211,7 @@ mysqli_close($con);
                 </div>
                 <div class="form-group">
                     <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" >
+                    <input type="password" id="password" name="password" placeholder="Enter your password">
                     <span id="toggle-password">Show</span>
                 </div>
                 <div class="form-group">
@@ -226,9 +226,8 @@ mysqli_close($con);
             </form>
         </div>
     </div>
-        
-    <script src="../js/profile.js"></script>
+
+    <script src="./js/profile.js"></script>
 </body>
 
 </html>
-

@@ -1,6 +1,7 @@
 <?php
 include 'connection.php';
-
+$message = '';
+$messageClass = '';
 if (isset($_GET['deleteid'])) {
     $id = $_GET['deleteid'];
 
@@ -10,7 +11,8 @@ if (isset($_GET['deleteid'])) {
 
     if (!$resultDeleteSubscribers) {
         // Handle the case where the query failed
-        die("Error deleting subscribers: " . mysqli_error($con));
+        $message = 'Error deleting subscribers';
+        $messageClass = 'alert-error';
     }
 
     // Then, delete associated listings
@@ -18,8 +20,9 @@ if (isset($_GET['deleteid'])) {
     $resultDeleteListings = mysqli_query($con, $sqlDeleteListings);
 
     if (!$resultDeleteListings) {
-        // Handle the case where the query failed
-        die("Error deleting listings: " . mysqli_error($con));
+        // Handle the case where the query failed;
+        $message = 'Error deleting listings';
+        $messageClass = 'alert-error';
     }
 
     // Finally, delete the user
@@ -28,7 +31,8 @@ if (isset($_GET['deleteid'])) {
 
     if (!$resultDeleteUser) {
         // Handle the case where the query failed
-        die("Error deleting user: " . mysqli_error($con));
+        $message = 'Error deleting user';
+        $messageClass = 'alert-error';
     }
 
     // Redirect to a page after successful deletion

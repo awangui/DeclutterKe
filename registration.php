@@ -46,11 +46,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="../css/login.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-    <link rel="manifest" href="./site.webmanifest">
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
     <title>Decluttering Ke</title>
     <style>
         .error-message {
@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div id="logo">
         <a href="index.php" class="logo">
-            <img src="../images/declutterLogo.png" class="icon">
+            <img src="./images/declutterLogo.png" class="icon">
             <b><span>Declutter</span> Ke</b>
         </a>
     </div>
@@ -83,5 +83,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <p>Already have an account?<span><a href="login.html">Login</a></span></p>
     </form>
 </body>
-<script src="../js/script.js"></script>
+<script src="./js/script.js"></script>
+
 </html>
