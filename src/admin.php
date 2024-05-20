@@ -146,14 +146,8 @@ while ($row = $result->fetch_assoc()) {
  <div class="main-content" style="display: block;">
  <h2>Dashboard</h2>
         <h1>Overview</h1>
-        <style>
-            .widgets {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 20px;
-            }
-        </style>
-        <div class="widgets">
+        <div class="header">
+
 <div class="widget">
     <h4>Total Users</h4>
     <p><?php echo $totalUsers; ?></p>
@@ -171,6 +165,11 @@ while ($row = $result->fetch_assoc()) {
     <p><?php echo $totalSellers; ?></p>
 </div>
 <div class="widget">
+                <div class="chart-container">
+                    <canvas id="sellersChart"></canvas>
+                </div>
+            </div>
+<div class="widget">
     <h4>Regular Users</h4>
     <p><?php echo $totalBuyers; ?></p>
 </div>
@@ -179,28 +178,25 @@ while ($row = $result->fetch_assoc()) {
     <p><?php echo $totalBrands; ?></p>
 </div>
 
-</div>
-<h2>Users</h2>
-<div class="row">
-            <div class="col">
+
+
                 <h2>Number of users joined each month</h2>
                 <div class="widget">
                     <canvas id="usersByMonthChart"></canvas>
                 </div>
-            </div>
-        </div>
+
         
         <h2>Categories</h2>
-        <div class="header"> 
+
         <div class="widget">
                 <h3>Number of listings per category</h3>
                 <canvas id="categoryChart"></canvas>
             </div>
-            <div class="widget">
+            <!-- <div class="widget"> -->
                 <!-- most popular category -->
-                <h2>Most popular Category</h2>
+                <!-- <h2>Most popular Category</h2>
                 <p><?php echo $most_listings['category_name']; ?></p>
-            </div>
+            </div> -->
             <div class="widget">
     <h4>Total categories</h4>
     <p><?php echo $totalCategories?></p>
@@ -214,15 +210,14 @@ while ($row = $result->fetch_assoc()) {
                     <?php } ?>
                 </ul>
             </div>
-        </div>
+
         <h2>Listings</h2> 
-        <div class="header"> 
+
         <div class="widget">
                 <h3>Number of listings per category</h3>
                 <canvas id="listingChart"></canvas>
             </div>
-</div>
-<div class="header">
+
         <div class="widget">
             <!-- most popular brand -->
             <h2>Most popular Brand</h2>
@@ -242,6 +237,7 @@ while ($row = $result->fetch_assoc()) {
             <canvas id="brandChart"></canvas>
         </div>
     </div>
+ </div>
 
 <script>
     
@@ -283,8 +279,8 @@ var ctxx = document.getElementById('categoryChart').getContext('2d');
                 datasets: [{
                     label: 'Number of Listings',
                     data: <?php echo json_encode($chart_values); ?>,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1
                 }]
             },
@@ -306,8 +302,8 @@ var ctxx = document.getElementById('categoryChart').getContext('2d');
                     datasets: [{
                         label: 'Number of Listings',
                         data: <?php echo json_encode($chart_values); ?>,
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
                         borderWidth: 1
                     }]
                 },
@@ -329,8 +325,8 @@ var ctxx = document.getElementById('categoryChart').getContext('2d');
             datasets: [{
                 label: 'Number of Listings',
                 data: <?php echo json_encode($chart_values); ?>,
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1
             }]
         },
@@ -343,4 +339,44 @@ var ctxx = document.getElementById('categoryChart').getContext('2d');
             }
         }
     });
+    //sellers chart
+    const totalUsers = <?php echo $totalUsers; ?>;
+        const totalSellers = <?php echo $totalSellers; ?>;
+        const sellersPercentage = (totalSellers / totalUsers) * 100;
+
+        const sellersChartctx = document.getElementById('sellersChart').getContext('2d');
+        const sellerChart = new Chart(sellersChartctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Users', 'Sellers'],
+                datasets: [{
+                    label: 'Users vs Sellers',
+                    data: [totalUsers - totalSellers, totalSellers],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgb(245, 172, 4,0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(245, 172, 4, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Users vs Sellers'
+                },
+                animation: {
+                    animateScale: true,
+                    animateRotate: true
+                }
+            }
+        });
 </script>
