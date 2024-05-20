@@ -132,6 +132,7 @@ if (isset($_POST['submit'])) {
             <a href="about.php">About</a>
             <a href="#contact">Contact</a>
             <a href="listing.php" class="cta active">Add a Listing</a>
+            <a href="manage_listings.php">Manage Listings</a>
             <div class="credentials">
                 <a href="profile.php"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>
                 <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>

@@ -78,6 +78,12 @@ mysqli_close($con);
    
     <script src="../js/font-awesome.js" crossorigin="anonymous"></script>
     <title>User Profile</title>
+    <style>
+        .error-message {
+            color: red;
+            display: <?php echo isset($error_message) ? 'block' : 'none'; ?>;
+        }
+    </style>
 </head>
 
 <body>

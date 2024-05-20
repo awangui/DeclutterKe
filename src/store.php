@@ -26,26 +26,33 @@ require_once 'connection.php';
 
 <body>
     <section class="sticky-nav">
-        <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
-        <nav>
+    <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
+            <nav>
             <a href="index.php" class="logo">
                 <img src="../images/declutterLogo.png" class="icon">
                 <b><span>Declutter</span> Ke</b>
             </a>
-            <a href="index.php">Home</a>
+            <a href="index.php" >Home</a>
             <a href="store.php" class="active">Store</a>
-            <a href="about.php">About</a>
+            <a href="about.php" >About</a>
             <a href="contact.php">Contact</a>
-            <a href="listing.php" class="cta">Add a Listing</a>
+            
             <?php if (isset($_SESSION['user_id'])) { ?>
+                <?php if ($_SESSION['user_role'] == 2) { ?>
+                   
+                    <a href="listing.php" class="cta">Add a Listing</a>
+                    <a href="manage_listings.php" >Manage Listings</a>
+                <?php } else { ?>
+                    <a href="listing.php" class="cta">Add a Listing</a>
+                <?php } ?>
                 <div class="credentials">
-                    <a href="profile.php"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>
-                    <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
+                    <a href="profile.php" id="myBtn"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>
+                    <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket"></i> Logout</a>
                 </div>
-            <?php } else {
-            ?>
+            <?php } else { ?>
+                <a href="listing.php" class="cta">Add a Listing</a>
                 <div class="credentials">
-                    <a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
+                    <a href="login.html"><i class="icon fa-solid fa-right-to-bracket"></i> Login</a>
                     <a href="registration.php"><i class="icon fa-regular fa-user"></i> Sign Up</a>
                 </div>
             <?php } ?>
