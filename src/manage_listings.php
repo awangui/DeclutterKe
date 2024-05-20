@@ -1,6 +1,8 @@
 <?php
 session_start();
 require_once 'connection.php';
+$message = '';
+$messageClass = '';
 
 // Check if the user is not logged in, redirect to the login page
 if (!isset($_SESSION['user_id'])) {
@@ -18,6 +20,12 @@ if (isset($_SESSION['user_id'])) {
     $listings_result = mysqli_stmt_get_result($stmt);
     $listings = mysqli_fetch_all($listings_result, MYSQLI_ASSOC);
     mysqli_stmt_close($stmt);
+}
+
+// Check if there's a message in the URL parameters
+if (isset($_GET['message']) && isset($_GET['messageClass'])) {
+    $message = urldecode($_GET['message']);
+    $messageClass = urldecode($_GET['messageClass']);
 }
 
 // Close the database connection
@@ -70,6 +78,11 @@ mysqli_close($con);
 <div class="container">
     <h2>Listings Posted</h2>
     <p style="text-align: center;">View and manage your listings</p>
+    <?php if ($message) : ?>
+        <div class="alert <?php echo $messageClass; ?>">
+            <?php echo $message; ?>
+        </div>
+    <?php endif; ?>
     <button class="btn add" onclick="window.location.href='listing.php'">Post a new ad</button>
     <div class="listings">
         <?php if ($listings && count($listings) > 0) : ?>
@@ -107,7 +120,7 @@ mysqli_close($con);
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Confirm Deletion</h2>
-            <p>Are you sure you want to delete this <?php echo $listing['name']?> listing?</p>
+            <p>Are you sure you want to delete this listing?</p>
             <button id="confirmDeleteButton" class="btn-confirm">Confirm</button>
             <button class="btn-cancel close">Cancel</button>
         </div>
@@ -115,35 +128,11 @@ mysqli_close($con);
 </div>
 <script>
     document.querySelectorAll('.delete').forEach(function(button) {
-        button.addEventListener
-        ('click', function() {
+        button.addEventListener('click', function() {
             var id = this.getAttribute('data-id');
             document.getElementById('confirmDeleteButton').setAttribute('data-id', id);
             document.getElementById('deleteModal').style.display = "block";
         });
-    });
-
-    // Handle deletion confirmation
-    document.getElementById('confirmDeleteButton').addEventListener('click', function() {
-        var id = this.getAttribute('data-id');
-        
-        // Send an AJAX request to delete_listing.php with the listing id
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "delete_listing.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                // Handle the response from delete_listing.php
-                // For example, you can display a success message or update the listings dynamically
-                // For simplicity, let's just log the response to the console for now
-                console.log(xhr.responseText);
-                // Close the modal after handling the deletion confirmation
-                document.getElementById('deleteModal').style.display = "none";
-                // Reload the page to reflect the changes
-                window.location.reload();
-            }
-        };
-        xhr.send("deleteid=" + id);
     });
 
     // Close the delete modal when the user clicks on the close button
@@ -159,24 +148,32 @@ mysqli_close($con);
         }
     };
 
-            // JavaScript to handle delete button clicks
-            document.querySelectorAll('.deleteBtn').forEach(function(button) {
-            button.addEventListener('click', function() {
-                var listing_id = this.getAttribute('data-id');
-                document.getElementById('confirmDeleteButton').setAttribute('data-id', listing_id);
-                document.getElementById('deleteModal').style.display = "block";
-            });
-        });
-
-        // JavaScript to handle confirm delete button click
-        document.getElementById('confirmDeleteButton').addEventListener('click', function() {
+    // JavaScript to handle delete button clicks
+    document.querySelectorAll('.deleteBtn').forEach(function(button) {
+        button.addEventListener('click', function() {
             var listing_id = this.getAttribute('data-id');
-            window.location.href = `delete_listing.php?deleteid=${listing_id}`;
+            document.getElementById('confirmDeleteButton').setAttribute('data-id', listing_id);
+            document.getElementById('deleteModal').style.display = "block";
         });
-        // JavaScript to handle close button click
-        document.querySelector('.close').addEventListener('click', function() {
-            document.getElementById('deleteModal').style.display = "none";
-        });
+    });
+
+    // JavaScript to handle confirm delete button click
+    document.getElementById('confirmDeleteButton').addEventListener('click', function() {
+        var listing_id = this.getAttribute('data-id');
+        window.location.href = `delete_listing.php?deleteid=${listing_id}`;
+    });
+//
+// Close the delete modal when the user clicks on the close button
+function closeModal() {
+        document.getElementById('deleteModal').style.display = "none";
+    }
+document.querySelectorAll('.close').forEach(function(button) {
+        button.addEventListener('click', closeModal);
+    });
+    // JavaScript to handle close button click
+    document.querySelector('.close').addEventListener('click', function() {
+        document.getElementById('deleteModal').style.display = "none";
+    });
 </script>
 </body>
 </html>

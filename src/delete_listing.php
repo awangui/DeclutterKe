@@ -1,22 +1,23 @@
 <?php
 include 'connection.php';
-$message = '';
-$messageClass = '';
+
 if (isset($_GET['deleteid'])) {
     $id = $_GET['deleteid'];
 
-    $sqlDeleteListing= "DELETE FROM listings WHERE listing_id = $id";
+    $sqlDeleteListing = "DELETE FROM listings WHERE listing_id = $id";
     $resultDeleteListing = mysqli_query($con, $sqlDeleteListing);
-    if (!$resultDeleteUser) {
+    
+    if (!$resultDeleteListing) {
         // Handle the case where the query failed
         $message = 'Error deleting listing';
         $messageClass = 'alert-error';
-    }
-    else{
+    } else {
         $message = 'Listing deleted successfully';
         $messageClass = 'alert-success';
     }
-    // Redirect to a page after successful deletion
-    header("Location: manage_listings.php?message=$message&messageClass=$messageClass");
+    
+    // Redirect to manage_listings.php with the message and message class as URL parameters
+    header("Location: manage_listings.php?message=" . urlencode($message) . "&messageClass=" . urlencode($messageClass));
     exit();
 }
+?>

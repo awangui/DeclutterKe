@@ -90,35 +90,36 @@ mysqli_close($con);
 
     <section class="navigation" id="navigation">
 
-        <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
-        <nav>
+    <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
+            <nav>
             <a href="index.php" class="logo">
                 <img src="../images/declutterLogo.png" class="icon">
                 <b><span>Declutter</span> Ke</b>
             </a>
-            <a href="index.php">Home</a>
+            <a href="index.php" >Home</a>
             <a href="store.php">Store</a>
-            <a href="about.php">About</a>
+            <a href="about.php" >About</a>
             <a href="contact.php">Contact</a>
-            <a href="listing.php" class="cta">Add a Listing</a>
-            <?php
-            // Check if the user is logged in
-            if (isset($_SESSION['user_id'])) {
-                // Check if the user role is set to 2 which refers to sellers
-
-                // Display the profile link
-                echo '<div class="credentials">';
-                echo '<a href="profile.php" class="active"><i class="icon fa-regular fa-user"></i>' . $_SESSION['name'] . '</a>';
-                echo '<a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>';
-                echo '</div>';
-            } else {
-                // Display the login and signup links for users who are not logged in
-                echo '<div class="credentials">';
-                echo '<a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>';
-                echo '<a href="registration.php"><i class="icon fa-regular fa-user"></i> Sign Up</a>';
-                echo '</div>';
-            }
-            ?>
+            
+            <?php if (isset($_SESSION['user_id'])) { ?>
+                <?php if ($_SESSION['user_role'] == 2) { ?>
+                   
+                    <a href="listing.php">Add a Listing</a>
+                    <a href="manage_listings.php" class="cta">Manage Listings</a>
+                <?php } else { ?>
+                    <a href="listing.php" class="cta">Add a Listing</a>
+                <?php } ?>
+                <div class="credentials">
+                    <a href="profile.php" class="active" id="myBtn"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>
+                    <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket"></i> Logout</a>
+                </div>
+            <?php } else { ?>
+                <a href="listing.php" class="cta">Add a Listing</a>
+                <div class="credentials">
+                    <a href="login.html"><i class="icon fa-solid fa-right-to-bracket"></i> Login</a>
+                    <a href="registration.php"><i class="icon fa-regular fa-user"></i> Sign Up</a>
+                </div>
+            <?php } ?>
         </nav>
     </section>
     <div class="container">
