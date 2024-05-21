@@ -4,15 +4,11 @@ require_once 'navbar.php';
 $message = '';
 $messageClass = '';
 
-// Check for success or error messages in the URL query parameters
-if (isset($_GET['success'])) {
-    $message = htmlspecialchars($_GET['success']);
-    $messageClass = 'success';
-} elseif (isset($_GET['error'])) {
-    $message = htmlspecialchars($_GET['error']);
-    $messageClass = 'error';
+// Check if there's a message in the URL parameters
+if (isset($_GET['message']) && isset($_GET['messageClass'])) {
+    $message = urldecode($_GET['message']);
+    $messageClass = urldecode($_GET['messageClass']);
 }
-
 // Function to get role label based on role number
 function getRoleLabel($role)
 {
@@ -53,38 +49,14 @@ if ($selectedRole !== 'All') {
     $sqlFetchUsers .= " WHERE role = '$selectedRole'";
 }
 $resultFetchUsers = mysqli_query($con, $sqlFetchUsers);
-
 if (!$resultFetchUsers) {
     // Handle the case where the query failed
     die("Error fetching users: " . mysqli_error($con));
 }
 
-// Fetch data for bar chart
-$sqlFetchUsersByMonth = "SELECT MONTH(date) AS month, YEAR(date) AS year, COUNT(*) AS totalUsers
-                         FROM users
-                         GROUP BY YEAR(date), MONTH(date)
-                         ORDER BY year DESC, month DESC";
-$resultFetchUsersByMonth = mysqli_query($con, $sqlFetchUsersByMonth);
-
-// Check for query errors
-if (!$resultFetchUsersByMonth) {
-    // Handle error
-    die("Error fetching data: " . mysqli_error($con));
+if (!$resultFetchUsers) {
+    die("Error fetching users: " . mysqli_error($con));
 }
-
-// Initialize arrays to store labels and data for chart
-$labels = [];
-$data = [];
-
-// Fetch data and populate arrays
-while ($row = mysqli_fetch_assoc($resultFetchUsersByMonth)) {
-    // Generate label in "Month Year" format
-    $label = date('M Y', mktime(0, 0, 0, $row['month'], 1, $row['year']));
-    $labels[] = $label;
-    // Store total users for the month
-    $data[] = $row['totalUsers'];
-}
-
 // Close connection
 mysqli_close($con);
 ?>
@@ -101,8 +73,8 @@ mysqli_close($con);
 
 <body>
     <div class="main-content" >
-        <?php if ($message): ?>
-            <div class="alert <?= $messageClass ?>"><?= $message ?></div>
+    <?php if ($message): ?>
+            <div class="alert <?= htmlspecialchars($messageClass) ?>"><?= htmlspecialchars($message) ?></div>
         <?php endif; ?>
 
         <div class="row">
@@ -143,7 +115,8 @@ mysqli_close($con);
                             }
                             ?>
                         </h2>
-                        <button id="downloadCSVButton"> <i class="fa-solid fa-download"></i> Download</button>
+                         <!-- Search Category -->
+              <button id="downloadCSVButton"> <i class="fa-solid fa-download"></i> Download</button>                
                         <section class='table-display'>
                         <table>
                             <thead>
@@ -159,6 +132,7 @@ mysqli_close($con);
                             </thead>
                             <tbody>
                                 <?php
+                                
                                 while ($row = mysqli_fetch_assoc($resultFetchUsers)) {
                                     ?>
                                     <tr>
@@ -180,6 +154,7 @@ mysqli_close($con);
                                         echo " <a href='#' data-id='$id' class='btn deleteBtn btn-danger'>Delete</a></td>";
                                         
                                     }
+                                    
                                     else{
                                          
                                         echo "<td><a href='#' data-id='{$row['UserId']}' data-name='{$row['firstName']}' data-email='{$row['email']}' data-date='{$row['date']}' data-role='" . getRoleLabel($row['role']) . "' data-listings='{$row['totalListings']}' class='btn viewBtn'>View</a></td>";
