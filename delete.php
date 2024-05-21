@@ -1,7 +1,9 @@
 <?php
 include 'connection.php';
+
 $message = '';
-$messageClass = '';
+$messageClass = 'alert-success'; // Default to success
+
 if (isset($_GET['deleteid'])) {
     $id = $_GET['deleteid'];
 
@@ -20,7 +22,7 @@ if (isset($_GET['deleteid'])) {
     $resultDeleteListings = mysqli_query($con, $sqlDeleteListings);
 
     if (!$resultDeleteListings) {
-        // Handle the case where the query failed;
+        // Handle the case where the query failed
         $message = 'Error deleting listings';
         $messageClass = 'alert-error';
     }
@@ -33,10 +35,12 @@ if (isset($_GET['deleteid'])) {
         // Handle the case where the query failed
         $message = 'Error deleting user';
         $messageClass = 'alert-error';
+    } else {
+        $message = 'User deleted successfully';
     }
 
     // Redirect to a page after successful deletion
-    header("Location: users.php");
+    header("Location: users.php?message=" . urlencode($message) . "&messageClass=" . urlencode($messageClass));
     exit();
 }
 ?>

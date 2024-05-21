@@ -64,7 +64,11 @@
 
 <!-- Add a button to trigger the download -->
 <button id="downloadCSVButton"> <i class="fa-solid fa-download"></i> Download</button>
-
+<style>
+    .table-display th{
+       background-color: #ffa500;
+    }
+</style>
 <!-- Listings Table -->
 <!-- Listings Table -->
 <section class='table-display'>
