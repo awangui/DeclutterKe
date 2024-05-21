@@ -3,6 +3,7 @@ session_start();
 require_once 'connection.php';
 $message = '';
 $messageClass = '';
+
 // Function to fetch categories from the database
 function getCategories($con)
 {
@@ -33,6 +34,9 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+// Initialize variables to retain form data
+$name = $category = $sub_category = $brand = $color = $years_used = $condition = $price = $description = $phone = $city = $town = "";
+
 // Check if the form is submitted
 if (isset($_POST['submit'])) {
     // Retrieve form data
@@ -49,54 +53,56 @@ if (isset($_POST['submit'])) {
     $city = htmlspecialchars($_POST['city']);
     $town = htmlspecialchars($_POST['town']);
 
-    // Insert category if it doesn't exist and get its ID
-    $categoryId = $_POST['category'];
-
-    // Insert brand if it doesn't exist and get its ID
-    $brandId = $_POST['brand'];
-
-    // File upload
-    $file_names = array();
-    $file_count = count($_FILES['images']['name']);
-    for ($i = 0; $i < $file_count; $i++) {
-        $file_name = $_FILES['images']['name'][$i];
-        $temp_name = $_FILES['images']['tmp_name'][$i];
-        $folder = './uploads/' . $file_name;
-        if (move_uploaded_file($temp_name, $folder)) {
-            $file_names[] = $file_name;
+    // Check if any required fields are empty
+    if (
+        empty($name) || empty($category) || empty($sub_category) || empty($brand) || empty($color) ||
+        empty($years_used) || empty($condition) || empty($price) || empty($description) || empty($phone) ||
+        empty($city) || empty($town)
+    ) {
+        $error_message = "Please make sure all fields are filled";
+    } else {
+        // File upload
+        $file_names = array();
+        $file_count = count($_FILES['images']['name']);
+        for ($i = 0; $i < $file_count; $i++) {
+            $file_name = $_FILES['images']['name'][$i];
+            $temp_name = $_FILES['images']['tmp_name'][$i];
+            $folder = './uploads/' . $file_name;
+            if (move_uploaded_file($temp_name, $folder)) {
+                $file_names[] = $file_name;
+            }
         }
-    }
 
-    // Insert listing with all photos
-    $photos = implode(',', $file_names); // Convert array of file names to a comma-separated string
+        // Insert listing with all photos
+        $photos = implode(',', $file_names); // Convert array of file names to a comma-separated string
 
-    // Retrieve the user's ID from the session
-    if (isset($_SESSION['user_id'])) {
-        $userId = $_SESSION['user_id'];
+        // Retrieve the user's ID from the session
+        if (isset($_SESSION['user_id'])) {
+            $userId = $_SESSION['user_id'];
 
-        // Update the user's category to 'seller'
-        $update_query = "UPDATE users SET `role` = '2' WHERE UserId = ?";
-        $stmt = mysqli_prepare($con, $update_query);
-        mysqli_stmt_bind_param($stmt, "i", $userId);
-        mysqli_stmt_execute($stmt);
+            // Update the user's category to 'seller'
+            $update_query = "UPDATE users SET `role` = '2' WHERE UserId = ?";
+            $stmt = mysqli_prepare($con, $update_query);
+            mysqli_stmt_bind_param($stmt, "i", $userId);
+            mysqli_stmt_execute($stmt);
 
+            // Insert the listing into the database, including the user's ID as the seller_id
+            $insert_query = "INSERT INTO listings (name, category_id, sub_category, brand_id, color, years_used, `condition`, price, description, photos, phone_number, city, town, seller_id) 
+                             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = mysqli_prepare($con, $insert_query);
+            mysqli_stmt_bind_param($stmt, "sssssssdsssssi", $name, $category, $sub_category, $brand, $color, $years_used, $condition, $price, $description, $photos, $phone, $city, $town, $userId);
 
-        // Insert the listing into the database, including the user's ID as the seller_id
-        $insert_query = "INSERT INTO listings (name, category_id, sub_category, brand_id, color, years_used, `condition`, price, description, photos, phone_number, city, town, seller_id) 
-                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $stmt = mysqli_prepare($con, $insert_query);
-        mysqli_stmt_bind_param($stmt, "sssssssdsssssi", $name, $categoryId, $sub_category, $brandId, $color, $years_used, $condition, $price, $description, $photos, $phone, $city, $town, $userId);
-
-        if (mysqli_stmt_execute($stmt)) {
-            $message = "Listing uploaded successfully.";
-            $messageClass = "alert-success";
+            if (mysqli_stmt_execute($stmt)) {
+                $message = "Listing uploaded successfully.";
+                $messageClass = "alert-success";
+            } else {
+                $message = "Failed to upload listing " . $con->error;
+                $messageClass = "alert-error";
+            }
         } else {
-            $message = "Failed to upload listing " . $con->error;
+            $message = "You are not logged in" . $con->error;
             $messageClass = "alert-error";
         }
-    } else {
-        $message = "You are not logged in" . $con->error;
-        $messageClass = "alert-error";
     }
 }
 ?>
@@ -114,12 +120,18 @@ if (isset($_POST['submit'])) {
     <link rel="manifest" href="site.webmanifest">
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/listing.css">
-    <script src="./js/font-awesome.js" crossorigin=" anonymous"></script>
+    <script src="./js/font-awesome.js" crossorigin="anonymous"></script>
     <title>Add Listing</title>
+    <style>
+        .error-message {
+            color: red;
+            display: <?php echo isset($error_message) ? 'block' : 'none'; ?>;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
-
     <section class="sticky-nav">
         <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
         <nav>
@@ -130,14 +142,13 @@ if (isset($_POST['submit'])) {
             <a href="index.php">Home</a>
             <a href="store.php">Store</a>
             <a href="about.php">About</a>
-            <a href="#contact">Contact</a>
+            <a href="contact.php">Contact</a>
             <a href="listing.php" class="cta active">Add a Listing</a>
             <a href="manage_listings.php">Manage Listings</a>
             <div class="credentials">
                 <a href="profile.php"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>
                 <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
             </div>
-
         </nav>
     </section>
 
@@ -145,97 +156,85 @@ if (isset($_POST['submit'])) {
         <div class="listing-container">
             <div class="listing-container">
                 <h2>Add a listing</h2>
-                <?php if ($message) : ?>
-                    <div class="alert <?php echo $messageClass; ?>" style="text-align:center">
-                        <?php echo $message; ?>
-                    </div>
-                <?php endif; ?>
+                <div id="error-message" class="error-message"><?php echo isset($error_message) ? $error_message : ''; ?></div>
                 <div class="details-container">
                     <div class="details" id="productDetails">
                         <label for="name">Product Name:</label>
-                        <input type="text" id="name" name="name" required>
+                        <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($name); ?>">
                         <label for="photos">Photos:</label>
-                        <input type="file" id="photos" name="images[]" multiple accept="image/*" required>
+                        <input type="file" id="photos" name="images[]" multiple accept="image/*">
                         <!-- div to preview images -->
                         <div id="imagePreview"></div>
                         <label for="category">Category:</label>
-                        <select id="category" name="category" required>
+                        <select id="category" name="category">
                             <?php
                             // Fetch categories from the database and populate the dropdown
                             $categories = getCategories($con);
                             foreach ($categories as $category) {
-                                echo "<option value=\"" . $category['category_id'] . "\">" . $category['category_name'] . "</option>";
+                                echo "<option value=\"" . $category['category_id'] . "\" " . ($category['category_id'] == $category ? "selected" : "") . ">" . $category['category_name'] . "</option>";
                             }
                             ?>
                         </select>
-
                         <label for="sub-category">Sub-Category:</label>
-                        <select id="sub-category" name="sub-category" required>
-                            <option value="fridges">Fridges</option>
-                            <option value="phones">Phones</option>
-                            <option value="tables">Tables</option>
-                            <option value="phones">Phones</option>
-                            <option value="Speakers">Speakers</option>
-                            <option value="beds">Beds</option>
-                            <option value="TVs">TVs</option>
-                            <option value="sofas">sofas</option>
-                            <option value="Microwaves">Microwaves</option>
-                            <option value="other">Other</option>
+                        <select id="sub-category" name="sub-category">
+                            <option value="fridges" <?php echo ($sub_category == 'fridges') ? 'selected' : ''; ?>>Fridges</option>
+                            <option value="phones" <?php echo ($sub_category == 'phones') ? 'selected' : ''; ?>>Phones</option>
+                            <option value="tables" <?php echo ($sub_category == 'tables') ? 'selected' : ''; ?>>Tables</option>
+                            <option value="Speakers" <?php echo ($sub_category == 'Speakers') ? 'selected' : ''; ?>>Speakers</option>
+                            <option value="beds" <?php echo ($sub_category == 'beds') ? 'selected' : ''; ?>>Beds</option>
+                            <option value="TVs" <?php echo ($sub_category == 'TVs') ? 'selected' : ''; ?>>TVs</option>
+                            <option value="sofas" <?php echo ($sub_category == 'sofas') ? 'selected' : ''; ?>>Sofas</option>
+                            <option value="Microwaves" <?php echo ($sub_category == 'Microwaves') ? 'selected' : ''; ?>>Microwaves</option>
+                            <option value="other" <?php echo ($sub_category == 'other') ? 'selected' : ''; ?>>Other</option>
                         </select>
-
                         <label for="brand">Brand:</label>
-                        <select id="brand" name="brand" required>
+                        <select id="brand" name="brand">
                             <?php
                             // Fetch brands from the database and populate the dropdown
                             $brands = getBrands($con);
                             foreach ($brands as $brand) {
-                                echo "<option value=\"" . $brand['brand_id'] . "\">" . $brand['brand_name'] . "</option>";
+                                echo "<option value=\"" . $brand['brand_id'] . "\" " . ($brand['brand_id'] == $brand ? "selected" : "") . ">" . $brand['brand_name'] . "</option>";
                             }
                             ?>
                         </select>
                     </div>
                     <div id="rightDetails">
                         <label for="color">Color:</label>
-                        <input type="text" id="color" name="color" required>
-
+                        <input type="text" id="color" name="color" value="<?php echo htmlspecialchars($color); ?>">
                         <label for="yearsUsed">Number of Years Used:</label>
-                        <input type="number" id="yearsUsed" name="yearsUsed" required>
-
-
+                        <input type="number" id="yearsUsed" name="yearsUsed" value="<?php echo htmlspecialchars($years_used); ?>">
                         <label for="condition">Condition:</label>
-                        <select id="condition" name="condition" required>
+                        <select id="condition" name="condition">
                             <option value="">Select the condition</option>
-                            <option value="new">Barely Used i.e almost new</option>
-                            <option value="fairly used">Fairly used</option>
-                            <option value="used">Used</option>
+                            <option value="new" <?php echo ($condition == 'new') ? 'selected' : ''; ?>>Barely Used i.e almost new</option>
+                            <option value="fairly used" <?php echo ($condition == 'fairly used') ? 'selected' : ''; ?>>Fairly used</option>
+                            <option value="used" <?php echo ($condition == 'used') ? 'selected' : ''; ?>>Used</option>
                         </select>
-
                         <label for="price">Price:</label>
-                        <input type="number" id="price" name="price" required>
-
+                        <input type="number" id="price" name="price" value="<?php echo htmlspecialchars($price); ?>">
                         <label for="description">Description:</label>
-                        <textarea id="description" name="description" rows="4" style="width: 100%;" placeholder="provide any more details necessary"></textarea>
+                        <textarea id="description" name="description" rows="4" style="width: 100%;" placeholder="provide any more details necessary"><?php echo htmlspecialchars($description); ?></textarea>
                         <div id="nextButtonContainer">
                             <button id="nextButton" type="button">Next</button>
                         </div>
                     </div>
                     <div class="details" id="contactDetails" style="display: none;">
                         <label for="city">Pickup City:</label>
-                        <input type="text" id="city" name="city" required placeholder="e.g Nairobi">
+                        <input type="text" id="city" name="city" placeholder="e.g Nairobi" value="<?php echo htmlspecialchars($city); ?>">
                         <label for="town">Location:</label>
-                        <input type="text" id="town" name="town" required placeholder="e.g Ruiru">
+                        <input type="text" id="town" name="town" placeholder="e.g Ruiru" value="<?php echo htmlspecialchars($town); ?>">
                         <label for="phone">Phone number:</label>
-                        <input type="number" id="phone" name="phone" required placeholder="provide the phone number you want to be contacted with">
+                        <input type="number" id="phone" name="phone" placeholder="provide the phone number you want to be contacted with" value="<?php echo htmlspecialchars($phone); ?>">
                     </div>
                     <div class="details" id="submitButtonContainer" style="display: none;">
                         <button id="backButton" type="button" style="display: none;">Back</button><br>
                         <button class="btn btn-submit" name="submit" type="submit">Submit</button>
                     </div>
+
                 </div>
             </div>
         </div>
     </form>
-
 
     <!-- Page dots -->
     <div class="page-dots">
@@ -262,6 +261,20 @@ if (isset($_POST['submit'])) {
 
                 reader.readAsDataURL(file);
             });
+        });
+
+        document.getElementById('nextButton').addEventListener('click', function() {
+            document.getElementById('productDetails').style.display = 'none';
+            document.getElementById('contactDetails').style.display = 'block';
+            document.getElementById('submitButtonContainer').style.display = 'block';
+            document.getElementById('backButton').style.display = 'inline';
+        });
+
+        document.getElementById('backButton').addEventListener('click', function() {
+            document.getElementById('productDetails').style.display = 'block';
+            document.getElementById('contactDetails').style.display = 'none';
+            document.getElementById('submitButtonContainer').style.display = 'none';
+            document.getElementById('backButton').style.display = 'none';
         });
     </script>
 </body>
