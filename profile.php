@@ -210,21 +210,73 @@ mysqli_close($con);
                     <input type="text" id="city" name="city" value="<?php echo htmlspecialchars($city); ?>" required>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password">
-                    <span id="toggle-password">Show</span>
-                </div>
-                <div class="form-group">
-                    <label for="confirm_password">Confirm Password:</label>
-                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password">
-                    <span id="toggle-confirm_password">Show</span>
-                </div>
-                <div class="form-group">
                     <button type="submit" name="submit" class="btn">Save Changes</button>
                 </div>
                 <div id="error-message" class="error-message"><?php echo isset($error_message) ? $error_message : ''; ?></div>
             </form>
         </div>
+     
+            <style>
+                .form-group {
+                    margin-bottom: 20px;
+                }
+
+                label {
+                    display: block;
+                    margin-bottom: 5px;
+                    font-weight: bold;
+                }
+
+                input[type="text"],
+                input[type="email"],
+                input[type="tel"],
+                input[type="password"] {
+                    width: 100%;
+                    padding: 10px;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                    box-sizing: border-box;
+                }
+
+                .btn {
+                    margin-top: 20px;
+                    padding: 10px 20px;
+                    background-color: #ffb610;
+                    color: white;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                }
+
+                .btn:hover {
+                    background-color: #3E3D3C;
+                }
+
+                .error-message {
+                    color: red;
+                    display: <?php echo isset($error_message) ? 'block' : 'none'; ?>;
+                }
+                    .modal-content {
+                        top: 20px;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        margin: auto;
+                        position: fixed;
+                        width: 50%;
+                        height: auto;
+                        overflow: auto;
+                        background-color: #fefefe;
+                        border: 1px solid #888;
+                        border-radius: 4px;
+                        padding: 20px;
+                    }
+                    .modal-content h3{
+                        text-align: center;
+                        color: #3E3D3C;
+                    }
+
+            </style>
     </div>
 
     <script src="./js/profile.js"></script>
