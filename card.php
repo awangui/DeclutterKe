@@ -14,18 +14,13 @@ if (!isset($_SESSION['user_id'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Property Details</title>
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
-  <link rel="manifest" href="site.webmanifest">
-  <script src="./js/font-awesome.js" crossorigin=" anonymous"></script>
+  <script src="./js/font-awesome.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./css/styles.css">
   <link rel="stylesheet" href="./css/card.css">
 </head>
 
 <body>
   <section class="sticky-nav">
-    <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
     <button class="menu" onclick="menuToggle()"><i class="fa fa-bars"></i></button>
     <nav>
       <a href="index.php" class="logo">
@@ -35,27 +30,12 @@ if (!isset($_SESSION['user_id'])) {
       <a href="index.php">Home</a>
       <a href="store.php" class="active">Store</a>
       <a href="about.php">About</a>
-      <a href="contact.php">Contact</a>
-
-      <?php if (isset($_SESSION['user_id'])) { ?>
-        <?php if ($_SESSION['user_role'] == 2) { ?>
-
-          <a href="listing.php">Add a Listing</a>
-          <a href="manage_listings.php" class="cta">Manage Listings</a>
-        <?php } else { ?>
-          <a href="listing.php" class="cta">Add a Listing</a>
-        <?php } ?>
-        <div class="credentials">
-          <a href="profile.php" id="myBtn"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>
-          <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket"></i> Logout</a>
-        </div>
-      <?php } else { ?>
-        <a href="listing.php" class="cta">Add a Listing</a>
-        <div class="credentials">
-          <a href="login.html"><i class="icon fa-solid fa-right-to-bracket"></i> Login</a>
-          <a href="registration.php"><i class="icon fa-regular fa-user"></i> Sign Up</a>
-        </div>
-      <?php } ?>
+      <a href="#contact">Contact</a>
+      <a href="listing.php" class="cta">Add a Listing</a>
+      <div class="credentials">
+        <a href="profile.php"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>
+        <a href="login.html"><i class="icon fa-solid fa-right-to-bracket "></i> Logout</a>
+      </div>
     </nav>
   </section>
 
@@ -77,11 +57,11 @@ if (!isset($_SESSION['user_id'])) {
         if ($row) {
           $photosArray = explode(',', $row['photos']); // Split photos field by comma
           echo '<div class="image-gallery">';
-          echo '<img src="./uploads/' . $photosArray[0] . '" alt="Product Image" id="mainImage">';
+          echo '<img src="uploads/' . $photosArray[0] . '" alt="Product Image" id="mainImage">';
 
           echo '<div class="gallery-row">';
           for ($i = 1; $i < count($photosArray); $i++) {
-            echo ' <img src="./uploads/' . $photosArray[$i] . '" alt="Product Image" onclick="swapImage(this)">';
+            echo ' <img src="uploads/' . $photosArray[$i] . '" alt="Product Image" onclick="swapImage(this)">';
           }
           echo '</div>';
           echo '</div>';
@@ -133,15 +113,14 @@ if (!isset($_SESSION['user_id'])) {
             <li class="list-group-item">Condition: <span> <?php echo $row['condition']; ?></span></li>
             <li class="list-group-item">Description:<span><?php echo $row['description']; ?></span></li>
           </div>
-
-          <!-- Price and contact information -->
+             <!-- Price and contact information -->
           <div class="price-contact">
             <li class="list-group-item">Price: <span><?php echo 'ksh ' . $row['price']; ?></span></li>
             <!-- Add contact options as needed -->
           </div>
 
-          <!-- Seller information -->
-          <div class="seller">
+        <!-- Seller information -->
+        <div class="seller">
             <h2>Seller details</h2>
             <div class="seller-info">
               <p class="seller-name"> <?php echo $row['firstName'] . ' ' .  $row['surname']; ?></p>
@@ -169,6 +148,9 @@ if (!isset($_SESSION['user_id'])) {
               </script>
             </a>
 
+            <a class="fa-regular fa-heart"></a>
+
+
             <!-- Button to open the modal -->
             <div id="myModal" class="modal">
 
@@ -193,7 +175,7 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
               </div>
             </div>
-            <button id="myBtn" class="btn buy-now-btn"><i class="fa-solid fa-basket-shopping"></i> Buy Now</button>
+            <button id="myBtn" class="btn buy-now-btn">Buy Now</button>
 
           </div>
 
@@ -257,7 +239,7 @@ if (!isset($_SESSION['user_id'])) {
             echo '<a href="card.php?listing_id=' . $related_row['listing_id'] . '">';
             echo '<div class="card">';
             // Fix image source path here
-            echo '<img src="./uploads/' . explode(',', $related_row['photos'])[0] . '" alt="Product Image" class="card-img-top">';
+            echo '<img src="uploads/' . explode(',', $related_row['photos'])[0] . '" alt="Product Image" class="card-img-top">';
             echo '<div class="card-body">';
             echo '<h3>' . $related_row['name'] . '</h3>'; // Display product name
             // Display other product details here
@@ -282,7 +264,7 @@ if (!isset($_SESSION['user_id'])) {
               echo '<a href="card.php?listing_id=' . $random_row['listing_id'] . '">';
               echo '<div class="card">';
               // Fix image source path here
-              echo '<img src="./uploads/' . $random_row['photos'] . '" alt="Product Image" class="card-img-top">';
+              echo '<img src="uploads/' . $random_row['photos'] . '" alt="Product Image" class="card-img-top">';
               echo '<div class="card-body">';
               echo '<h3>' . $random_row['name'] . '</h3>';
               // Display other product details here
@@ -324,9 +306,9 @@ if (!isset($_SESSION['user_id'])) {
           <ul>
             <h4><span>About Us</span></h4>
             <li><a href="about.php">Mission Statement</a></li>
-            <li><a href="about.php">Benefits of reselling</a></li>
+            <li><a href="#">Benefits of reselling</a></li>
             <li><a href="about.php">Our purpose</a></li>
-            <li><a href="about.php">Our buying process</a></li>
+            <li><a href="#">Our buying process</a></li>
           </ul>
         </div>
         <div class="contained">
