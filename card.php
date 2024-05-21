@@ -113,14 +113,14 @@ if (!isset($_SESSION['user_id'])) {
             <li class="list-group-item">Condition: <span> <?php echo $row['condition']; ?></span></li>
             <li class="list-group-item">Description:<span><?php echo $row['description']; ?></span></li>
           </div>
-             <!-- Price and contact information -->
+          <!-- Price and contact information -->
           <div class="price-contact">
             <li class="list-group-item">Price: <span><?php echo 'ksh ' . $row['price']; ?></span></li>
             <!-- Add contact options as needed -->
           </div>
 
-        <!-- Seller information -->
-        <div class="seller">
+          <!-- Seller information -->
+          <div class="seller">
             <h2>Seller details</h2>
             <div class="seller-info">
               <p class="seller-name"> <?php echo $row['firstName'] . ' ' .  $row['surname']; ?></p>
@@ -147,10 +147,6 @@ if (!isset($_SESSION['user_id'])) {
                 }
               </script>
             </a>
-
-            <a class="fa-regular fa-heart"></a>
-
-
             <!-- Button to open the modal -->
             <div id="myModal" class="modal">
 
