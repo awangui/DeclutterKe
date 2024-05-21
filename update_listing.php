@@ -159,7 +159,7 @@ if (isset($_POST['submit'])) {
             <a href="index.php">Home</a>
             <a href="store.php">Store</a>
             <a href="about.php">About</a>
-            <a href="#contact">Contact</a>
+            <a href="conact.php">Contact</a>
             <a href="listing.php" class="cta active">Add a Listing</a>
             <a href="manage_listings.php">Manage Listings</a>
             <div class="credentials">

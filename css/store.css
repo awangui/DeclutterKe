@@ -6,8 +6,8 @@ body {
 }
 
 .container {
-    margin-left: 22%;
-    margin-top: 40px;
+    margin-left: 25%;
+    margin-top: 10%;
     padding-bottom: 120px; 
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 250px));

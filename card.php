@@ -30,7 +30,7 @@ if (!isset($_SESSION['user_id'])) {
       <a href="index.php">Home</a>
       <a href="store.php" class="active">Store</a>
       <a href="about.php">About</a>
-      <a href="#contact">Contact</a>
+      <a href="conact.php">Contact</a>
       <a href="listing.php" class="cta">Add a Listing</a>
       <div class="credentials">
         <a href="profile.php"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>
@@ -154,7 +154,7 @@ if (!isset($_SESSION['user_id'])) {
               <div class="modal-content">
                 <span class="close">&times;</span>
                 <div class="modal-body">
-                  <h2>Payment</h2>
+                  <h2>Pay using M-pesa</h2>
                   <form action="./safaricom/stk_initiate.php" method="POST">
                     <div class="form-group">
                       <label for="amount">Amount</label>
@@ -162,7 +162,7 @@ if (!isset($_SESSION['user_id'])) {
                     </div>
                     <div class="form-group">
                       <label for="phone">Phone Number</label>
-                      <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter Phone Number">
+                      <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter your phone number">
                     </div>
                     <div class="form-group">
                       <button type="submit" class="btn btn-success" name="submit" value="submit">Pay</button>
@@ -171,7 +171,7 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
               </div>
             </div>
-            <button id="myBtn" class="btn buy-now-btn">Buy Now</button>
+            <button id="myBtn" class="btn buy-now-btn"> <i class="fa-solid fa-basket-shopping"> </i> Buy Now</button>
 
           </div>
 

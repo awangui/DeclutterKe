@@ -120,7 +120,7 @@ require_once 'connection.php';
                 $query = "SELECT l.*, b.brand_name, c.category_name 
               FROM listings l 
               JOIN brands b ON l.brand_id = b.brand_id 
-              JOIN categories c ON l.category_id = c.category_id";
+              JOIN categories c ON l.category_id = c.category_id limit 8";
                 $res = mysqli_query($con, $query);
                 while ($row = mysqli_fetch_assoc($res)) {
                     // Get the first image filename

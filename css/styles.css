@@ -548,7 +548,7 @@ nav a:hover {
 
 .row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 200px));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 1.5em;
     width: 100%;
 }

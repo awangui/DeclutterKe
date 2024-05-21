@@ -60,6 +60,10 @@ if (isset($_POST['submit'])) {
         empty($city) || empty($town)
     ) {
         $error_message = "Please make sure all fields are filled";
+    } elseif (empty($_FILES['images']['name'][0])) {
+        $error_message = "Please upload at least one photo";
+    } elseif (strlen($_POST['phone']) != 12) {
+        $error_message = "Phone number must be 12 digits long";
     } else {
         // File upload
         $file_names = array();
@@ -156,6 +160,11 @@ if (isset($_POST['submit'])) {
         <div class="listing-container">
             <div class="listing-container">
                 <h2>Add a listing</h2>
+                <?php if ($message) : ?>
+            <div class="alert <?php echo $messageClass; ?>"  style="text-align:center">
+                <?php echo $message; ?>
+            </div>
+        <?php endif; ?>
                 <div id="error-message" class="error-message"><?php echo isset($error_message) ? $error_message : ''; ?></div>
                 <div class="details-container">
                     <div class="details" id="productDetails">
