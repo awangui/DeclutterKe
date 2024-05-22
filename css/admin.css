@@ -116,7 +116,7 @@ b span {
 
 /* Main content styles */
 .main-content {
-    margin:0 10%;
+    margin: 0 10%;
     margin-top: 10%;
     padding: 20px;
     display: flex;
@@ -344,7 +344,7 @@ td {
 }
 
 th {
-    background-color:  grey;
+    background-color: grey;
     color: #fff;
 }
 
@@ -358,7 +358,8 @@ input[type=text] {
     margin: 8px 0;
     box-sizing: border-box;
 }
-#role{
+
+#role {
     width: 20%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -418,6 +419,43 @@ button:hover {
     font-size: 16px;
     color: #333;
 }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.widget {
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+
+}
+
+.widget h4,
+.widget h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.widget p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.main-content {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 8%;
+}
+
+.main-content h1,
+.main-content h2 {
+    text-align: center;
+}
+
 /* navgiation */
 #navigation {
     top: 0;
@@ -723,7 +761,7 @@ nav a:hover {
 }
 
 .btn-cancel {
- font-size: 16px;
+    font-size: 16px;
     background-color: #5cb85c;
     color: white;
 }
@@ -747,14 +785,15 @@ nav a:hover {
     border-color: #ebccd1;
 }
 
-  #downloadCSVButton{
-background-color: #3E3D3C;
-color: #fff;
-width: fit-content;
-  }
-  .btn {
+#downloadCSVButton {
+    background-color: #3E3D3C;
+    color: #fff;
+    width: fit-content;
+}
+
+.btn {
     background-color: rgb(90, 180, 90);
-    color:#fff;
+    color: #fff;
     padding: 10px 15px;
     border: none;
     cursor: pointer;
@@ -763,13 +802,18 @@ width: fit-content;
     display: inline-block;
     text-decoration: none;
 }
-.delete, .deleteBtn{
-background-color: #f44336e6;
+
+.delete,
+.deleteBtn {
+    background-color: #f44336e6;
 
 }
-.delete, .deleteBtn:hover {
+
+.delete,
+.deleteBtn:hover {
     background-color: #f44336;
 }
+
 .btn:hover {
     background-color: #ffa500;
 }

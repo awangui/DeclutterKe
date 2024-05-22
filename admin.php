@@ -1,7 +1,5 @@
 <?php
 require_once 'navbar.php';
-
-
 // Get total number of users
 $sql = "SELECT COUNT(*) AS totalUsers FROM users";
 $result = $con->query($sql);
@@ -16,7 +14,7 @@ if ($result->num_rows > 0) {
 $sql = "SELECT COUNT(*) AS totalCategories FROM categories";
 $result = $con->query($sql);
 if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
+    $row = $result->fetch_assoc();//fetches the result as an associative array
     $totalCategories = $row['totalCategories'];
 } else {
     $totalCategories = 0;
@@ -143,90 +141,20 @@ while ($row = $result->fetch_assoc()) {
     $chart_values[] = $row['total_listings'];
 }
 ?>
-<style>
-    .widget {
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        text-align: center;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        border-left: 6px solid #ffb610;
-    }
-
-    .widget h4,
-    .widget h3 {
-        margin-bottom: 10px;
-        font-size: 18px;
-    }
-
-    .widget p {
-        font-size: 24px;
-        font-weight: bold;
-        color: #333;
-    }
-</style>
-<style>
-    .grid-container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .widget {
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        text-align: center;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        border-left: 6px solid #ffb610;
-        margin: 20px;
-    }
-
-    .widget h4,
-    .widget h3 {
-        margin-bottom: 10px;
-        font-size: 18px;
-    }
-
-    .widget p {
-        font-size: 24px;
-        font-weight: bold;
-        color: #333;
-    }
-    .main-content{
-        width: 90%;
-        margin: 0 auto;
-        margin-top:8%;
-    }
-    .main-content h1, .main-content h2{
-        text-align: center;
-    }   
-</style>
 <div class="main-content" style="display: block;">
-    <h2>Dashboard</h2>
-    <h1>Overview</h1>
+    <h1>Admin Dashboard Overview</h1>
     <div class="header">
-
-
         <div class="widget">
-
-            <canvas id="usersByMonthChart"></canvas>
-        </div>
-
-
-
-
-        <div class="widget">
-            <h3>Number of listings per category</h3>
-            <canvas id="categoryChart"></canvas>
-        </div>
-        <!-- <div class="widget"> -->
-        <!-- most popular category -->
-        <!-- <h2>Most popular Category</h2>
-                <p><?php echo $most_listings['category_name']; ?></p>
-            </div> -->
-                <div class="widget">
             <h4>Total Users</h4>
             <p><?php echo $totalUsers; ?></p>
+        </div>
+        <div class="widget">
+            <h4>Total Sellers</h4>
+            <p><?php echo $totalSellers; ?></p>
+        </div>
+        <div class="widget">
+            <h4>Regular Users</h4>
+            <p><?php echo $totalBuyers; ?></p>
         </div>
         <div class="widget">
             <h4>Number of admins</h4>
@@ -237,23 +165,10 @@ while ($row = $result->fetch_assoc()) {
             <p><?php echo $totalListings ?></p>
         </div>
         <div class="widget">
-            <h4>Total Sellers</h4>
-            <p><?php echo $totalSellers; ?></p>
-        </div>
-      
-        <div class="widget">
-            <h4>Regular Users</h4>
-            <p><?php echo $totalBuyers; ?></p>
-        </div>
-        <div class="widget">
-            <h4>Total Brands</h4>
-            <p><?php echo $totalBrands; ?></p>
-        </div>
-        <div class="widget">
             <h4>Total categories</h4>
             <p><?php echo $totalCategories ?></p>
         </div>
-        <!-- top 3 categories -->
+
         <div class="widget">
             <h2>Top 3 Categories</h2>
             <ul>
@@ -263,17 +178,6 @@ while ($row = $result->fetch_assoc()) {
             </ul>
         </div>
         <div class="widget">
-            <h3>Number of listings per category</h3>
-            <canvas id="listingChart"></canvas>
-        </div>
-
-        <div class="widget">
-            <!-- most popular brand -->
-            <h2>Most popular Brand</h2>
-            <p><?php echo $most_listings['brand_name']; ?></p>
-        </div>
-        <!-- top 3 brands -->
-        <div class="widget">
             <h2>Top 3 Brands</h2>
             <ul>
                 <?php foreach ($top_brands as $brand) { ?>
@@ -282,21 +186,28 @@ while ($row = $result->fetch_assoc()) {
             </ul>
         </div>
         <div class="widget">
-            <h3>Number of listings per brand</h3>
-            <canvas id="brandChart"></canvas>
+            <h4>Total Brands</h4>
+            <p><?php echo $totalBrands; ?></p>
         </div>
         <div class="widget">
-        <h3>Number of listings per category</h3>
-            <div class="chart-container">
-                <canvas id="sellersChart"></canvas>
-            </div>
+            <canvas id="usersByMonthChart"></canvas>
+        </div>
+        <div class="widget">
+            <h3>Number of listings per brand</h3>
+            <canvas id="categoryChart"></canvas>
+        </div>
+
+        <!-- top 3 categories -->
+        <div class="widget">
+            <h3>Number of listings per category</h3>
+            <canvas id="listingChart"></canvas>
         </div>
     </div>
 </div>
 
 <script>
     // Function to display bar chart of users joined by month
-    const labels = <?php echo json_encode($labels); ?>;
+    const labels = <?php echo json_encode($labels); ?>; //convert php array to javascript array
     const data = <?php echo json_encode($data); ?>;
 
     const ctx = document.getElementById('usersByMonthChart').getContext('2d');
@@ -313,8 +224,9 @@ while ($row = $result->fetch_assoc()) {
             }]
         },
         options: {
+            //to make the chart
             responsive: true,
-            maintainAspectRatio: false,
+            maintainAspectRatio: false, //to make the chart responsive
             scales: {
                 yAxes: [{
                     ticks: {
@@ -325,8 +237,8 @@ while ($row = $result->fetch_assoc()) {
         }
     });
     //category chart
-    var ctxx = document.getElementById('categoryChart').getContext('2d');
-    var categoryChart = new Chart(ctxx, {
+    var categoryChartCtx = document.getElementById('categoryChart').getContext('2d');
+    var categoryChart = new Chart(categoryChartCtx, {
         type: 'bar',
         data: {
             labels: <?php echo json_encode($chart_labels); ?>,
@@ -352,7 +264,7 @@ while ($row = $result->fetch_assoc()) {
     var listingChart = new Chart(listingChartCtx, {
         type: 'bar',
         data: {
-            labels: <?php echo json_encode(array_values($categories)); ?>,
+            labels: <?php echo json_encode(array_values($categories)); ?>,//convert associative array to indexed array
             datasets: [{
                 label: 'Number of Listings',
                 data: <?php echo json_encode($chart_values); ?>,
@@ -390,47 +302,6 @@ while ($row = $result->fetch_assoc()) {
                     beginAtZero: true,
                     precision: 0
                 }
-            }
-        }
-    });
-    //sellers chart
-    const totalUsers = <?php echo $totalUsers; ?>;
-    const totalSellers = <?php echo $totalSellers; ?>;
-    const sellersPercentage = (totalSellers / totalUsers) * 100;
-
-    const sellersChartctx = document.getElementById('sellersChart').getContext('2d');
-    const sellerChart = new Chart(sellersChartctx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Users', 'Sellers'],
-            datasets: [{
-                label: 'Users vs Sellers',
-                data: [totalUsers - totalSellers, totalSellers],
-                backgroundColor: [
-                    'rgb(245, 172, 4,0.2)',
-                    'rgba(54, 162, 235, 0.2)'
-
-                ],
-                borderColor: [
-                    'rgba(245, 172, 4, 1)',
-                    'rgba(54, 162, 235, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: 'Users vs Sellers'
-            },
-            animation: {
-                animateScale: true,
-                animateRotate: true
             }
         }
     });
