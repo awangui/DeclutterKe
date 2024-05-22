@@ -264,7 +264,7 @@ if (!isset($_SESSION['user_id'])) {
               echo '<a href="card.php?listing_id=' . $random_row['listing_id'] . '">';
               echo '<div class="card">';
               // Fix image source path here
-              echo '<img src="uploads/' . $random_row['photos'] . '" alt="Product Image" class="card-img-top">';
+              echo '<img src="uploads/' . explode(',', $random_row['photos'])[0] . '" alt="Product Image" class="card-img-top">';
               echo '<div class="card-body">';
               echo '<h3>' . $random_row['name'] . '</h3>';
               // Display other product details here
