@@ -1,11 +1,20 @@
 <?php
 session_start();
 require_once 'connection.php';
-// Check if the user is not logged in, redirect to the login page
-// if (!isset($_SESSION['user_id'])) {
-//     header("Location: login.html");
-//     exit();
-// }
+//query parameters for filtering
+$name = isset($_GET['name']) ? $_GET['name'] : "";
+$brand = isset($_GET['brand']) ? $_GET['brand'] : "";
+$color = isset($_GET['color']) ? $_GET['color'] : "";
+$location = isset($_GET['location']) ? $_GET['location'] : "";
+$cat = isset($_GET['cat']) ? $_GET['cat'] : "";
+$new = isset($_GET['new']) ? $_GET['new'] : "";
+$fairly = isset($_GET['fairly']) ? $_GET['fairly'] : "";
+$used = isset($_GET['used']) ? $_GET['used'] : "";
+$years = isset($_GET['years']) ? $_GET['years'] : "";
+$sub_category = isset($_GET['sub-category']) ? $_GET['sub-category'] : "";
+$min_price = isset($_GET['min-price']) ? $_GET['min-price'] : "";
+$max_price = isset($_GET['max-price']) ? $_GET['max-price'] : "";
+$sort_by = isset($_GET['sort-by']) ? $_GET['sort-by'] : "";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +48,6 @@ require_once 'connection.php';
 
             <?php if (isset($_SESSION['user_id'])) { ?>
                 <?php if ($_SESSION['user_role'] == 2) { ?>
-
                     <a href="listing.php" class="cta">Add a Listing</a>
                     <a href="manage_listings.php">Manage Listings</a>
                 <?php } else { ?>
@@ -64,39 +72,33 @@ require_once 'connection.php';
             <h2>Filters</h2>
             <form action="store.php" method="GET">
                 <label for="name">Name:</label>
-                <input type="text" name="name" id="name" placeholder="Enter item name" value="<?php echo isset($_GET['name']) ? $_GET['name'] : ''; ?>" />
-
+                <input type="text" name="name" id="name" placeholder="Enter item name" value="<?php echo $name; ?>" />
                 <label for="brand">Brand:</label>
                 <select id="brand" name="brand">
                     <option value="any">Any</option>
                     <?php
                     // Fetch the list of brands from the database
-                    $num = mysqli_query($con, "SELECT DISTINCT LOWER(brand_name) AS brand FROM brands ORDER BY brand_name;");
+                    $num = mysqli_query($con, "SELECT DISTINCT LOWER(brand_name) AS brand FROM brands ORDER BY brand;");
                     while ($row = mysqli_fetch_assoc($num)) {
-                        echo "<option " . ($_GET['brand'] == $row['brand'] ? 'selected' : '') . " value='" . $row['brand'] . "'>" . $row['brand'] . "</option> \n";
+                        echo "<option " . ($brand == $row['brand'] ? 'selected' : '') . " value='" . $row['brand'] . "'>" . $row['brand'] . "</option> \n";
                     }
-                    var_dump($_POST);
                     ?>
                 </select>
-
-
                 <label for="color">Color:</label>
-                <input type="text" id="color" name="color" value="<?php echo isset($_GET['color']) ? $_GET['color'] : ''; ?>" placeholder="Enter color">
+                <input type="text" id="color" name="color" value="<?php echo $color; ?>" placeholder="Enter color">
 
                 <label for="location">Location:</label>
-                <input type="text" id="location" name="location" placeholder="Enter location" value="<?php echo isset($_GET['location']) ? $_GET['location'] : ''; ?>" />
+                <input type="text" id="location" name="location" placeholder="Enter location" value="<?php echo $location; ?>" />
 
                 <label for="category">Category:</label>
                 <select id="category" name="cat">
                     <option value="any">Any</option>
                     <?php
-                    $res = mysqli_query($con, "SELECT DISTINCT LOWER(category_name) AS category FROM categories ORDER BY category_name;");
+                    $res = mysqli_query($con, "SELECT DISTINCT LOWER(category_name) AS category FROM categories ORDER BY category;");
                     while ($row = mysqli_fetch_assoc($res)) {
-                        echo "<option " . ($_GET['cat'] == $row['category'] ? 'selected' : '') . " value='" . $row['category'] . "'>" . $row['category'] . "</option> \n";
+                        echo "<option " . ($cat == $row['category'] ? 'selected' : '') . " value='" . $row['category'] . "'>" . $row['category'] . "</option> \n";
                     }
-
                     ?>
-
                 </select>
 
                 <div class="filter-condition">
@@ -117,26 +119,22 @@ require_once 'connection.php';
                             <td><label for="used">Used</label></td>
                         </tr>
                     </table>
-
-                    <!-- Add more condition options as needed -->
                 </div>
 
                 <label for="years">Years Used:</label>
-                <input type="number" id="years" name="years" placeholder="Enter years used" value="<?php echo isset($_GET['years']) ? $_GET['years'] : ''; ?>">
-
+                <input type="number" id="years" name="years" placeholder="Enter years used" value="<?php echo $years; ?>">
                 <label for="sub-category">Sub-Category:</label>
-                <input type="text" id="sub-category" name="sub-category" placeholder="Enter sub-category" value="<?php echo isset($_GET['sub-category']) ? $_GET['sub-category'] : ''; ?>">
+                <input type="text" id="sub-category" name="sub-category" placeholder="Enter sub-category" value="<?php echo $sub_category; ?>">
                 <label for="min-price">Min Price:</label>
-                <input type="number" id="min-price" name="min-price" placeholder="Enter price" value="<?php echo isset($_GET['min-price']) ? $_GET['min-price'] : ''; ?>">
+                <input type="number" id="min-price" name="min-price" placeholder="Enter price" value="<?php echo $min_price; ?>">
                 <label for="max-price"> Max Price:</label>
-                <input type="number" id="max-price" name="max-price" placeholder="Enter price" value="<?php echo isset($_GET['max-price']) ? $_GET['max-price'] : '' ?>">
-
+                <input type="number" id="max-price" name="max-price" placeholder="Enter price" value="<?php echo $max_price; ?>">
                 <label for="sort-by">Sort By:</label>
                 <select id="sort-by" value="sort-by" name="sort-by">
                     <?php
-                    echo "<option " . ($_GET['sort-by'] == 'newest' ? 'selected' : '') . " value='newest'>Newest</option> \n";
-                    echo "<option " . ($_GET['sort-by'] == 'price-low-high' ? 'selected' : '') . " value='price-low-high'>Price: Low to High</option> \n";
-                    echo "<option " . ($_GET['sort-by'] == 'price-high-low' ? 'selected' : '') . " value='price-high-low'>Price: High to Low</option> \n";
+                    echo "<option " . ($sort_by == 'newest' ? 'selected' : '') . " value='newest'>Newest</option> \n";
+                    echo "<option " . ($sort_by == 'price-low-high' ? 'selected' : '') . " value='price-low-high'>Price: Low to High</option> \n";
+                    echo "<option " . ($sort_by == 'price-high-low' ? 'selected' : '') . " value='price-high-low'>Price: High to Low</option> \n";
                     ?>
                 </select>
 
