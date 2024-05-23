@@ -158,8 +158,12 @@ mysqli_close($con);
                 </div>
 
             </div>
-
-        </div>
+            <!-- check if role is seller then display manage listings if not display post an ad -->
+        <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 2) { ?>
+            <a href="manage_listings.php" class="edit cta" >Manage Listings</a>
+        <?php } else { ?>
+            <a href="listing.php" class="cta">Add a Listing</a>
+        <?php } ?>
     </div>
     <section id="footer">
         <div class="footer-main">

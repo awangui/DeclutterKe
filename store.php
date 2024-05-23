@@ -124,7 +124,15 @@ $sort_by = isset($_GET['sort-by']) ? $_GET['sort-by'] : "";
                 <label for="years">Years Used:</label>
                 <input type="number" id="years" name="years" placeholder="Enter years used" value="<?php echo $years; ?>">
                 <label for="sub-category">Sub-Category:</label>
-                <input type="text" id="sub-category" name="sub-category" placeholder="Enter sub-category" value="<?php echo $sub_category; ?>">
+                <select id="sub-category" name="sub-category">
+                    <option value="any">Any</option>
+                    <?php
+                 $res = mysqli_query($con, "SELECT DISTINCT LOWER(sub_category_name) AS sub_category FROM subcategories ORDER BY sub_category;");
+                 while ($row = mysqli_fetch_assoc($res)) {
+                        echo "<option " . ($sub_category == $row['sub_category'] ? 'selected' : '') . " value='" . $row['sub_category'] . "'>" . $row['sub_category'] . "</option> \n";
+                    }
+                    ?>
+                </select>
                 <label for="min-price">Min Price:</label>
                 <input type="number" id="min-price" name="min-price" placeholder="Enter price" value="<?php echo $min_price; ?>">
                 <label for="max-price"> Max Price:</label>
@@ -177,8 +185,8 @@ $sort_by = isset($_GET['sort-by']) ? $_GET['sort-by'] : "";
         if (isset($_GET['years']) && $_GET['years'] != "") {
             $queryFilter .= " AND years_used = " . $_GET['years'];
         }
-        if (isset($_GET['sub-category']) && $_GET['sub-category'] != "") {
-            $queryFilter .= " AND sub_category LIKE '%" . $_GET['sub-category'] . "%'";
+        if (isset($_GET['sub-category']) && $_GET['sub-category'] != "any") {
+            $queryFilter .= " AND s.sub_category_name = '" . $_GET['sub-category'] . "'";
         }
         if (isset($_GET['min-price']) && $_GET['min-price'] != "") {
             $queryFilter .= " AND price >= " . $_GET['min-price'];
@@ -196,10 +204,11 @@ $sort_by = isset($_GET['sort-by']) ? $_GET['sort-by'] : "";
             }
         }
         $queryFilter = " WHERE 1 " . $queryFilter;
-        $query = "SELECT listings.*, b.brand_name, c.category_name 
+        $query = "SELECT listings.*, b.brand_name, c.category_name, s.sub_category_name
           FROM listings 
           INNER JOIN brands b ON listings.brand_id = b.brand_id 
-          INNER JOIN categories c ON listings.category_id = c.category_id ";
+          INNER JOIN categories c ON listings.category_id = c.category_id 
+          INNER JOIN subcategories s ON listings.sub_category_id = s.sub_category_id";
 
         $query .= $queryFilter;
         $res = mysqli_query($con, $query);
@@ -227,7 +236,7 @@ $sort_by = isset($_GET['sort-by']) ? $_GET['sort-by'] : "";
                             <p class="category" id="category_<?php echo $row['listing_id']; ?>"><?php echo $row['category_name']; ?></p>
                             <!-- 
                             <p class="years" id="years_<?php echo $row['listing_id']; ?>">Used for <?php echo $row['years_used']; ?> yr(s)</p> -->
-                            <p class="sub-category" id="sub_category_<?php echo $row['listing_id']; ?>"><?php echo $row['sub_category']; ?></p>
+                            <p class="sub-category" id="sub_category_<?php echo $row['listing_id']; ?>"><?php echo $row['sub_category_name']; ?></p>
                             <p class="condition" id="condition_<?php echo $row['listing_id']; ?>"><?php echo $row['condition']; ?></p>
                             <p class="price" id="price_<?php echo $row['listing_id']; ?>">Ksh <?php echo $row['price']; ?></p>
                             <br>

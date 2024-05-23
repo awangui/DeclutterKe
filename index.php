@@ -86,7 +86,7 @@ require_once 'connection.php';
         <section id="browse">
             <h2>Popular Categories</h2>
             <ul class="items">
-                <li class="item"> <a href="store.php?sub-category=table">
+                <li class="item"> <a href="store.php?name=table">
                         Tables
                     </a>
                 </li>

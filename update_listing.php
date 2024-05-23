@@ -28,6 +28,18 @@ function getBrands($con)
     }
     return $brands;
 }
+// Function to fetch subcategories from the database
+function getSubCategories($con)
+{
+    $subcategories = array();
+    $query = "SELECT * FROM subcategories";
+    $result = mysqli_query($con, $query);
+    while ($row = mysqli_fetch_assoc($result)) {
+        $subcategories[] = $row;
+    }
+    return $subcategories;
+}
+
 
 // Check if the user is not logged in, redirect to the login page
 if (!isset($_SESSION['user_id'])) {
@@ -103,7 +115,7 @@ if (isset($_POST['submit'])) {
         echo "Debugging: categoryId = $categoryId, brandId = $brandId, listing_id = $listing_id<br>";
 
         // Prepare and bind SQL statement
-        $update_query = "UPDATE listings SET name = ?, category_id = ?, sub_category = ?, brand_id = ?, color = ?, years_used = ?, `condition` = ?, price = ?, description = ?, photos = ?, phone_number = ?, city = ?, town = ? WHERE listing_id = ?";
+        $update_query = "UPDATE listings SET name = ?, category_id = ?, sub_category_id = ?, brand_id = ?, color = ?, years_used = ?, `condition` = ?, price = ?, description = ?, photos = ?, phone_number = ?, city = ?, town = ? WHERE listing_id = ?";
         $stmt = mysqli_prepare($con, $update_query);
 
         // Check if statement preparation was successful
@@ -206,15 +218,14 @@ if (isset($_POST['submit'])) {
 
                     <label for="sub-category">Sub-Category:</label>
                     <select id="sub-category" name="sub-category" required>
-                        <option value="fridges" <?php echo ($listing['sub_category'] == 'fridges') ? 'selected' : ''; ?>>Fridges</option>
-                        <option value="phones" <?php echo ($listing['sub_category'] == 'phones') ? 'selected' : ''; ?>>Phones</option>
-                        <option value="tables" <?php echo ($listing['sub_category'] == 'tables') ? 'selected' : ''; ?>>Tables</option>
-                        <option value="Speakers" <?php echo ($listing['sub_category'] == 'Speakers') ? 'selected' : ''; ?>>Speakers</option>
-                        <option value="beds" <?php echo ($listing['sub_category'] == 'beds') ? 'selected' : ''; ?>>Beds</option>
-                        <option value="TVs" <?php echo ($listing['sub_category'] == 'TVs') ? 'selected' : ''; ?>>TVs</option>
-                        <option value="sofas" <?php echo ($listing['sub_category'] == 'sofas') ? 'selected' : ''; ?>>Sofas</option>
-                        <option value="Microwaves" <?php echo ($listing['sub_category'] == 'Microwaves') ? 'selected' : ''; ?>>Microwaves</option>
-                        <option value="other" <?php echo ($listing['sub_category'] == 'other') ? 'selected' : ''; ?>>Other</option>
+                        <?php
+                        $subcategories= getSubCategories($con);
+                       foreach ($subcategories as $subcategory) {
+                            $selected = ($subcategory['sub_category_id'] == $listing['sub_category_id']) ? 'selected' : '';
+                            echo "<option value=\"" . $subcategory['sub_category_id'] . "\" $selected>" . $subcategory['sub_category_name'] . "</option>";
+                        }
+                        ?>
+                    
                     </select>
 
                     <label for="brand">Brand:</label>

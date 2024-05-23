@@ -91,10 +91,11 @@ if (!isset($_SESSION['user_id'])) {
       // Check if the listing_id is provided in the URL
       if (isset($_GET['listing_id'])) {
         // Fetch product details based on the listing_id
-        $query = "SELECT listings.*, users.firstName, users.surname, users.date, b.brand_name, c.category_name 
+        $query = "SELECT listings.*, users.firstName, users.surname, users.date, b.brand_name, c.category_name, s.sub_category_name
         FROM listings 
         INNER JOIN users ON listings.seller_id = users.userId 
         INNER JOIN brands b ON listings.brand_id = b.brand_id 
+        INNER JOIN subcategories s ON listings.sub_category_id = s.sub_category_id
         INNER JOIN categories c ON listings.category_id = c.category_id 
         WHERE listings.listing_id = $listing_id";
 
@@ -110,7 +111,7 @@ if (!isset($_SESSION['user_id'])) {
             <li class="list-group-item">Posted:<span><?php echo $row['date_posted']; ?></span></li>
             <li class="list-group-item">Town:<span><?php echo $row['city']; ?></span></li>
             <li class="list-group-item">Category: <span> <?php echo $row['category_name']; ?></span></li>
-            <li class="list-group-item">Sub Category: <span> <?php echo $row['sub_category']; ?></span></li>
+            <li class="list-group-item">Sub Category: <span> <?php echo $row['sub_category_name']; ?></span></li>
             <li class="list-group-item">Brand: <span> <?php echo $row['brand_name']; ?></span></li>
             <li class="list-group-item">Color: <span> <?php echo $row['color']; ?></span></li>
             <li class="list-group-item">Years Used: <span> <?php echo $row['years_used']; ?></span></li>
