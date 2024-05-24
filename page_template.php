@@ -23,7 +23,7 @@
             <a href="index.php">Home</a>
             <a href="#categories">Categories</a>
             <a href="about.php" class="active">About</a>
-            <a href="#contact">Contact</a>
+            <a href="conact.php">Contact</a>
             <a href="listing.html" class="cta"><i class=" icon fa fa-plus"></i> Add a Listing</a>
             <a href="login.html" class="credentials"><i class="icon fa-solid fa-right-to-bracket "></i> Login</a>
             <a href="registration.html"><i class="icon fa-regular fa-user"></i> Sign Up</a>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Management</title>
+    <title>Category Management</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="./css/admin.css">
 </head>
@@ -30,26 +30,6 @@
             $message = "Error deleting category: " . $con->error;
             $messageClass = "alert-error";
         }
-    }
-
-    // Get category with the most listings
-    $sql = "SELECT category_name, COUNT(listing_id) as total_listings FROM categories JOIN listings ON categories.category_id = listings.category_id GROUP BY category_name ORDER BY total_listings DESC LIMIT 1";
-    $result = $con->query($sql);
-    $most_listings = $result->fetch_assoc();
-
-    // Get the top 3 categories with the most listings
-    $sql = "SELECT category_name, COUNT(listing_id) as total_listings FROM categories JOIN listings ON categories.category_id = listings.category_id GROUP BY category_name ORDER BY total_listings DESC LIMIT 3";
-    $result = $con->query($sql);
-    $top_categories = $result->fetch_all(MYSQLI_ASSOC);
-
-    // Get category chart data
-    $sql = "SELECT category_name, COUNT(listing_id) as total_listings FROM categories JOIN listings ON categories.category_id = listings.category_id GROUP BY category_name ORDER BY total_listings DESC";
-    $result = $con->query($sql);
-    $chart_labels = [];
-    $chart_values = [];
-    while ($row = $result->fetch_assoc()) {
-        $chart_labels[] = $row['category_name'];
-        $chart_values[] = $row['total_listings'];
     }
 
     // Process search query

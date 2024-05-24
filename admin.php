@@ -19,6 +19,10 @@ if ($result->num_rows > 0) {
 } else {
     $totalCategories = 0;
 }
+      // Get total number of subcategories
+      $sql_count = "SELECT COUNT(*) AS count FROM subcategories";
+      $result_count = mysqli_query($con, $sql_count);
+      $totalSubcategories = mysqli_fetch_assoc($result_count)['count'];
 
 //get total number of listings
 
@@ -168,7 +172,10 @@ while ($row = $result->fetch_assoc()) {
             <h4>Total categories</h4>
             <p><?php echo $totalCategories ?></p>
         </div>
-
+<div class="widget">
+            <h4>Total Subcategories</h4>
+            <p><?php echo $totalSubcategories ?></p>
+        </div>
         <div class="widget">
             <h2>Top 3 Categories</h2>
             <ul>
@@ -189,9 +196,7 @@ while ($row = $result->fetch_assoc()) {
             <h4>Total Brands</h4>
             <p><?php echo $totalBrands; ?></p>
         </div>
-        <div class="widget">
-            <canvas id="usersByMonthChart"></canvas>
-        </div>
+       
         <div class="widget">
             <h3>Number of listings per brand</h3>
             <canvas id="categoryChart"></canvas>
@@ -201,6 +206,9 @@ while ($row = $result->fetch_assoc()) {
         <div class="widget">
             <h3>Number of listings per category</h3>
             <canvas id="listingChart"></canvas>
+        </div>
+        <div class="widget">
+            <canvas id="usersByMonthChart"></canvas>
         </div>
     </div>
 </div>

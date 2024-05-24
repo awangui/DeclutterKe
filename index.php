@@ -36,24 +36,23 @@ require_once 'connection.php';
                 <a href="contact.php">Contact</a>
 
                 <?php if (isset($_SESSION['user_id'])) { ?>
-                    <?php if ($_SESSION['user_role'] == 2) { ?>
-
-                        <a href="listing.php">Add a Listing</a>
-                        <a href="manage_listings.php" class="cta">Manage Listings</a>
-                    <?php } else { ?>
-                        <a href="listing.php" class="cta">Add a Listing</a>
-                    <?php } ?>
-                    <div class="credentials">
-                        <a href="profile.php" id="myBtn"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>
-                        <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket"></i> Logout</a>
-                    </div>
+                <?php if ($_SESSION['user_role'] == 2) { ?>
+                    <a href="listing.php" class="cta">Add a Listing</a>
+                    <a href="manage_listings.php">Manage Listings</a>
                 <?php } else { ?>
                     <a href="listing.php" class="cta">Add a Listing</a>
-                    <div class="credentials">
-                        <a href="login.html"><i class="icon fa-solid fa-right-to-bracket"></i> Login</a>
-                        <a href="registration.php"><i class="icon fa-regular fa-user"></i> Sign Up</a>
-                    </div>
                 <?php } ?>
+                <div class="credentials">
+                    <a href="profile.php" id="myBtn"><i class="icon fa-regular fa-user"></i><?php echo $_SESSION['name']; ?></a>
+                    <a href="logout.php"><i class="icon fa-solid fa-right-to-bracket"></i> Logout</a>
+                </div>
+            <?php } else { ?>
+                <a href="listing.php" class="cta">Add a Listing</a>
+                <div class="credentials">
+                    <a href="login.html"><i class="icon fa-solid fa-right-to-bracket"></i> Login</a>
+                    <a href="registration.php"><i class="icon fa-regular fa-user"></i> Sign Up</a>
+                </div>
+            <?php } ?>
             </nav>
         </section>
         <div class="desc" id="index">

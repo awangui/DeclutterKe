@@ -109,7 +109,7 @@ if (!isset($_SESSION['user_id'])) {
           <h1 class="product-title"><?php echo $row['name'];  ?></h1>
           <div class="listing-details">
             <li class="list-group-item">Posted:<span><?php echo $row['date_posted']; ?></span></li>
-            <li class="list-group-item">Town:<span><?php echo $row['city']; ?></span></li>
+            <li class="list-group-item">Pickup Town:<span><?php echo $row['city']; ?></span></li>
             <li class="list-group-item">Category: <span> <?php echo $row['category_name']; ?></span></li>
             <li class="list-group-item">Sub Category: <span> <?php echo $row['sub_category_name']; ?></span></li>
             <li class="list-group-item">Brand: <span> <?php echo $row['brand_name']; ?></span></li>
@@ -213,9 +213,10 @@ if (!isset($_SESSION['user_id'])) {
       $listing_id = $_GET['listing_id'];
 
       // Fetch product details based on the listing_id
-      $query = "SELECT listings.*, categories.category_name 
+      $query = "SELECT listings.*, categories.category_name ,subcategories.sub_category_name
       FROM listings 
       INNER JOIN categories ON listings.category_id = categories.category_id 
+      INNER JOIN subcategories ON listings.sub_category_id = subcategories.sub_category_id
       WHERE listings.listing_id = $listing_id";
       $result = mysqli_query($con, $query);
       $row = mysqli_fetch_assoc($result);
@@ -224,7 +225,7 @@ if (!isset($_SESSION['user_id'])) {
       if ($row) {
         // Extract category and subcategory of the current product
         $category = $row['category_name'];
-        $sub_category = $row['sub_category'];
+        $sub_category = $row['sub_category_name'];
         // Fetch related products with similar category or subcategory, limited to 3
         $related_query = "SELECT * FROM listings WHERE listing_id != $listing_id AND category_id = " . $row['category_id'] . " LIMIT 3";
         $related_result = mysqli_query($con, $related_query);

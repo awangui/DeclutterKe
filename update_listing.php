@@ -4,7 +4,10 @@ require_once 'connection.php';
 
 $message = '';
 $messageClass = '';
-
+if (isset($_GET['message']) && isset($_GET['messageClass'])) {
+    $message = urldecode($_GET['message']);// Decode the URL-encoded message
+    $messageClass = urldecode($_GET['messageClass']);
+}
 // Function to fetch categories from the database
 function getCategories($con)
 {
@@ -131,6 +134,7 @@ if (isset($_POST['submit'])) {
         if (mysqli_stmt_execute($stmt)) {
             $message = "Listing updated successfully.";
             $messageClass = "alert-success";
+            header("Location: manage_listings.php?message=" . urlencode($message) . "&messageClass=" . urlencode($messageClass));
         } else {
             $message = "Failed to update listing " . $con->error;
             $messageClass = "alert-error";

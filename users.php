@@ -6,7 +6,7 @@ $messageClass = '';
 
 // Check if there's a message in the URL parameters
 if (isset($_GET['message']) && isset($_GET['messageClass'])) {
-    $message = urldecode($_GET['message']);
+    $message = urldecode($_GET['message']);// Decode the URL-encoded message
     $messageClass = urldecode($_GET['messageClass']);
 }
 // Function to get role label based on role number
@@ -50,14 +50,24 @@ if ($selectedRole !== 'All') {
 }
 $resultFetchUsers = mysqli_query($con, $sqlFetchUsers);
 if (!$resultFetchUsers) {
-    // Handle the case where the query failed
     die("Error fetching users: " . mysqli_error($con));
 }
 
 if (!$resultFetchUsers) {
     die("Error fetching users: " . mysqli_error($con));
 }
-// Close connection
+ // Modify the code to filter users by the selected month
+ if (isset($_GET['month']) && $_GET['month'] !== 'All') {
+    $month = $_GET['month'];
+    $sqlFetchUsers .= " WHERE MONTH(date) = $month";
+}
+
+$resultFetchUsers = mysqli_query($con, $sqlFetchUsers);
+if (!$resultFetchUsers) {
+    die("Error fetching users: " . mysqli_error($con));
+}
+?>
+<?php
 mysqli_close($con);
 ?>
 <!DOCTYPE html>
@@ -78,7 +88,19 @@ mysqli_close($con);
         <?php endif; ?>
 
         <div class="row">
-        <h1>Users</h1>
+        <h1 class="display" style="text-align: left;">
+                            <?php
+                            if ($selectedRole === 'All') {
+                                echo "All Users";
+                            } else if ($selectedRole === '2') {
+                                echo "Sellers";
+                            } else if ($selectedRole === '1') {
+                                echo "Admins";
+                            } else if ($selectedRole === '3') {
+                                echo "Regular Users";
+                            }
+                            ?>
+                        </h1>
             <div class="col">
                 <div class="card">
                     <div class="card-header"></div>
@@ -102,19 +124,35 @@ mysqli_close($con);
                         </form>
                     </div>
                     <div class="card-body">
-                        <h2 class="display">
-                            <?php
-                            if ($selectedRole === 'All') {
-                                echo "All Users";
-                            } else if ($selectedRole === '2') {
-                                echo "Sellers";
-                            } else if ($selectedRole === '1') {
-                                echo "Admins";
-                            } else if ($selectedRole === '3') {
-                                echo "Regular Users";
-                            }
-                            ?>
-                        </h2>
+                       
+                        <!-- filter by month joined -->
+                        <form method="GET">
+                            <label for="month" >Filter by Month Joined:</label>
+                            <select name="month" id="month">
+                                <option value="All">All</option>
+                                <?php
+                                // Display month options
+                                if (mysqli_num_rows($resultFetchUsers) == 0) {
+                                    echo "<option value='All' selected>No users found</option>";
+                                } else {
+                                    for ($month = 1; $month <= 12; $month++) {
+                                        $monthName = date('F', mktime(0, 0, 0, $month, 1));
+                                        echo "<option value='$month'";
+                                        if (isset($_GET['month']) && $_GET['month'] == $month) {
+                                            echo 'selected';
+                                        }
+                                        echo ">$monthName</option>";
+                                    }
+                                }
+                                ?>
+                            </select>
+                            <button type="submit">Filter</button>
+                            
+                        </form>
+
+<!-- filter reset button -->
+<button onclick="window.location.href='users.php'" >Reset</button>
+
                          <!-- Search Category -->
               <button id="downloadCSVButton"> <i class="fa-solid fa-download"></i> Download</button>                
                         <section class='table-display'>
@@ -123,6 +161,7 @@ mysqli_close($con);
                                 <tr>
                                     <th>User ID</th>
                                     <th>First Name</th>
+                                    <th>Surname</th>
                                     <th>Email</th>
                                     <th>Date Joined</th>
                                     <th>Role</th>
@@ -138,19 +177,22 @@ mysqli_close($con);
                                     <tr>
                                         <td><?= $row['UserId'] ?></td>
                                         <td><?= $row['firstName'] ?></td>
+                                        <td><?= $row['surname'] ?></td>
                                         <td><?= $row['email'] ?></td>
-                                        <td><?= $row['date'] ?></td>
+                                        <td><?= date('Y-m-d', strtotime($row['date'])) ?></td>
                                         <td><?= getRoleLabel($row['role']) ?></td>
                                         <td><?= $row['totalListings'] ?></td> 
                                         <?php
                                              $id = $row['UserId'];
                                           if ($row['role'] != 1) { 
                                            
-                                            if ($row['role'] == 2) {                                            echo "<td><a href='#' data-id='{$row['UserId']}' data-name='{$row['firstName']}' data-email='{$row['email']}' data-date='{$row['date']}' data-role='" . getRoleLabel($row['role']) . "' data-listings='{$row['totalListings']}' class='btn viewBtn'>View</a> ";
+                                            if ($row['role'] == 2) {                                            echo "<td><a href='#' data-id='{$row['UserId']}' data-name='{$row['firstName']}'data-surname='{$row['surname']}'data-phone='{$row['phone']}'
+                                             data-email='{$row['email']}' data-date='{$row['date']}' data-role='" . getRoleLabel($row['role']) . "' data-listings='{$row['totalListings']}' class='btn viewBtn'>View</a> ";
                                         }
                                              if ($row['role'] == 3) {
-                                            echo " <td><a href='#' data-id='{$row['UserId']}' data-name='{$row['firstName']}' data-email='{$row['email']}' data-date='{$row['date']}' data-role='" . getRoleLabel($row['role']) . "' data-listings='{$row['totalListings']}' class='btn viewBtn'>View</a> ";
+                                            echo " <td><a href='#' data-id='{$row['UserId']}' data-name='{$row['firstName']}' data-surname='{$row['surname']}'data-phone='{$row['phone']}'data-email='{$row['email']}' data-date='{$row['date']}' data-role='" . getRoleLabel($row['role']) . "' data-listings='{$row['totalListings']}' class='btn viewBtn'>View</a> ";
                                         }
+                                        
                                         echo " <a href='#' data-id='$id' class='btn deleteBtn btn-danger'>Delete</a></td>";
                                         
                                     }
@@ -179,6 +221,7 @@ mysqli_close($con);
                 <p><strong>User ID:</strong> <span id="modalUserId"></span></p>
                 <p><strong>First Name:</strong> <span id="modalFirstName"></span></p>
                 <p><strong>Email:</strong> <span id="modalEmail"></span></p>
+                <p><strong>Phone Number:</strong> <span id="modalPhone"></span></p>
                 <p><strong>Date Joined:</strong> <span id="modalDate"></span></p>
                 <p><strong>Role:</strong> <span id="modalRole"></span></p>
                 <p><strong>Total Listings:</strong> <span id="modalListings"></span></p>
@@ -201,21 +244,21 @@ mysqli_close($con);
             document.getElementById('downloadCSVButton').addEventListener('click', function() {
                 var csvContent = "";
                 var headers = document.querySelectorAll(".table-display th:not(:last-child)");
-                var headerRow = Array.from(headers).map(header => header.textContent.trim());
-                csvContent += headerRow.join(",") + "\n";
-                var rows = document.querySelectorAll(".table-display tbody tr");
+                var headerRow = Array.from(headers).map(header => header.textContent.trim());//create a new header array from the headers and map through eachh header to get the text content
+                csvContent += headerRow.join(",") + "\n";//join the header row with a comma and a new line
+                var rows = document.querySelectorAll(".table-display tbody tr");//get all the rows in the table
                 rows.forEach(function(row) {
                     var rowData = Array.from(row.querySelectorAll("td:not(:last-child)")).map(cell => cell.textContent.trim());
-                    csvContent += rowData.join(",") + "\n";
+                    csvContent += rowData.join(",") + "\n";//join the row data with a comma and a new line
                 });
-                var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-                var url = URL.createObjectURL(blob);
-                var a = document.createElement("a");
-                a.href = url;
-                a.download = "users_data.csv";
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
+                var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });//create a new blob object which holds the csv content
+                var url = URL.createObjectURL(blob);//create a url for the blob object
+                var a = document.createElement("a");//create a new anchor element
+                a.href = url;//set the href attribute of the anchor element to the url
+                a.download = "users_data.csv";//set the download attribute of the anchor element to the file name
+                document.body.appendChild(a);//append the anchor element to the body
+                a.click();//click the anchor element
+                document.body.removeChild(a);//remove the anchor element from the body
             });
             // JavaScript to handle view button clicks
             document.querySelectorAll('.viewBtn').forEach(function(button) {
@@ -223,13 +266,15 @@ mysqli_close($con);
                     var userId = this.getAttribute('data-id');
                     var firstName = this.getAttribute('data-name');
                     var email = this.getAttribute('data-email');
-                    var date = this.getAttribute('data-date');
+                    var date = this.getAttribute('data-date').split(' ')[0];
                     var role = this.getAttribute('data-role');
+                    var phone = this.getAttribute('data-phone');
                     var listings = this.getAttribute('data-listings');
 
                     document.getElementById('modalUserId').textContent = userId;
                     document.getElementById('modalFirstName').textContent = firstName;
                     document.getElementById('modalEmail').textContent = email;
+                    document.getElementById('modalPhone').textContent = phone;
                     document.getElementById('modalDate').textContent = date;
                     document.getElementById('modalRole').textContent = role;
                     document.getElementById('modalListings').textContent = listings;

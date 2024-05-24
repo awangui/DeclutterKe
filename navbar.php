@@ -38,6 +38,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <a href="admin.php" class="nav-link" data-page="admin.php">Dashboard</a>
             <a href="users.php" class="nav-link" data-page="users.php">Users</a>
             <a href="categories.php" class="nav-link" data-page="categories.php">Categories</a>
+            <a href="sub_categories.php" class="nav-link" data-page="sub_categories.php">Sub Categories</a>
             <a href="listings.php" class="nav-link" data-page="listings.php">Listings</a>
             <a href="brands.php" class="nav-link" data-page="brands.php">Brands</a>
             <div class="credentials">

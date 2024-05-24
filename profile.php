@@ -20,7 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = isset($_POST['email']) ? $_POST['email'] : null;
     $phone = isset($_POST['phone']) ? $_POST['phone'] : null;
     $city = isset($_POST['city']) ? $_POST['city'] : null;
-
     // Update user details in the database
     $query = "UPDATE users SET FirstName = ?, Surname = ?, Email = ?, Phone = ?, City = ? WHERE UserId = ?";
     $updateStmt = mysqli_prepare($con, $query);
@@ -158,12 +157,7 @@ mysqli_close($con);
                 </div>
 
             </div>
-            <!-- check if role is seller then display manage listings if not display post an ad -->
-        <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 2) { ?>
-            <a href="manage_listings.php" class="edit cta" >Manage Listings</a>
-        <?php } else { ?>
-            <a href="listing.php" class="cta">Add a Listing</a>
-        <?php } ?>
+    </div>
     </div>
     <section id="footer">
         <div class="footer-main">

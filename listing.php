@@ -8,14 +8,31 @@ $messageClass = '';
 function getCategories($con)
 {
     $categories = array();
-    $query = "SELECT * FROM categories";
+    $query = "SELECT * FROM categories ORDER BY category_name ASC";
     $result = mysqli_query($con, $query);
     while ($row = mysqli_fetch_assoc($result)) {
         $categories[] = $row;
+        foreach ($categories as &$category) {
+            $category['category_name'] = ucfirst($category['category_name']);
+        }
     }
     return $categories;
 }
-
+//function to get sub categories from database
+function getSubCategories($con)
+{
+    $sub_categories = array();
+    $query = "SELECT * FROM subcategories order by sub_category_name asc";
+    $result = mysqli_query($con, $query);
+    while ($row = mysqli_fetch_assoc($result)) {
+    $sub_categories[]=$row;
+    foreach ($sub_categories as &$sub_category) {
+        $sub_category['sub_category_name']= ucfirst($sub_category['sub_category_name']);
+    }
+    
+}
+return $sub_categories;
+}
 // Function to fetch brands from the database
 function getBrands($con)
 {
@@ -89,9 +106,9 @@ if (isset($_POST['submit'])) {
             $stmt = mysqli_prepare($con, $update_query);
             mysqli_stmt_bind_param($stmt, "i", $userId);
             mysqli_stmt_execute($stmt);
-
+            $_SESSION['role'] = 2;
             // Insert the listing into the database, including the user's ID as the seller_id
-            $insert_query = "INSERT INTO listings (name, category_id, sub_category, brand_id, color, years_used, `condition`, price, description, photos, phone_number, city, town, seller_id) 
+            $insert_query = "INSERT INTO listings (name, category_id, sub_category_id, brand_id, color, years_used, `condition`, price, description, photos, phone_number, city, town, seller_id) 
                              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($con, $insert_query);
             mysqli_stmt_bind_param($stmt, "sssssssdsssssi", $name, $category, $sub_category, $brand, $color, $years_used, $condition, $price, $description, $photos, $phone, $city, $town, $userId);
@@ -99,6 +116,8 @@ if (isset($_POST['submit'])) {
             if (mysqli_stmt_execute($stmt)) {
                 $message = "Listing uploaded successfully.";
                 $messageClass = "alert-success";
+                header("Location: manage_listings.phpmessage=" . urlencode($message) . "&messageClass=" . urlencode($messageClass));
+            exit();
             } else {
                 $message = "Failed to upload listing " . $con->error;
                 $messageClass = "alert-error";
@@ -186,15 +205,13 @@ if (isset($_POST['submit'])) {
                         </select>
                         <label for="sub-category">Sub-Category:</label>
                         <select id="sub-category" name="sub-category">
-                            <option value="fridges" <?php echo ($sub_category == 'fridges') ? 'selected' : ''; ?>>Fridges</option>
-                            <option value="phones" <?php echo ($sub_category == 'phones') ? 'selected' : ''; ?>>Phones</option>
-                            <option value="tables" <?php echo ($sub_category == 'tables') ? 'selected' : ''; ?>>Tables</option>
-                            <option value="Speakers" <?php echo ($sub_category == 'Speakers') ? 'selected' : ''; ?>>Speakers</option>
-                            <option value="beds" <?php echo ($sub_category == 'beds') ? 'selected' : ''; ?>>Beds</option>
-                            <option value="TVs" <?php echo ($sub_category == 'TVs') ? 'selected' : ''; ?>>TVs</option>
-                            <option value="sofas" <?php echo ($sub_category == 'sofas') ? 'selected' : ''; ?>>Sofas</option>
-                            <option value="Microwaves" <?php echo ($sub_category == 'Microwaves') ? 'selected' : ''; ?>>Microwaves</option>
-                            <option value="other" <?php echo ($sub_category == 'other') ? 'selected' : ''; ?>>Other</option>
+                            <?php
+                            // Fetch sub categories from the database and populate the dropdown
+                            $sub_categories = getSubCategories($con);
+                            foreach ($sub_categories as $sub_category) {
+                                echo "<option value=\"" . $sub_category['sub_category_id'] . "\" " . ($sub_category['sub_category_id'] == $sub_category ? "selected" : "") . ">" . $sub_category['sub_category_name'] . "</option>";
+                            }
+                            ?>
                         </select>
                         <label for="brand">Brand:</label>
                         <select id="brand" name="brand">
