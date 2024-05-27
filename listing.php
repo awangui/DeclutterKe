@@ -81,7 +81,8 @@ if (isset($_POST['submit'])) {
         $error_message = "Please upload at least one photo";
     } elseif (strlen($_POST['phone']) != 12) {
         $error_message = "Phone number must be 12 digits long";
-    } else {
+    } 
+    else {
         // File upload
         $file_names = array();
         $file_count = count($_FILES['images']['name']);
@@ -116,7 +117,7 @@ if (isset($_POST['submit'])) {
             if (mysqli_stmt_execute($stmt)) {
                 $message = "Listing uploaded successfully.";
                 $messageClass = "alert-success";
-                header("Location: manage_listings.phpmessage=" . urlencode($message) . "&messageClass=" . urlencode($messageClass));
+                header("Location: manage_listings.php?message=" . urlencode($message) . "&messageClass=" . urlencode($messageClass));
             exit();
             } else {
                 $message = "Failed to upload listing " . $con->error;
