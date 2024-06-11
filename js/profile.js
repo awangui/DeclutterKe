@@ -24,6 +24,7 @@
     var phone = document.getElementById("phone").value;
     var fname = document.getElementById("fname").value;
     var sname = document.getElementById("sname").value;
+    var email=document.getElementById("email").value;
     //check if the name contains numbers
     if (fname.match(/\d+/g) || sname.match(/\d+/g)) {
         errorMessage.innerText = "Name should not contain numbers";

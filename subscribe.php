@@ -26,7 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (mysqli_num_rows($checkSubscriptionResult) > 0) {
         // Email already subscribed
-        echo "You are already subscribed!";
+        echo "<script>alert (' Email already subscribed')</script>";
+        echo "<script>window.location.href = 'index.php';</script>";
         exit;
     }
 

@@ -1,79 +1,47 @@
-// function generateCalendar() {
-//     var calendarDiv = document.getElementById('miniCalendar');
-//     var currentDate = new Date();
-//     var currentDay = currentDate.getDate();
-//     var currentMonth = currentDate.getMonth();
-//     var currentYear = currentDate.getFullYear();
-//     var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-//     var firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
-//     var weekRow = document.createElement('div');
-//     weekRow.classList.add('week-row');
-//     calendarDiv.innerHTML = '';
-
-//     // Generate days of the week headers
-//     var daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-//     daysOfWeek.forEach(function(day) {
-//         var dayHeader = document.createElement('div');
-//         dayHeader.classList.add('day');
-//         dayHeader.textContent = day;
-//         weekRow.appendChild(dayHeader);
-//     });
-//     calendarDiv.appendChild(weekRow);
-
-//     // Generate days of the month
-//     var dayCount = 1;
-//     for (var i = 0; i < 6; i++) { // Max 6 rows
-//         var weekRow = document.createElement('div');
-//         weekRow.classList.add('week-row');
-//         for (var j = 0; j < 7; j++) {
-//             var dayCell = document.createElement('div');
-//             dayCell.classList.add('day');
-//             if ((i === 0 && j < firstDayOfMonth) || dayCount > daysInMonth) {
-//                 dayCell.textContent = '';
-//                 dayCell.classList.add('inactive');
-//             } else {
-//                 dayCell.textContent = dayCount;
-//                 if (dayCount === currentDay) {
-//                     dayCell.classList.add('currentDay');
-//                 }
-//                 dayCount++;
-//             }
-//             weekRow.appendChild(dayCell);
-//         }
-//         calendarDiv.appendChild(weekRow);
-//     }
-// }
-
-// // Call the function to generate the calendar
-// generateCalendar();
-// const menuToggle = document.querySelector('.menu-toggle');
-// // Get the side bar
-// const sideBar = document.querySelector('.side-bar');
-
-// Add event listener for menu toggle button
-menuToggle.addEventListener('click', function() {
-    // Toggle the 'active' class on the side bar
-    sideBar.classList.toggle('active');
+document.querySelectorAll('.delete').forEach(function(button) {
+    button.addEventListener('click', function() {
+        var id = this.getAttribute('data-id');
+        document.getElementById('confirmDeleteButton').setAttribute('data-id', id);
+        document.getElementById('deleteModal').style.display = "block";
+    });
 });
 
-            // JavaScript to handle modal close buttons
-            document.querySelectorAll('.close').forEach(function(button) {
-                button.addEventListener('click', function() {
-                    document.getElementById('userModal').style.display = "none";
-                    document.getElementById('deleteModal').style.display = "none";
-                });
-            });
+// Close the delete modal when the user clicks on the close button
+document.querySelector('.close').addEventListener('click', function() {
+    document.getElementById('deleteModal').style.display = "none";
+});
 
-            // Close the modal if the user clicks outside of it
-            window.addEventListener('click', function(event) {
-                var userModal = document.getElementById('userModal');
-                var deleteModal = document.getElementById('deleteModal');
-                if (event.target == userModal) {
-                    userModal.style.display = "none";
-                }
-                if (event.target == deleteModal) {
-                    deleteModal.style.display = "none";
-                }
-            });
+// Close the delete modal when the user clicks outside of it
+window.onclick = function(event) {
+    var modal = document.getElementById('deleteModal');
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+};
 
+// JavaScript to handle delete button clicks
+document.querySelectorAll('.deleteBtn').forEach(function(button) {
+    button.addEventListener('click', function() {
+        var listing_id = this.getAttribute('data-id');
+        document.getElementById('confirmDeleteButton').setAttribute('data-id', listing_id);
+        document.getElementById('deleteModal').style.display = "block";
+    });
+});
 
+// JavaScript to handle confirm delete button click
+document.getElementById('confirmDeleteButton').addEventListener('click', function() {
+    var listing_id = this.getAttribute('data-id');
+    window.location.href = `delete_listing.php?deleteid=${listing_id}`;
+});
+//
+// Close the delete modal when the user clicks on the close button
+function closeModal() {
+    document.getElementById('deleteModal').style.display = "none";
+}
+document.querySelectorAll('.close').forEach(function(button) {
+    button.addEventListener('click', closeModal);
+});
+// JavaScript to handle close button click
+document.querySelector('.close').addEventListener('click', function() {
+    document.getElementById('deleteModal').style.display = "none";
+});

@@ -110,7 +110,7 @@ if(typeof(myParam) !== 'undefined' && myParam !== null){
     var password = document.getElementById("password").value;
     var confirm_password = document.getElementById("confirm_password").value;
     var errorMessage = document.getElementById("error-message");
-    
+    var phone = document.getElementById("phone").value;
     var fname = document.getElementById("fname").value;
     var sname = document.getElementById("sname").value;
     //check if the name contains numbers
@@ -132,7 +132,18 @@ if(typeof(myParam) !== 'undefined' && myParam !== null){
     }
     fname = fname.trim();
     sname = sname.trim();
-    
+   // Phone number format check
+if (!/^\d{12}$/.test(phone)) {
+    errorMessage.innerText = "Phone number should be 12 characters long and not contain any letters.";
+    errorMessage.style.display = "block";
+    return false;
+}// Phone number format check
+if (!/^254\d{9}$/.test(phone)) {
+    errorMessage.innerText = "Phone number should start with 254";
+    errorMessage.style.display = "block";
+    return false;
+}
+
     // Password length check
     if (password.length < 8) {
         errorMessage.innerText = "Password must be at least 8 characters long.";
@@ -143,11 +154,6 @@ if(typeof(myParam) !== 'undefined' && myParam !== null){
     // Uppercase letter check
     if (!/[A-Z]/.test(password)) {
         errorMessage.innerText = "Password must contain at least one uppercase letter.";
-        errorMessage.style.display = "block";
-        return false;
-    }
-    if (phone.match(/\d+/g)) {
-        errorMessage.innerText = "Phone number should not contain letters";
         errorMessage.style.display = "block";
         return false;
     }

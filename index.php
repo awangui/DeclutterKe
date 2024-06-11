@@ -49,6 +49,7 @@ require_once 'connection.php';
             <?php } else { ?>
                 <a href="listing.php" class="cta">Add a Listing</a>
                 <div class="credentials">
+                    <a href="index.php#faq"><i class="fa-solid fa-circle-info"></i> Help</a>
                     <a href="login.html"><i class="icon fa-solid fa-right-to-bracket"></i> Login</a>
                     <a href="registration.php"><i class="icon fa-regular fa-user"></i> Sign Up</a>
                 </div>
@@ -163,6 +164,11 @@ require_once 'connection.php';
             <h2>Frequently Asked Questions</h2>
             <div class="accordion">
                 <div class="accordion-item">
+                    <h3 class="accordion-title">How do I create a create an account<i class="fa-solid fa-angle-down"></i></h3>
+                    <div class="accordion-content">
+                        <p>Click sign up at the top right of your navbar. Fill in your details as per the requested guidlines and click the sign up button</p>
+                    </div>          
+                <div class="accordion-item">
                     <h3 class="accordion-title">How do I list an item for sale?<i class="fa-solid fa-angle-down"></i></h3>
                     <div class="accordion-content">
                         <p>Make sure you are logged into your account.Click on add listing and fill in the necessary details then click on submit.</p>
@@ -171,7 +177,7 @@ require_once 'connection.php';
                 <div class="accordion-item">
                     <h3 class="accordion-title"> How do you facilitate communication between buyers and sellers?<i class="fa-solid fa-angle-down"></i></h3>
                     <div class="accordion-content">
-                        <p>We offer communication between parties through WhatsApp but we aim to implement an inbuilt chat feature soon. Which will facilitate communication between involvied parties directly on the web app.</p>
+                        <p>We offer communication between parties through WhatsApp on the item listing age click on the chat on whatsapp button and the system will navigate you to a whatsapp chat with the seller.</p>
                     </div>
                 </div>
                 <div class="accordion-item">
