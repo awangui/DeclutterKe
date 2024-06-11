@@ -47,6 +47,7 @@
 ## About The Project
 <p>DeclutterKe is a Kenyan based resale plaftorm for household goods allowing users to showcase items they no longer need for sale or browse the available listings of secondhand items to find their next purchase</p>
 <p>DeclutterKe aims to offer a cost-effective and sustainable solution.</p>
+
 ![Product Landing page][landing-page]
 ![Product Name Screen Shot][product-screenshot]
 
