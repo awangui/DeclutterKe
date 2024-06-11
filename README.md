@@ -27,17 +27,12 @@
 
 
 
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://github.com/awangui/DeclutterKe.git/">
-    <img src="./images/Logo maker project.png" alt="Logo" width="80" height="80">
-  </a>
+
 
 <h3 align="center">DeclutterKe</h3>
 
 
-</div>
+
 
 
 
@@ -69,8 +64,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]]
 
+![Product Landing page][landing-page]
+[![Product Name Screen Shot][product-screenshot]]
 
 
 
