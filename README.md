@@ -30,8 +30,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/awangui/DeclutterKe.git">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/awangui/DeclutterKe.git/">
+    <img src="./images/Logo maker project.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">DeclutterKe</h3>
@@ -183,6 +183,6 @@ Project Link: [https://github.com/awangui/DeclutterKe.git](https://github.com/aw
 [license-url]: https://github.com/awangui/DeclutterKe.git/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/anita-wangui-9868001b9
-[product-screenshot]: images/Screenshot.png
-[landing-page]:images/landing-page.jpg
+[product-screenshot]: ./images/Screenshot.jpg
+[landing-page]:./images/landing-page.jpg
 
