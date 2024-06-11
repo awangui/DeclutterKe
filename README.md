@@ -1,23 +1,5 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
 
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -63,10 +45,10 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-
+<p>DeclutterKe is a Kenyan based resale plaftorm for household goods allowing users to showcase items they no longer need for sale or browse the available listings of secondhand items to find their next purchase</p>
+<p>DeclutterKe aims to offer a cost-effective and sustainable solution.</p>
 ![Product Landing page][landing-page]
-[![Product Name Screen Shot][product-screenshot]]
+![Product Name Screen Shot][product-screenshot]
 
 
 
@@ -178,7 +160,7 @@ Project Link: [https://github.com/awangui/DeclutterKe.git](https://github.com/aw
 [license-shield]: https://img.shields.io/github/license/awangui/DeclutterKe.svg?style=for-the-badge
 [license-url]: https://github.com/awangui/DeclutterKe.git/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/anita-wangui-9868001b9
+[linkedin-url]: https://www.linkedin.com/in/anita-wangui-9868001b9/
 [product-screenshot]: ./images/Screenshot.jpg
 [landing-page]:./images/landing-page.jpg
 
