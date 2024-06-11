@@ -82,15 +82,6 @@
 [![css](https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white)](Css-url)
 [![javascript](https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](Javascript-url)
 
-* [![php][Php]][Php-url]
-* [![html][Html.js]][html-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -110,13 +101,11 @@ This is an example of how to list things you need to use the software and how to
   ```
 
 ### Installation
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
    git clone https://github.com/awangui/DeclutterKe.git
    ```
-3. Install NPM packages
+2. Install NPM packages
    ```sh
    npm install
    ```
@@ -168,8 +157,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <!-- CONTACT -->
 ## Contact
+Anita Wangui - [linkedin-url](https://linkedin.com/in/anita-wangui-9868001b9)
 
-Anita Wangui - anitawangui22@gmail.com
 
 Project Link: [https://github.com/awangui/DeclutterKe.git](https://github.com/awangui/DeclutterKe.git)
 
