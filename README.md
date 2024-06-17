@@ -115,7 +115,7 @@ Project Link: [https://github.com/awangui/DeclutterKe.git](https://github.com/aw
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 [contributors-shield]: https://img.shields.io/github/contributors/awangui/DeclutterKe.svg?style=for-the-badge
-[contributors-url]: https://github.com/awangui/DeclutterKe.git/graphs/contributors
+[contributors-url]: https://github.com/awangui/
 [forks-shield]: https://img.shields.io/github/forks/awangui/DeclutterKe.svg?style=for-the-badge
 [forks-url]: https://github.com/awangui/DeclutterKe.git/network/members
 [stars-shield]: https://img.shields.io/github/stars/awangui/DeclutterKe.svg?style=for-the-badge
