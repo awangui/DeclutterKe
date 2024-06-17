@@ -1,6 +1,6 @@
 <a name="readme-top"></a>
 
-[![Contributor]][contributors-url]
+[![Contributor][contributors-shield]][contributors-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 
